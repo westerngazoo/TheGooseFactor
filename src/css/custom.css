@@ -1,0 +1,59 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+/* "Gray Bionic" palette: neutral steel tones with subtle cyan accent */
+:root {
+  /* Primary scale (used for buttons, links, accents) */
+  --ifm-color-primary: #5a626b; /* base steel */
+  --ifm-color-primary-dark: #50575f;
+  --ifm-color-primary-darker: #474d54;
+  --ifm-color-primary-darkest: #373d42;
+  --ifm-color-primary-light: #646d77;
+  --ifm-color-primary-lighter: #6e7883;
+  --ifm-color-primary-lightest: #7c8793;
+
+  /* Optional subtle cyan accent for focus rings / interactive emphasis */
+  --goose-accent: #19b3c4;
+  --goose-accent-glow: 0 0 0 3px rgba(25, 179, 196, 0.35);
+
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(90, 98, 107, 0.15);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #8a949e; /* lighten in dark mode for contrast */
+  --ifm-color-primary-dark: #7c868f;
+  --ifm-color-primary-darker: #6f787f;
+  --ifm-color-primary-darkest: #5a626b;
+  --ifm-color-primary-light: #98a2ad;
+  --ifm-color-primary-lighter: #a6b0ba;
+  --ifm-color-primary-lightest: #b8c1ca;
+  --docusaurus-highlighted-code-line-bg: rgba(138, 148, 158, 0.18);
+}
+
+/* Enhanced focus style using accent (accessible) */
+:root :where(a, button, [role='button'], .button):focus-visible {
+  outline: 2px solid var(--goose-accent);
+  box-shadow: var(--goose-accent-glow);
+}
+
+/* Hero banner tweak for gray bionic vibe */
+.hero--primary {
+  background: linear-gradient(135deg, #2b2f33 0%, #3a3f45 40%, #1f2225 100%);
+  --ifm-hero-text-color: #e3e7ea;
+}
+
+/* Subtle card border tone alignment */
+.card {
+  border-color: rgba(90, 98, 107, 0.35);
+}
+
+/* Link hover subtle cyan accent */
+a:hover {
+  color: var(--goose-accent);
+}

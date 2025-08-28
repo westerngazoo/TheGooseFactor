@@ -1,0 +1,210 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Blurred goose background in center */
+.heroBanner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Zoomed in to crop out bottom-right AI logo; shifted slightly left/up */
+  background-image: url('/img/quack.png');
+  background-repeat: no-repeat;
+  background-size: 900px auto; /* was 680px */
+  background-position: calc(50% - 40px) calc(50% - 20px);
+  filter: blur(8px) opacity(0.38) saturate(1.1);
+  pointer-events: none;
+  animation: pulseGlow 11s ease-in-out infinite;
+  z-index: 0;
+}
+
+/* Sharp(ish) center overlay to reduce perceived blur in focal region */
+.heroBanner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/img/quack.png');
+  background-repeat: no-repeat;
+  background-size: 900px auto; /* match ::before */
+  background-position: calc(50% - 40px) calc(50% - 20px);
+  filter: blur(2px) saturate(1.05) brightness(1.02);
+  -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.45) 58%, rgba(0,0,0,0) 72%);
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.45) 58%, rgba(0,0,0,0) 72%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure hero content sits above background */
+.heroBanner > * { position: relative; z-index: 2; }
+
+/* Hacker gradient style for main heading */
+.heroTitleHacker {
+  font-family: var(--ifm-font-family-monospace, 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', monospace);
+  font-weight: 750;
+  letter-spacing: 0.2ch;
+  text-transform: uppercase;
+  background: linear-gradient(100deg,#e8fbff 0%,#9ef2ff 25%,#49d2e6 55%,#19b3c4 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 6px rgba(73,210,230,0.4)) drop-shadow(0 0 18px rgba(25,179,196,0.15));
+  position: relative;
+  /* Lift the heading upward for cleaner center spacing */
+  transform: translateY(-42px);
+  margin-bottom: 0.25rem;
+}
+
+.heroTitleHacker::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg,rgba(255,255,255,0.08) 0 2px,transparent 2px 4px);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  opacity: 0.35;
+  animation: scanlines 5s linear infinite;
+}
+
+@keyframes scanlines {
+  0% { background-position-y: 0; }
+  100% { background-position-y: 100%; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { filter: blur(7px) opacity(0.37) saturate(1.05); }
+  50% { filter: blur(9px) opacity(0.43) saturate(1.15); }
+}
+
+.typingWrapper {
+  display: inline-block;
+  font-family: var(--ifm-font-family-monospace, 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', monospace);
+  font-size: 1.3rem;
+  font-weight: 650; /* semi-bold hacker vibe */
+  letter-spacing: 0.15ch;
+  white-space: nowrap;
+  position: relative;
+  background: linear-gradient(90deg,#e8fbff,#9ef2ff 35%,#49d2e6 65%,#19b3c4);
+  -webkit-background-clip: text;
+  background-clip: text; /* standard */
+  color: transparent;
+  filter: drop-shadow(0 0 4px rgba(73,210,230,0.35));
+}
+
+.typingText {
+  border-right: 2px solid rgba(73,210,230,0.85);
+  animation: typing 0.9s steps(18, end) 0.05s 1 both, cursorBlink 0.55s linear infinite;
+  overflow: hidden;
+  display: inline-block;
+  max-width: 0;
+  opacity: 0.98;
+  text-shadow: 0 0 6px rgba(73,210,230,0.55), 0 0 12px rgba(25,179,196,0.35);
+}
+
+/* Impact QUACK appears after typing finishes */
+.impactQuack {
+  display: inline-block;
+  margin-left: 0.65rem;
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  color: var(--goose-accent, #19b3c4);
+  text-shadow: 0 0 4px rgba(25,179,196,0.55), 0 0 12px rgba(25,179,196,0.35);
+  transform-origin: center;
+  opacity: 0;
+  animation: quackImpact 0.75s ease-out 1.7s forwards;
+  position: relative;
+}
+
+.impactQuack::after {
+  content: '';
+  position: absolute;
+  inset: -0.6rem -0.8rem;
+  background: radial-gradient(circle at center, rgba(25,179,196,0.35) 0%, rgba(25,179,196,0) 70%);
+  filter: blur(4px);
+  opacity: 0;
+  animation: quackShock 0.75s ease-out 1.7s forwards;
+  pointer-events: none;
+}
+
+@keyframes quackImpact {
+  0% { transform: scale(0.1) rotate(-25deg); opacity: 0; }
+  50% { transform: scale(1.25) rotate(3deg); opacity: 1; }
+  70% { transform: scale(0.92) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes quackShock {
+  0% { opacity: 0; transform: scale(0.2); }
+  55% { opacity: 1; transform: scale(1.15); }
+  100% { opacity: 0; transform: scale(1.4); }
+}
+
+@keyframes typing {
+  from { max-width: 0; }
+  to { max-width: 100%; }
+}
+
+@keyframes cursorBlink {
+  0%, 49% { border-color: var(--goose-accent, #19b3c4); }
+  50%, 100% { border-color: transparent; }
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Push buttons further down to clear hero center & sit below logo */
+  margin-top: 8rem;
+}
+
+/* Fine-tune subtitle spacing separately if needed */
+.heroSubtitleAdjust {
+  /* Original slight tighten removed; now explicit positioning */
+  margin-top: 0;
+  position: relative;
+  left: -1cm; /* shift left */
+  top: 1cm;  /* shift downward */
+}
+
+@media (max-width: 680px) {
+  .heroTitleHacker { transform: translateY(-28px); }
+  .buttons { margin-top: 6rem; }
+  .heroSubtitleAdjust { left: -18px; top: 28px; }
+}
+
+/* Unified gray hacker-style buttons */
+.heroButton {
+  background: linear-gradient(145deg,#5a626b,#494f56 55%,#3b4046);
+  color: #f2f5f7;
+  border: 1px solid #3e444a;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.04) inset;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: background .25s ease, transform .15s ease, box-shadow .25s ease;
+}
+.heroButton:hover {
+  background: linear-gradient(145deg,#646d77,#535b63 55%,#444a51);
+  text-decoration: none;
+}
+.heroButton:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3) inset;
+}
+.heroButton:focus-visible {
+  outline: 2px solid var(--goose-accent,#19b3c4);
+  outline-offset: 2px;
+}
