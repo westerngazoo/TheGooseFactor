@@ -1,0 +1,26 @@
+[build]
+  command = "npm ci && npm run build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "18.20.3"
+  NPM_FLAGS = "--no-audit --no-fund"
+  CI = "true"
+
+# Cache optimization
+[[plugins]]
+  package = "@netlify/plugin-nextjs" # harmless no-op for static, can remove if causes warning
+
+# Headers (optional security hardening)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-XSS-Protection = "1; mode=block"
