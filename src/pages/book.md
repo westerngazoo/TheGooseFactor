@@ -7,6 +7,83 @@ slug: /book
 
 > Living manuscript. Expect rough edges, TODOs, and iterative refinement. Feedback welcome via GitHub issues or X @techno_goose.
 
+## Repository Separation & Source Layout
+
+The actual C++ source code for the algorithms & data structures (modules, tests, examples) lives in a **separate repository** (planned: `https://github.com/westerngazoo/algorithms` / `goose-lib`). This page documents design, structure, and how to build/run/test it—while the site itself only hosts the manuscript.
+
+### High‑Level Layout (external repo)
+```
+algorithms/
+	CMakeLists.txt              # Root: project, options, add_subdirectory(goose-lib)
+	goose-lib/
+		CMakeLists.txt            # Library target, modules, test + example registration
+		include/goose/algorithm/
+			sort.cppm               # Primary module interface (exports bubble_sort, re‑exports helpers)
+			factorial.cppm          # Example secondary module (exported from primary or standalone)
+		tests/
+			test_sort.cpp           # Basic sorting unit tests
+			test_sort_generic.cpp   # Generic iterator/comparator coverage
+		examples/
+			sort_demo.cpp           # Demonstrates sorting APIs
+			example_usage.cpp       # Misc usage showcase
+		build/                    # (Out-of-source preferred; not committed)
+```
+
+### Build Toolchain
+- **CMake ≥ 3.28** (for C++20 modules support improvements)
+- **Ninja** (recommended) or Makefiles
+- **Compilers:** Clang 17+ or GCC 13+ (module maturity); MSVC recent if needed
+- **Testing:** GoogleTest (fetched via CMake `FetchContent` inside `goose-lib`)
+
+### Configure & Build (clean out-of-source)
+```bash
+cd algorithms
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo
+cmake --build build -j
+```
+
+### Run Tests
+```bash
+cd build
+ctest --output-on-failure
+```
+
+### Examples
+Built example binaries appear under `build/goose-lib/examples/` (or `build/goose-lib/examples/` depending on generator). Run:
+```bash
+./build/goose-lib/examples/sort_demo
+```
+
+### Developer Workflow
+1. Edit module interface unit (e.g. `sort.cppm`).
+2. Rebuild incrementally: `cmake --build build -t goose`.
+3. Run focused test: `ctest -R sort_generic -V`.
+4. Benchmark (future): dedicated `bench/` directory with Google Benchmark.
+
+### Naming & Module Strategy
+- One primary umbrella interface per thematic area (e.g. `sort.cppm`).
+- Small focused implementation partitions (if needed) kept private unless exported.
+- Public API surface kept minimal; internal helpers stay non-exported to reduce BMI churn.
+
+### Compiler Flags (draft recommendation)
+```cmake
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_compile_options(
+	-Wall -Wextra -Wpedantic -Wconversion -Wshadow -Werror
+	-ftime-trace
+)
+```
+(Adjust `-Werror` locally; may relax in CI.)
+
+### Sanitizers Quick Switch
+```bash
+cmake -S . -B build-asan -G Ninja -DCMAKE_BUILD_TYPE=Debug -DENABLE_ASAN=ON
+```
+(CMake option would append `-fsanitize=address,undefined` to targets.)
+
+---
+
 ## Purpose
 
 Build an opinionated, modern C++ (C++20/23 leaning) guide to core data structures and algorithms with:
