@@ -1,15 +1,14 @@
 [build]
   command = "npm ci && npm run build"
-  publish = "build"
+  publish = "build" # Docusaurus output directory
 
 [build.environment]
   NODE_VERSION = "18.20.3"
   NPM_FLAGS = "--no-audit --no-fund"
   CI = "true"
+  NETLIFY_NEXT_PLUGIN_SKIP = "true" # Ensure Next.js plugin is skipped (not a Next.js project)
 
-# Cache optimization
-[[plugins]]
-  package = "@netlify/plugin-nextjs" # harmless no-op for static, can remove if causes warning
+# No Netlify plugins required for static Docusaurus build
 
 # Headers (optional security hardening)
 [[headers]]
