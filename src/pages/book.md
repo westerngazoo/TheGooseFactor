@@ -54,6 +54,9 @@ Built example binaries appear under `build/goose-lib/examples/` (or `build/goose
 ./build/goose-lib/examples/sort_demo
 ```
 
+### Running benchmarks
+
+
 ### Developer Workflow
 1. Edit module interface unit (e.g. `sort.cppm`).
 2. Rebuild incrementally: `cmake --build build -t goose`.
@@ -81,6 +84,23 @@ add_compile_options(
 cmake -S . -B build-asan -G Ninja -DCMAKE_BUILD_TYPE=Debug -DENABLE_ASAN=ON
 ```
 (CMake option would append `-fsanitize=address,undefined` to targets.)
+
+### Benchmarks
+Benchmarks are opt‑in so regular library builds stay lean. Enable with a CMake cache option:
+
+```bash
+# From repository root containing goose-lib/
+cd goose-lib
+cmake -S . -B build -G Ninja -DGOOSE_BUILD_BENCHMARKS=ON -DCMAKE_BUILD_TYPE=Release
+cmake --build build --target run_benchmarks -j
+./build/benchmarks/run_benchmarks
+```
+
+Notes:
+- Uses Google Benchmark (fetched similarly to tests) – stable micro‑bench environment.
+- Always build benchmarks with `Release` (or `RelWithDebInfo`) + disable sanitizers for fair timings.
+- For noisy environments, run multiple repetitions: `--benchmark_repetitions=10 --benchmark_report_aggregates_only=true`.
+- Future: add JSON output (`--benchmark_format=json`) + script to compare CI runs.
 
 ---
 ### Source Repository
