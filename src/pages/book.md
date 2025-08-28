@@ -84,6 +84,12 @@ cmake -S . -B build-asan -G Ninja -DCMAKE_BUILD_TYPE=Debug -DENABLE_ASAN=ON
 
 ---
 
+### Source repo
+
+The source repo can be found here:
+
+https://github.com/westerngazoo/algorithms
+
 ## Purpose
 
 Build an opinionated, modern C++ (C++20/23 leaning) guide to core data structures and algorithms with:
