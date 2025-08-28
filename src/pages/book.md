@@ -178,14 +178,14 @@ To keep dense technical material engaging, multiple **goose personas** will appe
 
 | Persona | Image | Role / Tone | Prefix |
 |---------|-------|-------------|--------|
-| Angry Goose | `angrygoose.png` | Pitfalls, UB, perf traps | `ANGRY:` |
-| Nerdy Goose | `nerdygoose.png` | Complexity, memory layout, standard refs | `NERDY:` |
-| Sarcastic Goose | `sarcasticgoose.png` | Light snark vs anti‑patterns | `SARC:` |
-| Happy Goose | `happygoose.png` | Reinforces clarity & clean patterns | `HAPPY:` |
-| Math Goose | `mathgoose.png` | Formalism, invariants, proofs | `MATH:` |
-| Sharp Goose | `sharpgoose.png` | API surface critique, naming | `SHARP:` |
-| Surprised Goose | `surprisedgoose.png` | Edge cases, unintuitive outcomes | `SURPRISE:` |
-| Weightlifting Goose | `surfingoose.png` | Training analogies ↔ optimization | `TRAIN:` |
+| Angry Goose | <img src="/img/angrygoose.png" alt="Angry Goose" width="46" /> | Pitfalls, UB, perf traps | `ANGRY:` |
+| Nerdy Goose | <img src="/img/nerdygoose.png" alt="Nerdy Goose" width="46" /> | Complexity, memory layout, standard refs | `NERDY:` |
+| Sarcastic Goose | <img src="/img/sarcasticgoose.png" alt="Sarcastic Goose" width="46" /> | Light snark vs anti‑patterns | `SARC:` |
+| Happy Goose | <img src="/img/happygoose.png" alt="Happy Goose" width="46" /> | Reinforces clarity & clean patterns | `HAPPY:` |
+| Math Goose | <img src="/img/mathgoose.png" alt="Math Goose" width="46" /> | Formalism, invariants, proofs | `MATH:` |
+| Sharp Goose | <img src="/img/sharpgoose.png" alt="Sharp Goose" width="46" /> | API surface critique, naming | `SHARP:` |
+| Surprised Goose | <img src="/img/surprisedgoose.png" alt="Surprised Goose" width="46" /> | Edge cases, unintuitive outcomes | `SURPRISE:` |
+| Weightlifting Goose | <img src="/img/surfingoose.png" alt="Weightlifting Goose" width="46" /> | Training analogies ↔ optimization | `TRAIN:` |
 
 ### Callout Markup Pattern
 Each callout is a blockquote beginning with the tag:
