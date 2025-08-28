@@ -205,7 +205,7 @@ To keep dense technical material engaging, multiple **goose personas** will appe
 | Math Goose | <img src="/img/mathgoose.png" alt="Math Goose" width="46" /> | Formalism, invariants, proofs | `MATH:` |
 | Sharp Goose | <img src="/img/sharpgoose.png" alt="Sharp Goose" width="46" /> | API surface critique, naming | `SHARP:` |
 | Surprised Goose | <img src="/img/surprisedgoose.png" alt="Surprised Goose" width="46" /> | Edge cases, unintuitive outcomes | `SURPRISE:` |
-| Weightlifting Goose | <img src="/img/surfingoose.png" alt="Weightlifting Goose" width="46" /> | Training analogies ↔ optimization | `TRAIN:` |
+| Weightlifting Goose | <img src="/img/weightliftingoose.png" alt="Weightlifting Goose" width="46" /> | Training analogies ↔ optimization | `TRAIN:` |
 
 ### Callout Markup Pattern
 Each callout is a blockquote beginning with the tag:
