@@ -1,6 +1,7 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import gooseReactions from './src/remark/gooseReactions';
 
 const config: Config = {
   title: 'The Goose Factor',
@@ -22,18 +23,31 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          remarkPlugins: [gooseReactions],
         },
         blog: {
-          showReadingTime: true,
-          feedOptions: { type: ['rss', 'atom'], xslt: true },
-          editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+            showReadingTime: true,
+            feedOptions: { type: ['rss', 'atom'], xslt: true },
+            editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            onInlineTags: 'warn',
+            onInlineAuthors: 'warn',
+            onUntruncatedBlogPosts: 'warn',
+            remarkPlugins: [gooseReactions],
         },
+        pages: { remarkPlugins: [gooseReactions] },
         theme: { customCss: './src/css/custom.css' },
       },
     ],
+  ],
+  plugins: [
+    function gooseAll(){
+      return {
+        name: 'goose-reactions-inline',
+        configureMarkdown(md){
+          md.remarkPlugins = [...(md.remarkPlugins||[]), gooseReactions];
+        }
+      };
+    }
   ],
   themeConfig: {
     image: 'img/goosefactorcloseup.png',

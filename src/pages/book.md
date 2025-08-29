@@ -12,6 +12,8 @@ slug: /book
 The actual C++ source code for the algorithms & data structures (modules, tests, examples) lives in a **separate repository** (planned: `https://github.com/westerngazoo/algorithms` / `goose-lib`). This page documents design, structure, and how to build/run/test it—while the site itself only hosts the manuscript.
 
 ### High‑Level Layout (external repo)
+
+External repository (source code): **Algorithms Library** → [https://github.com/westerngazoo/algorithms](https://github.com/westerngazoo/algorithms)
 ```
 algorithms/
 	CMakeLists.txt              # Root: project, options, add_subdirectory(goose-lib)
@@ -26,6 +28,9 @@ algorithms/
 		examples/
 			sort_demo.cpp           # Demonstrates sorting APIs
 			example_usage.cpp       # Misc usage showcase
+		benchmarks/              # Micro-benchmarks (Google Benchmark)
+			CMakeLists.txt          # Adds benchmark targets (enabled via option)
+			bench_sort.cpp             # Sample benchmark (sorting)
 		build/                    # (Out-of-source preferred; not committed)
 ```
 
@@ -108,6 +113,72 @@ Notes:
 Explore the full source code, modules, and examples in the dedicated repository:
 
 [github.com/westerngazoo/algorithms](https://github.com/westerngazoo/algorithms)
+
+## How This Book Will Be Written (Style & Persona System)
+
+To keep dense technical material engaging, multiple **goose personas** will appear as concise margin-style callouts after code blocks or concept explanations. Each persona has a distinct voice and intent:
+
+| Persona | Image | Role / Tone |
+|---------|-------|-------------|
+| Angry Goose | <img src="/img/angrygoose.png" alt="Angry Goose" style={{width: '100px', height: 'auto'}} /> | Pitfalls, UB, perf traps |
+| Nerdy Goose | <img src="/img/nerdygoose.png" alt="Nerdy Goose" style={{width: '100px', height: 'auto'}} /> | Complexity, memory layout, standard refs |
+| Sarcastic Goose | <img src="/img/sarcasticgoose.png" alt="Sarcastic Goose" style={{width: '100px', height: 'auto'}} /> | Light snark vs anti‑patterns |
+| Happy Goose | <img src="/img/happygoose.png" alt="Happy Goose" style={{width: '100px', height: 'auto'}} /> | Reinforces clarity & clean patterns |
+| Math Goose | <img src="/img/mathgoose.png" alt="Math Goose" style={{width: '100px', height: 'auto'}} /> | Formalism, invariants, proofs |
+| Sharp Goose | <img src="/img/sharpgoose.png" alt="Sharp Goose" style={{width: '100px', height: 'auto'}} /> | API surface critique, naming |
+| Surprised Goose | <img src="/img/surprisedgoose.png" alt="Surprised Goose" style={{width: '100px', height: 'auto'}} /> | Edge cases, unintuitive outcomes |
+| Weightlifting Goose | <img src="/img/weightliftingoose.png" alt="Weightlifting Goose" style={{width: '100px', height: 'auto'}} /> | Training analogies ↔ optimization |
+
+### Callout Markup Pattern
+Each callout is a blockquote beginning with the tag:
+
+```cpp
+auto v = bubble_sort(vec);
+```
+
+> :angrygoose: Copy here is O(n). Consider in‑place + return view if large.
+>
+> :nerdygoose: Stable? Current implementation preserves order; benchmark vs std::stable_sort.
+
+### Code Snippet Conventions
+- C++23 unless earlier standard comparison.
+- `auto` only when it enhances, not obscures, meaning.
+- `constexpr` + `[[nodiscard]]` on pure utilities.
+- Complexity comments above functions: `// O(n log n) avg, O(n^2) worst (degenerate pivot)`.
+- Ellipses only with explicit `// ... omitted ...` markers.
+
+### Testing Snippets
+```cpp
+TEST(Sort, BasicAscending) {
+	std::vector<int> v{5,4,3,2,1};
+	bubble_sort(v);
+	EXPECT_TRUE(std::is_sorted(v.begin(), v.end()));
+}
+```
+> :nerdygoose: Property version randomizes size & contents; see property testing chapter.
+
+### Benchmark Snippets (Preview)
+```cpp
+static void BM_Bubble_Random100(benchmark::State& st) {
+	for (auto _ : st) {
+		auto v = make_random(100);
+		bubble_sort(v);
+		benchmark::DoNotOptimize(v);
+	}
+}
+BENCHMARK(BM_Bubble_Random100);
+```
+
+### Chapter Completion Checklist
+1. Invariants stated
+2. Edge cases enumerated
+3. Complexity & memory behavior noted
+4. ≥1 persona caution or design insight
+5. Test snippet includes boundary or randomized strategy
+
+Chapters failing the list remain `[~] drafting`.
+
+---
 
 ## Purpose
 
@@ -192,81 +263,6 @@ Working on: Ch 1–2 historical context drafts + Sorting-first narrative justifi
 
 Next up: Value semantics examples (copy elision, NRVO visuals) and iterator/ranges canonical patterns.
 
-## How This Book Will Be Written (Style & Persona System)
-
-To keep dense technical material engaging, multiple **goose personas** will appear as concise margin-style callouts after code blocks or concept explanations. Each persona has a distinct voice and intent:
-
-| Persona | Image | Role / Tone | Prefix |
-|---------|-------|-------------|--------|
-| Angry Goose | <img src="/img/angrygoose.png" alt="Angry Goose" width="46" /> | Pitfalls, UB, perf traps | `ANGRY:` |
-| Nerdy Goose | <img src="/img/nerdygoose.png" alt="Nerdy Goose" width="46" /> | Complexity, memory layout, standard refs | `NERDY:` |
-| Sarcastic Goose | <img src="/img/sarcasticgoose.png" alt="Sarcastic Goose" width="46" /> | Light snark vs anti‑patterns | `SARC:` |
-| Happy Goose | <img src="/img/happygoose.png" alt="Happy Goose" width="46" /> | Reinforces clarity & clean patterns | `HAPPY:` |
-| Math Goose | <img src="/img/mathgoose.png" alt="Math Goose" width="46" /> | Formalism, invariants, proofs | `MATH:` |
-| Sharp Goose | <img src="/img/sharpgoose.png" alt="Sharp Goose" width="46" /> | API surface critique, naming | `SHARP:` |
-| Surprised Goose | <img src="/img/surprisedgoose.png" alt="Surprised Goose" width="46" /> | Edge cases, unintuitive outcomes | `SURPRISE:` |
-| Weightlifting Goose | <img src="/img/weightliftingoose.png" alt="Weightlifting Goose" width="46" /> | Training analogies ↔ optimization | `TRAIN:` |
-
-### Callout Markup Pattern
-Each callout is a blockquote beginning with the tag:
-
-```md
-```cpp
-auto v = bubble_sort(vec);
-```
-
-> ANGRY: Copy here is O(n). Consider in‑place + return view if large.
-> NERDY: Stable? Current implementation preserves order; benchmark vs std::stable_sort.
-```
-
-(Later: site theming may render avatars.)
-
-### Code Snippet Conventions
-- C++23 unless earlier standard comparison.
-- `auto` only when it enhances, not obscures, meaning.
-- `constexpr` + `[[nodiscard]]` on pure utilities.
-- Complexity comments above functions: `// O(n log n) avg, O(n^2) worst (degenerate pivot)`.
-- Ellipses only with explicit `// ... omitted ...` markers.
-
-### Testing Snippets
-```cpp
-TEST(Sort, BasicAscending) {
-	std::vector<int> v{5,4,3,2,1};
-	bubble_sort(v);
-	EXPECT_TRUE(std::is_sorted(v.begin(), v.end()));
-}
-```
-> NERDY: Property version randomizes size & contents; see property testing chapter.
-
-### Benchmark Snippets (Preview)
-```cpp
-static void BM_Bubble_Random100(benchmark::State& st) {
-	for (auto _ : st) {
-		auto v = make_random(100);
-		bubble_sort(v);
-		benchmark::DoNotOptimize(v);
-	}
-}
-BENCHMARK(BM_Bubble_Random100);
-```
-> ANGRY: Pedagogical only—never ship bubble sort to prod.
-
-### Persona Guidelines
-- ≤ 2 sentences per callout.
-- Max 2 personas per snippet.
-- No redundancy with main text—add net new insight.
-- Sarcasm targets patterns, not readers.
-
-### Chapter Completion Checklist
-1. Invariants stated
-2. Edge cases enumerated
-3. Complexity & memory behavior noted
-4. ≥1 persona caution or design insight
-5. Test snippet includes boundary or randomized strategy
-
-Chapters failing the list remain `[~] drafting`.
-
----
 
 ## Contributing / Feedback
 

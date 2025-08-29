@@ -57,3 +57,34 @@
 a:hover {
   color: var(--goose-accent);
 }
+
+/* Inline goose reaction images */
+.goose-reaction {
+  display: inline-block;
+  height: 1.6em;
+  width: auto;
+  vertical-align: text-bottom;
+  margin: 0 0.15em;
+  border-radius: 4px;
+}
+
+/* New simpler token style */
+.goose-inline {
+  display:inline-block;
+  height:5em;
+  width:auto;
+  vertical-align:text-bottom;
+  margin:0 .2em;
+  max-width:5em;
+}
+
+/* Small table images */
+.goose-table-small {
+  width: 50px;
+  height: auto;
+  vertical-align: middle;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .goose-reaction { animation: none; }
+}
