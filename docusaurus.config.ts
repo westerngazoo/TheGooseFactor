@@ -57,6 +57,7 @@ const config: Config = {
       items: [
         { to: '/blog', label: 'Blog', position: 'left' },
         { to: '/book', label: 'C++ Algorithms', position: 'left' },
+        { to: '/embedded-book', label: 'Embedded C++/Rust', position: 'left' },
         { to: '/scifi', label: 'Sci‑Fi Novel', position: 'left' },
         { to: '/math', label: 'Math & Physics', position: 'left' },
         { to: '/about', label: 'About', position: 'left' },
@@ -79,6 +80,7 @@ const config: Config = {
           items: [
             { label: 'Blog', to: '/blog' },
             { label: 'C++ Algorithms', to: '/book' },
+            { label: 'Embedded C++/Rust', to: '/embedded-book' },
             { label: 'Sci‑Fi Novel', to: '/scifi' },
             { label: 'Math & Physics', to: '/math' },
             { label: 'About', to: '/about' },
