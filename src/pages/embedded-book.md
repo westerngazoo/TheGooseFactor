@@ -302,6 +302,14 @@ embedded-cpp-rust/
 - **Skill Development**: Cross-training opportunities
 - **Architecture Decisions**: Informed choices for embedded projects
 
+## Part VII: Cracking the Modern Systems Interview
+
+This part moved to its own page for easier navigation and sharing.
+
+Read it here: [Embedded Systems Interview](/systems-interview)
+
+—
+
 ## Contributing
 
 This book is open source and community-driven. Contributions are welcome:
