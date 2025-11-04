@@ -294,6 +294,8 @@ void destroy_array(IntArray* arr) {
 
 > :angrygoose: Manual memory management was C's greatest strength and biggest weakness. You got complete control, but with great power came great responsibility (and frequent crashes).
 
+> :nerdygoose: that's very spidey catch
+
 ### C's Memory Model: The Foundation
 
 C's memory model is beautifully simple yet deceptively complex:

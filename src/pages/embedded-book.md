@@ -25,6 +25,20 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 - On-board debugger (ST-Link)
 - Extensive community support
 
+## Working Examples (GitHub)
+
+Live code accompanies each topic in this repo:
+
+→ https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust
+
+Repo layout convention (you can adjust as you build it):
+- Drivers live under `drivers/<peripheral>` for both languages
+- Non-driver topics are top-level (e.g., `hal`, `rtos`, `wireless`, `sensors_dsp`, `power`, `projects/*`)
+
+Examples:
+- C++ drivers: `cpp/drivers/uart`, `cpp/drivers/spi_i2c`, `cpp/drivers/gpio`, `cpp/drivers/timers_pwm`, `cpp/drivers/adc`, `cpp/drivers/dac`, `cpp/drivers/dma`
+- Rust drivers: `rust/drivers/uart`, `rust/drivers/spi_i2c`, `rust/drivers/gpio`, `rust/drivers/timers_pwm`, `rust/drivers/adc`, `rust/drivers/dac`, `rust/drivers/dma`
+
 ## Book Structure
 
 ### Part I: Foundations
@@ -42,6 +56,9 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 ### Part II: Core Concepts
 
 #### Chapter 3: Hardware Abstraction Layer (HAL)
+Working examples:
+- C++: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/cpp/hal
+- Rust: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/rust/hal
 **C++ Implementation:**
 - Modern C++ HAL design patterns
 - RAII for peripheral management
@@ -55,6 +72,9 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 - Compile-time peripheral configuration
 
 #### Chapter 4: GPIO and Digital I/O
+Working examples:
+- C++: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/cpp/drivers/gpio
+- Rust: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/rust/drivers/gpio
 **C++ Implementation:**
 - Register-level GPIO control
 - Pin abstraction with templates
@@ -68,6 +88,9 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 - Safe concurrent access patterns
 
 #### Chapter 5: Timers and PWM
+Working examples:
+- C++: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/cpp/drivers/timers_pwm
+- Rust: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/rust/drivers/timers_pwm
 **C++ Implementation:**
 - Timer peripheral abstraction
 - PWM signal generation
@@ -83,6 +106,9 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 ### Part III: Communication Protocols
 
 #### Chapter 6: UART Serial Communication
+Working examples:
+- C++: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/cpp/drivers/uart
+- Rust: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/rust/drivers/uart
 **C++ Implementation:**
 - UART driver with buffering
 - Interrupt-driven I/O
@@ -96,6 +122,9 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 - Embedded-io ecosystem
 
 #### Chapter 7: SPI and I2C
+Working examples:
+- C++: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/cpp/drivers/spi_i2c
+- Rust: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/rust/drivers/spi_i2c
 **C++ Implementation:**
 - Master/slave SPI implementation
 - I2C device driver patterns
@@ -111,6 +140,9 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 ### Part IV: Advanced Topics
 
 #### Chapter 8: Real-Time Operating Systems
+Working examples:
+- C++: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/cpp/rtos
+- Rust: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/rust/rtos
 **C++ Implementation:**
 - FreeRTOS integration
 - Task scheduling patterns
@@ -124,6 +156,9 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 - Memory safety in RTOS context
 
 #### Chapter 9: Wireless Communication
+Working examples:
+- C++: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/cpp/wireless
+- Rust: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/rust/wireless
 **C++ Implementation:**
 - Bluetooth Low Energy (BLE) stack
 - WiFi connectivity patterns
@@ -137,6 +172,9 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 - Async networking patterns
 
 #### Chapter 10: Sensor Integration and Signal Processing
+Working examples:
+- C++: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/cpp/sensors_dsp
+- Rust: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/rust/sensors_dsp
 **C++ Implementation:**
 - ADC/DAC abstractions
 - Sensor fusion algorithms
@@ -152,6 +190,9 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 ### Part V: Performance and Optimization
 
 #### Chapter 11: Benchmarking and Profiling
+Working examples:
+- C++: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/cpp/benchmarking
+- Rust: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/rust/benchmarking
 **C++ Implementation:**
 - Performance measurement techniques
 - Code size optimization
@@ -165,6 +206,9 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 - Performance optimization patterns
 
 #### Chapter 12: Power Management
+Working examples:
+- C++: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/cpp/power
+- Rust: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/rust/power
 **C++ Implementation:**
 - Low-power mode implementations
 - Clock scaling strategies
@@ -180,6 +224,9 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 ### Part VI: Real-World Projects
 
 #### Chapter 13: IoT Environmental Monitor
+Working examples:
+- C++: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/cpp/projects/iot_monitor
+- Rust: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/rust/projects/iot_monitor
 **C++ Implementation:**
 - Sensor data collection
 - Wireless data transmission
@@ -193,6 +240,9 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 - Safe concurrent operations
 
 #### Chapter 14: Motor Control System
+Working examples:
+- C++: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/cpp/projects/motor_control
+- Rust: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/rust/projects/motor_control
 **C++ Implementation:**
 - PWM motor control
 - Encoder feedback
@@ -206,6 +256,9 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 - Safe hardware access
 
 #### Chapter 15: Custom RTOS Implementation
+Working examples:
+- C++: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/cpp/projects/custom_rtos
+- Rust: https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust/tree/main/rust/projects/custom_rtos
 **C++ Implementation:**
 - Cooperative scheduler
 - Memory management
@@ -261,29 +314,75 @@ All examples use the **STM32F4 Discovery Board** - a popular, affordable develop
 3. Build and flash example projects
 4. Compare implementations and performance
 
-## Repository Structure
+## Repository Structure (language-separated)
+
+Top-level organization in your examples repo:
 
 ```
-embedded-cpp-rust/
-├── cpp-implementations/
-│   ├── hal/           # Hardware abstraction layer
-│   ├── drivers/       # Peripheral drivers
-│   ├── examples/      # Example projects
-│   └── benchmarks/    # Performance tests
-├── rust-implementations/
-│   ├── src/
-│   │   ├── hal.rs     # Hardware abstraction
-│   │   ├── drivers/   # Peripheral drivers
-│   │   └── examples/  # Example projects
-│   └── benches/       # Performance benchmarks
-├── shared-hardware/
-│   ├── stm32f4/       # Board-specific code
-│   └── common/        # Shared utilities
-└── docs/
-    ├── setup/         # Setup guides
-    ├── comparisons/   # Comparative analysis
-    └── projects/      # Project documentation
+Embedded-Systems-Programming-Cpp-vs-Rust/
+├── cpp/
+└── rust/
 ```
+
+### C++ layout (`cpp/`)
+```
+cpp/
+├── hal/                # Hardware abstraction layer (C++17/20)
+├── drivers/            # UART, SPI, I2C, ADC/DAC, etc.
+├── rtos/               # FreeRTOS integrations and patterns
+├── sensors_dsp/
+├── wireless/
+├── power/
+├── projects/
+│   ├── iot_monitor/
+│   ├── motor_control/
+│   └── custom_rtos/
+├── common/             # Board-agnostic utilities (logging, ring buffers)
+├── boards/
+│   └── stm32f4/        # Startup, linker script, board cfg
+├── benchmarks/         # Micro/functional benchmarks
+├── tests/              # Desktop-hosted tests where feasible
+├── cmake/              # CMake modules/toolchain files
+├── toolchain/          # GCC/Clang flags, OpenOCD cfg
+├── scripts/            # flash, openocd, bench scripts
+└── README.md
+```
+
+Build tool: CMake + arm-none-eabi-gcc (or clang). Provide a top-level CMakeLists.txt per subproject and a toolchain file. Favor separate libraries (hal, drivers) and small example executables in each topic folder.
+
+### Rust layout (`rust/`)
+```
+rust/
+├── Cargo.toml          # Workspace
+├── .cargo/
+│   └── config.toml     # Target, runner (probe-rs), rustflags
+├── hal/                # crate: hal
+│   ├── Cargo.toml
+│   └── src/lib.rs
+├── drivers/            # crate: drivers
+│   ├── Cargo.toml
+│   └── src/lib.rs
+├── rtos/               # crate: rtos (e.g., RTIC examples)
+├── sensors_dsp/        # crate: sensors_dsp
+├── wireless/           # crate: wireless
+├── power/              # crate: power
+├── projects/
+│   ├── iot_monitor/    # bin crate
+│   │   ├── Cargo.toml
+│   │   └── src/main.rs
+│   ├── motor_control/
+│   └── custom_rtos/
+├── benches/            # criterion or custom benches (desktop/hosted)
+├── examples/           # small example bins per crate
+├── boards/
+│   └── stm32f4/        # memory.x, feature flags, BSP helpers
+├── xtask/              # optional automation crate
+└── README.md
+```
+
+Workspace members example (in `rust/Cargo.toml`): hal, drivers, rtos, sensors_dsp, wireless, power, projects/*.
+
+Build tool: cargo + probe-rs/OpenOCD. Use features for board selection and enable `no_std` + `defmt` logging where helpful.
 
 ## Why This Approach?
 

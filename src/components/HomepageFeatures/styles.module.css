@@ -34,6 +34,11 @@
   margin: 0;
 }
 
+.imageLink {
+  display: inline-block;
+  text-decoration: none;
+}
+
 .featureImg {
   max-width: 140px;
   width: 100%;
