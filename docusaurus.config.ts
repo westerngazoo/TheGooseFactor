@@ -2,6 +2,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import gooseReactions from './src/remark/gooseReactions';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 const config: Config = {
   title: 'The Goose Factor',
@@ -23,7 +25,8 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          remarkPlugins: [gooseReactions],
+          remarkPlugins: [gooseReactions, remarkMath],
+          rehypePlugins: [rehypeKatex],
         },
         blog: {
             showReadingTime: true,
@@ -32,9 +35,10 @@ const config: Config = {
             onInlineTags: 'warn',
             onInlineAuthors: 'warn',
             onUntruncatedBlogPosts: 'warn',
-            remarkPlugins: [gooseReactions],
+            remarkPlugins: [gooseReactions, remarkMath],
+            rehypePlugins: [rehypeKatex],
         },
-        pages: { remarkPlugins: [gooseReactions] },
+        pages: { remarkPlugins: [gooseReactions, remarkMath], rehypePlugins: [rehypeKatex] },
         theme: { customCss: './src/css/custom.css' },
       },
     ],
@@ -44,7 +48,8 @@ const config: Config = {
       return {
         name: 'goose-reactions-inline',
         configureMarkdown(md){
-          md.remarkPlugins = [...(md.remarkPlugins||[]), gooseReactions];
+          md.remarkPlugins = [...(md.remarkPlugins||[]), gooseReactions, remarkMath];
+          md.rehypePlugins = [...(md.rehypePlugins || []), rehypeKatex];
         }
       };
     }
