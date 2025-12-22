@@ -3,7 +3,7 @@
   publish = "build" # Docusaurus output directory
 
 [build.environment]
-  NODE_VERSION = "18.20.3"
+  NODE_VERSION = "20.18.1"
   NPM_FLAGS = "--no-audit --no-fund"
   CI = "true"
   NETLIFY_NEXT_PLUGIN_SKIP = "true" # Ensure Next.js plugin is skipped (not a Next.js project)
