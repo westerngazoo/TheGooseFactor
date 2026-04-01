@@ -7,7 +7,7 @@ description: A type-safe implementation of Peano arithmetic showing how to const
 
 Ever wondered what natural numbers *really* are? Not just "1, 2, 3..." but their fundamental construction? Let's build them from first principles using C++ and Peano's axioms.
 
-> For the mathematical foundation, see the [Natural Numbers section](/math#natural-numbers-construction-and-arithmetic) of our math reference.
+> For the mathematical foundation, see the [Natural Numbers section](/math/discrete-math/natural-numbers) of our math reference.
 
 ## Why Bother?
 
@@ -375,7 +375,7 @@ This exercise shows that:
 - Recursion is the foundation of computation
 - C++ templates form a Turing-complete compile-time language
 
-For the full mathematical treatment with proofs of associativity, commutativity, and well-ordering, check out the [Natural Numbers section](/math#natural-numbers-construction-and-arithmetic) in our math reference.
+For the full mathematical treatment with proofs of associativity, commutativity, and well-ordering, check out the [Natural Numbers section](/math/discrete-math/natural-numbers) in our math reference.
 
 ---
 

@@ -1,0 +1,10 @@
+{
+  "label": "1. Discrete Math Refresh",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "Sets, logic, relations, functions -- the type system for reasoning about algorithms."
+  }
+}

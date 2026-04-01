@@ -5,6 +5,18 @@ import gooseReactions from './src/remark/gooseReactions';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
+const sharedRemarkPlugins = [gooseReactions, remarkMath];
+const sharedRehypePlugins = [rehypeKatex];
+
+// Additional books (beyond the default docs instance)
+const extraBooks = [
+  {id: 'embedded', path: 'books/embedded', routeBasePath: 'embedded-book', label: 'Embedded C++/Rust'},
+  {id: 'systems-interview', path: 'books/systems-interview', routeBasePath: 'systems-interview', label: 'Systems Interview'},
+  {id: 'math', path: 'books/math', routeBasePath: 'math', label: 'Math & Physics'},
+  {id: 'scifi', path: 'books/scifi', routeBasePath: 'scifi', label: 'Sci-Fi Novel'},
+  {id: 'poems', path: 'books/poems', routeBasePath: 'poems', label: 'Poems'},
+];
+
 const config: Config = {
   title: 'The Goose Factor',
   tagline: 'Code, Writing, and Open Source Flight',
@@ -22,28 +34,43 @@ const config: Config = {
     [
       'classic',
       {
+        // Default docs instance = C++ Algorithms book
         docs: {
-          sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          remarkPlugins: [gooseReactions, remarkMath],
-          rehypePlugins: [rehypeKatex],
+          path: 'books/cpp-algorithms',
+          routeBasePath: 'book',
+          sidebarPath: './sidebars-autogen.ts',
+          remarkPlugins: sharedRemarkPlugins,
+          rehypePlugins: sharedRehypePlugins,
+          editUrl: 'https://github.com/westerngazoo/TheGooseFactor/edit/main/',
         },
         blog: {
             showReadingTime: true,
             feedOptions: { type: ['rss', 'atom'], xslt: true },
-            editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            editUrl: 'https://github.com/westerngazoo/TheGooseFactor/edit/main/',
             onInlineTags: 'warn',
             onInlineAuthors: 'warn',
             onUntruncatedBlogPosts: 'warn',
-            remarkPlugins: [gooseReactions, remarkMath],
-            rehypePlugins: [rehypeKatex],
+            remarkPlugins: sharedRemarkPlugins,
+            rehypePlugins: sharedRehypePlugins,
         },
-        pages: { remarkPlugins: [gooseReactions, remarkMath], rehypePlugins: [rehypeKatex] },
+        pages: { remarkPlugins: sharedRemarkPlugins, rehypePlugins: sharedRehypePlugins },
         theme: { customCss: './src/css/custom.css' },
       },
     ],
   ],
   plugins: [
+    ...extraBooks.map(book => [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: book.id,
+        path: book.path,
+        routeBasePath: book.routeBasePath,
+        sidebarPath: './sidebars-autogen.ts',
+        remarkPlugins: sharedRemarkPlugins,
+        rehypePlugins: sharedRehypePlugins,
+        editUrl: 'https://github.com/westerngazoo/TheGooseFactor/edit/main/',
+      },
+    ]),
     function gooseAll(){
       return {
         name: 'goose-reactions-inline',
@@ -54,6 +81,15 @@ const config: Config = {
       };
     }
   ],
+  themes: [
+    ['@easyops-cn/docusaurus-search-local', {
+      hashed: true,
+      indexDocs: true,
+      indexBlog: true,
+      indexPages: true,
+      docsDir: 'books/cpp-algorithms',
+    }],
+  ],
   themeConfig: {
     image: 'img/goosefactorcloseup.png',
     navbar: {
@@ -63,9 +99,9 @@ const config: Config = {
         { to: '/blog', label: 'Blog', position: 'left' },
         { to: '/book', label: 'C++ Algorithms', position: 'left' },
         { to: '/embedded-book', label: 'Embedded C++/Rust', position: 'left' },
-  { to: '/systems-interview', label: 'Embedded Systems Interview', position: 'left' },
-  { to: '/poems', label: 'Poems', position: 'left' },
-        { to: '/scifi', label: 'Sci‑Fi Novel', position: 'left' },
+        { to: '/systems-interview', label: 'Embedded Systems Interview', position: 'left' },
+        { to: '/poems', label: 'Poems', position: 'left' },
+        { to: '/scifi', label: 'Sci\u2011Fi Novel', position: 'left' },
         { to: '/math', label: 'Math & Physics', position: 'left' },
         { to: '/about', label: 'About', position: 'left' },
         { href: 'https://github.com/westerngazoo', label: 'GitHub', position: 'right' },
@@ -90,13 +126,13 @@ const config: Config = {
             { label: 'Embedded C++/Rust', to: '/embedded-book' },
             { label: 'Embedded Systems Interview', to: '/systems-interview' },
             { label: 'Poems', to: '/poems' },
-            { label: 'Sci‑Fi Novel', to: '/scifi' },
+            { label: 'Sci\u2011Fi Novel', to: '/scifi' },
             { label: 'Math & Physics', to: '/math' },
             { label: 'About', to: '/about' },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} The Goose Factor. Built with Docusaurus.`,
+      copyright: `Copyright \u00a9 ${new Date().getFullYear()} The Goose Factor. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
