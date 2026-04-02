@@ -62,6 +62,10 @@ components = ["rust-src", "rustfmt", "clippy", "llvm-tools"]
 
 **Why nightly?** Bare-metal Rust requires `#![no_std]` and `#![no_main]`, which need nightly for some features. The `global_asm!` macro for including assembly also works best on nightly.
 
+> :nerdygoose: Nightly sounds scary, but the RISC-V bare-metal target has been stable enough for production use since 2022. The features we depend on (`global_asm!`, `asm!`) rarely break. Pin your toolchain to a known-good nightly if you're nervous.
+>
+> :sharpgoose: Notice we include `rust-src`. This is your escape hatch — if you ever need to rebuild `core` with different settings (e.g., custom allocator error handling), having the source available makes that possible. For now it's just insurance.
+
 **What's `riscv64gc-unknown-none-elf`?** The target triple:
 
 | Part | Meaning |
@@ -93,6 +97,10 @@ lto = true
 ```
 
 **`panic = "abort"`** is critical. By default, Rust panics trigger *stack unwinding* — walking up the call stack, running destructors, printing a backtrace. This requires runtime support from `std` (which we don't have). `abort` tells Rust: "on panic, just stop. Don't try to unwind."
+
+> :angrygoose: Forget `panic = "abort"` and you'll get a linker error about missing `eh_personality` and `_Unwind_Resume`. The error message is cryptic and will send you down a 2-hour rabbit hole. Save yourself: always set it in both `[profile.dev]` and `[profile.release]`.
+>
+> :surprisedgoose: Without `abort`, Rust tries to link in unwinding machinery — which depends on `libc`, which depends on an OS. We *are* the OS. Circular dependency detected.
 
 **`lto = true`** enables Link-Time Optimization. The linker can see all code at once and optimize across module boundaries. On bare-metal, this produces significantly smaller binaries.
 
@@ -199,6 +207,10 @@ Address          What lives here
 
 **Why `0x80200000`?** This is the convention. OpenSBI occupies `0x80000000` through `0x801FFFFF` (2MB). It then jumps to `0x80200000` in Supervisor mode. This is where our kernel must begin.
 
+> :mathgoose: The math: `0x80200000 - 0x80000000 = 0x200000 = 2 MiB`. OpenSBI reserves exactly 2 MiB for itself. Our 126 MB of RAM runs from `0x80200000` to `0x87E00000`. That's `126 × 1024 × 1024 = 132,120,576` bytes — more than enough for a kernel, heap, and user pages.
+>
+> :angrygoose: If you set `ORIGIN = 0x80000000` instead of `0x80200000`, your kernel will overwrite OpenSBI. The first SBI call will jump into your code (or garbage), and you'll get the most confusing triple-fault of your life. This is the #1 beginner mistake.
+
 ### Section ordering
 
 ```ld
@@ -230,6 +242,10 @@ _stack_top = ORIGIN(RAM) + LENGTH(RAM);
 
 The stack pointer starts at the very top of RAM and grows **downward**. This is the simplest approach — no need to calculate sizes. Later, when we add a heap allocator, we'll partition memory more carefully.
 
+> :surprisedgoose: There's no stack overflow detection here! If the stack grows into BSS/data, it silently corrupts your kernel state. On a real OS, there'd be a guard page. We'll add that when we set up virtual memory in Part 3.
+>
+> :sharpgoose: Putting the stack at the top of RAM is elegant — it maximizes the distance between the stack (growing down) and the heap (growing up). They meet in the middle only when you're truly out of memory.
+
 ## File 5: `Makefile`
 
 ```makefile
@@ -259,6 +275,10 @@ clean:
 **`make run`** builds and boots QEMU. Exit with `Ctrl-A` then `X`.
 
 **`make debug`** starts QEMU paused with a GDB server on port 1234. You can attach GDB and step through instructions — invaluable when something doesn't boot.
+
+> :happygoose: `make objdump` is your best friend when the linker script isn't doing what you think. If `_start` isn't at `0x80200000`, you'll see it immediately in the disassembly. Verify early, verify often.
+>
+> :weightliftingoose: Get in the habit of running `make debug` and single-stepping through the boot code at least once. It's like watching slow-motion replays of your form — you'll catch mistakes you'd never notice at full speed.
 
 **`make objdump`** disassembles the kernel ELF. Use this to verify `_start` is actually at `0x80200000`.
 

@@ -131,12 +131,6 @@ const FeatureList: FeatureItem[] = [
 ];
 
 function Feature({title, image, alt, caption, link, description}: FeatureItem) {
-  const linkProps = link
-    ? link.external
-      ? {href: link.url, rel: 'noopener noreferrer', target: '_blank'}
-      : {to: link.url}
-    : undefined;
-
   const figure = (
     <figure className={styles.figure}>
       <img
@@ -149,23 +143,33 @@ function Feature({title, image, alt, caption, link, description}: FeatureItem) {
     </figure>
   );
 
-  return (
-  <div className={clsx('col col--3 col--6--md col--12--sm')}>
-      <div className={clsx('card', styles.featureCard)}>
-        <div className={clsx('card__image', 'text--center', styles.imageWrap)}>
-          {linkProps ? (
-            <Link {...linkProps} className={styles.imageLink}>
-              {figure}
-            </Link>
-          ) : (
-            figure
-          )}
-        </div>
-        <div className={clsx('card__body', 'text--center', styles.cardBody)}>
-          <Heading as="h3">{title}</Heading>
-          <p>{description}</p>
-        </div>
+  const cardContent = (
+    <div className={clsx('card', styles.featureCard)}>
+      <div className={clsx('card__image', 'text--center', styles.imageWrap)}>
+        {figure}
       </div>
+      <div className={clsx('card__body', 'text--center', styles.cardBody)}>
+        <Heading as="h3">{title}</Heading>
+        <p>{description}</p>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className={clsx('col col--3 col--6--md col--12--sm')}>
+      {link ? (
+        link.external ? (
+          <a href={link.url} rel="noopener noreferrer" target="_blank" className={styles.cardLink}>
+            {cardContent}
+          </a>
+        ) : (
+          <Link to={link.url} className={styles.cardLink}>
+            {cardContent}
+          </Link>
+        )
+      ) : (
+        cardContent
+      )}
     </div>
   );
 }

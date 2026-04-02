@@ -28,3 +28,9 @@ mod app{
 Lab:
 - Design a 3-task pipeline with deadlines; justify periods and stack sizes
 - Add a watchdog and demonstrate recovery from a stuck task
+
+> :angrygoose: `vTaskDelayUntil` and `vTaskDelay` are NOT the same. `vTaskDelay(10)` delays 10 ticks *from now* — so execution time adds to the period and you get drift. `vTaskDelayUntil` anchors to the last wake time. Using the wrong one in a real-time loop is a classic interview trap.
+>
+> :nerdygoose: RTIC (Real-Time Interrupt-driven Concurrency) is Rust's answer to "RTOS but at compile time." Tasks are interrupt handlers scheduled by hardware priority — no runtime scheduler, no stack per task, no heap. The compiler proves your priorities are consistent. In an interview, comparing RTIC to FreeRTOS shows breadth.
+>
+> :surprisedgoose: Stack sizing is the most under-discussed RTOS topic. Each task gets a fixed stack (typically 256–4096 bytes on Cortex-M). Too small → silent stack overflow → corrupted TCB → random crashes three hours later. Always measure with stack watermarking and add 25% headroom.

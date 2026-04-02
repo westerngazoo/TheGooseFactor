@@ -63,6 +63,18 @@
   padding-bottom: 0.75rem;
 }
 
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.cardLink:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
 @media (max-width: 996px) {
   .featureImg { max-width: 110px; }
 }

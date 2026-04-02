@@ -52,6 +52,10 @@ https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust
 
 ## Why This Approach?
 
+> :nerdygoose: The STM32F4 at 168MHz with 1MB Flash and 192KB RAM is a sweet spot — powerful enough for complex applications (DSP, USB host, TCP/IP stack) but constrained enough that language choices *matter*. You can't hide behind "just throw more RAM at it."
+>
+> :sharpgoose: Dual implementations on the same hardware eliminate the "well, your chip is faster" argument. When C++ and Rust produce different binary sizes or interrupt latencies on the same Cortex-M4, the difference is in the language and the programmer — nothing else.
+
 ### For Learners
 - **Direct Comparison**: See the same problem solved two ways
 - **Best Practices**: Learn idiomatic patterns in both languages
@@ -61,6 +65,10 @@ https://github.com/westerngazoo/Embedded-Systems-Programming-Cpp-vs-Rust
 - **Migration Guidance**: Porting strategies between languages
 - **Performance Data**: Real benchmarks on identical hardware
 - **Safety Analysis**: Memory safety implications in embedded context
+
+> :angrygoose: Don't fall for the "Rust is always safer" or "C++ is always faster" narratives. On embedded, it depends on the pattern. C++ RAII handles resource cleanup beautifully. Rust's ownership prevents DMA buffer aliasing at compile time. Each language has domains where it shines — and traps where it fails.
+>
+> :happygoose: By the end of this book, you'll be able to pick the right tool for each embedded problem — not based on tribal loyalty, but on measured evidence from real hardware.
 
 ## Contributing
 

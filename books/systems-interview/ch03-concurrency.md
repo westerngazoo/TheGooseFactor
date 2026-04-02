@@ -10,6 +10,10 @@ What to know:
 - ISR vs thread vs task; priority inversion; latency budgets
 - Atomics and memory orders; single-producer/single-consumer rings
 
+> :angrygoose: Memory ordering is the #1 topic where candidates either shine or crash. Saying "I use `memory_order_seq_cst` for everything" is a red flag — it means you don't understand the performance cost. But using `relaxed` incorrectly is worse — it means your code has races you can't see.
+>
+> :nerdygoose: The key insight: `acquire` on load means "all writes before the paired `release` store are visible to me." This is the fundamental contract of SPSC queues — the producer's `release` store on head publishes the data it just wrote, and the consumer's `acquire` load on head sees that data.
+
 Example (C11: SPSC ring buffer):
 ```c
 #include <stdatomic.h>
@@ -58,3 +62,7 @@ impl<const N: usize> Spsc<N> {
 Lab:
 - Implement an 8-bit SPSC ring (power-of-two size) and measure throughput
 - Add watermarks and overflow counters; report bounded latency under load
+
+> :sharpgoose: Notice the Rust SPSC uses `unsafe` for the buffer write. The `SAFETY` comment is critical — it documents the invariant: only one thread calls `push`. In an interview, if you write `unsafe` Rust, always state the safety contract. It shows you understand *why* the borrow checker can't prove this safe and what you're guaranteeing instead.
+>
+> :mathgoose: Power-of-two sizing (`N = 1024`) lets you use `& (N-1)` instead of `% N` for wrapping. Modulo is a division, which costs 20-40 cycles on ARM Cortex-M. Bitwise AND costs 1 cycle. On a 10µs ISR budget, those 39 cycles matter.

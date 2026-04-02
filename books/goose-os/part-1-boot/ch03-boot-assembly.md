@@ -36,6 +36,10 @@ When QEMU starts with `-bios default -kernel goose-os`, here's the sequence:
 
 Our kernel runs in S-mode. We can manage page tables, handle interrupts, and control user processes — but we can't directly touch hardware timers or power management. For that, we make **SBI calls** to OpenSBI (think of it like a BIOS API).
 
+> :nerdygoose: SBI (Supervisor Binary Interface) is RISC-V's answer to "how does the OS talk to firmware?" It's a clean, versioned ABI with function IDs. Call it via `ecall` from S-mode — OpenSBI handles it in M-mode and returns. Think of it as a very minimal hypervisor.
+>
+> :sharpgoose: This privilege model is cleaner than x86. On x86, the boundary between firmware (SMM) and the OS (Ring 0) is murky — firmware can interrupt the OS invisibly via System Management Interrupts. On RISC-V, M-mode and S-mode interactions are explicit and well-specified.
+
 ## The Boot Assembly: `src/boot.S`
 
 ```asm
@@ -107,6 +111,10 @@ _start:
 
 `bnez` = "branch if not equal to zero". A single instruction gates the entire boot sequence.
 
+> :angrygoose: If you forget to park the other harts, all 4 cores will race through BSS zeroing and stack setup simultaneously. They'll corrupt each other's state and you'll get non-deterministic crashes that only happen sometimes. Debugging race conditions at boot time, before you have *any* debug infrastructure, is a special kind of misery.
+>
+> :surprisedgoose: OpenSBI actually boots hart 0 first by convention, but the spec doesn't *guarantee* which hart arrives first. On some hardware, hart 1 might win the race. Our `bnez a0` check handles this correctly — only hart 0 proceeds, regardless of arrival order.
+
 ## Zeroing BSS
 
 ```asm
@@ -140,6 +148,10 @@ _bss_done:
 | `x28-x31` | `t3-t6` | More temporaries |
 
 We use `t0` and `t1` for the BSS loop because they're temporary registers — no one expects them to be preserved across function calls.
+
+> :angrygoose: The BSS *must* be zeroed before *any* Rust code runs. Rust's safety guarantees assume zero-initialized statics are actually zero. If they contain random garbage from previous boot cycles, you'll get "impossible" behavior — `false` booleans that evaluate to `true`, enums with invalid discriminants, null pointers that aren't null.
+>
+> :mathgoose: We step by 8 bytes (`addi t0, t0, 8`) because `sd` stores a doubleword (64 bits). This works because `.bss` is `ALIGN(4K)` — guaranteed to start on a 4096-byte boundary, which is divisible by 8. If BSS weren't aligned, we'd need a byte-by-byte loop at the edges.
 
 ## Stack Setup
 
@@ -179,6 +191,10 @@ pub extern "C" fn kmain(hart_id: usize, _dtb_addr: usize) -> !
 
 It automatically receives `a0` as `hart_id` and `a1` as `_dtb_addr`. The arguments flow through without any extra code.
 
+> :happygoose: This is beautiful. Zero glue code. OpenSBI puts hart ID in `a0`, the calling convention says first argument goes in `a0`, and Rust's `extern "C"` uses that convention. Three independent systems align perfectly because they all follow the same standard.
+>
+> :nerdygoose: The DTB (Device Tree Blob) pointer in `a1` describes all the hardware on the board — memory size, CPU count, peripheral addresses. We ignore it now (`_dtb_addr`), but in Part 10 (real hardware) we'll parse it to discover the VisionFive 2's actual memory layout instead of hardcoding addresses.
+
 ## The Safety Net
 
 ```asm
@@ -190,6 +206,10 @@ _park:
 ```
 
 If `kmain` ever returns (it shouldn't — it's declared `-> !`), we fall into the parking loop. `wfi` (wait for interrupt) puts the core into a low-power sleep state. Without this, the core would execute whatever garbage follows in memory.
+
+> :sarcasticgoose: "My kernel will never return, I don't need a safety net." Famous last words. One accidental `return` from a `-> !` function (which Rust makes impossible, but if you use `unsafe` to construct one...) and your CPU is executing `.rodata` strings as instructions. I've seen it. It's not fun.
+>
+> :angrygoose: Without `wfi`, parked harts spin in a tight loop burning 100% CPU. On QEMU it wastes host CPU time. On the VisionFive 2, it wastes real power and generates real heat. Always `wfi` in spin loops.
 
 ## How It Gets Compiled
 

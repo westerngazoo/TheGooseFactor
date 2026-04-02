@@ -73,3 +73,9 @@ rust/
 Workspace members example (in `rust/Cargo.toml`): hal, drivers, rtos, sensors_dsp, wireless, power, projects/*.
 
 Build tool: cargo + probe-rs/OpenOCD. Use features for board selection and enable `no_std` + `defmt` logging where helpful.
+
+> :sarcasticgoose: C++ gets CMake + toolchain files + linker scripts + OpenOCD config. Rust gets `Cargo.toml` + `.cargo/config.toml` + `memory.x`. Same hardware, same capability, noticeably different ceremony.
+>
+> :sharpgoose: The mirror structure (both languages having `hal/`, `drivers/`, `projects/`) is deliberate. When comparing implementations, you want to find the C++ UART driver and the Rust UART driver in analogous locations. Structure enables comparison; chaos prevents it.
+>
+> :nerdygoose: Rust's `defmt` logging is a game-changer for embedded debugging — it encodes log format strings as indices at compile time, so `defmt::info!("temperature: {}", t)` sends ~4 bytes over the wire instead of the full string. On C++ you'd need printf with a custom transport, which costs 10-50x more bandwidth.

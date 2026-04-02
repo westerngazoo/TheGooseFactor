@@ -32,6 +32,10 @@ Example (C: endianness check):
 int is_little_endian(){ uint16_t x=1; return *(uint8_t*)&x==1; }
 ```
 
+> :surprisedgoose: That endianness check is technically undefined behavior in C — it violates strict aliasing. In practice every compiler handles it, but the "correct" way is `memcpy` into a `uint8_t`. Welcome to embedded C, where "works everywhere" and "standard-compliant" are different things.
+>
+> :nerdygoose: The CRC polynomial `0x1021` (CRC-CCITT) is used in Bluetooth, XMODEM, and SD cards. Know this one cold — interviewers love asking "what polynomial does your protocol use and why?" The answer: it detects all single and double bit errors, all odd-count errors, and all burst errors ≤16 bits.
+
 Lab:
 - Write a latency ladder note with typical numbers (L1, L2, DRAM, flash, network)
 - Implement crc16_ccitt and verify against known vectors

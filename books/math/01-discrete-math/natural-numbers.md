@@ -18,6 +18,10 @@ The natural numbers $\mathbb{N} = \{0, 1, 2, \dots\}$ can be constructed axiomat
 
 Common notation: $S(n) = n+1$, so $1 = S(0), 2 = S(1), \dots$
 
+> :mathgoose: Five axioms. That's all it takes to build arithmetic from nothing. The induction axiom (5) is doing the heavy lifting — it's what lets you prove things about *all* natural numbers, not just finitely many. Without it, you can't even prove $n + 0 = 0 + n$.
+>
+> :nerdygoose: These axioms map directly to code. In Haskell or Rust, you'd write `enum Nat { Zero, Succ(Box<Nat>) }`. Axiom 3 says `Succ(n)` never equals `Zero`. Axiom 4 says `Succ` is injective. Axiom 5 is structural recursion — pattern matching with a base case and a recursive case.
+
 ## Recursive Definitions of Operations
 
 Addition ($+$):
@@ -116,6 +120,10 @@ $$
 $$
 
 Then $n \in \mathbb{N}$ iff $n$ is the set of all smaller natural numbers. This makes $\in$ behave like $<$.
+
+> :surprisedgoose: Numbers *are* sets? In von Neumann's construction, 3 literally *is* the set $\{0, 1, 2\}$ — it *contains* all smaller numbers. So $2 \in 3$ is true, and it means the same as $2 < 3$. The membership relation $\in$ and the ordering relation $<$ are the *same thing*. This is either beautiful or disturbing, depending on your philosophy.
+>
+> :sarcasticgoose: "But zero is the empty set? That makes no sense." It makes *perfect* sense — zero is the number with nothing before it, and the empty set is the set with nothing in it. They're the same concept, encoded differently. Welcome to foundations of mathematics, where everything is sets all the way down.
 
 ## Well-Ordering of $\mathbb{N}$
 

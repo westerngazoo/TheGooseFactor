@@ -35,6 +35,10 @@ Example: subset relation $\subseteq$ on $\mathcal{P}(S)$.
 
 Note: A poset can have multiple maximal elements but at most one greatest element.
 
+> :angrygoose: Maximal ≠ greatest. This trips up everyone. In the poset of subsets of $\{1,2\}$ ordered by $\subseteq$, the sets $\{1\}$ and $\{2\}$ are both maximal in $\{\{1\}, \{2\}\}$ — but neither is greatest because they're incomparable. Mixing these up leads to incorrect proofs about dependency graphs and scheduling.
+>
+> :sharpgoose: Well-ordering of $\mathbb{N}$ is what makes induction work. The "every nonempty subset has a least element" property guarantees that induction terminates — your descent must stop somewhere. If you try to do induction on $\mathbb{Z}$, it fails because you can keep going to $-1, -2, -3, \dots$ forever.
+
 ## Cardinality and Infinite Sets
 
 Two sets $A$ and $B$ have the same **cardinality** (written $|A| = |B|$) if there exists a bijection $f: A \to B$.
@@ -57,3 +61,9 @@ $$
 $$
 |\mathcal{P}(A)| = 2^{|A|}
 $$
+
+> :surprisedgoose: $\mathbb{Q}$ is countable but $\mathbb{R}$ is not — even though $\mathbb{Q}$ is dense in $\mathbb{R}$ (between any two reals there's a rational). Density and cardinality are completely independent properties. This is one of the most counterintuitive results in mathematics.
+>
+> :mathgoose: Cantor's diagonal argument is worth memorizing. Assume a list of all reals in $[0,1]$. Construct a new real by making digit $n$ different from the $n$-th listed number's $n$-th digit. This new real isn't in the list — contradiction. The argument generalizes: $|A| < |\mathcal{P}(A)|$ for any set, so there's no "largest infinity."
+>
+> :nerdygoose: Inclusion-exclusion ($|A \cup B| = |A| + |B| - |A \cap B|$) generalizes to $n$ sets and is the foundation of the Sieve of Eratosthenes, combinatorial counting, and probability of union of events. Learn the two-set version by heart; the general form follows.

@@ -49,6 +49,12 @@ Rust is harder to write than C for some kernel patterns:
 
 This is real friction. But the argument is: **it's better to fight the compiler than to fight runtime bugs at 3 AM**.
 
+> :angrygoose: Let me be blunt: doubly-linked lists in Rust are *painful*. The borrow checker won't let two nodes point at each other because that's aliased mutable state. You'll reach for `unsafe` or `Rc<RefCell<>>` and feel like you're fighting the language.
+>
+> :happygoose: But here's the thing — every use-after-free bug the borrow checker prevents in the rest of your kernel is worth that friction. In C, linked list bugs are the #1 source of kernel exploits. The compiler is annoying because it's *right*.
+>
+> :sarcasticgoose: "Just write it in C, it's easier." Sure — easier to write, easier to ship, easier to get a CVE. Pick two.
+
 ## The Architecture Question
 
 ### Why Not x86?
@@ -58,6 +64,10 @@ x86 is the most-documented target for OS dev (OSDev wiki, xv6, etc.), but:
 - **Legacy baggage** — real mode, protected mode, long mode. A20 gate. Segmentation. You spend weeks on boot protocol before writing actual OS code.
 - **Complex, proprietary ISA** — Intel/AMD own the specification. Decades of backwards compatibility make it messy.
 - **UEFI boot** — modern x86 boot requires understanding UEFI, which is an entire OS-sized specification.
+
+> :surprisedgoose: The A20 gate. In 2026, x86 CPUs still start in 16-bit real mode for backwards compatibility with the 8086 from 1978. You literally have to enable the 21st address line by toggling a pin that was originally controlled by the *keyboard controller*. This is not a joke.
+>
+> :weightliftingoose: Think of x86 boot as training with a 50kg weighted vest that someone welded shut. Sure, you'll get stronger — but you'll spend more time fighting the vest than actually learning to run. RISC-V lets you start sprinting from day one.
 
 ### Why Not ARM?
 
@@ -75,6 +85,10 @@ ARM is great for embedded (and we'll use it for our garage door product), but:
 - **Mainline toolchain support** — GCC and LLVM both have first-class RISC-V backends. `riscv64gc-unknown-none-elf` is a Tier 2 Rust target.
 - **Growing hardware** — from $5 Milk-V Duo to 64-core Milk-V Pioneer. Real silicon you can buy today.
 - **OpenSBI** — open-source firmware that handles M-mode initialization. We boot straight into S-mode and start writing our OS. No BIOS/UEFI nonsense.
+
+> :nerdygoose: The "G" in RV64GC stands for "General purpose" — it's shorthand for IMAFD (Integer + Multiply + Atomics + Float + Double). Combined with C (Compressed 16-bit instructions), this is the standard Linux-capable profile. Every extension is documented in the open spec.
+>
+> :sharpgoose: OpenSBI is the unsung hero of RISC-V OS development. It gives you an SBI (Supervisor Binary Interface) — a clean API for timer setup, IPI, power management, and console I/O. Instead of writing 2,000 lines of M-mode firmware, you call `sbi_set_timer()` and move on with your life.
 
 ## Our Hardware
 
@@ -101,6 +115,10 @@ Once our OS works in QEMU, we'll deploy to real silicon:
 - **Available**: ~$45-85 from vendors like YouYeeToo
 
 The VisionFive 2 is essentially the "Raspberry Pi of RISC-V" — affordable, well-documented, and widely available.
+
+> :angrygoose: Real hardware will surprise you. QEMU's UART is instant, but the VisionFive 2's physical UART runs at 115200 baud. Blast bytes too fast and you'll overflow the FIFO. Your "working" kernel will print garbled output. Always test on real hardware before declaring victory.
+>
+> :happygoose: The flip side: when you see "Hello from GooseOS!" on a *physical* serial terminal connected to a *real* RISC-V chip, the dopamine hit is unmatched. Emulators are for development; real silicon is for celebration.
 
 ## What We'll Build
 

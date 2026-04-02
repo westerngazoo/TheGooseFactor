@@ -26,3 +26,9 @@ pub fn exp_then_bin<F: Fn(usize)->bool>(limit:usize, ok:F)->Option<usize>{
 Lab:
 - Implement circular buffer ops: push, pop, peek, count; test wrap-around
 - Implement time-bounded search for first true in monotonic predicate
+
+> :angrygoose: `if(n<3) return -1` — this boundary check is the whole point. In embedded interview coding questions, the edge cases *are* the question. Empty buffer, one byte, exactly N bytes, off-by-one at the CRC boundary. If you don't test all of these, you haven't answered the question.
+>
+> :nerdygoose: The exponential-then-binary search pattern is O(log n) with no upfront knowledge of the search space size. It's perfect for embedded scenarios: "find the minimum buffer size where latency stays under 10µs" — you don't know the answer, but you know the predicate is monotonic.
+>
+> :mathgoose: Watch out for `(l+r)/2` overflow. If `l` and `r` are both close to `usize::MAX`, their sum overflows. The safe version is `l + (r - l) / 2`. In an interview for systems code, mentioning this unprompted shows you think about correctness at the bit level.

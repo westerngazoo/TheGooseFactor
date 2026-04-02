@@ -28,11 +28,10 @@ const books = [
 const defaultBook = books[0];
 const extraBooks = books.slice(1);
 
-// Generate navbar items from books array
-const bookNavItems = books.map(b => ({
+// Generate navbar dropdown items from books array
+const bookDropdownItems = books.map(b => ({
   to: `/${b.routeBasePath}`,
   label: b.label,
-  position: 'left' as const,
 }));
 
 // Generate footer items from books array
@@ -120,7 +119,12 @@ const config: Config = {
       logo: { alt: 'Goose Logo', src: 'img/gooseFactor.png' },
       items: [
         { to: '/blog', label: 'Blog', position: 'left' },
-        ...bookNavItems,
+        {
+          type: 'dropdown',
+          label: 'Books',
+          position: 'left',
+          items: bookDropdownItems,
+        },
         { to: '/about', label: 'About', position: 'left' },
         { href: 'https://github.com/westerngazoo', label: 'GitHub', position: 'right' },
         { href: 'https://x.com/techno_goose', label: 'X', position: 'right' },

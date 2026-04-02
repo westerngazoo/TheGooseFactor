@@ -111,6 +111,10 @@ We store the MMIO base address as a `usize`. `const fn` means this can be evalua
 
 **Why not a raw pointer?** Keeping it as `usize` and converting to `*mut u8` only when needed makes the struct `Send` and `Sync` by default (raw pointers are `!Send` and `!Sync`). This matters when we eventually share the UART across cores.
 
+> :sharpgoose: This `usize` trick is a deliberate design choice. By storing the address as an integer, we make the type safe to share between threads — the Rust compiler auto-derives `Send + Sync`. If we stored `*mut u8`, we'd need `unsafe impl Send for Uart {}` and a comment explaining why. The `usize` approach encodes the safety argument in the type itself.
+>
+> :nerdygoose: `const fn new()` is key for kernel globals. We'll eventually write `static UART: Uart = Uart::new(0x1000_0000);` — and that only works if the constructor is `const`. Planning ahead here saves a refactor later.
+
 ### Initialization
 
 ```rust
@@ -161,6 +165,10 @@ And your UART output **disappears**. The compiler is technically correct — fro
 
 Similarly, `read_volatile` for the status register prevents the compiler from caching the value in a register and never re-reading it (which would make our busy-wait loop spin forever or not at all).
 
+> :angrygoose: This is not a hypothetical bug. I've seen UART drivers that "work" in debug mode and produce zero output in release mode. The optimizer is *aggressive* — it will remove MMIO writes, hoist reads out of loops, and reorder stores. `volatile` is your firewall.
+>
+> :sarcasticgoose: "But my code works without `volatile`!" It works *today*, with *this* optimizer version, at *this* optimization level. Change any one of those and your serial output vanishes. Using `volatile` correctly is not optional — it's a correctness requirement.
+
 ### Transmitting a Byte
 
 ```rust
@@ -202,6 +210,8 @@ Every MMIO access is in an `unsafe` block because:
 3. We're responsible for ensuring correctness
 
 This is **correct and necessary** `unsafe`. A UART driver must touch hardware registers. The point of Rust's model isn't to avoid `unsafe` — it's to **isolate** it. All the danger is here, in 30 lines of code, clearly marked. Everything that uses `uart.puts("hello")` is safe Rust.
+
+> :happygoose: This is Rust's superpower for OS code. 30 lines of `unsafe` UART driver, and the *entire rest of the kernel* gets safe `uart.puts()`. In C, every single function is implicitly `unsafe`. In Rust, you build safe abstractions on top of unsafe foundations — and the compiler enforces the boundary.
 
 ## `src/main.rs` — Kernel Entry
 
@@ -305,6 +315,10 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 
 Required by `#![no_std]`. When Rust panics — array out of bounds, `unwrap()` on `None`, explicit `panic!()` — it calls this function. For now, we just halt. In Part 2, we'll print the panic info to UART so we can actually see what went wrong.
 
+> :angrygoose: A silent panic handler is *dangerous*. If your kernel panics right now, it silently halts with no indication of what went wrong. You'll stare at a frozen QEMU wondering if the boot failed, the UART broke, or your code hit a panic. Part 2 can't come soon enough.
+>
+> :happygoose: But even this silent handler is better than C's behavior. In C, array out-of-bounds doesn't panic — it silently reads garbage, corrupts the stack, and keeps running. At least Rust *stops* before things get worse.
+
 ## Building and Running
 
 ```bash
@@ -358,6 +372,10 @@ Let's trace the full path from power-on to "Hello":
 ```
 
 Congratulations. You just booted an operating system you wrote from scratch.
+
+> :happygoose: Take a moment. You wrote assembly that boots a CPU, zeroes memory, sets up a stack, and hands off to Rust. You wrote a UART driver that talks directly to hardware. You printed "Hello World" with no OS, no runtime, no libraries. Everything from the first instruction to the last byte on screen is *yours*.
+>
+> :weightliftingoose: This is the foundation. Every chapter from here builds on this boot sequence. Virtual memory, interrupts, processes — they're all just "more code that runs after `kmain`". The hardest part (getting to Rust from bare metal) is behind you.
 
 ## What's Next
 

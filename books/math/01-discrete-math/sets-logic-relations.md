@@ -37,6 +37,10 @@ Power set and counting:
 - $\mathcal{P}(A)$ is the set of all subsets of $A$
 - If $|A|=n$, then $|\mathcal{P}(A)|=2^n$
 
+> :mathgoose: De Morgan's laws are dual: swap $\cup \leftrightarrow \cap$ and complement everything. This duality runs deep — it connects set theory to Boolean algebra to circuit logic. The AND/OR gates in your CPU obey the exact same laws.
+>
+> :nerdygoose: $|\mathcal{P}(A)|=2^n$ is why bitmasks work. A set of $n$ elements has exactly $2^n$ subsets — the same as the number of $n$-bit binary strings. Each bit is a yes/no membership decision. This is the connection between sets and bit manipulation in code.
+
 Cartesian product:
 - $A \times B = \{(a,b) \mid a \in A, b \in B\}$
 - $|A \times B| = |A| \cdot |B|$
@@ -109,6 +113,10 @@ Given relations $R, S \subseteq X \times X$:
 - **Quantifier negation** is the difference between "All inputs pass" ($\forall$) and "Find a counterexample" ($\exists$).
 - **Equivalence relations** are exactly what DSU/Union-Find maintains.
 - **Partial orders** model dependency graphs, topological sort, and "dominates" relations.
+
+> :happygoose: This section is the payoff. Every abstract concept above has a direct algorithmic counterpart. Once you see "equivalence relation → Union-Find" and "partial order → topological sort," the math stops feeling abstract and starts feeling like a tool.
+>
+> :surprisedgoose: The contrapositive equivalence ($p \Rightarrow q \equiv \lnot q \Rightarrow \lnot p$) is surprisingly powerful in debugging. Instead of proving "if input is valid, output is correct," prove the contrapositive: "if output is wrong, input was invalid." Sometimes one direction is much easier to verify.
 
 ## Quick sanity checks
 - If your proof says "for all", try to produce a counterexample (negate it to an $\exists$).

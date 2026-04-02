@@ -17,6 +17,10 @@ Scope: embedded device roles (bare‑metal and RTOS) using C, modern C++ (17/20/
 
 Noise to de‑prioritize: trick puzzles, excessive big‑O brainteasers unrelated to devices, niche language trivia.
 
+> :sharpgoose: The biggest signal in an embedded interview is *judgment under constraints*. Anyone can implement a sorting algorithm. Not everyone can explain why they chose a ring buffer over a linked list when the ISR has a 5µs deadline and zero heap access.
+>
+> :sarcasticgoose: If an interviewer asks you to reverse a linked list on a whiteboard for an embedded role, smile and do it — then ask them about their interrupt latency budget. That's the real interview.
+
 ## Four prep tracks (run them in parallel)
 1) Fundamentals: memory hierarchy, MMIO, DMA, bit ops, endianness, CRCs
 2) Concurrency: ISRs vs tasks, queues/ring buffers, atomics/memory ordering
@@ -96,6 +100,10 @@ embedded-interview/
 ```
 
 Recommended: keep each lab self-contained with a minimal README, inputs/outputs, and a quick test/bench harness.
+
+> :happygoose: A well-organized repo with `BUILD` and `RUN` instructions is itself an interview artifact. Interviewers *will* look at your GitHub. A clean lab repo with measured results says more than a bullet point on your resume.
+>
+> :weightliftingoose: Treat each lab like a training session. Write down what you measured, what surprised you, and what you'd do differently. That notebook becomes your interview story bank — real experiences beat memorized answers every time.
 
 ## Templates you'll reuse
 - Design prompt template:
@@ -188,3 +196,7 @@ Use this to prioritize practice time and tailor your portfolio demos.
 - Updates: partial OTA, version skew, rollback gaps, schema drift
 
 For each lab/design, list which failure modes you handle and how you observe them.
+
+> :angrygoose: Failure modes are where interviews are won or lost. Anyone can design a happy-path system. The candidate who says "what happens when the DMA descriptor ring wraps while we're in a brown-out?" gets the offer.
+>
+> :nerdygoose: The taxonomy above maps to real CVEs. ABA problems show up in lock-free queues. Torn reads crash CAN bus parsers. Stale cache causes MMIO reads to return yesterday's data. Learn these patterns — they'll come up in debugging questions.
