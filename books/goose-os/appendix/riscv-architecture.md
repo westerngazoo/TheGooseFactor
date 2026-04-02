@@ -31,7 +31,7 @@ Common extensions:
 
 > :nerdygoose: The "G" in RV64GC stands for "General purpose" — it's shorthand for IMAFD. The "C" (compressed) is separate because 16-bit encoding is optional, but every real Linux-capable chip includes it for code density.
 >
-> :weightliftingoose: Think of extensions like gym equipment. RV32I is bodyweight fundamentals — you can do everything, just slowly. M adds a squat rack (multiply/divide). A adds a spotter (atomics for safe concurrent access). F/D add precision machines (floating point). C makes everything more compact — like circuit training.
+> :weightliftinggoose: Think of extensions like gym equipment. RV32I is bodyweight fundamentals — you can do everything, just slowly. M adds a squat rack (multiply/divide). A adds a spotter (atomics for safe concurrent access). F/D add precision machines (floating point). C makes everything more compact — like circuit training.
 
 ## Privilege Levels
 

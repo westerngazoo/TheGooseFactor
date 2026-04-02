@@ -87,7 +87,7 @@ pub struct TrapFrame {
 
 **Total: 33 fields × 8 bytes = 264 bytes, rounded to 272 for 16-byte alignment.**
 
-> :weightliftingoose: 272 bytes on the stack per trap. Every timer tick, every keypress, every exception allocates and deallocates 272 bytes. On our 126MB stack, that's nothing. But on a microcontroller with 8KB of RAM? You'd optimize this to save only caller-saved registers. For GooseOS, clarity beats optimization at this stage.
+> :weightliftinggoose: 272 bytes on the stack per trap. Every timer tick, every keypress, every exception allocates and deallocates 272 bytes. On our 126MB stack, that's nothing. But on a microcontroller with 8KB of RAM? You'd optimize this to save only caller-saved registers. For GooseOS, clarity beats optimization at this stage.
 
 ## `trap.S` — The Assembly Handler
 

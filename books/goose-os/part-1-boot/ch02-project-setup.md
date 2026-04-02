@@ -278,7 +278,7 @@ clean:
 
 > :happygoose: `make objdump` is your best friend when the linker script isn't doing what you think. If `_start` isn't at `0x80200000`, you'll see it immediately in the disassembly. Verify early, verify often.
 >
-> :weightliftingoose: Get in the habit of running `make debug` and single-stepping through the boot code at least once. It's like watching slow-motion replays of your form — you'll catch mistakes you'd never notice at full speed.
+> :weightliftinggoose: Get in the habit of running `make debug` and single-stepping through the boot code at least once. It's like watching slow-motion replays of your form — you'll catch mistakes you'd never notice at full speed.
 
 **`make objdump`** disassembles the kernel ELF. Use this to verify `_start` is actually at `0x80200000`.
 

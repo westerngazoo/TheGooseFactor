@@ -44,7 +44,7 @@ The VisionFive 2 gives us a **fully open boot chain**. On a Raspberry Pi, the GP
 
 **Bonus**: The VisionFive 2 also makes an excellent embedded development board. Everything in the [Embedded C++/Rust book](/embedded-book) applies directly — same RISC-V toolchain, same JTAG debugging, same UART serial console. One board, two books.
 
-> :weightliftingoose: Think of it like cross-training. The muscle memory you build writing kernel code (register access, interrupt handlers, memory-mapped I/O) transfers directly to embedded firmware — and vice versa. The VisionFive 2 is your training ground for both.
+> :weightliftinggoose: Think of it like cross-training. The muscle memory you build writing kernel code (register access, interrupt handlers, memory-mapped I/O) transfers directly to embedded firmware — and vice versa. The VisionFive 2 is your training ground for both.
 
 ## Why Rust?
 
@@ -72,18 +72,22 @@ The VisionFive 2 gives us a **fully open boot chain**. On a Raspberry Pi, the GP
 
 ## Roadmap
 
+GooseOS is evolving toward a **microkernel architecture** — the kernel stays minimal (IPC, memory, scheduling), and everything else (drivers, filesystem, networking) runs as composable userspace services. Load only what you need.
+
 | Part | Topic | Branch | Status |
 |------|-------|--------|--------|
 | **Part 1** | Boot + Hello World | `part-1` | Done |
 | **Part 2** | `println!` macro + panic handler | `part-2` | Done |
 | **Part 3** | Trap handling + PLIC + interrupt-driven UART | `part-3` | Done |
-| Part 4 | Deploy to VisionFive 2 (real hardware!) | | Next |
-| Part 5 | Page tables + virtual memory | | Planned |
-| Part 6 | Process scheduling | | Planned |
-| Part 7 | Heap allocator | | Planned |
-| Part 8 | File system | | Planned |
-| Part 9 | System calls | | Planned |
-| Part 10 | SMP (multicore) | | Planned |
+| **Part 4** | Platform abstraction + VisionFive 2 hardware | `part-4` | Done |
+| Part 5 | Sv39 page tables + virtual memory | | Next |
+| Part 6 | First userspace process + context switching | | Planned |
+| Part 7 | IPC message passing (microkernel core) | | Planned |
+| Part 8 | UART server in userspace (first service) | | Planned |
+| Part 9 | Heap allocator + capability-based memory | | Planned |
+| Part 10 | Block device + filesystem service | | Planned |
+| Part 11 | Network stack service | | Planned |
+| Part 12 | SMP (multicore) | | Planned |
 
 Each part has a corresponding git branch. To see the code at any stage:
 

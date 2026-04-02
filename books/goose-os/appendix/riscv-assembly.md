@@ -169,7 +169,7 @@ sfence.vma  rs1, rs2      # flush specific address/ASID
 
 > :angrygoose: Forgot `sfence.vma` after changing page tables? Congrats, your kernel is now executing with stale TLB entries. The CPU cached the old mapping and will happily use it until you flush. This is the #1 virtual memory debugging headache.
 >
-> :weightliftingoose: `sfence.vma` without arguments flushes the *entire* TLB — the nuclear option. Fine for boot-time setup, but in hot paths use the targeted version with specific address/ASID to avoid flushing entries you still need. TLB misses are expensive.
+> :weightliftinggoose: `sfence.vma` without arguments flushes the *entire* TLB — the nuclear option. Fine for boot-time setup, but in hot paths use the targeted version with specific address/ASID to avoid flushing entries you still need. TLB misses are expensive.
 
 ## A Complete Example: Boot Entry
 
@@ -499,7 +499,7 @@ riscv64-linux-gnu-gdb hello.elf
 (gdb) x/10i $pc            # disassemble next 10 instructions
 ```
 
-> :weightliftingoose: GDB single-stepping through assembly is the best way to build intuition. Watch the registers change instruction by instruction. It's like watching your reps in the mirror — you see exactly what each instruction does.
+> :weightliftinggoose: GDB single-stepping through assembly is the best way to build intuition. Watch the registers change instruction by instruction. It's like watching your reps in the mirror — you see exactly what each instruction does.
 >
 > :angrygoose: If GDB says "Remote connection closed" immediately, your program probably triple-faulted before hitting the breakpoint. Check that `_start` is actually at `0x80000000` with `riscv64-linux-gnu-objdump -d hello.elf | head -20`.
 

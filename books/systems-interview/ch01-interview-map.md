@@ -103,7 +103,7 @@ Recommended: keep each lab self-contained with a minimal README, inputs/outputs,
 
 > :happygoose: A well-organized repo with `BUILD` and `RUN` instructions is itself an interview artifact. Interviewers *will* look at your GitHub. A clean lab repo with measured results says more than a bullet point on your resume.
 >
-> :weightliftingoose: Treat each lab like a training session. Write down what you measured, what surprised you, and what you'd do differently. That notebook becomes your interview story bank — real experiences beat memorized answers every time.
+> :weightliftinggoose: Treat each lab like a training session. Write down what you measured, what surprised you, and what you'd do differently. That notebook becomes your interview story bank — real experiences beat memorized answers every time.
 
 ## Templates you'll reuse
 - Design prompt template:

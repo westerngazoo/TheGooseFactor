@@ -158,7 +158,7 @@ Boot with `make run`. You should see:
 
 Type characters → they echo back immediately via UART interrupt. The timer ticks in the background. Two independent interrupt sources, both working.
 
-> :weightliftingoose: Think about what's happening: the CPU is asleep in `wfi`. A keypress arrives → UART asserts IRQ 10 → PLIC wakes the CPU → trap vector saves state → Rust handler reads the character → echoes it → restores state → `sret` → back to `wfi`. The entire round-trip is microseconds. That's what interrupt-driven I/O gives you — zero CPU usage when idle, instant response when needed.
+> :weightliftinggoose: Think about what's happening: the CPU is asleep in `wfi`. A keypress arrives → UART asserts IRQ 10 → PLIC wakes the CPU → trap vector saves state → Rust handler reads the character → echoes it → restores state → `sret` → back to `wfi`. The entire round-trip is microseconds. That's what interrupt-driven I/O gives you — zero CPU usage when idle, instant response when needed.
 
 ## Branch
 

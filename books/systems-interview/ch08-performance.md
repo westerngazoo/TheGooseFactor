@@ -24,7 +24,7 @@ Lab:
 - Benchmark two implementations (branchy vs LUT); report mean and p95 over 30 runs
 - Show before/after for an inlined hot path with cache-friendly layout
 
-> :weightliftingoose: "Measure first" is the cardinal rule. In an interview, if you say "I'd optimize X because it's probably slow" without measuring, you've already lost. Say instead: "I'd profile, identify the hot path, measure the baseline, then compare after the change." Process over intuition.
+> :weightliftinggoose: "Measure first" is the cardinal rule. In an interview, if you say "I'd optimize X because it's probably slow" without measuring, you've already lost. Say instead: "I'd profile, identify the hot path, measure the baseline, then compare after the change." Process over intuition.
 >
 > :nerdygoose: Report p95, not just mean. Mean hides outliers. If your mean latency is 10µs but p95 is 500µs, you have a cache miss or context switch problem that mean will never reveal. Interviewers who care about real-time systems want to see you think in distributions, not averages.
 >

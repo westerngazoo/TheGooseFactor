@@ -375,7 +375,7 @@ Congratulations. You just booted an operating system you wrote from scratch.
 
 > :happygoose: Take a moment. You wrote assembly that boots a CPU, zeroes memory, sets up a stack, and hands off to Rust. You wrote a UART driver that talks directly to hardware. You printed "Hello World" with no OS, no runtime, no libraries. Everything from the first instruction to the last byte on screen is *yours*.
 >
-> :weightliftingoose: This is the foundation. Every chapter from here builds on this boot sequence. Virtual memory, interrupts, processes — they're all just "more code that runs after `kmain`". The hardest part (getting to Rust from bare metal) is behind you.
+> :weightliftinggoose: This is the foundation. Every chapter from here builds on this boot sequence. Virtual memory, interrupts, processes — they're all just "more code that runs after `kmain`". The hardest part (getting to Rust from bare metal) is behind you.
 
 ## What's Next
 

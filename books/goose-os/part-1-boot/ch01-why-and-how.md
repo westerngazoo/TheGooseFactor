@@ -67,7 +67,7 @@ x86 is the most-documented target for OS dev (OSDev wiki, xv6, etc.), but:
 
 > :surprisedgoose: The A20 gate. In 2026, x86 CPUs still start in 16-bit real mode for backwards compatibility with the 8086 from 1978. You literally have to enable the 21st address line by toggling a pin that was originally controlled by the *keyboard controller*. This is not a joke.
 >
-> :weightliftingoose: Think of x86 boot as training with a 50kg weighted vest that someone welded shut. Sure, you'll get stronger — but you'll spend more time fighting the vest than actually learning to run. RISC-V lets you start sprinting from day one.
+> :weightliftinggoose: Think of x86 boot as training with a 50kg weighted vest that someone welded shut. Sure, you'll get stronger — but you'll spend more time fighting the vest than actually learning to run. RISC-V lets you start sprinting from day one.
 
 ### Why Not ARM?
 

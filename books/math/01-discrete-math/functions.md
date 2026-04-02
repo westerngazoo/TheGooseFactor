@@ -70,4 +70,4 @@ Two algorithm-friendly proof ideas:
 
 > :happygoose: Invariants and monovariants are the two most useful proof techniques in algorithm analysis. Invariant: "the sorted prefix grows by one each iteration" (insertion sort correctness). Monovariant: "the distance to target strictly decreases each step" (termination proof). If you can identify both, you've proven your algorithm correct *and* terminates.
 >
-> :weightliftingoose: This checklist is your training form. Every time you read a proof or write one, run through these questions. At first it feels slow. After a few dozen proofs, it becomes automatic — like checking your grip before a deadlift.
+> :weightliftinggoose: This checklist is your training form. Every time you read a proof or write one, run through these questions. At first it feels slow. After a few dozen proofs, it becomes automatic — like checking your grip before a deadlift.
