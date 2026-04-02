@@ -8,14 +8,38 @@ import rehypeKatex from 'rehype-katex';
 const sharedRemarkPlugins = [gooseReactions, remarkMath];
 const sharedRehypePlugins = [rehypeKatex];
 
-// Additional books (beyond the default docs instance)
-const extraBooks = [
-  {id: 'embedded', path: 'books/embedded', routeBasePath: 'embedded-book', label: 'Embedded C++/Rust'},
-  {id: 'systems-interview', path: 'books/systems-interview', routeBasePath: 'systems-interview', label: 'Systems Interview'},
-  {id: 'math', path: 'books/math', routeBasePath: 'math', label: 'Math & Physics'},
-  {id: 'scifi', path: 'books/scifi', routeBasePath: 'scifi', label: 'Sci-Fi Novel'},
-  {id: 'poems', path: 'books/poems', routeBasePath: 'poems', label: 'Poems'},
+// ──────────────────────────────────────────────
+// Single source of truth for all books.
+// Add a new entry here → navbar, footer, and
+// docs plugin are generated automatically.
+// The first entry uses the preset's default docs
+// instance (required by the search plugin).
+// ──────────────────────────────────────────────
+const books = [
+  {id: 'default',            path: 'books/cpp-algorithms',     routeBasePath: 'book',              label: 'C++ Algorithms'},
+  {id: 'embedded',           path: 'books/embedded',           routeBasePath: 'embedded-book',     label: 'Embedded C++/Rust'},
+  {id: 'systems-interview',  path: 'books/systems-interview',  routeBasePath: 'systems-interview', label: 'Systems Interview'},
+  {id: 'math',               path: 'books/math',               routeBasePath: 'math',              label: 'Math & Physics'},
+  {id: 'scifi',              path: 'books/scifi',              routeBasePath: 'scifi',             label: 'Sci-Fi Novel'},
+  {id: 'poems',              path: 'books/poems',              routeBasePath: 'poems',             label: 'Poems'},
+  {id: 'goose-os',           path: 'books/goose-os',           routeBasePath: 'goose-os',          label: 'GooseOS'},
 ];
+
+const defaultBook = books[0];
+const extraBooks = books.slice(1);
+
+// Generate navbar items from books array
+const bookNavItems = books.map(b => ({
+  to: `/${b.routeBasePath}`,
+  label: b.label,
+  position: 'left' as const,
+}));
+
+// Generate footer items from books array
+const bookFooterItems = books.map(b => ({
+  label: b.label,
+  to: `/${b.routeBasePath}`,
+}));
 
 const config: Config = {
   title: 'The Goose Factor',
@@ -34,10 +58,9 @@ const config: Config = {
     [
       'classic',
       {
-        // Default docs instance = C++ Algorithms book
         docs: {
-          path: 'books/cpp-algorithms',
-          routeBasePath: 'book',
+          path: defaultBook.path,
+          routeBasePath: defaultBook.routeBasePath,
           sidebarPath: './sidebars-autogen.ts',
           remarkPlugins: sharedRemarkPlugins,
           rehypePlugins: sharedRehypePlugins,
@@ -87,7 +110,7 @@ const config: Config = {
       indexDocs: true,
       indexBlog: true,
       indexPages: true,
-      docsDir: 'books/cpp-algorithms',
+      docsDir: defaultBook.path,
     }],
   ],
   themeConfig: {
@@ -97,12 +120,7 @@ const config: Config = {
       logo: { alt: 'Goose Logo', src: 'img/gooseFactor.png' },
       items: [
         { to: '/blog', label: 'Blog', position: 'left' },
-        { to: '/book', label: 'C++ Algorithms', position: 'left' },
-        { to: '/embedded-book', label: 'Embedded C++/Rust', position: 'left' },
-        { to: '/systems-interview', label: 'Embedded Systems Interview', position: 'left' },
-        { to: '/poems', label: 'Poems', position: 'left' },
-        { to: '/scifi', label: 'Sci\u2011Fi Novel', position: 'left' },
-        { to: '/math', label: 'Math & Physics', position: 'left' },
+        ...bookNavItems,
         { to: '/about', label: 'About', position: 'left' },
         { href: 'https://github.com/westerngazoo', label: 'GitHub', position: 'right' },
         { href: 'https://x.com/techno_goose', label: 'X', position: 'right' },
@@ -116,19 +134,6 @@ const config: Config = {
           items: [
             { label: 'GitHub', href: 'https://github.com/westerngazoo' },
             { label: 'X', href: 'https://x.com/techno_goose' },
-          ],
-        },
-        {
-          title: 'Explore',
-          items: [
-            { label: 'Blog', to: '/blog' },
-            { label: 'C++ Algorithms', to: '/book' },
-            { label: 'Embedded C++/Rust', to: '/embedded-book' },
-            { label: 'Embedded Systems Interview', to: '/systems-interview' },
-            { label: 'Poems', to: '/poems' },
-            { label: 'Sci\u2011Fi Novel', to: '/scifi' },
-            { label: 'Math & Physics', to: '/math' },
-            { label: 'About', to: '/about' },
           ],
         },
       ],

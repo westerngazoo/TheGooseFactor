@@ -45,6 +45,48 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
+    title: 'Embedded C++/Rust',
+    image: 'gooseFactor.png',
+    alt: 'Goose working with embedded hardware',
+    caption: 'Dual-language embedded',
+    link: {url: '/embedded-book'},
+    description: (
+      <>
+        Side‑by‑side C++ and Rust on the same STM32 hardware. Drivers, RTOS,
+        protocols, and real‑world projects compared.{' '}
+        <Link to="/embedded-book">Explore →</Link>
+      </>
+    ),
+  },
+  {
+    title: 'Systems Interview',
+    image: 'sharpgoose.png',
+    alt: 'Goose preparing for embedded systems interviews',
+    caption: 'Interview prep & drills',
+    link: {url: '/systems-interview'},
+    description: (
+      <>
+        Targeted drills, labs, and checklists for embedded systems roles.
+        C, C++, and Rust with side‑by‑side guidance.{' '}
+        <Link to="/systems-interview">Start prep →</Link>
+      </>
+    ),
+  },
+  {
+    title: 'Math & Physics',
+    image: 'mathgoose.png',
+    alt: 'Analytical goose surrounded by equations',
+    caption: 'Derivations & intuition',
+    link: {url: '/math'},
+    description: (
+      <>
+        High‑impact notes: discrete math, combinatorics, probability, linear
+        algebra, modeling & physical intuition feeding algorithm design.{' '}
+        <Link to="/math">Dive in →</Link>
+      </>
+    ),
+  },
+  {
   title: 'Sci‑Fi Novel',
     image: 'newtongoose.png',
     alt: 'Goose exploring a neon techno sci-fi world',
@@ -60,16 +102,15 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: 'Math & Physics',
-    image: 'gooseFactor.png',
-    alt: 'Analytical goose surrounded by equations',
-    caption: 'Derivations & intuition',
-    link: {url: '/math'},
+    title: 'Poems',
+    image: 'surprisedgoose.png',
+    alt: 'Goose writing poetry',
+    caption: 'Verse & experiments',
+    link: {url: '/poems'},
     description: (
       <>
-        High‑impact notes: discrete math, combinatorics, probability, linear
-        algebra, modeling & physical intuition feeding algorithm design.{' '}
-        <Link to="/math">Dive in →</Link>
+        A small corner for verse—short pieces, drafts, and experiments.{' '}
+        <Link to="/poems">Read →</Link>
       </>
     ),
   },
