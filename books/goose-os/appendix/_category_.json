@@ -1,10 +1,10 @@
 {
-  "label": "Appendix: RISC-V Guide",
+  "label": "Appendix",
   "position": 99,
   "collapsible": true,
   "collapsed": false,
   "link": {
     "type": "generated-index",
-    "description": "RISC-V architecture primer for OS developers — history, ISA basics, assembly, and memory layout."
+    "description": "RISC-V architecture primer, hardware reference, and U-Boot command guide for OS developers."
   }
 }

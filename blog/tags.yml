@@ -2,3 +2,23 @@ geese:
   label: Geese
   permalink: /geese
   description: Flock updates
+
+embedded:
+  label: Embedded
+  permalink: /embedded
+  description: Bare-metal and embedded systems
+
+ai:
+  label: AI
+  permalink: /ai
+  description: AI-assisted development
+
+risc-v:
+  label: RISC-V
+  permalink: /risc-v
+  description: RISC-V architecture and development
+
+goose-os:
+  label: GooseOS
+  permalink: /goose-os
+  description: GooseOS kernel development

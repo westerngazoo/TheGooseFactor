@@ -63,12 +63,10 @@ const config: Config = {
           sidebarPath: './sidebars-autogen.ts',
           remarkPlugins: sharedRemarkPlugins,
           rehypePlugins: sharedRehypePlugins,
-          editUrl: 'https://github.com/westerngazoo/TheGooseFactor/edit/main/',
         },
         blog: {
             showReadingTime: true,
             feedOptions: { type: ['rss', 'atom'], xslt: true },
-            editUrl: 'https://github.com/westerngazoo/TheGooseFactor/edit/main/',
             onInlineTags: 'warn',
             onInlineAuthors: 'warn',
             onUntruncatedBlogPosts: 'warn',
@@ -90,7 +88,6 @@ const config: Config = {
         sidebarPath: './sidebars-autogen.ts',
         remarkPlugins: sharedRemarkPlugins,
         rehypePlugins: sharedRehypePlugins,
-        editUrl: 'https://github.com/westerngazoo/TheGooseFactor/edit/main/',
       },
     ]),
     function gooseAll(){

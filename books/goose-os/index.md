@@ -79,7 +79,7 @@ GooseOS is evolving toward a **microkernel architecture** — the kernel stays m
 | **Part 1** | Boot + Hello World | `part-1` | Done |
 | **Part 2** | `println!` macro + panic handler | `part-2` | Done |
 | **Part 3** | Trap handling + PLIC + interrupt-driven UART | `part-3` | Done |
-| **Part 4** | Platform abstraction + VisionFive 2 hardware | `part-4` | Done |
+| **Part 4** | Real hardware — VF2 boot, UART fixes, dev workflow | `part-4` | Done |
 | Part 5 | Sv39 page tables + virtual memory | | Next |
 | Part 6 | First userspace process + context switching | | Planned |
 | Part 7 | IPC message passing (microkernel core) | | Planned |
