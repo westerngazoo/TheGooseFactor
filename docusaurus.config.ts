@@ -19,10 +19,13 @@ const books = [
   {id: 'default',            path: 'books/cpp-algorithms',     routeBasePath: 'book',              label: 'C++ Algorithms'},
   {id: 'embedded',           path: 'books/embedded',           routeBasePath: 'embedded-book',     label: 'Embedded C++/Rust'},
   {id: 'systems-interview',  path: 'books/systems-interview',  routeBasePath: 'systems-interview', label: 'Systems Interview'},
-  {id: 'math',               path: 'books/math',               routeBasePath: 'math',              label: 'Math & Physics'},
+  {id: 'math',               path: 'books/math',               routeBasePath: 'math',              label: 'Math Basics'},
+  {id: 'physics',            path: 'books/physics',            routeBasePath: 'physics',           label: 'Physics Basics'},
   {id: 'scifi',              path: 'books/scifi',              routeBasePath: 'scifi',             label: 'Sci-Fi Novel'},
   {id: 'poems',              path: 'books/poems',              routeBasePath: 'poems',             label: 'Poems'},
   {id: 'goose-os',           path: 'books/goose-os',           routeBasePath: 'goose-os',          label: 'GooseOS'},
+  {id: 'geometric-algebra',  path: 'books/geometric-algebra',  routeBasePath: 'geometric-algebra', label: 'Geometric Algebra'},
+  {id: 'os-compared',        path: 'books/os-compared',        routeBasePath: 'os-compared',       label: 'OS Compared'},
 ];
 
 const defaultBook = books[0];
@@ -122,6 +125,7 @@ const config: Config = {
           position: 'left',
           items: bookDropdownItems,
         },
+        { to: '/apps', label: 'Apps', position: 'left' },
         { to: '/about', label: 'About', position: 'left' },
         { href: 'https://github.com/westerngazoo', label: 'GitHub', position: 'right' },
         { href: 'https://x.com/techno_goose', label: 'X', position: 'right' },
