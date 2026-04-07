@@ -1,5 +1,6 @@
 import React from 'react';
 import MDXComponents from '@theme-original/MDXComponents';
+import DesmosGraph from '@site/src/components/DesmosGraph';
 
 const TOKENS = [
   'angrygoose','nerdygoose','sarcasticgoose','happygoose','mathgoose',
@@ -34,4 +35,5 @@ function P(props){
 export default {
   ...MDXComponents,
   p: P,
+  DesmosGraph,
 };

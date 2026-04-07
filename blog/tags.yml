@@ -22,3 +22,8 @@ goose-os:
   label: GooseOS
   permalink: /goose-os
   description: GooseOS kernel development
+
+math:
+  label: Math
+  permalink: /math
+  description: Mathematics and mathematical foundations

@@ -115,6 +115,20 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
+    title: 'Goose Apps',
+    image: 'weightliftinggoose.png',
+    alt: 'Goose lifting weights representing fitness apps',
+    caption: 'Fitness tools',
+    link: {url: '/apps'},
+    description: (
+      <>
+        Calorie calculator, routine generator and interactive tools
+        powered by the <strong>Goose Method</strong>.{' '}
+        <Link to="/apps">Launch apps &rarr;</Link>
+      </>
+    ),
+  },
+  {
     title: 'Collaboration',
     image: 'surfingoose.png',
     alt: 'Surfing goose navigating collaborative open source waves',

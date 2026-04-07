@@ -1,0 +1,10 @@
+{
+  "label": "2. Real Numbers & Precalculus",
+  "position": 3,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "The real number system, algebra, and trigonometry — everything you need before Apostol's Calculus."
+  }
+}

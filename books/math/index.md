@@ -1,54 +1,33 @@
 ---
 sidebar_position: 1
 sidebar_label: Introduction
-title: "Math & Physics"
+title: "Math Basics"
 slug: /
 ---
 
-# Math & Physics
+# Math Basics
 
-This section will gather concise, high-impact notes, derivations, and problem-solving patterns that support algorithmic thinking and systems design.
+Concise, high-impact notes on the mathematics behind algorithms, analysis, and systems design. Definitions first, then intuition, then examples, then connections to code.
 
-## Focus Areas
+## What's Covered
 
-### Mathematics
-- Discrete math refresh (sets, relations, functions, logic)
-- Counting & combinatorics patterns
-- Number theory snippets (mod math, inverses, CRT intuition)
-- Graph theory concepts tied to algorithms
-- Linear algebra primitives for optimization & graphics
-- Probability essentials for randomized algorithms
+### 1. Discrete Math Refresh
+Sets, logic, relations, functions, natural numbers, ordering, cardinality — the type system for reasoning about algorithms.
 
-### Physics
-- Kinematics & dynamics formulas as reusable building blocks
-- Energy / momentum conservation patterns (problem framing)
-- Dimensional analysis as a debugging tool
-- Computational physics snippets (time stepping, stability intuition)
-- Statistical mechanics analogies for search / optimization heuristics
+### 2. Real Numbers & Precalculus
+The real number system (field axioms, order, completeness), algebra refresher (inequalities, polynomials), and trigonometry — everything needed before Apostol's Calculus.
 
-## Goals
-- Minimal fluff: definitions → intuition → canonical examples.
-- Bridge: show how a math/physics concept maps to an algorithmic technique.
-- Reusability: export small LaTeX/Markdown blocks to reuse in other docs.
+### 3. Calculus
+Limits, continuity, differentiation, and integration — following Apostol's rigorous approach with an emphasis on why the definitions work.
 
-## Structure (Living Outline)
-1. Discrete Math Refresh (Sets, Logic, Relations, Functions)
-2. Logic & Proof Micro-Toolkit
-3. Modular Arithmetic & Fast Exponentiation
-4. Combinatorics Patterns (Binomial, Stars & Bars, Inclusion-Exclusion)
-5. Probability Tricks (Linearity, Indicator RVs, Tail Bounds Intuition)
-6. Graph Theory Core (Cuts, Flows, Matchings -- intuition first)
-7. Linear Algebra Sparks (Rank, Nullity, Projections, Spectral Glimpse)
-8. Continuous Math Bridge (Series approximations, smoothness, convexity)
-9. Physics Modeling Primitives (F=ma discretized, harmonic oscillator)
-10. Energy Methods & Invariants (How to "see" conserved quantities)
-11. Dimensional Analysis & Scaling Arguments
-12. Monte Carlo & Physical Analogies (Random walks, diffusion, annealing)
-13. Optimization Landscapes vs Physical Potentials
+### Coming Soon
+- Modular arithmetic & fast exponentiation
+- Combinatorics patterns (binomial, stars & bars, inclusion-exclusion)
+- Probability essentials (linearity, indicator RVs, tail bounds)
+- Graph theory core (cuts, flows, matchings)
+- Linear algebra (rank, nullity, projections, spectral glimpse)
 
-## Contribution Guide
-If you add content:
-1. Keep sections atomic; prefer cross-linking over duplication.
-2. Start with Intuition, then Formal, then Example, then "Algorithmic Touchpoints."
-3. Add quick sanity checks (edge cases / limit behavior).
-4. Tag open questions or TODOs with `TODO:` so they surface in search.
+## Approach
+- **Minimal fluff**: definitions, intuition, canonical examples.
+- **Bridge to code**: every concept connects to an algorithmic technique.
+- **Goose personas** debate the hard parts so you don't have to wonder alone.

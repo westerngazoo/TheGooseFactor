@@ -172,6 +172,10 @@ StarFive # go 0x40200000
   ...
 ```
 
+![GooseOS first boot on VisionFive 2 — source code on the left, serial console on the right showing the goose banner on real RISC-V silicon](/img/gooseos-first-boot-vf2.png)
+
+*The moment GooseOS first booted on the VisionFive 2. Left: the kernel source. Right: OpenSBI → U-Boot → GooseOS on real hardware. "Booted on hart 1, Platform: VisionFive 2 (JH7110)." Our Rust, their silicon.*
+
 > :weightliftinggoose: That moment when "Booted on hart 1" and "Platform: VisionFive 2" appear on your serial console — that's YOUR code running on real RISC-V silicon. No Linux, no runtime, no OS underneath. Just your Rust, bare metal. Savor it.
 
 ### U-Boot Command Breakdown

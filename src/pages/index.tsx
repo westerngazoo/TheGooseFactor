@@ -32,6 +32,9 @@ function HomepageHeader() {
           <Link className={clsx('button button--lg margin--sm', styles.heroButton)} to="/math">
             Math & Physics
           </Link>
+          <Link className={clsx('button button--lg margin--sm', styles.heroButton)} to="/apps">
+            Goose Apps
+          </Link>
         </div>
       </div>
     </header>

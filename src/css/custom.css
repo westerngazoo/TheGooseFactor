@@ -60,6 +60,27 @@ a:hover {
   color: var(--goose-accent);
 }
 
+/* Prevent KaTeX math overflow — wrap long equations */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+}
+
+.katex-display > .katex {
+  white-space: nowrap;
+}
+
+/* Constrain article/blog content width so formulas don't push layout */
+article .markdown {
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+article .markdown > * {
+  max-width: 100%;
+}
+
 /* Inline goose reaction images */
 .goose-reaction {
   display: inline-block;

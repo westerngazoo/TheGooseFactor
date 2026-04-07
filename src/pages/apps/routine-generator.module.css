@@ -1,0 +1,403 @@
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+.header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+}
+
+.title {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 750;
+  letter-spacing: 0.1ch;
+  background: linear-gradient(100deg, #e8fbff 0%, #9ef2ff 25%, #49d2e6 55%, #19b3c4 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  opacity: 0.7;
+  font-size: 1rem;
+}
+
+/* ─── Day Selector ─── */
+.selectorRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.selectorLabel {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.dayBtn {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.15s;
+}
+
+.dayBtnActive {
+  background: var(--goose-accent);
+  color: #fff;
+  border-color: var(--goose-accent);
+}
+
+/* ─── Constraints Box ─── */
+.constraintBox {
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  background: rgba(231, 76, 60, 0.06);
+  border: 1px solid rgba(231, 76, 60, 0.2);
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+.constraintList {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+  columns: 2;
+  column-gap: 2rem;
+}
+
+.constraintList li {
+  margin-bottom: 0.2rem;
+}
+
+@media (max-width: 600px) {
+  .constraintList {
+    columns: 1;
+  }
+}
+
+/* ─── Day Configurator ─── */
+.configurator {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.dayConfig {
+  border: 1px solid rgba(90, 98, 107, 0.2);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  opacity: 0.5;
+  transition: opacity 0.15s;
+}
+
+.dayEnabled {
+  opacity: 1;
+  border-color: rgba(90, 98, 107, 0.4);
+}
+
+.dayConfigHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dayToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.dayToggle input {
+  accent-color: var(--goose-accent);
+  width: 16px;
+  height: 16px;
+}
+
+.addBtn {
+  padding: 0.25rem 0.75rem;
+  border: 1px dashed var(--goose-accent);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--goose-accent);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.addBtn:hover {
+  background: rgba(25, 179, 196, 0.08);
+}
+
+.blockConfigs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.blockRow {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.blockSelect {
+  flex: 1;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.85rem;
+}
+
+.intensityPicker {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.intBtn {
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: all 0.15s;
+}
+
+.intBtnActive {
+  color: #fff;
+}
+
+.removeBtn {
+  padding: 0.25rem 0.5rem;
+  border: none;
+  background: transparent;
+  color: var(--ifm-color-emphasis-500);
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  border-radius: 4px;
+}
+
+.removeBtn:hover {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.08);
+}
+
+.planTitle {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+/* ─── Warning box ─── */
+.warningBox {
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  background: rgba(243, 156, 18, 0.08);
+  border: 1px solid rgba(243, 156, 18, 0.25);
+}
+
+.warningItem {
+  font-size: 0.82rem;
+  color: #f39c12;
+  font-weight: 500;
+}
+
+.warningItem + .warningItem {
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 600px) {
+  .blockRow {
+    flex-wrap: wrap;
+  }
+  .blockSelect {
+    flex-basis: 100%;
+  }
+}
+
+/* ─── Week Grid ─── */
+.weekGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dayCard {
+  border: 1px solid rgba(90, 98, 107, 0.3);
+  border-radius: 8px;
+  padding: 1.25rem;
+  background: var(--ifm-card-background-color);
+}
+
+.dayHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(90, 98, 107, 0.15);
+}
+
+.dayName {
+  font-size: 1.15rem;
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.intensityBadges {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.6rem;
+  border-radius: 10px;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.blockSection {
+  margin-bottom: 0.75rem;
+}
+
+.blockTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.blockDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.exerciseList {
+  padding-left: 1.25rem;
+}
+
+.exerciseRow {
+  margin-bottom: 0.35rem;
+}
+
+.exName {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.biserie {
+  color: var(--goose-accent);
+  font-weight: 700;
+}
+
+.exDetail {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.exNote {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.rationale {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed rgba(90, 98, 107, 0.2);
+  font-size: 0.85rem;
+  opacity: 0.65;
+  font-style: italic;
+}
+
+/* ─── PAP Box ─── */
+.papBox {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border-radius: 8px;
+  background: rgba(25, 179, 196, 0.06);
+  border: 1px solid rgba(25, 179, 196, 0.2);
+}
+
+.papList {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+  font-size: 0.92rem;
+}
+
+.papList li {
+  margin-bottom: 0.35rem;
+}
+
+/* ─── Diagnostic ─── */
+.diagToggle {
+  display: block;
+  margin: 2rem auto 1rem;
+  padding: 0.6rem 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.15s;
+}
+
+.diagToggle:hover {
+  border-color: var(--goose-accent);
+  color: var(--goose-accent);
+}
+
+.diagTable {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+.diagTable table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.diagTable th {
+  background: rgba(90, 98, 107, 0.1);
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  font-weight: 700;
+}
+
+.diagTable td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid rgba(90, 98, 107, 0.15);
+  vertical-align: top;
+}
+
+.diagTable tr:hover {
+  background: rgba(25, 179, 196, 0.04);
+}

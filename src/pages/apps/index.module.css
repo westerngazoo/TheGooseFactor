@@ -1,0 +1,86 @@
+.header {
+  text-align: center;
+  padding: 3rem 0 1rem;
+  background: linear-gradient(135deg, #2b2f33 0%, #3a3f45 40%, #1f2225 100%);
+  color: #e3e7ea;
+}
+
+.heroImg {
+  width: 120px;
+  height: auto;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 12px rgba(25, 179, 196, 0.3));
+}
+
+.heroTitle {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 750;
+  letter-spacing: 0.15ch;
+  background: linear-gradient(100deg, #e8fbff 0%, #9ef2ff 25%, #49d2e6 55%, #19b3c4 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.heroSub {
+  max-width: 540px;
+  margin: 0.5rem auto 0;
+  opacity: 0.85;
+  font-size: 1.05rem;
+}
+
+.grid {
+  padding: 2rem 0 3rem;
+  gap: 1.5rem;
+}
+
+.cardLink {
+  text-decoration: none !important;
+  color: inherit !important;
+  display: block;
+  height: 100%;
+}
+
+.appCard {
+  padding: 2rem;
+  height: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(90, 98, 107, 0.35);
+}
+
+.appCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(25, 179, 196, 0.12);
+  border-color: var(--goose-accent);
+}
+
+.cardEmoji {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.cardTitle {
+  margin-bottom: 0.5rem;
+}
+
+.cardDesc {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin-bottom: 1rem;
+}
+
+.tagRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  background: rgba(25, 179, 196, 0.12);
+  color: var(--goose-accent);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
