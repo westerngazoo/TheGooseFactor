@@ -74,6 +74,70 @@ Firecracker gives you a minimal Linux VM per workload. It is excellent for stron
 
 A GooseOS WASM process starts in microseconds. There is no VM to boot — the process is just an address space with a WASM interpreter already running. The memory overhead is the interpreter itself plus the WASM module's linear memory. For a "hello world," that is under 1MB total.
 
+## Why Not JVM Microservices?
+
+This is the comparison that matters most, because JVM microservices are how the majority of cloud workloads actually run today. Spring Boot, Quarkus, Micronaut, Vert.x — the Java ecosystem dominates backend infrastructure. If you are running microservices in production, odds are they look like this:
+
+```
++-----------------------------+
+|  Your Service (Java/.jar)   |
++---------+-------------------+
+|  Framework (Spring Boot)    |
++---------+-------------------+
+|  JVM (HotSpot / GraalVM)   |
+|  (~200MB base footprint)    |
++---------+-------------------+
+|  Container (Docker + runc)  |
++---------+-------------------+
+|  Linux Kernel               |
++---------+-------------------+
+|  Hardware / VM              |
++-----------------------------+
+```
+
+That is a lot of machinery to print "Hello, World."
+
+### The Cold Start Problem
+
+A Spring Boot microservice takes 2-8 seconds to start. The JVM loads, class paths resolve, dependency injection wires up, connection pools initialize. Kubernetes can't scale from zero to handling a request in under 10 seconds. This is why teams over-provision — they keep idle replicas running because cold start is too painful.
+
+GraalVM native-image cuts this to ~50ms by ahead-of-time compiling to a native binary. But you lose runtime reflection, dynamic class loading, and a chunk of the library ecosystem. You are fighting the platform instead of working with it.
+
+A GooseOS WASM process starts in microseconds. There is no VM, no class loading, no framework initialization. The WASM module's `_start` function executes immediately. Scale-to-zero becomes practical — spin up on request, tear down on idle, pay for nothing in between.
+
+### The Memory Problem
+
+A minimal Spring Boot service consumes 150-300MB of RAM. The JVM heap, metaspace, thread stacks, JIT compiler buffers — they add up. Run 50 microservices on a node and you need 8-16GB just for JVM overhead before your application allocates a single byte.
+
+A WASM module's memory is its linear memory — typically 1-4MB for a simple service. The interpreter adds some overhead, but the total for a "hello world" is under 1MB. You could run hundreds of WASM workloads in the memory that a single Spring Boot service consumes.
+
+| | JVM (Spring Boot) | GraalVM Native | GooseOS WASM |
+|---|---|---|---|
+| Cold start | 2-8 seconds | ~50ms | microseconds |
+| Memory floor | 150-300MB | 30-50MB | < 1MB |
+| Isolation | Container (Linux cgroups) | Container (Linux cgroups) | WASM sandbox + Sv39 page tables |
+| Portability | "Write once, run on JVM" | Platform-specific binary | .wasm runs anywhere |
+| GC pauses | Yes (unpredictable latency) | Yes (reduced) | No GC (linear memory) |
+| Attack surface | JVM + framework + Linux | Native binary + Linux | 16 syscalls |
+
+### The Security Model
+
+The JVM's `SecurityManager` was deprecated in Java 17 and removed in Java 24. For two decades it was the official sandbox, and the ecosystem collectively decided it was too complex to use correctly. Today, JVM security is "trust the code, isolate with containers." The isolation comes from Linux namespaces and cgroups — the same 30-million-line kernel attack surface.
+
+WASM was designed as a sandbox from day one. A module cannot access memory outside its linear memory bounds. It cannot make syscalls. It cannot read files, open sockets, or touch hardware unless the host explicitly provides those capabilities through WASI. The sandbox is not an afterthought — it is the execution model.
+
+### Language Lock-In
+
+JVM microservices require JVM languages: Java, Kotlin, Scala, Clojure. Your Go service, your Rust service, your Python service — they need their own runtimes, their own container images, their own deployment pipelines.
+
+WASM is a compilation target for almost everything. Rust, C, C++, Go, AssemblyScript, Python (via wasm32-wasi), even Java (via TeaVM or JWebAssembly). One execution model, one deployment format, any source language. A team can write services in Rust for performance-critical paths and Python for data processing, and both compile to the same .wasm format running on the same kernel.
+
+### What About Quarkus and Micronaut?
+
+These frameworks solve some JVM problems — faster startup, lower memory via build-time DI. Quarkus with native-image gets close to 50ms start and 30MB RSS. But they are still optimizing within the JVM paradigm: a large runtime on a large kernel inside a container. Each layer carries its own CVE surface, its own update cycle, its own operational complexity.
+
+GooseOS asks: what if we removed all those layers instead of optimizing them?
+
 ## Why RISC-V?
 
 Three reasons:
