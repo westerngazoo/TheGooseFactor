@@ -126,11 +126,70 @@ What is missing is the interpreter itself. The plan:
 
 **Do we need a filesystem?** Not for the first demo. WASM binaries can be embedded in the kernel image, just like we embed the UART server assembly today. A filesystem comes later, when we want to load modules from SD card or network. It is a convenience, not a prerequisite.
 
+## Three-Layer Permissions: The Microkernel Security Model
+
+On Linux, security is a filter bolted onto a 400-syscall surface. Seccomp profiles, AppArmor, SELinux — each one tries to restrict what a process *could* do, out of the hundreds of things the kernel *lets* it do. One missed syscall in your seccomp profile and you have an escape.
+
+GooseOS inverts this. A WASM module cannot do *anything* by default. Every external action — writing to the console, opening a file, connecting to a socket — must travel through IPC to a userspace server. There is no bypass path. This creates three natural enforcement points:
+
+```
+┌──────────────────────────────┐
+│       WASM Module            │
+│    (no raw syscalls,         │
+│     no hardware access)      │
+└──────────────┬───────────────┘
+               │ WASI call
+     ┌─────────▼──────────┐
+ ①   │  WASM Interpreter  │  "Is this WASI function enabled?"
+     │  Capability Flags   │   sock_connect? DENIED.
+     └─────────┬──────────┘
+               │ IPC
+     ┌─────────▼──────────┐
+ ②   │  Kernel IPC Layer  │  "Can this PID talk to that PID?"
+     │  Capability Table   │   PID 7 → net server? NO CAP.
+     └─────────┬──────────┘
+               │ message
+     ┌─────────▼──────────┐
+ ③   │  Server (net/fs)   │  "Is this specific request allowed?"
+     │  Per-PID Policy     │   Port 443? Not in ACL.
+     └────────────────────┘
+```
+
+### Layer 1: WASI Capability Flags
+
+The interpreter holds a permission bitfield per module. When a WASM module calls `sock_connect`, the interpreter checks the flag *before* sending any IPC. Denied calls never leave the process. Zero overhead.
+
+### Layer 2: Kernel IPC Capabilities
+
+The kernel maintains a per-process capability table — which PIDs this process can send IPC to. The orchestrator grants these at spawn time. A workload with console and filesystem access gets `ipc_caps: [uart_server, fs_server]`. It physically cannot send messages to the network server, even if the interpreter has a bug.
+
+### Layer 3: Server-Side Policy
+
+Each server enforces granular rules. The network server checks port ACLs per PID. The filesystem server enforces path sandboxing — each workload sees only its own root directory. The server can also enforce quotas: storage limits, connection counts, bandwidth.
+
+### Why This Matters
+
+On Linux, a container escape gives you raw syscalls — game over. On GooseOS, escaping the WASM sandbox puts you inside the interpreter process. You can make syscalls, but the kernel blocks IPC to any server you have no capability for. Even if you somehow reach a server, the server checks its per-PID policy. You would need to break all three layers simultaneously.
+
+A workload manifest declares what each module can access:
+
+```
+workload "edge-proxy":
+  console: yes
+  network: connect [api.example.com:443], listen [0.0.0.0:8080]
+  filesystem: none
+  memory: 16MB
+```
+
+The orchestrator reads this, sets the WASI flags, grants IPC capabilities, and informs each server of the policy. Simple, auditable, and enforced at every layer.
+
+Compare this to Docker, where you need Dockerfile + seccomp profile + AppArmor policy + cgroup limits + network policy — five configuration surfaces that must all agree. GooseOS has one manifest and three enforcement points that fall naturally out of the microkernel architecture.
+
 ## The Endgame
 
-Imagine a cloud node running GooseOS. Each tenant's workload is a .wasm module, loaded into its own process. The kernel provides hardware isolation. WASM provides language-level sandboxing. IPC provides communication. No Linux, no Docker, no CVEs in the container runtime because there is no container runtime.
+Imagine a cloud node running GooseOS. Each tenant's workload is a .wasm module, loaded into its own process. The kernel provides hardware isolation. WASM provides language-level sandboxing. IPC provides communication. The three-layer permission model controls exactly what each workload can reach. No Linux, no Docker, no CVEs in the container runtime because there is no container runtime.
 
-Cold start: microseconds. Memory per workload: kilobytes. Attack surface: 16 syscalls.
+Cold start: microseconds. Memory per workload: kilobytes. Attack surface: 16 syscalls. Permissions: three independent layers, each simple enough to audit by hand.
 
 That is the bet. GooseOS is the experiment to find out if it works.
 
