@@ -328,6 +328,68 @@ sd      t0, 0x08(sp)        # save original sp
 
 ---
 
+### Session 5: The Keyboard That Never Worked (PLIC Context + IRQ Flood)
+
+**Builds 48 → 62.** Phase 13: VisionFive 2 hardware bring-up.
+
+**Symptom:** "Hello from userspace UART!" prints correctly, but pressing keys on the serial terminal produces no output. Works perfectly on QEMU.
+
+**Investigation — three bugs, stacked:**
+
+**Bug 1: Boot race condition (Build 48)**
+
+Timer interrupt fires between PID 1 and PID 2 creation. `schedule_from_idle()` switches to PID 1, which calls `SYS_CALL(2, char)` to a nonexistent PID 2 and blocks forever.
+
+*Fix:* Disable SIE before process creation. Don't re-enable before `sret` — the SPIE→SIE mechanism handles it automatically.
+
+**Bug 2: Wrong PLIC context (Build 54–55)**
+
+Added debug prints: `[irq] claimed IRQ 32` / `[irq] no owner`. No `[irq]` prints at all. Added a PLIC register dump at idle:
+
+```
+[plic] IRQ 32 priority=1 enable_word[1]=0x00000001 threshold=0 pending=0x00040001
+```
+
+`pending=0x00040001` — the UART IS generating the interrupt, the PLIC sees it, but it's never delivered to the CPU. The assumption was wrong:
+
+```
+Wrong: "2 contexts per hart → Hart 1 S-mode = context 3"
+Right: Hart 0 (S7 monitor core) has NO S-mode → only 1 context
+       Context 0: Hart 0 M-mode (S7)
+       Context 1: Hart 1 M-mode (U74)
+       Context 2: Hart 1 S-mode (U74)  ← this is us
+```
+
+We were enabling IRQ 32 in context 3 (Hart 2 M-mode), but running on Hart 1 S-mode (context 2).
+
+*Fix:* `PLIC_S_CONTEXT = 2` for VF2.
+
+**Bug 3: IRQ flood before registration (Build 56)**
+
+With the correct PLIC context, IRQs started arriving — but flooded endlessly:
+
+```
+[irq] claimed IRQ 32
+[irq] no owner, kernel fallback
+[irq] claimed IRQ 32
+[irq] no owner, kernel fallback
+... (infinite loop)
+```
+
+The kernel's `enable_rx_interrupt()` ran at boot (before any process existed). The DW8250's interrupt is level-triggered — it stays asserted as long as IER is set. Every `plic::complete()` immediately re-fires the IRQ. PID 2 never gets scheduled to register.
+
+*Fix:* Don't enable the IRQ at the PLIC during boot. Add `plic::enable_irq()` — called from `SYS_IRQ_REGISTER` when a process claims ownership. Now the sequence is:
+
+1. Boot: UART chip IER enabled, PLIC does NOT route it
+2. PID 2 calls `SYS_IRQ_REGISTER(32)` → kernel calls `plic::enable_irq(32)`
+3. First keypress → PLIC delivers → PID 2 handles it
+
+**Lesson:** Three independent bugs masked each other. The boot race hid the PLIC context bug (IRQs never arrived to test). The PLIC context bug hid the IRQ flood (wrong context meant no delivery). Each fix revealed the next layer. The diagnostic dump (`pending=0x00040001`) was the key that cracked the PLIC context — it proved the interrupt existed but wasn't being claimed.
+
+**Time to fix:** ~4 hours across builds 48–62. Would have been 30 minutes with a DTB parser to read the actual PLIC context mapping.
+
+---
+
 ## Debugging Checklist
 
 When something goes wrong in GooseOS, work through this list:
@@ -343,8 +405,9 @@ When something goes wrong in GooseOS, work through this list:
 5. **Works on QEMU, fails on VF2?** Platform-specific issue:
    - Check UART register stride (1 on QEMU, 4 on VF2)
    - Check IRQ number (10 on QEMU, 32 on VF2)
-   - Check PLIC context (1 on QEMU, 3 on VF2)
+   - Check PLIC context (1 on QEMU, 2 on VF2 — S7 core has no S-mode!)
    - Check kernel load address (0x80200000 on QEMU, 0x40200000 on VF2)
+   - Check IRQ timing: is the PLIC enabled before the owning process registers?
 
 6. **Intermittent failure?** Race condition or preemption bug. Check trap.S register save order. Check that all state is saved before any temp register is used.
 
