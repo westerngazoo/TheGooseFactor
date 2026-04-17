@@ -1,4 +1,4 @@
-import {useState, useMemo, type ReactNode, type ChangeEvent} from 'react';
+import {useState, useMemo, useRef, type ReactNode} from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import styles from './calorie-calculator.module.css';
@@ -285,6 +285,20 @@ const FOODS: Food[] = [
   {name: 'Whey Isolate', unit: '1 scoop (30g)', unitGrams: 30, protein: 83, carbs: 3.3, fat: 1.7, keto: true, mixed: true, category: 'protein', meal: ['post', 'pre', 'any']},
   {name: 'Casein Protein', unit: '1 scoop (33g)', unitGrams: 33, protein: 76, carbs: 6, fat: 3, keto: false, mixed: true, category: 'protein', meal: ['night']},
   {name: 'Greek Yogurt (0% fat)', unit: '170g', unitGrams: 170, protein: 10, carbs: 3.6, fat: 0.7, keto: false, mixed: true, category: 'protein', meal: ['pre', 'night', 'any']},
+  {name: 'Turkey Breast', unit: '100g', unitGrams: 100, protein: 29, carbs: 0, fat: 1, keto: true, mixed: true, category: 'protein', meal: ['main', 'night', 'any']},
+  {name: 'Lean Pork Loin', unit: '100g', unitGrams: 100, protein: 26, carbs: 0, fat: 3.5, keto: true, mixed: true, category: 'protein', meal: ['main', 'any']},
+  {name: 'Sirloin Steak', unit: '100g', unitGrams: 100, protein: 29, carbs: 0, fat: 6, keto: true, mixed: true, category: 'protein', meal: ['main', 'any']},
+  {name: 'Shrimp', unit: '100g', unitGrams: 100, protein: 24, carbs: 0.2, fat: 0.3, keto: true, mixed: true, category: 'protein', meal: ['main', 'any']},
+  {name: 'Cod Fillet', unit: '100g', unitGrams: 100, protein: 23, carbs: 0, fat: 0.9, keto: true, mixed: true, category: 'protein', meal: ['main', 'night', 'any']},
+  {name: 'Tilapia', unit: '100g', unitGrams: 100, protein: 26, carbs: 0, fat: 2.7, keto: true, mixed: true, category: 'protein', meal: ['main', 'any']},
+  {name: 'Cottage Cheese (low-fat)', unit: '100g', unitGrams: 100, protein: 11, carbs: 3.4, fat: 1, keto: true, mixed: true, category: 'protein', meal: ['pre', 'night', 'any']},
+  {name: 'String Cheese', unit: '1 stick (28g)', unitGrams: 28, protein: 23, carbs: 1, fat: 18, keto: true, mixed: true, category: 'combo', meal: ['night', 'any']},
+  {name: 'Tempeh', unit: '100g', unitGrams: 100, protein: 19, carbs: 9, fat: 11, keto: false, mixed: true, category: 'protein', meal: ['main', 'any']},
+  {name: 'Seitan', unit: '100g', unitGrams: 100, protein: 25, carbs: 14, fat: 1.9, keto: false, mixed: true, category: 'protein', meal: ['main', 'any']},
+  {name: 'Lentils (cooked)', unit: '100g', unitGrams: 100, protein: 9, carbs: 20, fat: 0.4, keto: false, mixed: true, category: 'protein', meal: ['main', 'any']},
+  {name: 'Black Beans (cooked)', unit: '100g', unitGrams: 100, protein: 8.9, carbs: 23, fat: 0.5, keto: false, mixed: true, category: 'protein', meal: ['main', 'any']},
+  {name: 'Chickpeas (cooked)', unit: '100g', unitGrams: 100, protein: 8.9, carbs: 27, fat: 2.6, keto: false, mixed: true, category: 'protein', meal: ['main', 'any']},
+  {name: 'Skim Milk', unit: '240ml', unitGrams: 240, protein: 3.4, carbs: 5, fat: 0.2, keto: false, mixed: true, category: 'protein', meal: ['pre', 'post', 'any']},
   // ── Fat sources ──
   {name: 'Avocado', unit: '1/2 avocado (100g)', unitGrams: 100, protein: 2, carbs: 8.5, fat: 14.7, keto: true, mixed: true, category: 'fat', meal: ['main', 'any']},
   {name: 'Olive Oil', unit: '1 tbsp (14g)', unitGrams: 14, protein: 0, carbs: 0, fat: 100, keto: true, mixed: true, category: 'fat', meal: ['main', 'any']},
@@ -294,15 +308,44 @@ const FOODS: Food[] = [
   {name: 'Cream Cheese', unit: '30g', unitGrams: 30, protein: 6, carbs: 4, fat: 34, keto: true, mixed: false, category: 'fat', meal: ['main', 'night']},
   {name: 'Bacon', unit: '2 slices (30g)', unitGrams: 30, protein: 37, carbs: 1.4, fat: 42, keto: true, mixed: false, category: 'combo', meal: ['main', 'any']},
   {name: 'Butter', unit: '1 tbsp (14g)', unitGrams: 14, protein: 0.9, carbs: 0, fat: 81, keto: true, mixed: false, category: 'fat', meal: ['main', 'any']},
+  {name: 'Coconut Oil', unit: '1 tbsp (14g)', unitGrams: 14, protein: 0, carbs: 0, fat: 100, keto: true, mixed: true, category: 'fat', meal: ['main', 'any']},
+  {name: 'Walnuts', unit: '30g (~14 halves)', unitGrams: 30, protein: 15, carbs: 14, fat: 65, keto: true, mixed: true, category: 'fat', meal: ['night', 'any']},
+  {name: 'Cashews', unit: '30g', unitGrams: 30, protein: 18, carbs: 30, fat: 44, keto: false, mixed: true, category: 'fat', meal: ['night', 'any']},
+  {name: 'Macadamia Nuts', unit: '30g', unitGrams: 30, protein: 8, carbs: 14, fat: 76, keto: true, mixed: true, category: 'fat', meal: ['night', 'any']},
+  {name: 'Pistachios', unit: '30g', unitGrams: 30, protein: 20, carbs: 28, fat: 45, keto: false, mixed: true, category: 'fat', meal: ['night', 'any']},
+  {name: 'Chia Seeds', unit: '15g (1 tbsp)', unitGrams: 15, protein: 17, carbs: 42, fat: 31, keto: true, mixed: true, category: 'fat', meal: ['pre', 'any']},
+  {name: 'Flax Seeds (ground)', unit: '15g (1 tbsp)', unitGrams: 15, protein: 18, carbs: 29, fat: 42, keto: true, mixed: true, category: 'fat', meal: ['pre', 'any']},
+  {name: 'Olives', unit: '30g (~10 olives)', unitGrams: 30, protein: 0.8, carbs: 6, fat: 11, keto: true, mixed: true, category: 'fat', meal: ['main', 'any']},
+  {name: 'Heavy Cream', unit: '30g (2 tbsp)', unitGrams: 30, protein: 2, carbs: 2.8, fat: 36, keto: true, mixed: false, category: 'fat', meal: ['main', 'night']},
+  {name: 'Dark Chocolate (85%)', unit: '25g', unitGrams: 25, protein: 7, carbs: 34, fat: 46, keto: true, mixed: true, category: 'fat', meal: ['night', 'any']},
   // ── Carb sources ──
   {name: 'Oats', unit: '40g (dry)', unitGrams: 40, protein: 13, carbs: 66, fat: 7, keto: false, mixed: true, category: 'carb', meal: ['pre']},
   {name: 'White Rice', unit: '100g (cooked)', unitGrams: 100, protein: 2.7, carbs: 28, fat: 0.3, keto: false, mixed: true, category: 'carb', meal: ['post', 'main']},
   {name: 'Sweet Potato', unit: '100g (cooked)', unitGrams: 100, protein: 1.6, carbs: 20, fat: 0.1, keto: false, mixed: true, category: 'carb', meal: ['pre', 'main']},
   {name: 'Banana', unit: '1 medium (120g)', unitGrams: 120, protein: 1.1, carbs: 23, fat: 0.3, keto: false, mixed: true, category: 'carb', meal: ['pre', 'post']},
   {name: 'Whole Wheat Bread', unit: '1 slice (30g)', unitGrams: 30, protein: 13, carbs: 43, fat: 3.4, keto: false, mixed: true, category: 'carb', meal: ['pre', 'main']},
+  {name: 'Brown Rice (cooked)', unit: '100g (cooked)', unitGrams: 100, protein: 2.6, carbs: 23, fat: 0.9, keto: false, mixed: true, category: 'carb', meal: ['pre', 'post', 'main']},
+  {name: 'Quinoa (cooked)', unit: '100g (cooked)', unitGrams: 100, protein: 4.4, carbs: 21, fat: 1.9, keto: false, mixed: true, category: 'carb', meal: ['pre', 'main']},
+  {name: 'Whole Wheat Pasta (cooked)', unit: '100g (cooked)', unitGrams: 100, protein: 5, carbs: 25, fat: 1, keto: false, mixed: true, category: 'carb', meal: ['pre', 'main']},
+  {name: 'White Pasta (cooked)', unit: '100g (cooked)', unitGrams: 100, protein: 5.8, carbs: 25, fat: 1.1, keto: false, mixed: true, category: 'carb', meal: ['post', 'main']},
+  {name: 'Potato (cooked)', unit: '100g (cooked)', unitGrams: 100, protein: 2, carbs: 17, fat: 0.1, keto: false, mixed: true, category: 'carb', meal: ['post', 'main']},
+  {name: 'Apple', unit: '1 medium (180g)', unitGrams: 180, protein: 0.3, carbs: 14, fat: 0.2, keto: false, mixed: true, category: 'carb', meal: ['pre', 'any']},
+  {name: 'Blueberries', unit: '100g', unitGrams: 100, protein: 0.7, carbs: 14, fat: 0.3, keto: false, mixed: true, category: 'carb', meal: ['pre', 'any']},
+  {name: 'Strawberries', unit: '100g', unitGrams: 100, protein: 0.7, carbs: 7.7, fat: 0.3, keto: true, mixed: true, category: 'carb', meal: ['pre', 'any']},
+  {name: 'Orange', unit: '1 medium (130g)', unitGrams: 130, protein: 0.9, carbs: 12, fat: 0.1, keto: false, mixed: true, category: 'carb', meal: ['pre', 'any']},
+  {name: 'Corn Tortilla', unit: '1 tortilla (25g)', unitGrams: 25, protein: 5.7, carbs: 45, fat: 4, keto: false, mixed: true, category: 'carb', meal: ['main']},
+  {name: 'Rice Cake', unit: '1 cake (9g)', unitGrams: 9, protein: 7.8, carbs: 82, fat: 2.8, keto: false, mixed: true, category: 'carb', meal: ['pre', 'post']},
+  {name: 'Bagel (plain)', unit: '1 bagel (100g)', unitGrams: 100, protein: 10, carbs: 50, fat: 1, keto: false, mixed: true, category: 'carb', meal: ['pre']},
   // ── Keto-friendly veggies (very low carb) ──
   {name: 'Broccoli', unit: '100g', unitGrams: 100, protein: 2.8, carbs: 7, fat: 0.4, keto: true, mixed: true, category: 'carb', meal: ['main', 'any']},
   {name: 'Spinach', unit: '100g', unitGrams: 100, protein: 2.9, carbs: 3.6, fat: 0.4, keto: true, mixed: true, category: 'carb', meal: ['main', 'any']},
+  {name: 'Cauliflower', unit: '100g', unitGrams: 100, protein: 1.9, carbs: 5, fat: 0.3, keto: true, mixed: true, category: 'carb', meal: ['main', 'any']},
+  {name: 'Kale', unit: '100g', unitGrams: 100, protein: 4.3, carbs: 9, fat: 0.9, keto: true, mixed: true, category: 'carb', meal: ['main', 'any']},
+  {name: 'Zucchini', unit: '100g', unitGrams: 100, protein: 1.2, carbs: 3.1, fat: 0.3, keto: true, mixed: true, category: 'carb', meal: ['main', 'any']},
+  {name: 'Asparagus', unit: '100g', unitGrams: 100, protein: 2.2, carbs: 3.9, fat: 0.1, keto: true, mixed: true, category: 'carb', meal: ['main', 'any']},
+  {name: 'Bell Pepper', unit: '100g', unitGrams: 100, protein: 1, carbs: 6, fat: 0.3, keto: true, mixed: true, category: 'carb', meal: ['main', 'any']},
+  {name: 'Brussels Sprouts', unit: '100g', unitGrams: 100, protein: 3.4, carbs: 9, fat: 0.3, keto: true, mixed: true, category: 'carb', meal: ['main', 'any']},
+  {name: 'Mushrooms', unit: '100g', unitGrams: 100, protein: 3.1, carbs: 3.3, fat: 0.3, keto: true, mixed: true, category: 'carb', meal: ['main', 'any']},
   // ── Soy ──
   {name: 'Tofu (firm)', unit: '100g', unitGrams: 100, protein: 17, carbs: 2, fat: 9, keto: true, mixed: true, category: 'protein', meal: ['main', 'any']},
   {name: 'Edamame', unit: '100g (shelled)', unitGrams: 100, protein: 11, carbs: 8.9, fat: 5, keto: false, mixed: true, category: 'protein', meal: ['main', 'any']},
@@ -531,6 +574,9 @@ export default function CalorieCalculator(): ReactNode {
   const [age, setAge] = useState(28);
   const [weight, setWeight] = useState(80);
   const [height, setHeight] = useState(175);
+  const ageRef = useRef<HTMLInputElement>(null);
+  const weightRef = useRef<HTMLInputElement>(null);
+  const heightRef = useRef<HTMLInputElement>(null);
   const [activity, setActivity] = useState<ActivityLevel>('heavy');
   const [goal, setGoal] = useState<Goal>('lean_bulk');
   const [dietMode, setDietMode] = useState<DietMode>('mixed');
@@ -558,12 +604,33 @@ export default function CalorieCalculator(): ReactNode {
 
   const [showFoodRef, setShowFoodRef] = useState(false);
 
-  function clampedHandler(setter: (v: number) => void, min: number, max: number) {
-    return (e: ChangeEvent<HTMLInputElement>) => {
-      const v = parseFloat(e.target.value);
-      if (!isNaN(v)) setter(Math.min(max, Math.max(min, v)));
-    };
-  }
+  // Live update: parse whatever is in the box; if it's a usable number
+  // within range, push it to state so calculations update as you type.
+  // Does NOT touch el.value, so typing is never disturbed.
+  const liveUpdate = (
+    raw: string,
+    setNum: (n: number) => void,
+    min: number,
+    max: number,
+  ) => {
+    const v = parseFloat(raw);
+    if (!isNaN(v) && v >= min && v <= max) setNum(v);
+  };
+
+  // Commit on blur: clamp out-of-range or empty values back into the field.
+  const commit = (
+    ref: React.RefObject<HTMLInputElement>,
+    setNum: (n: number) => void,
+    min: number,
+    max: number,
+  ) => {
+    const el = ref.current;
+    if (!el) return;
+    const v = parseFloat(el.value);
+    const c = isNaN(v) ? min : Math.min(max, Math.max(min, v));
+    setNum(c);
+    el.value = String(c);
+  };
 
   return (
     <Layout title="Calorie Calculator" description="TDEE and macros by time window - Goose Method">
@@ -595,23 +662,32 @@ export default function CalorieCalculator(): ReactNode {
                 </div>
               </label>
 
-              <label className={styles.label}>
-                Age
-                <input type="number" min={14} max={80} value={age}
-                  onChange={clampedHandler(setAge, 14, 80)} className={styles.input} />
-              </label>
+              <div className={styles.label}>
+                <label htmlFor="cc-age">Age</label>
+                <input id="cc-age" ref={ageRef}
+                  type="text" inputMode="numeric" defaultValue={age}
+                  onChange={(e) => liveUpdate(e.target.value, setAge, 14, 80)}
+                  onBlur={() => commit(ageRef, setAge, 14, 80)}
+                  className={styles.input} />
+              </div>
 
-              <label className={styles.label}>
-                Weight (kg)
-                <input type="number" min={30} max={250} step={0.5} value={weight}
-                  onChange={clampedHandler(setWeight, 30, 250)} className={styles.input} />
-              </label>
+              <div className={styles.label}>
+                <label htmlFor="cc-weight">Weight (kg)</label>
+                <input id="cc-weight" ref={weightRef}
+                  type="text" inputMode="decimal" defaultValue={weight}
+                  onChange={(e) => liveUpdate(e.target.value, setWeight, 30, 250)}
+                  onBlur={() => commit(weightRef, setWeight, 30, 250)}
+                  className={styles.input} />
+              </div>
 
-              <label className={styles.label}>
-                Height (cm)
-                <input type="number" min={100} max={230} value={height}
-                  onChange={clampedHandler(setHeight, 100, 230)} className={styles.input} />
-              </label>
+              <div className={styles.label}>
+                <label htmlFor="cc-height">Height (cm)</label>
+                <input id="cc-height" ref={heightRef}
+                  type="text" inputMode="numeric" defaultValue={height}
+                  onChange={(e) => liveUpdate(e.target.value, setHeight, 100, 230)}
+                  onBlur={() => commit(heightRef, setHeight, 100, 230)}
+                  className={styles.input} />
+              </div>
 
               <label className={styles.label}>
                 Activity
