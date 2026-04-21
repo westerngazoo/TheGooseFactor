@@ -2,28 +2,16 @@ import {useState, useCallback, type ReactNode} from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import styles from './routine-generator.module.css';
-
-/* ══════════════════════════════════════════
-   GOOSE METHOD — TYPES & DATA
-   ══════════════════════════════════════════ */
-
-type Intensity = 'high' | 'medium' | 'low';
-type MuscleGroup =
-  | 'quad'
-  | 'posterior'
-  | 'chest'
-  | 'back'
-  | 'shoulder'
-  | 'biceps'
-  | 'triceps';
-
-type Exercise = {
-  name: string;
-  biseriePair?: string;
-  sets: string;
-  reps: string;
-  notes?: string;
-};
+import {
+  type Intensity,
+  type MuscleGroup,
+  type Exercise,
+  MUSCLE_GROUPS,
+  GROUP_LABELS,
+  INTENSITY_COLORS,
+  INTENSITY_LABELS,
+  EXERCISES,
+} from '../../data/routineData';
 
 type DayBlock = {
   group: MuscleGroup;
@@ -39,162 +27,6 @@ type DayPlan = {
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const MUSCLE_GROUPS: MuscleGroup[] = [
-  'quad', 'posterior', 'chest', 'back', 'shoulder', 'biceps', 'triceps',
-];
-
-const GROUP_LABELS: Record<MuscleGroup, string> = {
-  quad: 'Quads (Anterior)',
-  posterior: 'Glutes/Hams (Posterior)',
-  chest: 'Chest',
-  back: 'Back',
-  shoulder: 'Shoulders',
-  biceps: 'Biceps',
-  triceps: 'Triceps',
-};
-
-const INTENSITY_COLORS: Record<Intensity, string> = {
-  high: '#e74c3c',
-  medium: '#f39c12',
-  low: '#2ecc71',
-};
-
-const INTENSITY_LABELS: Record<Intensity, string> = {
-  high: 'HIGH',
-  medium: 'MED',
-  low: 'LOW',
-};
-
-/* ── Exercise DB ── */
-const EXERCISES: Record<MuscleGroup, Record<Intensity, Exercise[]>> = {
-  quad: {
-    high: [
-      {name: 'Barbell Squat', biseriePair: 'Leg Extension', sets: '5', reps: '5', notes: 'Deep. High bar.'},
-      {name: 'Front Squat', sets: '4', reps: '5', notes: 'Upright torso. Quad bias.'},
-      {name: 'Pause Back Squat', sets: '4', reps: '5', notes: '2s pause in hole. Kills momentum.'},
-    ],
-    medium: [
-      {name: 'Leg Press', sets: '4', reps: '10'},
-      {name: 'Hack Squat', sets: '3', reps: '12'},
-      {name: 'Bulgarian Split Squat', sets: '3', reps: '10', notes: 'Each leg.'},
-      {name: 'Goblet Squat', sets: '3', reps: '12'},
-    ],
-    low: [
-      {name: 'Leg Extension', sets: '3', reps: '15-20', notes: 'Pump. No failure.'},
-      {name: 'Sissy Squat', sets: '3', reps: '15'},
-      {name: 'Walking Lunges (light)', sets: '3', reps: '20', notes: 'Per leg. Pump focus.'},
-    ],
-  },
-  posterior: {
-    high: [
-      {name: 'Romanian Deadlift', biseriePair: 'Leg Curl', sets: '5', reps: '5', notes: 'Full posterior chain.'},
-      {name: 'Conventional Deadlift', sets: '5', reps: '5', notes: 'Full body. Do before squat.'},
-      {name: 'Good Morning', sets: '4', reps: '6', notes: 'Hamstrings + spinal erectors.'},
-    ],
-    medium: [
-      {name: 'Heavy Lunges', biseriePair: 'Leg Curl', sets: '4', reps: '8'},
-      {name: 'Hip Thrust', sets: '4', reps: '10', notes: 'Glute bias. Pause at top.'},
-      {name: 'Glute Ham Raise', sets: '3', reps: '10'},
-      {name: 'Stiff-Leg DB Deadlift', sets: '3', reps: '12'},
-    ],
-    low: [
-      {name: 'Leg Curl Machine', sets: '3', reps: '15-20', notes: 'No spinal load.'},
-      {name: 'Cable Glute Kickback', sets: '3', reps: '15', notes: 'Per leg.'},
-      {name: 'Back Hyperextension', sets: '3', reps: '15-20'},
-    ],
-  },
-  chest: {
-    high: [
-      {name: 'Bench Press', biseriePair: 'Cable Crossover', sets: '5', reps: '5', notes: 'SACRED — no secondary groups recommended.'},
-      {name: 'Incline Barbell', biseriePair: 'Cable Crossover', sets: '4', reps: '6'},
-      {name: 'Weighted Dips', sets: '4', reps: '6', notes: 'Lean forward for chest bias.'},
-      {name: 'Close-Grip Bench Press', sets: '4', reps: '6', notes: 'Chest + triceps overload.'},
-    ],
-    medium: [
-      {name: 'Dumbbell Press', sets: '4', reps: '10', notes: 'Full ROM.'},
-      {name: 'Incline DB Press', sets: '4', reps: '10'},
-      {name: 'Machine Chest Press', sets: '3', reps: '10-12'},
-      {name: 'DB Fly', sets: '3', reps: '12', notes: 'Stretch deep.'},
-    ],
-    low: [
-      {name: 'Push-ups / Cable Fly', sets: '3', reps: '15-20', notes: 'Blood flow.'},
-      {name: 'Pec Deck Fly', sets: '3', reps: '15-20'},
-      {name: 'Low-to-High Cable Fly', sets: '3', reps: '15', notes: 'Upper chest pump.'},
-    ],
-  },
-  back: {
-    high: [
-      {name: 'Deadlift', biseriePair: 'Cable Row', sets: '5', reps: '5', notes: 'Always before squat if same day.'},
-      {name: 'Weighted Pull-ups', sets: '5', reps: '5', notes: 'Lat focus.'},
-      {name: 'Pendlay Row', sets: '5', reps: '5', notes: 'Dead-stop every rep.'},
-    ],
-    medium: [
-      {name: 'Barbell Row', biseriePair: 'Cable Pullover', sets: '5', reps: '5', notes: 'PAP + muscle length.'},
-      {name: 'T-Bar Row', sets: '4', reps: '8-10'},
-      {name: 'Lat Pulldown (wide)', sets: '4', reps: '10'},
-      {name: 'Single-Arm DB Row', sets: '3', reps: '10', notes: 'Per side.'},
-    ],
-    low: [
-      {name: 'Cable Row', sets: '3', reps: '15', notes: 'Activation only.'},
-      {name: 'Straight-Arm Pulldown', sets: '3', reps: '15', notes: 'Lat pump.'},
-      {name: 'Face Pull', sets: '3', reps: '15-20', notes: 'Rear delt + upper back.'},
-    ],
-  },
-  shoulder: {
-    high: [
-      {name: 'Clean and Press', biseriePair: 'Lateral Raises', sets: '5', reps: '5', notes: 'PAP + selective isolation.'},
-      {name: 'Overhead Press (Barbell)', sets: '5', reps: '5', notes: 'Strict. No leg drive.'},
-      {name: 'Push Press', sets: '4', reps: '5', notes: 'Leg drive allowed for overload.'},
-    ],
-    medium: [
-      {name: 'DB Shoulder Press', sets: '4', reps: '10'},
-      {name: 'Lateral + Front Raises', sets: '3', reps: '12-15'},
-      {name: 'Arnold Press', sets: '3', reps: '10', notes: 'Full ROM rotation.'},
-      {name: 'Upright Row (EZ bar)', sets: '3', reps: '10'},
-    ],
-    low: [
-      {name: 'Lateral Raises', sets: '3', reps: '15-20', notes: 'Pump.'},
-      {name: 'Cable Lateral Raise', sets: '3', reps: '15-20', notes: 'Constant tension.'},
-      {name: 'Reverse Pec Deck', sets: '3', reps: '15-20', notes: 'Rear delt pump.'},
-    ],
-  },
-  biceps: {
-    high: [
-      {name: 'Cheated EZ Curl', biseriePair: 'Dragon Curl', sets: '4', reps: '6-8', notes: 'Heavy eccentric. Dragon Curl: lower half (0-90).'},
-      {name: 'Weighted Chin-Up', sets: '4', reps: '6', notes: 'Underhand, close grip.'},
-      {name: 'Barbell Curl (heavy)', sets: '4', reps: '6', notes: 'Strict. Full ROM.'},
-    ],
-    medium: [
-      {name: 'DB Curl', sets: '3', reps: '10-12'},
-      {name: 'Hammer Curls', sets: '3', reps: '10-12'},
-      {name: 'Incline DB Curl', sets: '3', reps: '10', notes: 'Long head stretch.'},
-      {name: 'Preacher Curl', sets: '3', reps: '10'},
-    ],
-    low: [
-      {name: 'Cable Curl', sets: '3', reps: '15-20'},
-      {name: 'Concentration Curl', sets: '3', reps: '15', notes: 'Per arm. Squeeze peak.'},
-      {name: 'Spider Curl', sets: '3', reps: '15-20', notes: 'Constant tension pump.'},
-    ],
-  },
-  triceps: {
-    high: [
-      {name: 'EZ Skull Crusher', biseriePair: 'Cable Pushdown', sets: '4', reps: '6-8', notes: 'Long head max stretch.'},
-      {name: 'Close-Grip Bench Press', sets: '4', reps: '5', notes: 'Compound triceps overload.'},
-      {name: 'Weighted Dips (upright)', sets: '4', reps: '6', notes: 'Vertical torso = triceps bias.'},
-    ],
-    medium: [
-      {name: 'DB Skull Crusher', sets: '3', reps: '10-12'},
-      {name: 'Cable Pushdown', sets: '3', reps: '12'},
-      {name: 'Overhead DB Extension', sets: '3', reps: '10', notes: 'Long head stretch.'},
-      {name: 'Rope Pushdown', sets: '3', reps: '10-12'},
-    ],
-    low: [
-      {name: 'Light Cable Pushdown', sets: '3', reps: '15-20'},
-      {name: 'DB Kickback', sets: '3', reps: '15', notes: 'Per arm.'},
-      {name: 'Bench Dip (bodyweight)', sets: '3', reps: '15-20'},
-    ],
-  },
-};
 
 /* ── Presets ── */
 type PresetKey = '3day' | '4day' | '5day' | '6day' | 'custom';

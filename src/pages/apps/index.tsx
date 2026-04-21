@@ -30,6 +30,14 @@ const apps: AppCard[] = [
     link: '/apps/routine-generator',
     tags: ['Training', 'Goose Method', 'PAP'],
   },
+  {
+    title: 'Session Builder',
+    emoji: '\u{1F3AF}',
+    description:
+      "Cherry-pick today's workout — pick muscle groups and intensity on the fly, with live Goose Method validation.",
+    link: '/apps/session-builder',
+    tags: ['Training', 'Today', 'Ad-hoc'],
+  },
 ];
 
 function AppCardComponent({title, emoji, description, link, tags}: AppCard) {

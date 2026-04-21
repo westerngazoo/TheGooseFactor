@@ -1,0 +1,391 @@
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+.header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+}
+
+.title {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 750;
+  letter-spacing: 0.1ch;
+  background: linear-gradient(100deg, #ffe8e8 0%, #ffb49e 25%, #e67349 55%, #c44219 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  opacity: 0.7;
+  font-size: 1rem;
+}
+
+/* ─── Legend ─── */
+.legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.5rem 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  background: var(--ifm-card-background-color);
+  border: 1px solid rgba(90, 98, 107, 0.25);
+  margin-bottom: 1.5rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.83rem;
+}
+
+.legendBadge {
+  display: inline-block;
+  min-width: 5.5rem;
+  text-align: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  font-family: var(--ifm-font-family-monospace);
+  flex-shrink: 0;
+}
+
+.legendText {
+  opacity: 0.85;
+}
+
+/* ─── Layout ─── */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pickerPanel,
+.sessionPanel {
+  background: var(--ifm-card-background-color);
+  border: 1px solid rgba(90, 98, 107, 0.25);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.sectionTitle {
+  margin: 0 0 0.75rem;
+}
+
+/* ─── Picker fields ─── */
+.pickerField {
+  margin-bottom: 1rem;
+}
+
+.fieldLabel {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  opacity: 0.65;
+  margin-bottom: 0.4rem;
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.chip {
+  padding: 0.35rem 0.7rem;
+  background: transparent;
+  border: 1.5px solid var(--ifm-color-emphasis-300);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.12s;
+  color: var(--ifm-font-color-base);
+}
+
+.chip:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.chipActive {
+  background: var(--goose-accent);
+  border-color: var(--goose-accent);
+  color: #fff;
+}
+
+/* ─── Available exercises ─── */
+.availableHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.availableCount {
+  font-size: 0.75rem;
+  opacity: 0.55;
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.exerciseList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.exerciseBtn {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 0.1rem 0.75rem;
+  padding: 0.65rem 0.85rem;
+  text-align: left;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  background: var(--ifm-background-color);
+  cursor: pointer;
+  transition: all 0.12s;
+  position: relative;
+}
+
+.exerciseBtn:hover:not(:disabled) {
+  border-color: var(--goose-accent);
+  transform: translateY(-1px);
+}
+
+.exerciseBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.exName {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--ifm-font-color-base);
+}
+
+.exMeta {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--goose-accent);
+  align-self: center;
+  justify-self: end;
+}
+
+.exNotes {
+  grid-column: 1 / -1;
+  font-size: 0.78rem;
+  opacity: 0.7;
+  font-style: italic;
+  color: var(--ifm-font-color-base);
+}
+
+.exAddTag,
+.exPickedTag {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  position: absolute;
+  right: 0.85rem;
+  top: 0.65rem;
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.exerciseBtn .exAddTag {
+  display: none;
+}
+
+.exerciseBtn:hover .exAddTag {
+  display: inline;
+  color: var(--goose-accent);
+}
+
+.exPickedTag {
+  color: #2ecc71;
+}
+
+/* ─── Session ─── */
+.sessionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.clearBtn {
+  padding: 0.3rem 0.8rem;
+  background: transparent;
+  border: 1px solid var(--ifm-color-emphasis-400);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: var(--ifm-font-color-base);
+}
+
+.clearBtn:hover {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+.emptyState {
+  padding: 2rem 0;
+  text-align: center;
+  opacity: 0.55;
+  font-style: italic;
+}
+
+.summary {
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  background: rgba(25, 179, 196, 0.08);
+  border: 1px solid rgba(25, 179, 196, 0.25);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.warningBox {
+  padding: 0.9rem 1.1rem;
+  border-radius: 8px;
+  background: rgba(243, 156, 18, 0.1);
+  border: 1px solid rgba(243, 156, 18, 0.4);
+  font-size: 0.87rem;
+  margin-bottom: 1rem;
+}
+
+.warningBox ul {
+  margin: 0.4rem 0 0;
+  padding-left: 1.2rem;
+}
+
+/* ─── Pick Card ─── */
+.pickCard {
+  border: 1px solid rgba(90, 98, 107, 0.25);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.55rem;
+  background: var(--ifm-background-color);
+}
+
+.pickHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.4rem;
+}
+
+.pickBadge {
+  display: inline-block;
+  min-width: 5.5rem;
+  text-align: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.pickGroup {
+  font-weight: 600;
+  font-size: 0.85rem;
+  opacity: 0.75;
+  flex: 1;
+}
+
+.pickControls {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.moveBtn,
+.removeBtn {
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.75rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ifm-font-color-base);
+}
+
+.moveBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.moveBtn:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.removeBtn {
+  font-size: 1.1rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.removeBtn:hover {
+  background: rgba(231, 76, 60, 0.1);
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+.pickBody {
+  padding-left: 0.2rem;
+}
+
+.pickName {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.15rem;
+}
+
+.pickMeta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  font-size: 0.85rem;
+}
+
+.pickSetsReps {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 700;
+  color: var(--goose-accent);
+}
+
+.pickBiserie {
+  font-size: 0.8rem;
+  opacity: 0.65;
+  font-style: italic;
+}
+
+.pickNotes {
+  margin-top: 0.25rem;
+  font-size: 0.82rem;
+  opacity: 0.72;
+  font-style: italic;
+}
