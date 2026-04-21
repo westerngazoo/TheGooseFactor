@@ -38,6 +38,14 @@ const apps: AppCard[] = [
     link: '/apps/session-builder',
     tags: ['Training', 'Today', 'Ad-hoc'],
   },
+  {
+    title: 'Progress Tracker',
+    emoji: '\u{1F4C8}',
+    description:
+      'Daily log for workouts, diet, and body metrics. Sign in with Google; data is private to your account.',
+    link: '/apps/progress-tracker',
+    tags: ['Logging', 'Google Auth', 'Supabase'],
+  },
 ];
 
 function AppCardComponent({title, emoji, description, link, tags}: AppCard) {

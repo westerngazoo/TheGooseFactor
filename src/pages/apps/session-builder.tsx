@@ -12,8 +12,12 @@ import {
   CATEGORY_LABELS,
   CATEGORY_COLORS,
   CATEGORY_PURPOSE,
-  EXERCISE_LIBRARY,
+  exercisesFor,
 } from '../../data/routineData';
+import MuscleMap, {
+  activationFor,
+  mergeActivations,
+} from '../../components/MuscleMap';
 
 /* ══════════════════════════════════════════
    SESSION BUILDER
@@ -102,7 +106,7 @@ export default function SessionBuilder(): ReactNode {
   }, []);
 
   const warnings = useMemo(() => validateSession(picks), [picks]);
-  const availableExercises = EXERCISE_LIBRARY[selGroup][selCategory];
+  const availableExercises = useMemo(() => exercisesFor(selGroup, selCategory), [selGroup, selCategory]);
   const pickedNames = new Set(
     picks.filter((p) => p.group === selGroup && p.category === selCategory).map((p) => p.exercise.name)
   );
@@ -183,8 +187,20 @@ export default function SessionBuilder(): ReactNode {
                       onClick={() => addExercise(ex)}
                       disabled={already}
                     >
-                      <span className={styles.exName}>{ex.name}</span>
+                      <span className={styles.exName}>
+                        {ex.compound ? '◆ ' : ''}{ex.name}
+                      </span>
                       <span className={styles.exMeta}>{ex.sets} &times; {ex.reps}</span>
+                      {(ex.primary || ex.secondary) && (
+                        <span className={styles.exActivation}>
+                          {(ex.primary ?? []).map((g) => (
+                            <span key={`p-${g}`} className={styles.pillPrimary}>{GROUP_LABELS[g]}</span>
+                          ))}
+                          {(ex.secondary ?? []).map((g) => (
+                            <span key={`s-${g}`} className={styles.pillSecondary}>{GROUP_LABELS[g]}</span>
+                          ))}
+                        </span>
+                      )}
                       {ex.notes && <span className={styles.exNotes}>{ex.notes}</span>}
                       {already ? <span className={styles.exPickedTag}>✓ added</span> : <span className={styles.exAddTag}>+ add</span>}
                     </button>
@@ -222,6 +238,23 @@ export default function SessionBuilder(): ReactNode {
               <div className={styles.summary}>
                 <strong>{picks.length}</strong> exercise{picks.length !== 1 ? 's' : ''} · estimated{' '}
                 <strong>{picks.reduce((s, p) => s + (parseInt(p.exercise.sets) || 0), 0)}</strong> working sets
+              </div>
+            )}
+
+            {picks.length > 0 && (
+              <div className={styles.mapWrap}>
+                <MuscleMap
+                  activation={mergeActivations(
+                    picks.map((p) =>
+                      activationFor(
+                        p.exercise.primary,
+                        p.exercise.secondary,
+                        p.exercise.primarySub,
+                        p.exercise.secondarySub,
+                      )
+                    )
+                  )}
+                />
               </div>
             )}
 

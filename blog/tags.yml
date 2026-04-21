@@ -27,3 +27,13 @@ math:
   label: Math
   permalink: /math
   description: Mathematics and mathematical foundations
+
+training:
+  label: Training
+  permalink: /training
+  description: Strength, hypertrophy, and periodization
+
+goose-method:
+  label: Goose Method
+  permalink: /goose-method
+  description: The Goose training and nutrition framework
