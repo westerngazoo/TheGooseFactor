@@ -80,14 +80,18 @@ GooseOS is evolving toward a **microkernel architecture** — the kernel stays m
 | **Part 2** | `println!` macro + panic handler | `part-2` | Done |
 | **Part 3** | Trap handling + PLIC + interrupt-driven UART | `part-3` | Done |
 | **Part 4** | Real hardware — VF2 boot, UART fixes, dev workflow | `part-4` | Done |
-| Part 5 | Sv39 page tables + virtual memory | | Next |
-| Part 6 | First userspace process + context switching | | Planned |
-| Part 7 | IPC message passing (microkernel core) | | Planned |
-| Part 8 | UART server in userspace (first service) | | Planned |
-| Part 9 | Heap allocator + capability-based memory | | Planned |
-| Part 10 | Block device + filesystem service | | Planned |
-| Part 11 | Network stack service | | Planned |
-| Part 12 | SMP (multicore) | | Planned |
+| **Part 5** | Sv39 page tables + virtual memory | | Done |
+| **Part 6** | Userspace — syscalls, user page tables, page walk | | Done |
+| **Part 7** | IPC — process table, sync message passing, context switching | | Done |
+| **Part 8** | Architecture pivot — why WASM, the blueprint | | Done |
+| **Part 9** | Call/Reply RPC pattern | | Done |
+| **Part 10** | Userspace memory management | | Done |
+| **Part 11** | Process lifecycle + ELF loading | | Done |
+| **Part 12** | Preemptive scheduling (Dining Geese) | | Done |
+| **Part 13** | Device servers — first service in userspace | | Done |
+| Part 14+ | Filesystem, network, SMP — TBD | | Planned |
+
+Appendices cover RISC-V history / architecture / assembly / registers, the JH7110 SoC, QEMU, U-Boot, ELF format, and debugging sessions.
 
 Each part has a corresponding git branch. To see the code at any stage:
 
