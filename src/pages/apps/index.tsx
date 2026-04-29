@@ -39,6 +39,14 @@ const apps: AppCard[] = [
     tags: ['Training', 'Today', 'Ad-hoc'],
   },
   {
+    title: 'Phased Builder',
+    emoji: '\u{1F525}',
+    description:
+      'Build your session in 5 phases — warm-up circuit, multi-joint compound, heavy strength, hypertrophy, pump. Each phase narrows the next.',
+    link: '/apps/phased-builder',
+    tags: ['Training', 'Phased', 'Adaptive'],
+  },
+  {
     title: 'Progress Tracker',
     emoji: '\u{1F4C8}',
     description:

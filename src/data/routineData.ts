@@ -18,6 +18,24 @@ export type MuscleGroup =
   | 'forearms'
   | 'traps';
 
+export type Phase = 'warmup' | 'multijoint' | 'heavy' | 'medium' | 'pump';
+
+export const PHASE_LABELS: Record<Phase, string> = {
+  warmup: 'Warm-up Circuit',
+  multijoint: 'Multi-joint Complete',
+  heavy: 'Heavy Strength',
+  medium: 'Medium / Hypertrophy',
+  pump: 'Finisher / Pump',
+};
+
+export const PHASE_DESCRIPTIONS: Record<Phase, string> = {
+  warmup: 'HIIT-style full-body activation. Bodyweight, dynamic, fast.',
+  multijoint: 'One total-body compound flow. Light-moderate, technique focus.',
+  heavy: 'Heavy compound based on the multi-joint pattern. 3-5 reps.',
+  medium: 'Hypertrophy accessories. 8-12 reps, target the gaps.',
+  pump: 'Optional isolation finisher. 15-20 reps, blood flow.',
+};
+
 export type Exercise = {
   name: string;
   biseriePair?: string;
@@ -33,6 +51,10 @@ export type Exercise = {
   /** Optional sub-muscle tagging for anatomy chart precision. */
   primarySub?: SubMuscle[];
   secondarySub?: SubMuscle[];
+  /** Phases this exercise fits into in the phased-builder wizard. */
+  phases?: Phase[];
+  /** Equipment required, for filtering. */
+  equipment?: ('barbell' | 'dumbbell' | 'kettlebell' | 'cable' | 'machine' | 'bodyweight' | 'band' | 'box')[];
 };
 
 /* ══════════════════════════════════════════
@@ -405,6 +427,124 @@ function flattenLegacy(): FlatExercise[] {
   return out;
 }
 
+/* ── PHASE 1 / 2 ADDITIONS — warmup circuit + multi-joint complete flows ── */
+const PHASED_ADDITIONS: FlatExercise[] = [
+  // ─── Warm-up circuit (Phase 1) ───
+  // Cardio / aerobic prep
+  {name: 'Jumping Jacks', category: 'metabolic', primary: ['shoulder', 'calves'], secondary: ['core'], compound: true, sets: '3', reps: '30s', notes: 'Aerobic + arm/leg coordination.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Jump Rope', category: 'metabolic', primary: ['calves'], secondary: ['shoulder', 'core'], sets: '3', reps: '60s', notes: 'Best calf prep. Skip light.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'High Knees', category: 'metabolic', primary: ['quad'], secondary: ['core', 'calves'], sets: '3', reps: '30s', notes: 'Hip flexor activation.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Butt Kicks', category: 'metabolic', primary: ['posterior'], secondary: ['calves'], sets: '3', reps: '30s', notes: 'Hamstring activation.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Mountain Climbers', category: 'metabolic', primary: ['core', 'shoulder'], secondary: ['quad'], compound: true, sets: '3', reps: '30s', notes: 'Plank + alternating knee drive.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Bear Crawl', category: 'metabolic', primary: ['core', 'shoulder'], secondary: ['quad', 'triceps'], compound: true, sets: '3', reps: '15-20m', notes: 'Slow, controlled. Core stability.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Crab Walk', category: 'metabolic', primary: ['posterior', 'triceps'], secondary: ['core', 'shoulder'], compound: true, sets: '3', reps: '15-20m', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Inchworm Walkout', category: 'metabolic', primary: ['core'], secondary: ['shoulder', 'posterior'], compound: true, sets: '3', reps: '8-10', notes: 'Hip + hamstring + shoulder mobility.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'World’s Greatest Stretch', category: 'metabolic', primary: ['core'], secondary: ['posterior', 'shoulder'], sets: '2', reps: '5/side', notes: 'Lunge + thoracic rotation. Best general warmup.', phases: ['warmup'], equipment: ['bodyweight']},
+
+  // Push-up family
+  {name: 'Standard Push-Up', category: 'metabolic', primary: ['chest'], secondary: ['triceps', 'shoulder', 'core'], compound: true, sets: '3', reps: '15-20', primarySub: ['chest_mid'], secondarySub: ['triceps_lateral', 'delt_front'], phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Incline Push-Up', category: 'metabolic', primary: ['chest'], secondary: ['triceps', 'shoulder'], compound: true, sets: '3', reps: '15-20', notes: 'Hands elevated. Lower-pec bias.', primarySub: ['chest_lower'], phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Decline Push-Up', category: 'metabolic', primary: ['chest', 'shoulder'], secondary: ['triceps', 'core'], compound: true, sets: '3', reps: '12-15', notes: 'Feet elevated. Upper-chest + delts.', primarySub: ['chest_upper', 'delt_front'], phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Diamond Push-Up', category: 'metabolic', primary: ['triceps', 'chest'], secondary: ['shoulder'], compound: true, sets: '3', reps: '10-15', primarySub: ['triceps_lateral', 'triceps_medial'], phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Plyo Push-Up', category: 'metabolic', primary: ['chest'], secondary: ['triceps', 'shoulder'], compound: true, sets: '4', reps: '6-10', notes: 'Explosive. Hands leave floor.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Hindu Push-Up', category: 'metabolic', primary: ['chest', 'shoulder'], secondary: ['core', 'triceps'], compound: true, sets: '3', reps: '10-12', notes: 'Down-dog to up-dog flow.', phases: ['warmup'], equipment: ['bodyweight']},
+
+  // Squat / lunge family (light)
+  {name: 'Bodyweight Squat', category: 'metabolic', primary: ['quad'], secondary: ['posterior', 'core'], compound: true, sets: '3', reps: '20', notes: 'Fast, full ROM. No weight.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Air Squat (fast)', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['core', 'calves'], compound: true, sets: '3', reps: '30s', notes: 'AMRAP per round.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Front Squat (light)', category: 'metabolic', primary: ['quad'], secondary: ['core', 'shoulder'], compound: true, sets: '3', reps: '12-15', notes: 'Empty bar / very light. Pattern primer.', primarySub: ['rectus_femoris', 'vastus_medialis'], phases: ['warmup'], equipment: ['barbell']},
+  {name: 'Cossack Squat', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['core'], compound: true, sets: '2', reps: '6/side', notes: 'Lateral squat. Hip mobility.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Reverse Lunge (BW)', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['core'], compound: true, sets: '3', reps: '10/leg', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Walking Lunge (BW)', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['core', 'calves'], compound: true, sets: '3', reps: '20', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Lateral Lunge', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['core'], compound: true, sets: '3', reps: '8/side', phases: ['warmup'], equipment: ['bodyweight']},
+
+  // Plyometric / jump
+  {name: 'Jump Squat (low load)', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['calves', 'core'], compound: true, sets: '3', reps: '10', notes: 'Soft landing. Reset between reps.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Jump Lunge (alternating)', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['calves', 'core'], compound: true, sets: '3', reps: '20', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Tuck Jump', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['calves', 'core'], compound: true, sets: '3', reps: '10', notes: 'Knees high. Explosive.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Skater Jump', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['calves', 'core'], compound: true, sets: '3', reps: '20', notes: 'Lateral hop. Ankle stability.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Pogo Jumps', category: 'metabolic', primary: ['calves'], secondary: ['core'], sets: '3', reps: '20', notes: 'Stiff legs. Pop off ground.', primarySub: ['gastrocnemius'], phases: ['warmup'], equipment: ['bodyweight']},
+
+  // Core / plank flows
+  {name: 'Plank Up-Down', category: 'metabolic', primary: ['core', 'triceps'], secondary: ['shoulder'], compound: true, sets: '3', reps: '30s', notes: 'Plank ↔ push-up transition.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Bird Dog', category: 'isolation', primary: ['core', 'posterior'], sets: '2', reps: '8/side', notes: 'Anti-rotation core.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Glute Bridge (BW)', category: 'metabolic', primary: ['posterior'], secondary: ['core'], sets: '3', reps: '15', notes: 'Glute activation.', primarySub: ['glute_max'], phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Hollow Hold', category: 'isolation', primary: ['core'], sets: '3', reps: '20-30s', notes: 'Anti-extension.', primarySub: ['abs_lower', 'abs_upper'], phases: ['warmup'], equipment: ['bodyweight']},
+
+  // Band / mobility
+  {name: 'Band Pull-Apart', category: 'isolation', primary: ['shoulder'], secondary: ['back'], sets: '3', reps: '15', notes: 'Rear delt + scap warmup.', primarySub: ['delt_rear', 'rhomboids'], phases: ['warmup'], equipment: ['band']},
+  {name: 'Band Face Pull', category: 'isolation', primary: ['shoulder', 'back'], sets: '3', reps: '15', notes: 'Rear delt + upper back warmup.', primarySub: ['delt_rear', 'traps_mid'], phases: ['warmup'], equipment: ['band']},
+  {name: 'Band Dislocates', category: 'isolation', primary: ['shoulder'], sets: '2', reps: '10', notes: 'Shoulder mobility before pressing.', phases: ['warmup'], equipment: ['band']},
+  {name: 'Cat-Cow', category: 'isolation', primary: ['core'], secondary: ['back'], sets: '2', reps: '8', notes: 'Spinal mobility.', phases: ['warmup'], equipment: ['bodyweight']},
+
+  // ─── Multi-joint complete flows (Phase 2) ───
+  {name: 'DB Clean & Press', category: 'metabolic', primary: ['shoulder', 'posterior'], secondary: ['back', 'quad', 'core'], compound: true, sets: '4', reps: '8-10', notes: 'Per side. Full body. Pattern: pull from floor, press overhead.', primarySub: ['delt_front', 'glute_max'], phases: ['multijoint'], equipment: ['dumbbell']},
+  {name: 'DB Snatch', category: 'metabolic', primary: ['shoulder', 'posterior'], secondary: ['back', 'core', 'traps'], compound: true, sets: '4', reps: '6-8', notes: 'Single DB ground-to-overhead in one move.', primarySub: ['delt_front', 'glute_max', 'hams_bf'], phases: ['multijoint'], equipment: ['dumbbell']},
+  {name: 'DB Thruster', category: 'metabolic', primary: ['quad', 'shoulder'], secondary: ['posterior', 'core', 'triceps'], compound: true, sets: '4', reps: '10-12', notes: 'Front squat → press without pause.', primarySub: ['rectus_femoris', 'delt_front'], phases: ['multijoint'], equipment: ['dumbbell']},
+  {name: 'KB Clean & Press', category: 'metabolic', primary: ['shoulder', 'posterior'], secondary: ['back', 'core', 'forearms'], compound: true, sets: '4', reps: '8-10', notes: 'Per side.', phases: ['multijoint'], equipment: ['kettlebell']},
+  {name: 'KB Swing (heavy)', category: 'metabolic', primary: ['posterior'], secondary: ['core', 'shoulder', 'forearms'], compound: true, sets: '5', reps: '15-20', notes: 'Hip hinge. Power from glutes, not arms.', primarySub: ['glute_max', 'hams_bf'], phases: ['multijoint'], equipment: ['kettlebell']},
+  {name: 'KB Snatch', category: 'metabolic', primary: ['posterior', 'shoulder'], secondary: ['back', 'core', 'traps', 'forearms'], compound: true, sets: '4', reps: '8-10', notes: 'Per side. Most complete KB lift.', phases: ['multijoint'], equipment: ['kettlebell']},
+  {name: 'KB Goblet Squat', category: 'metabolic', primary: ['quad'], secondary: ['posterior', 'core', 'shoulder'], compound: true, sets: '4', reps: '10-12', phases: ['multijoint'], equipment: ['kettlebell']},
+  {name: 'DB Renegade Row', category: 'metabolic', primary: ['back', 'core'], secondary: ['biceps', 'shoulder'], compound: true, sets: '4', reps: '8/side', notes: 'Plank + row. Anti-rotation.', primarySub: ['lats', 'rhomboids', 'abs_upper'], phases: ['multijoint'], equipment: ['dumbbell']},
+  {name: 'Devil’s Press', category: 'metabolic', primary: ['shoulder', 'chest'], secondary: ['posterior', 'core', 'quad'], compound: true, sets: '4', reps: '8-10', notes: 'Burpee + DB snatch. Brutal.', phases: ['multijoint'], equipment: ['dumbbell']},
+  {name: 'DB Man-Maker', category: 'metabolic', primary: ['shoulder', 'back', 'quad'], secondary: ['chest', 'core', 'triceps'], compound: true, sets: '4', reps: '6-8', notes: 'Push-up → row each arm → clean → thruster.', phases: ['multijoint'], equipment: ['dumbbell']},
+  {name: 'DB Step-Up & Press', category: 'metabolic', primary: ['quad', 'shoulder'], secondary: ['posterior', 'core'], compound: true, sets: '4', reps: '8/side', phases: ['multijoint'], equipment: ['dumbbell', 'box']},
+  {name: 'Arnold Press (light)', category: 'metabolic', primary: ['shoulder'], secondary: ['triceps'], compound: true, sets: '4', reps: '10-12', notes: 'Light DB. Full rotation primer.', primarySub: ['delt_front', 'delt_side'], phases: ['multijoint'], equipment: ['dumbbell']},
+  {name: 'Front Squat (medium)', category: 'metabolic', primary: ['quad'], secondary: ['core', 'posterior', 'shoulder'], compound: true, sets: '4', reps: '8-10', notes: 'Moderate barbell. Pattern + warmup for heavy.', primarySub: ['rectus_femoris', 'vastus_medialis'], phases: ['multijoint'], equipment: ['barbell']},
+  {name: 'Power Clean (light)', category: 'metabolic', primary: ['posterior', 'back'], secondary: ['quad', 'shoulder', 'traps'], compound: true, sets: '4', reps: '5', notes: 'Technique work. 50-60% 1RM.', phases: ['multijoint'], equipment: ['barbell']},
+  {name: 'Hang Clean (light)', category: 'metabolic', primary: ['posterior', 'back'], secondary: ['quad', 'shoulder', 'traps'], compound: true, sets: '4', reps: '5', phases: ['multijoint'], equipment: ['barbell']},
+  {name: 'Push Press (light)', category: 'metabolic', primary: ['shoulder'], secondary: ['triceps', 'quad', 'core'], compound: true, sets: '4', reps: '6-8', notes: 'Pattern primer for heavy OHP.', phases: ['multijoint'], equipment: ['barbell']},
+  {name: 'Barbell Complex (Bear)', category: 'metabolic', primary: ['quad', 'shoulder', 'back'], secondary: ['posterior', 'core', 'biceps'], compound: true, sets: '4', reps: '6 rounds', notes: 'Power clean → front squat → push press → back squat → push press behind neck. 1 round = all 5 unbroken.', phases: ['multijoint'], equipment: ['barbell']},
+  {name: 'DB Complex', category: 'metabolic', primary: ['shoulder', 'back', 'quad'], secondary: ['core', 'biceps', 'posterior'], compound: true, sets: '4', reps: '6 rounds', notes: 'Curl → press → squat → row → RDL. Light DBs, no rest within round.', phases: ['multijoint'], equipment: ['dumbbell']},
+  {name: 'KB Complex', category: 'metabolic', primary: ['posterior', 'shoulder'], secondary: ['back', 'core', 'quad'], compound: true, sets: '4', reps: '6 rounds', notes: 'Swing → clean → press → squat → row.', phases: ['multijoint'], equipment: ['kettlebell']},
+  {name: 'Sandbag Get-Up', category: 'metabolic', primary: ['core', 'posterior'], secondary: ['shoulder', 'quad'], compound: true, sets: '3', reps: '8-10', notes: 'Floor to standing with sandbag bear hug.', phases: ['multijoint']},
+];
+
+/* Phase tags for existing strong lifts (Phase 3 / 4 / 5) */
+const PHASE_TAGS: Record<string, Phase[]> = {
+  // Phase 3 — heavy strength
+  'Bench Press': ['heavy'], 'Paused Bench': ['heavy'], 'Close-Grip Bench': ['heavy'], 'Close-Grip Bench Press': ['heavy'],
+  'Incline Barbell': ['heavy'], 'Weighted Dips': ['heavy'], 'Weighted Dips (upright)': ['heavy'],
+  'Barbell Back Squat': ['heavy'], 'Front Squat': ['heavy'], 'Pause Back Squat': ['heavy'],
+  'Box Squat': ['heavy'], 'Safety Bar Squat': ['heavy'],
+  'Deadlift': ['heavy'], 'Conventional Deadlift': ['heavy'], 'Sumo Deadlift': ['heavy'],
+  'Romanian Deadlift (heavy)': ['heavy'], 'Deficit Deadlift': ['heavy'], 'Good Morning': ['heavy'],
+  'Rack Pulls': ['heavy'],
+  'Overhead Press (Barbell)': ['heavy'], 'Push Press': ['heavy'],
+  'Clean and Press': ['heavy'], 'Power Clean': ['heavy'], 'Hang Clean': ['heavy'],
+  'Clean & Jerk': ['heavy'], 'Snatch': ['heavy'], 'Snatch Pull': ['heavy'],
+  'Push Jerk': ['heavy'], 'Split Jerk': ['heavy'],
+  'Barbell Row': ['heavy'], 'Pendlay Row': ['heavy'], 'T-Bar Row': ['heavy'],
+  'Weighted Pull-Up': ['heavy'], 'Weighted Pull-ups': ['heavy'], 'Weighted Chin-Up': ['heavy'],
+
+  // Phase 4 — medium / hypertrophy
+  'Incline DB Press': ['medium'], 'Flat DB Press': ['medium'], 'Dumbbell Press': ['medium'],
+  'Machine Chest Press': ['medium'], 'DB Fly': ['medium'], 'Smith Incline Press': ['medium'], 'Hammer Strength Incline': ['medium'],
+  'Leg Press': ['medium'], 'Hack Squat': ['medium'], 'Bulgarian Split Squat': ['medium'],
+  'Walking Lunges (DB)': ['medium'], 'Heavy Lunges': ['medium'], 'Heavy Walking Lunges': ['medium'],
+  'Smith Machine Squat': ['medium'], 'Goblet Squat': ['medium'],
+  'Hip Thrust': ['medium'], 'Glute Ham Raise': ['medium'], 'Stiff-Leg DB Deadlift': ['medium'], 'Single-Leg RDL': ['medium'],
+  'Lat Pulldown (wide)': ['medium'], 'Single-Arm DB Row': ['medium'], 'Chest-Supported Row': ['medium'], 'Seated Cable Row': ['medium'],
+  'Seated DB Shoulder Press': ['medium'], 'DB Shoulder Press': ['medium'], 'Arnold Press': ['medium'], 'Machine Shoulder Press': ['medium'], 'Z Press': ['medium'],
+  'Preacher Curl': ['medium'], 'Preacher Curl (EZ bar)': ['medium'],
+  'Incline DB Curl': ['medium'], 'Hammer Curl': ['medium'], 'Cable Curl': ['medium'], 'Cable Curl (bar)': ['medium'], 'DB Curl': ['medium'], 'Rope Hammer Curl': ['medium'],
+  'EZ Skull Crusher': ['medium'], 'DB Skull Crusher': ['medium'], 'Overhead DB Extension': ['medium'], 'Rope Pushdown': ['medium'], 'V-Bar Pushdown': ['medium'], 'Cable Pushdown': ['medium'],
+  'Heavy Barbell Shrug': ['medium'], 'DB Shrug (heavy)': ['medium'],
+  'Standing Calf Raise': ['medium'], 'Donkey Calf Raise': ['medium'], 'Calf Press (leg press)': ['medium'],
+  'Hanging Leg Raise': ['medium'], 'Cable Woodchopper': ['medium'],
+
+  // Phase 5 — pump
+  'Pec Deck Fly': ['pump'], 'Cable Crossover': ['pump'], 'Low-to-High Cable Fly': ['pump'],
+  'Leg Extension': ['pump'], 'Sissy Squat': ['pump'], 'Cyclist Squat': ['pump'], 'Single-Leg Extension': ['pump'], 'Walking Lunges (light)': ['pump'],
+  'Lying Leg Curl': ['pump'], 'Seated Leg Curl': ['pump'], 'Cable Glute Kickback': ['pump'], 'Cable Pull-Through': ['pump'], 'Back Hyperextension': ['pump'],
+  'Straight-Arm Pulldown': ['pump'], 'Face Pull': ['pump'], 'Cable Row': ['pump'],
+  'Reverse Pec Deck': ['pump'], 'Reverse Pec Deck (rear)': ['pump'], 'Lateral Raises': ['pump'], 'DB Lateral Raise': ['pump'], 'Cable Lateral Raise': ['pump'], 'Front Raise (DB/Plate)': ['pump'], 'Upright Row (EZ bar)': ['pump'],
+  'Concentration Curl': ['pump'], 'Spider Curl': ['pump'], 'Single-Arm Cable Curl': ['pump'], 'Reverse Curl (EZ bar)': ['pump'],
+  'DB Kickback': ['pump'], 'Cable Kickback': ['pump'], 'Light Cable Pushdown': ['pump'], 'Single-Arm Rope Extension': ['pump'], 'Bench Dip (bodyweight)': ['pump'],
+  'Seated Calf Raise': ['pump'], 'Single-Leg Calf Raise': ['pump'],
+  'Wrist Curl': ['pump'], 'Reverse Wrist Curl': ['pump'],
+};
+
 /* Compound / full-body / specialty lifts not in the nested library. */
 const COMPOUND_ADDITIONS: FlatExercise[] = [
   // ── Olympic / power lifts ──
@@ -581,8 +721,19 @@ export const ALL_EXERCISES: FlatExercise[] = (() => {
     const o = PRIMARY_OVERRIDES[ex.name];
     return o ? {...ex, ...o} : ex;
   });
-  return [...withOverrides, ...COMPOUND_ADDITIONS];
+  // Apply phase tags from PHASE_TAGS map (legacy + compound additions)
+  const all = [...withOverrides, ...COMPOUND_ADDITIONS, ...PHASED_ADDITIONS];
+  return all.map((ex) => {
+    const tagged = PHASE_TAGS[ex.name];
+    if (tagged && !ex.phases) return {...ex, phases: tagged};
+    return ex;
+  });
 })();
+
+/** All exercises that fit a given phase. */
+export function exercisesForPhase(phase: Phase): FlatExercise[] {
+  return ALL_EXERCISES.filter((e) => e.phases?.includes(phase));
+}
 
 /** All exercises for a given (group, category) — includes compounds where the group
  *  appears in primary OR secondary. */
