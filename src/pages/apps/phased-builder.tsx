@@ -1,21 +1,23 @@
-import {useState, useMemo, useCallback, type ReactNode} from 'react';
+import {useState, useMemo, useEffect, useCallback, type ReactNode} from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import Link from '@docusaurus/Link';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './phased-builder.module.css';
 import {
-  type Exercise,
+  type LibraryExercise,
   type MuscleGroup,
   type Phase,
   PHASE_LABELS,
   PHASE_DESCRIPTIONS,
   GROUP_LABELS,
-  ALL_EXERCISES,
   exercisesForPhase,
 } from '../../data/routineData';
 import MuscleMap, {
   activationFor,
   mergeActivations,
 } from '../../components/MuscleMap';
+import {getSupabase, type SessionType} from '../../lib/supabase';
 
 /* ══════════════════════════════════════════
    PHASED SESSION BUILDER
@@ -24,12 +26,12 @@ import MuscleMap, {
    muscle pattern of the previous pick.
    ══════════════════════════════════════════ */
 
-type Pick = {id: number; phase: Phase; ex: Exercise};
+type Pick = {id: number; phase: Phase; ex: LibraryExercise};
 
 const PHASES: Phase[] = ['warmup', 'multijoint', 'heavy', 'medium', 'pump'];
 
 /** Filter Phase 3+ exercises so they overlap with the multijoint pick's primary muscles. */
-function filterByPattern(exs: Exercise[], pattern: MuscleGroup[]): Exercise[] {
+function filterByPattern(exs: LibraryExercise[], pattern: MuscleGroup[]): LibraryExercise[] {
   if (pattern.length === 0) return exs;
   return exs.filter((e) =>
     (e.primary ?? []).some((g) => pattern.includes(g)) ||
@@ -37,7 +39,7 @@ function filterByPattern(exs: Exercise[], pattern: MuscleGroup[]): Exercise[] {
   );
 }
 
-function ExerciseCard({ex, onAdd, added}: {ex: Exercise; onAdd: () => void; added: boolean}): ReactNode {
+function ExerciseCard({ex, onAdd, added}: {ex: LibraryExercise; onAdd: () => void; added: boolean}): ReactNode {
   return (
     <button className={`${styles.card} ${added ? styles.cardPicked : ''}`} onClick={onAdd} disabled={added}>
       <div className={styles.cardTop}>
@@ -66,7 +68,7 @@ export default function PhasedBuilder(): ReactNode {
   const [equipFilter, setEquipFilter] = useState<string>('all');
   const [textFilter, setTextFilter] = useState<string>('');
 
-  const addPick = useCallback((phase: Phase, ex: Exercise) => {
+  const addPick = useCallback((phase: Phase, ex: LibraryExercise) => {
     setPicks((prev) => [...prev, {id: nextId, phase, ex}]);
     setNextId((n) => n + 1);
   }, [nextId]);
@@ -75,15 +77,91 @@ export default function PhasedBuilder(): ReactNode {
     setPicks((prev) => prev.filter((p) => p.id !== id));
   }, []);
 
-  const clearAll = useCallback(() => { setPicks([]); setNextId(1); }, []);
+  const clearAll = useCallback(() => { setPicks([]); setNextId(1); setSaveResult(null); }, []);
+
+  // ─── Supabase auth state for "Save to Progress Tracker" ───
+  const {siteConfig} = useDocusaurusContext();
+  const fields = siteConfig.customFields as Record<string, string>;
+  const supabase = useMemo(
+    () => getSupabase(fields.supabaseUrl, fields.supabaseAnonKey),
+    [fields.supabaseUrl, fields.supabaseAnonKey],
+  );
+  const [user, setUser] = useState<any>(null);
+  const [saving, setSaving] = useState(false);
+  const [saveResult, setSaveResult] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!supabase) return;
+    supabase.auth.getSession().then(({data}) => setUser(data.session?.user ?? null));
+    const {data: sub} = supabase.auth.onAuthStateChange((_e, s) => setUser(s?.user ?? null));
+    return () => sub.subscription.unsubscribe();
+  }, [supabase]);
+
+  const saveToTracker = useCallback(async () => {
+    if (!supabase || !user || picks.length === 0) return;
+    setSaving(true); setSaveResult(null);
+
+    const phasesPresent = new Set(picks.map((p) => p.phase));
+    const sessionType: SessionType =
+      phasesPresent.has('heavy') && phasesPresent.size === 1 ? 'strength' :
+      phasesPresent.has('heavy') ? 'mixed' :
+      phasesPresent.has('multijoint') ? 'metabolic' :
+      phasesPresent.has('medium') ? 'hypertrophy' :
+      phasesPresent.has('pump') ? 'pump' : 'mixed';
+
+    const today = new Date().toISOString().slice(0, 10);
+    const {data: sess, error: sErr} = await supabase
+      .from('workout_sessions')
+      .insert({
+        user_id: user.id,
+        session_date: today,
+        name: 'Phased session',
+        session_type: sessionType,
+      })
+      .select()
+      .single();
+
+    if (sErr || !sess) {
+      setSaveResult('Error: ' + (sErr?.message ?? 'session create failed'));
+      setSaving(false);
+      return;
+    }
+
+    const phaseToIntensity: Record<Phase, 'high' | 'medium' | 'low'> = {
+      warmup: 'low', multijoint: 'medium', heavy: 'high', medium: 'medium', pump: 'low',
+    };
+
+    const rows = picks.map((p) => ({
+      user_id: user.id,
+      session_id: (sess as any).id,
+      muscle_group: p.ex.primary?.[0] ?? 'core',
+      category: p.ex.category,
+      exercise_name: p.ex.name,
+      sets: parseInt(p.ex.sets) || null,
+      reps: p.ex.reps,
+      intensity: phaseToIntensity[p.phase],
+      pap_pair: p.ex.biseriePair ?? null,
+      notes: p.ex.notes ?? null,
+    }));
+
+    const {error: eErr} = await supabase.from('workout_entries').insert(rows);
+    if (eErr) {
+      setSaveResult('Error logging entries: ' + eErr.message);
+      setSaving(false);
+      return;
+    }
+
+    setSaveResult(`Saved ${picks.length} exercise${picks.length > 1 ? 's' : ''} to today's log.`);
+    setSaving(false);
+  }, [supabase, user, picks]);
 
   // Multijoint pick determines the muscle "pattern" that filters Phase 3 onwards
   const mjPick = picks.find((p) => p.phase === 'multijoint');
   const pattern = mjPick?.ex.primary ?? [];
 
   // Per-phase filtering
-  const exercisesByPhase: Record<Phase, Exercise[]> = useMemo(() => {
-    const out = {} as Record<Phase, Exercise[]>;
+  const exercisesByPhase: Record<Phase, LibraryExercise[]> = useMemo(() => {
+    const out = {} as Record<Phase, LibraryExercise[]>;
     for (const ph of PHASES) {
       let list = exercisesForPhase(ph);
       if (ph !== 'warmup' && ph !== 'multijoint' && pattern.length > 0) {
@@ -235,6 +313,39 @@ export default function PhasedBuilder(): ReactNode {
                     ))}
                   </div>
                 ))}
+
+                {/* Save to Progress Tracker */}
+                <div className={styles.saveBlock}>
+                  {!supabase && (
+                    <p className={styles.saveHint}>
+                      Configure Supabase to enable saving to your daily log.
+                    </p>
+                  )}
+                  {supabase && !user && (
+                    <p className={styles.saveHint}>
+                      <Link to="/apps/progress-tracker">Sign in via Progress Tracker</Link> to save this session to your daily log.
+                    </p>
+                  )}
+                  {supabase && user && !saveResult && (
+                    <button
+                      className={styles.saveBtn}
+                      onClick={saveToTracker}
+                      disabled={saving}
+                    >
+                      {saving ? 'Saving…' : `Save ${picks.length} exercise${picks.length > 1 ? 's' : ''} to Progress Tracker`}
+                    </button>
+                  )}
+                  {saveResult && (
+                    <div className={saveResult.startsWith('Error') ? styles.saveError : styles.saveOk}>
+                      {saveResult}
+                      {!saveResult.startsWith('Error') && (
+                        <>
+                          {' '}<Link to="/apps/progress-tracker">View your log →</Link>
+                        </>
+                      )}
+                    </div>
+                  )}
+                </div>
               </>
             )}
           </aside>

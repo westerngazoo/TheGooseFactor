@@ -260,6 +260,7 @@ function WorkoutTab({
   const [group, setGroup] = useState<MuscleGroup>('chest');
   const [category, setCategory] = useState<ExerciseCategory>('strength');
   const [intensity, setIntensity] = useState<IntensityTag>('high');
+  const [exerciseSearch, setExerciseSearch] = useState('');
   const initialList = exercisesFor('chest', 'strength');
   const [exerciseName, setExerciseName] = useState<string>(initialList[0]?.name ?? '');
   const [sets, setSets] = useState('5');
@@ -272,8 +273,14 @@ function WorkoutTab({
   // "Last time" display: pull the most recent entry for this exercise (any session).
   const [lastEntry, setLastEntry] = useState<WorkoutEntry | null>(null);
 
-  const available = useMemo(() => exercisesFor(group, category), [group, category]);
-  const currentEx = available.find((e) => e.name === exerciseName);
+  const available = useMemo(() => {
+    // If search has text, search across the entire library; otherwise filter by group×category
+    const q = exerciseSearch.trim().toLowerCase();
+    if (q) return ALL_EXERCISES.filter((e) => e.name.toLowerCase().includes(q));
+    return exercisesFor(group, category);
+  }, [group, category, exerciseSearch]);
+  const currentEx = available.find((e) => e.name === exerciseName) ??
+                    ALL_EXERCISES.find((e) => e.name === exerciseName);
   useEffect(() => {
     const first = available[0];
     setExerciseName(first?.name ?? '');
@@ -421,9 +428,22 @@ function WorkoutTab({
             {INTENSITIES.map((i) => <option key={i} value={i}>{i.toUpperCase()}</option>)}
           </select>
         </label>
-        <label>
-          <span>Exercise</span>
+        <label className={styles.colSpan2}>
+          <span>Search any exercise (optional)</span>
+          <input
+            type="text"
+            value={exerciseSearch}
+            onChange={(e) => setExerciseSearch(e.target.value)}
+            placeholder="Type to search the full library — clear to filter by group/category"
+          />
+        </label>
+        <label className={styles.colSpan2}>
+          <span>
+            Exercise
+            {exerciseSearch.trim() && ` (${available.length} matching "${exerciseSearch.trim()}")`}
+          </span>
           <select value={exerciseName} onChange={(e) => setExerciseName(e.target.value)}>
+            {available.length === 0 && <option value="">(no matches)</option>}
             {available.map((ex) => (
               <option key={ex.name} value={ex.name}>
                 {ex.compound ? '◆ ' : ''}{ex.name}

@@ -397,10 +397,12 @@ export const EXERCISE_LIBRARY: Record<MuscleGroup, Record<ExerciseCategory, Exer
    compound / full-body lifts.
    ══════════════════════════════════════════ */
 
-type FlatExercise = Exercise & {
+export type LibraryExercise = Exercise & {
   category: ExerciseCategory;
   primary: MuscleGroup[];
 };
+
+type FlatExercise = LibraryExercise;
 
 /* Auto-derive a flat list from the existing nested EXERCISE_LIBRARY.
    Each exercise gets primary = [the-nested-group] (if not already set). */
