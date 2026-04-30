@@ -160,19 +160,12 @@
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 6px;
   background: var(--ifm-background-color);
-  cursor: pointer;
   transition: all 0.12s;
   position: relative;
 }
 
-.exerciseBtn:hover:not(:disabled) {
+.exerciseBtn:hover {
   border-color: var(--goose-accent);
-  transform: translateY(-1px);
-}
-
-.exerciseBtn:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
 }
 
 .exName {
@@ -227,6 +220,57 @@
   color: var(--goose-accent);
   border: 1px solid var(--goose-accent);
   opacity: 0.75;
+}
+
+.exActionRow {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.exVideoLink {
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: var(--ifm-font-family-monospace);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  background: rgba(255, 0, 0, 0.08);
+  color: #c0392b;
+  text-decoration: none;
+  border: 1px solid rgba(192, 57, 43, 0.25);
+  transition: all 0.12s;
+}
+
+.exVideoLink:hover {
+  background: rgba(255, 0, 0, 0.18);
+  text-decoration: none;
+  color: #c0392b;
+}
+
+.exAddBtn {
+  flex: 1;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--goose-accent);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--goose-accent);
+  font-weight: 800;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.exAddBtn:hover:not(:disabled) {
+  background: var(--goose-accent);
+  color: #fff;
+}
+
+.exAddBtn:disabled {
+  border-color: #2ecc71;
+  color: #2ecc71;
+  cursor: default;
 }
 
 .mapWrap {

@@ -12,6 +12,7 @@ import {
   PHASE_DESCRIPTIONS,
   GROUP_LABELS,
   exercisesForPhase,
+  exerciseVideoUrl,
 } from '../../data/routineData';
 import MuscleMap, {
   activationFor,
@@ -41,7 +42,7 @@ function filterByPattern(exs: LibraryExercise[], pattern: MuscleGroup[]): Librar
 
 function ExerciseCard({ex, onAdd, added}: {ex: LibraryExercise; onAdd: () => void; added: boolean}): ReactNode {
   return (
-    <button className={`${styles.card} ${added ? styles.cardPicked : ''}`} onClick={onAdd} disabled={added}>
+    <div className={`${styles.card} ${added ? styles.cardPicked : ''}`}>
       <div className={styles.cardTop}>
         <strong>{ex.compound ? '◆ ' : ''}{ex.name}</strong>
         <span className={styles.cardMeta}>{ex.sets} × {ex.reps}</span>
@@ -57,8 +58,22 @@ function ExerciseCard({ex, onAdd, added}: {ex: LibraryExercise; onAdd: () => voi
         </div>
       )}
       {ex.notes && <div className={styles.cardNotes}>{ex.notes}</div>}
-      <span className={styles.cardAction}>{added ? '✓ added' : '+ add'}</span>
-    </button>
+      <div className={styles.cardActions}>
+        <a
+          href={exerciseVideoUrl(ex.name)}
+          target="_blank"
+          rel="noreferrer"
+          className={styles.videoLink}
+          onClick={(e) => e.stopPropagation()}
+          title="Open YouTube tutorial"
+        >▶ video</a>
+        <button
+          className={styles.addBtn}
+          onClick={onAdd}
+          disabled={added}
+        >{added ? '✓ added' : '+ add'}</button>
+      </div>
+    </div>
   );
 }
 

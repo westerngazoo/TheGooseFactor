@@ -35,6 +35,7 @@ import {
   CATEGORY_COLORS,
   exercisesFor,
   ALL_EXERCISES,
+  exerciseVideoUrl,
 } from '../../data/routineData';
 import MuscleMap, {
   activationFor,
@@ -441,6 +442,15 @@ function WorkoutTab({
           <span>
             Exercise
             {exerciseSearch.trim() && ` (${available.length} matching "${exerciseSearch.trim()}")`}
+            {exerciseName && (
+              <a
+                href={exerciseVideoUrl(exerciseName)}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.videoLink}
+                title={`YouTube tutorial for ${exerciseName}`}
+              >▶ video</a>
+            )}
           </span>
           <select value={exerciseName} onChange={(e) => setExerciseName(e.target.value)}>
             {available.length === 0 && <option value="">(no matches)</option>}

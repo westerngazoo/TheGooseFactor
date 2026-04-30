@@ -13,6 +13,7 @@ import {
   CATEGORY_COLORS,
   CATEGORY_PURPOSE,
   exercisesFor,
+  exerciseVideoUrl,
 } from '../../data/routineData';
 import MuscleMap, {
   activationFor,
@@ -181,11 +182,9 @@ export default function SessionBuilder(): ReactNode {
                 {availableExercises.map((ex) => {
                   const already = pickedNames.has(ex.name);
                   return (
-                    <button
+                    <div
                       key={ex.name}
                       className={`${styles.exerciseBtn} ${already ? styles.exerciseBtnPicked : ''}`}
-                      onClick={() => addExercise(ex)}
-                      disabled={already}
                     >
                       <span className={styles.exName}>
                         {ex.compound ? '◆ ' : ''}{ex.name}
@@ -202,8 +201,22 @@ export default function SessionBuilder(): ReactNode {
                         </span>
                       )}
                       {ex.notes && <span className={styles.exNotes}>{ex.notes}</span>}
-                      {already ? <span className={styles.exPickedTag}>✓ added</span> : <span className={styles.exAddTag}>+ add</span>}
-                    </button>
+                      <span className={styles.exActionRow}>
+                        <a
+                          href={exerciseVideoUrl(ex.name)}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={styles.exVideoLink}
+                          title="Open YouTube tutorial"
+                        >▶ video</a>
+                        <button
+                          type="button"
+                          className={styles.exAddBtn}
+                          onClick={() => addExercise(ex)}
+                          disabled={already}
+                        >{already ? '✓ added' : '+ add'}</button>
+                      </span>
+                    </div>
                   );
                 })}
               </div>

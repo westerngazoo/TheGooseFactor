@@ -224,18 +224,59 @@
   font-style: italic;
 }
 
-.cardAction {
-  position: absolute;
-  bottom: 0.4rem;
-  right: 0.7rem;
-  font-size: 0.7rem;
-  font-weight: 800;
-  font-family: var(--ifm-font-family-monospace);
-  letter-spacing: 0.5px;
-  color: var(--goose-accent);
+.cardActions {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+  align-items: center;
 }
 
-.cardPicked .cardAction {
+.videoLink {
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: var(--ifm-font-family-monospace);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  background: rgba(255, 0, 0, 0.08);
+  color: #c0392b;
+  text-decoration: none;
+  border: 1px solid rgba(192, 57, 43, 0.25);
+  transition: all 0.12s;
+}
+
+.videoLink:hover {
+  background: rgba(255, 0, 0, 0.18);
+  text-decoration: none;
+  color: #c0392b;
+}
+
+.addBtn {
+  flex: 1;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--goose-accent);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--goose-accent);
+  font-weight: 800;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.addBtn:hover:not(:disabled) {
+  background: var(--goose-accent);
+  color: #fff;
+}
+
+.addBtn:disabled {
+  border-color: #2ecc71;
+  color: #2ecc71;
+  cursor: default;
+}
+
+.cardPicked .addBtn {
+  border-color: #2ecc71;
   color: #2ecc71;
 }
 

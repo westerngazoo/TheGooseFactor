@@ -364,6 +364,28 @@
   opacity: 0.85;
 }
 
+.videoLink {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: var(--ifm-font-family-monospace);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  background: rgba(255, 0, 0, 0.08);
+  color: #c0392b;
+  text-decoration: none;
+  border: 1px solid rgba(192, 57, 43, 0.25);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.videoLink:hover {
+  background: rgba(255, 0, 0, 0.18);
+  text-decoration: none;
+  color: #c0392b;
+}
+
 /* ─── Totals ─── */
 .totalsRow {
   display: flex;

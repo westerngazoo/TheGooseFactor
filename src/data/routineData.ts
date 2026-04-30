@@ -479,6 +479,30 @@ const PHASED_ADDITIONS: FlatExercise[] = [
   {name: 'Band Dislocates', category: 'isolation', primary: ['shoulder'], sets: '2', reps: '10', notes: 'Shoulder mobility before pressing.', phases: ['warmup'], equipment: ['band']},
   {name: 'Cat-Cow', category: 'isolation', primary: ['core'], secondary: ['back'], sets: '2', reps: '8', notes: 'Spinal mobility.', phases: ['warmup'], equipment: ['bodyweight']},
 
+  // ─── Strength circuits (Phase 1, heavier) ───
+  {name: 'Barbell Complex (5/5/5/5/5)', category: 'metabolic', primary: ['quad', 'shoulder', 'back'], secondary: ['posterior', 'core', 'biceps'], compound: true, sets: '5', reps: '5 each', notes: 'Deadlift / row / clean / front squat / push press, 5 reps each unbroken. 90s rest between rounds.', phases: ['warmup'], equipment: ['barbell']},
+  {name: 'DB Strength Circuit', category: 'metabolic', primary: ['shoulder', 'quad', 'back'], secondary: ['posterior', 'core', 'biceps'], compound: true, sets: '4', reps: '8 each', notes: 'Squat / row / push press / RDL / curl. 60s rest between rounds.', phases: ['warmup'], equipment: ['dumbbell']},
+  {name: 'KB Strength Circuit', category: 'metabolic', primary: ['posterior', 'shoulder'], secondary: ['back', 'core', 'quad'], compound: true, sets: '4', reps: '10 each', notes: 'Swing / goblet squat / press / row / clean. 60s rest.', phases: ['warmup'], equipment: ['kettlebell']},
+  {name: 'Push-Pull AMRAP', category: 'metabolic', primary: ['chest', 'back'], secondary: ['triceps', 'biceps', 'shoulder', 'core'], compound: true, sets: '1', reps: '12 min AMRAP', notes: '5 pull-ups + 10 push-ups + 15 squats. As many rounds as possible.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Cindy (CrossFit)', category: 'metabolic', primary: ['chest', 'back', 'quad'], secondary: ['triceps', 'biceps', 'core', 'posterior'], compound: true, sets: '1', reps: '20 min AMRAP', notes: '5 pull-ups + 10 push-ups + 15 air squats per round. Classic benchmark.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Chelsea (EMOM)', category: 'metabolic', primary: ['chest', 'back', 'quad'], secondary: ['triceps', 'core'], compound: true, sets: '30', reps: 'EMOM 30 min', notes: '5 pull-ups + 10 push-ups + 15 air squats every minute on the minute.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Fran (21-15-9)', category: 'metabolic', primary: ['quad', 'shoulder', 'back'], secondary: ['posterior', 'core', 'triceps'], compound: true, sets: '1', reps: '21-15-9', notes: 'Thrusters + pull-ups, 21 of each, then 15, then 9. For time.', phases: ['warmup'], equipment: ['barbell']},
+  {name: 'Death by Burpees', category: 'metabolic', primary: ['chest', 'quad'], secondary: ['core', 'shoulder', 'triceps'], compound: true, sets: '1', reps: 'EMOM ladder', notes: '1 burpee min 1, 2 min 2, 3 min 3… until you fail. Brutal.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Squat EMOM', category: 'metabolic', primary: ['quad'], secondary: ['posterior', 'core'], compound: true, sets: '10', reps: 'EMOM 5 reps', notes: '5 reps every minute on the minute, 10 min. 60-70% 1RM.', primarySub: ['vastus_lateralis', 'rectus_femoris'], phases: ['warmup'], equipment: ['barbell']},
+  {name: 'Deadlift EMOM', category: 'metabolic', primary: ['posterior', 'back'], secondary: ['traps', 'forearms', 'core'], compound: true, sets: '10', reps: 'EMOM 3 reps', notes: '3 reps every minute, 10 min. 65-75% 1RM. Technique focus.', primarySub: ['glute_max', 'hams_bf', 'erectors'], phases: ['warmup'], equipment: ['barbell']},
+  {name: 'Bench Press EMOM', category: 'metabolic', primary: ['chest'], secondary: ['triceps', 'shoulder'], compound: true, sets: '10', reps: 'EMOM 5 reps', notes: '5 reps every minute, 10 min. 60% 1RM.', primarySub: ['chest_mid'], phases: ['warmup'], equipment: ['barbell']},
+  {name: 'OHP EMOM', category: 'metabolic', primary: ['shoulder'], secondary: ['triceps', 'core'], compound: true, sets: '10', reps: 'EMOM 5 reps', notes: '5 reps every minute, 10 min. 60% 1RM. Strict press.', primarySub: ['delt_front'], phases: ['warmup'], equipment: ['barbell']},
+  {name: 'Pull-Up Ladder', category: 'metabolic', primary: ['back'], secondary: ['biceps', 'forearms', 'core'], compound: true, sets: '1', reps: '1→2→3…', notes: 'Climb the ladder. 1 rep, rest, 2 reps, rest, etc. until failure.', primarySub: ['lats'], phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Tabata Squats', category: 'metabolic', primary: ['quad'], secondary: ['posterior', 'core', 'calves'], compound: true, sets: '8', reps: '20s on / 10s off', notes: '8 rounds × 4 min total. Body-weight or light DB.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Tabata KB Swings', category: 'metabolic', primary: ['posterior'], secondary: ['core', 'shoulder', 'forearms'], compound: true, sets: '8', reps: '20s on / 10s off', notes: '8 rounds × 4 min. Conditioning.', phases: ['warmup'], equipment: ['kettlebell']},
+  {name: '5-Station Strength Circuit', category: 'metabolic', primary: ['chest', 'back', 'quad'], secondary: ['shoulder', 'core', 'posterior'], compound: true, sets: '3', reps: '60s each', notes: 'Bench / Row / Squat / OHP / Deadlift. 60s work, 30s transition. 3 rounds.', phases: ['warmup'], equipment: ['barbell']},
+  {name: 'Renegade Row Circuit', category: 'metabolic', primary: ['back', 'core'], secondary: ['chest', 'shoulder', 'biceps'], compound: true, sets: '4', reps: '8 each', notes: 'Push-up + row L + row R + plank → 8 rounds.', primarySub: ['lats', 'rhomboids', 'abs_upper'], phases: ['warmup'], equipment: ['dumbbell']},
+  {name: 'Sled Push + Pull-Up', category: 'metabolic', primary: ['quad', 'back'], secondary: ['posterior', 'core', 'biceps'], compound: true, sets: '5', reps: '20m + 5', notes: 'Sled push 20m, then 5 pull-ups, repeat 5 rounds.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Farmer Carry + Jump Squat', category: 'metabolic', primary: ['forearms', 'quad'], secondary: ['traps', 'core', 'posterior'], compound: true, sets: '4', reps: '30m + 10', notes: '30m heavy farmer carry, 10 jump squats, 60s rest.', phases: ['warmup'], equipment: ['dumbbell']},
+  {name: 'Thruster Ladder', category: 'metabolic', primary: ['quad', 'shoulder'], secondary: ['posterior', 'core', 'triceps'], compound: true, sets: '1', reps: '10→8→6→4→2', notes: 'Descending rep ladder. 60s rest between sets. Light-moderate DBs.', phases: ['warmup'], equipment: ['dumbbell']},
+  {name: 'Bear Complex (heavy)', category: 'metabolic', primary: ['quad', 'shoulder', 'back'], secondary: ['posterior', 'core'], compound: true, sets: '5', reps: '7 rounds', notes: 'Power clean → front squat → push press → back squat → push press behind neck. 5 sets × 7 unbroken rounds.', phases: ['warmup'], equipment: ['barbell']},
+  {name: '100 Rep Challenge', category: 'metabolic', primary: ['chest'], secondary: ['triceps', 'shoulder'], compound: true, sets: '1', reps: '100 reps', notes: 'Pick a lift (push-ups, bench at light load, squats, etc.). 100 total reps as fast as possible.', phases: ['warmup'], equipment: ['bodyweight']},
+
   // ─── Multi-joint complete flows (Phase 2) ───
   {name: 'DB Clean & Press', category: 'metabolic', primary: ['shoulder', 'posterior'], secondary: ['back', 'quad', 'core'], compound: true, sets: '4', reps: '8-10', notes: 'Per side. Full body. Pattern: pull from floor, press overhead.', primarySub: ['delt_front', 'glute_max'], phases: ['multijoint'], equipment: ['dumbbell']},
   {name: 'DB Snatch', category: 'metabolic', primary: ['shoulder', 'posterior'], secondary: ['back', 'core', 'traps'], compound: true, sets: '4', reps: '6-8', notes: 'Single DB ground-to-overhead in one move.', primarySub: ['delt_front', 'glute_max', 'hams_bf'], phases: ['multijoint'], equipment: ['dumbbell']},
@@ -735,6 +759,14 @@ export const ALL_EXERCISES: FlatExercise[] = (() => {
 /** All exercises that fit a given phase. */
 export function exercisesForPhase(phase: Phase): FlatExercise[] {
   return ALL_EXERCISES.filter((e) => e.phases?.includes(phase));
+}
+
+/** YouTube search URL for an exercise demo. Top result is almost always a
+ *  reputable form/tutorial video. Reliable across all 150+ exercises without
+ *  hand-curating links that can go 404. */
+export function exerciseVideoUrl(name: string): string {
+  const q = encodeURIComponent(`${name} exercise form tutorial`);
+  return `https://www.youtube.com/results?search_query=${q}`;
 }
 
 /** All exercises for a given (group, category) — includes compounds where the group
