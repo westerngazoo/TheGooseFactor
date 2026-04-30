@@ -281,6 +281,17 @@
   margin-bottom: 0.75rem;
 }
 
+.searchInput {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  margin-top: 0.25rem;
+}
+
 .exAddTag,
 .exPickedTag {
   grid-column: 2;

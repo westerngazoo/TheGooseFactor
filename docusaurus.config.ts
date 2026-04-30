@@ -60,6 +60,9 @@ const config: Config = {
   customFields: {
     supabaseUrl: process.env.SUPABASE_URL ?? '',
     supabaseAnonKey: process.env.SUPABASE_ANON_KEY ?? '',
+    // USDA FoodData Central API key (https://api.data.gov/signup/).
+    // Falls back to DEMO_KEY which works but is rate-limited ~30 req/hr/IP.
+    usdaApiKey: process.env.USDA_API_KEY ?? 'DEMO_KEY',
   },
   presets: [
     [

@@ -14,6 +14,7 @@ import {
   CATEGORY_PURPOSE,
   exercisesFor,
   exerciseVideoUrl,
+  ALL_EXERCISES,
 } from '../../data/routineData';
 import MuscleMap, {
   activationFor,
@@ -76,6 +77,7 @@ export default function SessionBuilder(): ReactNode {
   const [nextId, setNextId] = useState(1);
   const [selGroup, setSelGroup] = useState<MuscleGroup>('chest');
   const [selCategory, setSelCategory] = useState<ExerciseCategory>('strength');
+  const [exSearch, setExSearch] = useState('');
 
   const addExercise = useCallback((exercise: Exercise) => {
     setPicks((prev) => [
@@ -107,7 +109,11 @@ export default function SessionBuilder(): ReactNode {
   }, []);
 
   const warnings = useMemo(() => validateSession(picks), [picks]);
-  const availableExercises = useMemo(() => exercisesFor(selGroup, selCategory), [selGroup, selCategory]);
+  const availableExercises = useMemo(() => {
+    const q = exSearch.trim().toLowerCase();
+    if (q) return ALL_EXERCISES.filter((e) => e.name.toLowerCase().includes(q));
+    return exercisesFor(selGroup, selCategory);
+  }, [selGroup, selCategory, exSearch]);
   const pickedNames = new Set(
     picks.filter((p) => p.group === selGroup && p.category === selCategory).map((p) => p.exercise.name)
   );
@@ -172,9 +178,22 @@ export default function SessionBuilder(): ReactNode {
             </div>
 
             <div className={styles.pickerField}>
+              <label className={styles.fieldLabel}>Search any exercise</label>
+              <input
+                type="text"
+                className={styles.searchInput}
+                placeholder="Type to search the full library — clear to filter by group/category"
+                value={exSearch}
+                onChange={(e) => setExSearch(e.target.value)}
+              />
+            </div>
+
+            <div className={styles.pickerField}>
               <div className={styles.availableHeader}>
                 <label className={styles.fieldLabel}>
-                  {GROUP_LABELS[selGroup]} · {CATEGORY_LABELS[selCategory]}
+                  {exSearch.trim()
+                    ? `Search: "${exSearch.trim()}"`
+                    : `${GROUP_LABELS[selGroup]} · ${CATEGORY_LABELS[selCategory]}`}
                 </label>
                 <span className={styles.availableCount}>{availableExercises.length} exercises</span>
               </div>

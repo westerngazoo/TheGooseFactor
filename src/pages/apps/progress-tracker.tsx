@@ -41,6 +41,7 @@ import MuscleMap, {
   activationFor,
   mergeActivations,
 } from '../../components/MuscleMap';
+import {searchFoods, scaleMacros, type FoodResult} from '../../lib/nutrition';
 
 /* ══════════════════════════════════════════
    PROGRESS TRACKER
@@ -228,6 +229,7 @@ function ProgressTrackerApp(): ReactNode {
           userId={userId!}
           entries={dietEntries}
           reload={reload}
+          usdaApiKey={fields.usdaApiKey || 'DEMO_KEY'}
         />
       )}
       {tab === 'body' && (
@@ -588,12 +590,13 @@ function WorkoutTab({
    DIET TAB
    ═══════════════════════════════════════════════════════════ */
 function DietTab({
-  supabase, userId, entries, reload,
+  supabase, userId, entries, reload, usdaApiKey,
 }: {
   supabase: any;
   userId: string;
   entries: DietEntry[];
   reload: () => Promise<void>;
+  usdaApiKey: string;
 }): ReactNode {
   const [foodName, setFoodName] = useState('');
   const [meal, setMeal] = useState('main');
@@ -602,6 +605,53 @@ function DietTab({
   const [protein, setProtein] = useState('');
   const [carbs, setCarbs] = useState('');
   const [fat, setFat] = useState('');
+
+  // ─── USDA nutrition lookup ───
+  const [lookupQuery, setLookupQuery] = useState('');
+  const [lookupResults, setLookupResults] = useState<FoodResult[]>([]);
+  const [lookupBusy, setLookupBusy] = useState(false);
+  const [lookupErr, setLookupErr] = useState<string | null>(null);
+  const [chosen, setChosen] = useState<FoodResult | null>(null);
+
+  const runLookup = async () => {
+    const q = lookupQuery.trim();
+    if (!q) return;
+    setLookupBusy(true); setLookupErr(null); setLookupResults([]);
+    try {
+      const results = await searchFoods(q, usdaApiKey, 10);
+      setLookupResults(results);
+      if (results.length === 0) setLookupErr('No matches in the USDA database.');
+    } catch (e: any) {
+      setLookupErr(e?.message ?? 'Lookup failed.');
+    } finally {
+      setLookupBusy(false);
+    }
+  };
+
+  const pickFood = (f: FoodResult) => {
+    setChosen(f);
+    setFoodName(f.description);
+    // If grams already entered, recompute now; else default to 100g
+    const g = parseFloat(grams) || 100;
+    if (!grams) setGrams('100');
+    const m = scaleMacros(f.per100g, g);
+    setCalories(String(Math.round(m.kcal)));
+    setProtein(m.protein_g.toFixed(1));
+    setCarbs(m.carbs_g.toFixed(1));
+    setFat(m.fat_g.toFixed(1));
+  };
+
+  // Re-scale macros when user edits grams *after* picking a food
+  useEffect(() => {
+    if (!chosen) return;
+    const g = parseFloat(grams);
+    if (isNaN(g)) return;
+    const m = scaleMacros(chosen.per100g, g);
+    setCalories(String(Math.round(m.kcal)));
+    setProtein(m.protein_g.toFixed(1));
+    setCarbs(m.carbs_g.toFixed(1));
+    setFat(m.fat_g.toFixed(1));
+  }, [grams, chosen]);
 
   const addEntry = async () => {
     if (!foodName.trim()) { alert('Food name required.'); return; }
@@ -618,6 +668,7 @@ function DietTab({
     });
     if (error) { alert(error.message); return; }
     setFoodName(''); setGrams(''); setCalories(''); setProtein(''); setCarbs(''); setFat('');
+    setChosen(null); setLookupResults([]); setLookupQuery('');
     await reload();
   };
 
@@ -639,6 +690,57 @@ function DietTab({
   return (
     <div className={styles.card}>
       <Heading as="h3">Log a food</Heading>
+
+      {/* ─── USDA nutrition lookup ─── */}
+      <div className={styles.lookupBox}>
+        <div className={styles.lookupRow}>
+          <input
+            type="text"
+            className={styles.lookupInput}
+            placeholder="Search USDA nutrition (e.g. chicken breast, jasmine rice, broccoli)"
+            value={lookupQuery}
+            onChange={(e) => setLookupQuery(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); runLookup(); } }}
+          />
+          <button
+            type="button"
+            className={styles.lookupBtn}
+            onClick={runLookup}
+            disabled={lookupBusy || !lookupQuery.trim()}
+          >
+            {lookupBusy ? 'Searching…' : 'Search'}
+          </button>
+        </div>
+        {lookupErr && <div className={styles.lookupErr}>{lookupErr}</div>}
+        {lookupResults.length > 0 && (
+          <div className={styles.lookupResults}>
+            {lookupResults.map((r) => (
+              <button
+                key={r.fdcId}
+                type="button"
+                className={`${styles.lookupItem} ${chosen?.fdcId === r.fdcId ? styles.lookupItemPicked : ''}`}
+                onClick={() => pickFood(r)}
+                title={`Click to fill the form. Per 100g: ${Math.round(r.per100g.kcal)} kcal · ${r.per100g.protein_g.toFixed(1)}g P / ${r.per100g.carbs_g.toFixed(1)}g C / ${r.per100g.fat_g.toFixed(1)}g F`}
+              >
+                <span className={styles.lookupName}>{r.description}</span>
+                <span className={styles.lookupMeta}>
+                  {Math.round(r.per100g.kcal)} kcal ·
+                  {' '}P {r.per100g.protein_g.toFixed(1)}
+                  {' '}C {r.per100g.carbs_g.toFixed(1)}
+                  {' '}F {r.per100g.fat_g.toFixed(1)}
+                  {' '}<span className={styles.lookupPer100}>/100g</span>
+                </span>
+              </button>
+            ))}
+          </div>
+        )}
+        {chosen && (
+          <div className={styles.lookupHint}>
+            ✓ <strong>{chosen.description}</strong> — change grams below to rescale macros automatically.
+          </div>
+        )}
+      </div>
+
       <div className={styles.formGrid}>
         <label className={styles.colSpan2}>
           <span>Food</span>
