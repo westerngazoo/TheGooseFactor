@@ -388,6 +388,16 @@
   color: var(--ifm-font-color-base);
 }
 
+.lookupSource {
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  white-space: nowrap;
+}
+
 .lookupBtn {
   padding: 0.5rem 1rem;
   background: var(--goose-accent);
@@ -398,6 +408,29 @@
   font-size: 0.85rem;
   cursor: pointer;
   white-space: nowrap;
+}
+
+.sourceBadgeUsda,
+.sourceBadgeOff {
+  display: inline-block;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 0.05rem 0.35rem;
+  border-radius: 3px;
+  margin-right: 0.25rem;
+  vertical-align: middle;
+}
+
+.sourceBadgeUsda {
+  background: rgba(46, 204, 113, 0.18);
+  color: #2ecc71;
+}
+
+.sourceBadgeOff {
+  background: rgba(155, 89, 182, 0.18);
+  color: #9b59b6;
 }
 
 .lookupBtn:hover:not(:disabled) {

@@ -41,7 +41,7 @@ import MuscleMap, {
   activationFor,
   mergeActivations,
 } from '../../components/MuscleMap';
-import {searchFoods, scaleMacros, type FoodResult} from '../../lib/nutrition';
+import {searchNutrition, scaleMacros, type FoodResult, type NutritionSource} from '../../lib/nutrition';
 
 /* ══════════════════════════════════════════
    PROGRESS TRACKER
@@ -606,21 +606,22 @@ function DietTab({
   const [carbs, setCarbs] = useState('');
   const [fat, setFat] = useState('');
 
-  // ─── USDA nutrition lookup ───
+  // ─── Nutrition lookup (USDA + Open Food Facts) ───
   const [lookupQuery, setLookupQuery] = useState('');
   const [lookupResults, setLookupResults] = useState<FoodResult[]>([]);
   const [lookupBusy, setLookupBusy] = useState(false);
   const [lookupErr, setLookupErr] = useState<string | null>(null);
   const [chosen, setChosen] = useState<FoodResult | null>(null);
+  const [source, setSource] = useState<NutritionSource>('both');
 
   const runLookup = async () => {
     const q = lookupQuery.trim();
     if (!q) return;
     setLookupBusy(true); setLookupErr(null); setLookupResults([]);
     try {
-      const results = await searchFoods(q, usdaApiKey, 10);
+      const results = await searchNutrition(q, source, usdaApiKey, 10);
       setLookupResults(results);
-      if (results.length === 0) setLookupErr('No matches in the USDA database.');
+      if (results.length === 0) setLookupErr('No matches found.');
     } catch (e: any) {
       setLookupErr(e?.message ?? 'Lookup failed.');
     } finally {
@@ -691,17 +692,27 @@ function DietTab({
     <div className={styles.card}>
       <Heading as="h3">Log a food</Heading>
 
-      {/* ─── USDA nutrition lookup ─── */}
+      {/* ─── Nutrition lookup (USDA + Open Food Facts) ─── */}
       <div className={styles.lookupBox}>
         <div className={styles.lookupRow}>
           <input
             type="text"
             className={styles.lookupInput}
-            placeholder="Search USDA nutrition (e.g. chicken breast, jasmine rice, broccoli)"
+            placeholder="Search nutrition — chicken breast, oats, Quaker, Lala, Snickers…"
             value={lookupQuery}
             onChange={(e) => setLookupQuery(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); runLookup(); } }}
           />
+          <select
+            className={styles.lookupSource}
+            value={source}
+            onChange={(e) => setSource(e.target.value as NutritionSource)}
+            title="Pick which database to search"
+          >
+            <option value="both">Both</option>
+            <option value="usda">USDA (whole foods)</option>
+            <option value="off">Open Food Facts (branded)</option>
+          </select>
           <button
             type="button"
             className={styles.lookupBtn}
@@ -714,24 +725,32 @@ function DietTab({
         {lookupErr && <div className={styles.lookupErr}>{lookupErr}</div>}
         {lookupResults.length > 0 && (
           <div className={styles.lookupResults}>
-            {lookupResults.map((r) => (
-              <button
-                key={r.fdcId}
-                type="button"
-                className={`${styles.lookupItem} ${chosen?.fdcId === r.fdcId ? styles.lookupItemPicked : ''}`}
-                onClick={() => pickFood(r)}
-                title={`Click to fill the form. Per 100g: ${Math.round(r.per100g.kcal)} kcal · ${r.per100g.protein_g.toFixed(1)}g P / ${r.per100g.carbs_g.toFixed(1)}g C / ${r.per100g.fat_g.toFixed(1)}g F`}
-              >
-                <span className={styles.lookupName}>{r.description}</span>
-                <span className={styles.lookupMeta}>
-                  {Math.round(r.per100g.kcal)} kcal ·
-                  {' '}P {r.per100g.protein_g.toFixed(1)}
-                  {' '}C {r.per100g.carbs_g.toFixed(1)}
-                  {' '}F {r.per100g.fat_g.toFixed(1)}
-                  {' '}<span className={styles.lookupPer100}>/100g</span>
-                </span>
-              </button>
-            ))}
+            {lookupResults.map((r, i) => {
+              const isOff = r.dataType === 'OpenFoodFacts';
+              return (
+                <button
+                  key={`${r.dataType}-${r.fdcId || i}`}
+                  type="button"
+                  className={`${styles.lookupItem} ${chosen?.description === r.description ? styles.lookupItemPicked : ''}`}
+                  onClick={() => pickFood(r)}
+                  title={`Click to fill the form. Per 100g: ${Math.round(r.per100g.kcal)} kcal · ${r.per100g.protein_g.toFixed(1)}g P / ${r.per100g.carbs_g.toFixed(1)}g C / ${r.per100g.fat_g.toFixed(1)}g F`}
+                >
+                  <span className={styles.lookupName}>
+                    <span className={isOff ? styles.sourceBadgeOff : styles.sourceBadgeUsda}>
+                      {isOff ? 'OFF' : 'USDA'}
+                    </span>
+                    {' '}{r.description}
+                  </span>
+                  <span className={styles.lookupMeta}>
+                    {Math.round(r.per100g.kcal)} kcal ·
+                    {' '}P {r.per100g.protein_g.toFixed(1)}
+                    {' '}C {r.per100g.carbs_g.toFixed(1)}
+                    {' '}F {r.per100g.fat_g.toFixed(1)}
+                    {' '}<span className={styles.lookupPer100}>/100g</span>
+                  </span>
+                </button>
+              );
+            })}
           </div>
         )}
         {chosen && (
