@@ -1,0 +1,10 @@
+{
+  "label": "Part I: Foundations",
+  "position": 5,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "What an algorithm is, what Big-O actually says, and the cost model of C."
+  }
+}

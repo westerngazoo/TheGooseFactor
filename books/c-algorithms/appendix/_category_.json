@@ -1,0 +1,10 @@
+{
+  "label": "Appendix",
+  "position": 99,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "Reference material: the C23 standard, build setup, and math foundations."
+  }
+}

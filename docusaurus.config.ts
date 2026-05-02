@@ -27,6 +27,7 @@ const books = [
   {id: 'goose-os',           path: 'books/goose-os',           routeBasePath: 'goose-os',          label: 'GooseOS'},
   {id: 'geometric-algebra',  path: 'books/geometric-algebra',  routeBasePath: 'geometric-algebra', label: 'Geometric Algebra'},
   {id: 'os-compared',        path: 'books/os-compared',        routeBasePath: 'os-compared',       label: 'OS Compared'},
+  {id: 'c-algorithms',       path: 'books/c-algorithms',       routeBasePath: 'c-algorithms',      label: 'C Algorithms'},
 ];
 
 const defaultBook = books[0];
