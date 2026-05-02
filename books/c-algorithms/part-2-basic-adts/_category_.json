@@ -1,0 +1,10 @@
+{
+  "label": "Part II: Basic ADTs",
+  "position": 10,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "Stack, queue, deque, linked lists, hash tables — the everyday abstract data types and their honest C implementations."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "label": "Part III: Trees",
+  "position": 15,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "Binary trees, BSTs, AVL, Red-Black, B-trees, heaps, and tries — with rotations, invariants, and worked deletes."
+  }
+}
