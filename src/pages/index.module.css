@@ -208,3 +208,77 @@
   outline: 2px solid var(--goose-accent,#19b3c4);
   outline-offset: 2px;
 }
+
+/* ──────────────────────────────────────────────────────────── */
+/* Books menu section — grid of all books on the front page.   */
+/* ──────────────────────────────────────────────────────────── */
+.booksSection {
+  padding: 3rem 0 2.5rem;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at top, rgba(25,179,196,0.07) 0%, rgba(25,179,196,0) 70%),
+    transparent;
+  border-top: 1px solid rgba(73,210,230,0.15);
+  border-bottom: 1px solid rgba(73,210,230,0.15);
+}
+
+.booksTitle {
+  font-family: var(--ifm-font-family-monospace, 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', monospace);
+  font-weight: 700;
+  letter-spacing: 0.18ch;
+  text-transform: uppercase;
+  background: linear-gradient(100deg,#e8fbff 0%,#9ef2ff 30%,#49d2e6 60%,#19b3c4 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 5px rgba(73,210,230,0.35));
+  margin-bottom: 0.4rem;
+  font-size: 2rem;
+}
+
+.booksSubtitle {
+  color: var(--ifm-color-emphasis-700);
+  font-style: italic;
+  margin-bottom: 1.6rem;
+}
+
+.booksGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.8rem;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.bookButton {
+  background: linear-gradient(145deg,#5a626b,#494f56 55%,#3b4046);
+  color: #f2f5f7;
+  border: 1px solid #3e444a;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.04) inset;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  padding: 0.85rem 0.6rem;
+  transition: background .2s ease, transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+  text-align: center;
+  font-size: 0.95rem;
+}
+.bookButton:hover {
+  background: linear-gradient(145deg,#646d77,#535b63 55%,#444a51);
+  border-color: var(--goose-accent,#19b3c4);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3), 0 0 8px rgba(25,179,196,0.25);
+  text-decoration: none;
+  color: #f2f5f7;
+}
+.bookButton:active {
+  transform: translateY(2px);
+}
+.bookButton:focus-visible {
+  outline: 2px solid var(--goose-accent,#19b3c4);
+  outline-offset: 2px;
+}
+
+@media (max-width: 680px) {
+  .booksTitle { font-size: 1.5rem; }
+  .booksGrid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.5rem; }
+  .bookButton { font-size: 0.85rem; padding: 0.7rem 0.5rem; }
+}
