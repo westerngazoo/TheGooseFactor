@@ -881,31 +881,121 @@ const SCIENTIFIC_ADDITIONS: FlatExercise[] = [
 ];
 
 /** Infer equipment from an exercise name. Used as a fallback for legacy
- *  entries that didn't declare equipment explicitly. */
+ *  entries that didn't declare equipment explicitly. Uses simple
+ *  substring matching for robustness (no regex slash issues). */
 type Equipment = NonNullable<Exercise['equipment']>[number];
 function inferEquipment(name: string): Equipment[] | undefined {
   const n = name.toLowerCase();
+  const has = (s: string) => n.includes(s);
+  const hasAny = (...ss: string[]) => ss.some(has);
   const out = new Set<Equipment>();
-  if (/\b(barbell|smith|t-bar|trap.bar|trap bar|landmine|axle|log|bear complex|fran|emom|^ez |[ \(]ez bar| ez curl| ez skull|good morning|deadlift|squat|bench press|press|pull|row|clean|snatch|jerk|thruster|complex|atlas)\b/.test(n)
-      && !/\b(db|dumbbell|kb|kettlebell|cable|machine|bodyweight|push.up|pull.up|chin.up|dip|trx)\b/.test(n)) {
-    out.add('barbell');
+
+  // ─── Bodyweight / calisthenics / mobility / mat work ───
+  // Check FIRST so explicit-bodyweight names don't get swept into 'barbell'.
+  if (
+    hasAny(
+      'push-up', 'push up', 'pushup',
+      'pull-up', 'pull up', 'pullup',
+      'chin-up', 'chin up', 'chinup',
+      'muscle-up', 'muscle up',
+      'plank', 'bird dog', 'cat-cow', 'cat cow',
+      'burpee', 'inchworm', 'bear crawl', 'crab walk',
+      'bodyweight', '(bw)', '(light)',
+      'sit-up', 'sit up', 'situp',
+      'hollow', 'hanging', 'dragon flag',
+      'pistol', 'shrimp', 'cossack',
+      'jumping jack', 'high knee', 'butt kick',
+      'mountain climber', 'skater', 'tuck jump',
+      'broad jump', 'jump squat', 'jump lunge',
+      'airplane', "world's greatest", 'world s greatest',
+      'cindy', 'chelsea', 'fran',
+      'nordic', 'copenhagen', 'clamshell', 'frog',
+      'dead bug', 'curl-up', 'curl up', 'side plank',
+      'scapular pull', 'scapular push', 'wall slide',
+      'y-t-w', '90/90', 'couch stretch', 'thread the needle',
+      'tibialis', 'atg split squat', 'patrick step',
+      'reverse nordic', 'kot', 'death by',
+      '100 rep', 'pull-up ladder', 'tabata squats',
+      'air squat', 'bodyweight squat',
+      'bench dip', 'dead hang',
+      'walking lunge (bw)', 'reverse lunge (bw)',
+      'walking lunge (light)', 'walking lunges (light)',
+      'lateral lunge', 'lateral bound', 'pogo',
+    )
+  ) out.add('bodyweight');
+
+  // ─── TRX ───
+  if (has('trx')) out.add('bodyweight');
+
+  // ─── Bands / monster walks / pull-aparts / dislocates ───
+  if (hasAny('band ', '(band)', 'monster walk', 'pull-apart', 'pull apart', 'dislocate')) out.add('band');
+
+  // ─── Box / step ups ───
+  if (hasAny('box jump', 'depth jump', 'step-up', 'step up')) out.add('box');
+
+  // ─── Cable ───
+  if (has('cable')) out.add('cable');
+
+  // ─── Machine ───
+  if (
+    hasAny(
+      'machine', 'hack squat', 'leg press', 'pec deck',
+      'lat pulldown', 'pulldown', 'seated cable',
+      'leg curl', 'leg extension', 'hyperextension',
+      'reverse hyper', 'hip thrust', 'preacher curl',
+      'chest-supported', 'chest supported',
+      'hammer strength', 'pendulum', 'belt squat',
+      'reverse pec deck', 'smith ', 'smith machine',
+    )
+  ) out.add('machine');
+
+  // ─── Kettlebell ───
+  if (
+    hasAny(
+      'kettlebell', 'kb ', ' kb ', '(kb)',
+      'goblet', 'turkish get-up', 'farmer',
+      'halo', 'windmill', 'kb swing',
+    )
+  ) out.add('kettlebell');
+
+  // ─── Dumbbell ───
+  if (hasAny('dumbbell', 'db ', '(db)', ' db-')) out.add('dumbbell');
+
+  // ─── Barbell (last so it doesn't sweep DB/KB/etc.) ───
+  if (
+    hasAny(
+      'barbell', 'bb ', 'ez bar', 'ez curl', 'ez skull',
+      't-bar', 'trap bar', 'trap-bar', 'landmine',
+      'log press', 'log clean', 'axle',
+      'good morning', 'deadlift', 'squat',
+      'bench press', 'incline barbell', 'pendlay',
+      'yates', 'meadows', 'seal row',
+      'overhead press', 'push press', 'push jerk', 'split jerk',
+      'clean and press', 'clean & jerk', 'snatch',
+      'power clean', 'hang clean', 'squat clean',
+      'snatch pull', 'clean pull', 'snatch balance',
+      'overhead squat', 'rack pull', 'block pull',
+      'thrusters', 'thruster', 'plate pinch',
+      'high pull', 'shrug', 'pin press', 'pin squat',
+      'reverse-band', 'wide-grip bench', 'paused bench',
+      'floor press', 'spoto press', 'close-grip bench',
+      'weighted dip', 'weighted pull', 'weighted chin',
+      'front squat', 'back squat', 'box squat', 'safety bar',
+      'zercher', 'sumo deadlift', 'romanian deadlift',
+      'deficit deadlift', 'pause deadlift',
+      'bear complex', 'barbell complex',
+    )
+  ) {
+    // Only tag barbell if no more-specific equipment already claimed it.
+    if (!out.has('dumbbell') && !out.has('kettlebell') && !out.has('cable') && !out.has('machine') && !out.has('bodyweight')) {
+      out.add('barbell');
+    }
   }
-  if (/\b(barbell|^bb |bb |ez bar|ez curl|ez skull|smith|trap.bar|trap bar|t-bar|landmine|log press|axle)\b/.test(n)) out.add('barbell');
-  if (/\b(dumbbell|^db | db | db$|^db-)\b/.test(n)) out.add('dumbbell');
-  if (/\b(kettlebell|^kb | kb |kb$|kb-|goblet|farmer)\b/.test(n)) out.add('kettlebell');
-  if (/\bcable\b/.test(n)) out.add('cable');
-  if (/\b(machine|hack squat|leg press|pec deck|lat pulldown|seated cable row|leg curl|leg extension|hyperextension|reverse hyper|hip thrust|preacher curl|chest-supported|hammer strength|pendulum)\b/.test(n)) out.add('machine');
-  if (/\b(push.up|pull.up|chin.up|muscle.up|plank|bird dog|cat.cow|burpee|inchworm|bear crawl|crab walk|bodyweight|sit.up|hollow|hanging|dragon flag|pistol|shrimp|jumping jack|high knee|butt kick|mountain climber|skater|tuck jump|broad jump|jump squat|jump lunge|airplane|world|cossack|cindy|chelsea|nordic|copenhagen|clamshell|frog|dead bug|curl-up|side plank|scapular|wall slide|y-t-w|90/90|couch stretch|thread the needle|tibialis|atg)\b/.test(n)) out.add('bodyweight');
-  if (/\bband|monster walk|pull.apart|dislocates\b/.test(n)) out.add('band');
-  if (/\b(box jump|depth jump|step.up|patrick step)\b/.test(n)) out.add('box');
-  if (/\btrx\b/.test(n)) out.add('bodyweight');
-  if (/\bdips?\b/.test(n)) out.add('bodyweight');
-  if (/\b(kb dip|tabata)\b/.test(n) === false && /\bdip\b/.test(n)) out.add('bodyweight');
-  if (/\b(plate|kb halo|kb windmill|kb swing)\b/.test(n)) out.add('kettlebell');
-  // Plate exercises like Plate Pinch
-  if (/\bplate pinch\b/.test(n)) out.add('barbell');
-  // Sled / strongman implements get implicitly tagged via 'machine' or no tag
-  if (/\b(sled|tire flip|stone|husafell|sandbag)\b/.test(n)) {} // intentionally no tag — gym implement
+
+  // ─── Sled / tire / atlas stone / sandbag = no tag (specialty implements) ───
+  // Intentionally not tagged so user can leave equipment filter open
+  // and these still appear, OR filter to a specific tag and they're hidden.
+
   return out.size ? Array.from(out) : undefined;
 }
 
