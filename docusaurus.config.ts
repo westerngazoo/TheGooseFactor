@@ -49,7 +49,7 @@ const config: Config = {
   tagline: 'Code, Writing, and Open Source Flight',
   favicon: 'img/goosefactorcloseup.png',
   future: { v4: true },
-  url: 'https://thegoosefactor.netlify.app',
+  url: 'https://the-goose-factor.netlify.app',
   baseUrl: '/',
   trailingSlash: false,
   organizationName: 'westerngazoo',
