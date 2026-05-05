@@ -880,13 +880,41 @@ const SCIENTIFIC_ADDITIONS: FlatExercise[] = [
   {name: 'TRX Hamstring Curl', category: 'hypertrophy', primary: ['posterior'], secondary: ['core'], compound: true, sets: '3', reps: '10-12', notes: 'Heels in straps, curl in. Hamstring strength + glute activation.', primarySub: ['hams_bf', 'glute_max'], phases: ['medium'], equipment: ['bodyweight']},
 ];
 
+/** Infer equipment from an exercise name. Used as a fallback for legacy
+ *  entries that didn't declare equipment explicitly. */
+type Equipment = NonNullable<Exercise['equipment']>[number];
+function inferEquipment(name: string): Equipment[] | undefined {
+  const n = name.toLowerCase();
+  const out = new Set<Equipment>();
+  if (/\b(barbell|smith|t-bar|trap.bar|trap bar|landmine|axle|log|bear complex|fran|emom|^ez |[ \(]ez bar| ez curl| ez skull|good morning|deadlift|squat|bench press|press|pull|row|clean|snatch|jerk|thruster|complex|atlas)\b/.test(n)
+      && !/\b(db|dumbbell|kb|kettlebell|cable|machine|bodyweight|push.up|pull.up|chin.up|dip|trx)\b/.test(n)) {
+    out.add('barbell');
+  }
+  if (/\b(barbell|^bb |bb |ez bar|ez curl|ez skull|smith|trap.bar|trap bar|t-bar|landmine|log press|axle)\b/.test(n)) out.add('barbell');
+  if (/\b(dumbbell|^db | db | db$|^db-)\b/.test(n)) out.add('dumbbell');
+  if (/\b(kettlebell|^kb | kb |kb$|kb-|goblet|farmer)\b/.test(n)) out.add('kettlebell');
+  if (/\bcable\b/.test(n)) out.add('cable');
+  if (/\b(machine|hack squat|leg press|pec deck|lat pulldown|seated cable row|leg curl|leg extension|hyperextension|reverse hyper|hip thrust|preacher curl|chest-supported|hammer strength|pendulum)\b/.test(n)) out.add('machine');
+  if (/\b(push.up|pull.up|chin.up|muscle.up|plank|bird dog|cat.cow|burpee|inchworm|bear crawl|crab walk|bodyweight|sit.up|hollow|hanging|dragon flag|pistol|shrimp|jumping jack|high knee|butt kick|mountain climber|skater|tuck jump|broad jump|jump squat|jump lunge|airplane|world|cossack|cindy|chelsea|nordic|copenhagen|clamshell|frog|dead bug|curl-up|side plank|scapular|wall slide|y-t-w|90/90|couch stretch|thread the needle|tibialis|atg)\b/.test(n)) out.add('bodyweight');
+  if (/\bband|monster walk|pull.apart|dislocates\b/.test(n)) out.add('band');
+  if (/\b(box jump|depth jump|step.up|patrick step)\b/.test(n)) out.add('box');
+  if (/\btrx\b/.test(n)) out.add('bodyweight');
+  if (/\bdips?\b/.test(n)) out.add('bodyweight');
+  if (/\b(kb dip|tabata)\b/.test(n) === false && /\bdip\b/.test(n)) out.add('bodyweight');
+  if (/\b(plate|kb halo|kb windmill|kb swing)\b/.test(n)) out.add('kettlebell');
+  // Plate exercises like Plate Pinch
+  if (/\bplate pinch\b/.test(n)) out.add('barbell');
+  // Sled / strongman implements get implicitly tagged via 'machine' or no tag
+  if (/\b(sled|tire flip|stone|husafell|sandbag)\b/.test(n)) {} // intentionally no tag — gym implement
+  return out.size ? Array.from(out) : undefined;
+}
+
 export const ALL_EXERCISES: FlatExercise[] = (() => {
   const legacy = flattenLegacy();
   const withOverrides = legacy.map((ex) => {
     const o = PRIMARY_OVERRIDES[ex.name];
     return o ? {...ex, ...o} : ex;
   });
-  // Apply phase tags from PHASE_TAGS map (legacy + compound additions)
   const all = [
     ...withOverrides,
     ...COMPOUND_ADDITIONS,
@@ -894,11 +922,21 @@ export const ALL_EXERCISES: FlatExercise[] = (() => {
     ...STRENGTH_ADDITIONS,
     ...SCIENTIFIC_ADDITIONS,
   ];
-  return all.map((ex) => {
-    const tagged = PHASE_TAGS[ex.name];
-    if (tagged && !ex.phases) return {...ex, phases: tagged};
-    return ex;
+  // Apply PHASE_TAGS for any entry missing explicit phases
+  const tagged = all.map((ex) => {
+    const t = PHASE_TAGS[ex.name];
+    let next: FlatExercise = (t && !ex.phases) ? {...ex, phases: t} : ex;
+    // Fill in equipment by name inference if missing
+    if (!next.equipment) {
+      const inferred = inferEquipment(next.name);
+      if (inferred) next = {...next, equipment: inferred};
+    }
+    return next;
   });
+  // De-duplicate by name — last entry wins (so the richest-tagged copy survives)
+  const byName = new Map<string, FlatExercise>();
+  for (const ex of tagged) byName.set(ex.name, ex);
+  return Array.from(byName.values());
 })();
 
 /** All exercises that fit a given phase. */
