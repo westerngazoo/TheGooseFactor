@@ -54,6 +54,14 @@ const apps: AppCard[] = [
     link: '/apps/progress-tracker',
     tags: ['Logging', 'Google Auth', 'Supabase'],
   },
+  {
+    title: 'Exercise Library',
+    emoji: '\u{1F4DA}',
+    description:
+      "Every exercise in the database — search and filter by muscle, category, phase, equipment. Anatomy preview + YouTube tutorial per move.",
+    link: '/apps/exercise-library',
+    tags: ['Reference', 'Filterable', 'Anatomy'],
+  },
 ];
 
 function AppCardComponent({title, emoji, description, link, tags}: AppCard) {

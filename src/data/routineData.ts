@@ -819,6 +819,67 @@ const STRENGTH_ADDITIONS: FlatExercise[] = [
   {name: 'Sandbag Shouldering', category: 'metabolic', primary: ['posterior', 'back', 'shoulder'], secondary: ['core', 'biceps'], compound: true, sets: '5', reps: '5/side', notes: 'Heavy sandbag, ground to shoulder, alternating sides.', primarySub: ['glute_max', 'lats', 'delt_front'], phases: ['multijoint']},
 ];
 
+/* ── SCIENCE-BACKED ADDITIONS — research-validated exercises across
+   joint health, injury prevention, hypertrophy, mobility, plyometrics ── */
+const SCIENTIFIC_ADDITIONS: FlatExercise[] = [
+  // ── Knees Over Toes (Ben Patrick / ATG) — knee health + lower-body strength ──
+  {name: 'Tibialis Raise (ATG)', category: 'isolation', primary: ['calves'], sets: '3', reps: '20-25', notes: 'Heels to wall, lift toes against weight. Anterior-shin strength. KOT staple.', phases: ['warmup', 'pump'], equipment: ['bodyweight']},
+  {name: 'ATG Split Squat', category: 'strength', primary: ['quad'], secondary: ['posterior', 'core'], compound: true, sets: '4', reps: '5-8/leg', notes: 'Deep-ROM split squat, knee tracks past toe. Knee-health + quad strength (Ben Patrick / KOT).', primarySub: ['rectus_femoris', 'vastus_medialis'], secondarySub: ['glute_max'], phases: ['heavy'], equipment: ['bodyweight', 'dumbbell']},
+  {name: 'Backward Sled Drag', category: 'metabolic', primary: ['quad'], secondary: ['calves', 'core'], compound: true, sets: '5', reps: '20-30m', notes: 'Walk backward dragging sled. Quad-builder, knee rehab favorite (KOT).', primarySub: ['vastus_lateralis', 'rectus_femoris'], phases: ['warmup', 'medium']},
+  {name: 'Patrick Step', category: 'strength', primary: ['quad'], secondary: ['core'], compound: true, sets: '4', reps: '8-10/leg', notes: 'Single-leg eccentric step-down. VMO + knee control. KOT.', primarySub: ['vastus_medialis', 'rectus_femoris'], phases: ['heavy'], equipment: ['bodyweight']},
+  {name: 'Reverse Nordic Curl', category: 'strength', primary: ['quad'], secondary: ['core'], compound: true, sets: '4', reps: '5-8', notes: 'Kneeling, lean back slowly. Quad eccentric strength + knee health.', primarySub: ['rectus_femoris', 'vastus_medialis'], phases: ['heavy'], equipment: ['bodyweight']},
+  {name: 'KOT Calf Raise (slant)', category: 'hypertrophy', primary: ['calves'], sets: '4', reps: '15-20', notes: 'Standing on slant board / weight plate, full ROM. Stretches gastroc fully.', primarySub: ['gastrocnemius'], phases: ['medium', 'pump'], equipment: ['bodyweight']},
+
+  // ── Hamstring / adductor injury prevention ──
+  {name: 'Nordic Hamstring Curl', category: 'strength', primary: ['posterior'], secondary: ['core'], compound: true, sets: '4', reps: '5-8', notes: 'Eccentric hamstring strength. ~70% reduction in hamstring injuries (Petersen 2011 meta-analysis).', primarySub: ['hams_bf', 'hams_semi'], phases: ['heavy'], equipment: ['bodyweight']},
+  {name: 'Copenhagen Plank', category: 'strength', primary: ['core'], secondary: ['posterior'], compound: true, sets: '3', reps: '15-30s/side', notes: 'Side plank with top-leg foot on bench. Adductor strength. Cuts groin injuries ~41% (Harøy 2019).', primarySub: ['obliques'], phases: ['heavy'], equipment: ['bodyweight']},
+  {name: 'Long-Lever Adductor Squeeze', category: 'isolation', primary: ['core'], sets: '3', reps: '10×5s holds', notes: 'Lying flat, ball between ankles. Squeeze 5s, relax. Adductor activation.', primarySub: ['obliques'], phases: ['warmup', 'pump'], equipment: ['bodyweight']},
+
+  // ── Glute medius EMG-validated activation ──
+  {name: 'Clamshell', category: 'isolation', primary: ['posterior'], sets: '3', reps: '15-20/side', notes: 'Side-lying knee abduction. Top EMG-validated glute med move (Selkowitz et al. 2013).', primarySub: ['glute_med'], phases: ['warmup', 'pump'], equipment: ['bodyweight', 'band']},
+  {name: 'Banded Lateral Walk', category: 'metabolic', primary: ['posterior'], secondary: ['core'], compound: true, sets: '3', reps: '15-20m/side', notes: 'Mini-band above knees, side-step. Glute medius activation.', primarySub: ['glute_med'], phases: ['warmup'], equipment: ['band']},
+  {name: 'Single-Leg Glute Bridge', category: 'isolation', primary: ['posterior'], secondary: ['core'], sets: '3', reps: '12-15/side', notes: 'Per leg. Anti-rotation glute work.', primarySub: ['glute_max'], secondarySub: ['obliques'], phases: ['warmup', 'pump'], equipment: ['bodyweight']},
+  {name: 'Side Plank w/ Hip Abduction', category: 'isolation', primary: ['core', 'posterior'], compound: true, sets: '3', reps: '8-12/side', notes: 'Side plank, lift top leg up. EMG: highest glute med activation (Boren et al. 2011).', primarySub: ['obliques', 'glute_med'], phases: ['heavy', 'pump'], equipment: ['bodyweight']},
+  {name: 'Frog Pump', category: 'isolation', primary: ['posterior'], sets: '3', reps: '20-30', notes: 'Soles-together hip thrust. Maximum glute peak activation.', primarySub: ['glute_max'], phases: ['pump'], equipment: ['bodyweight']},
+
+  // ── McGill core science ──
+  {name: 'Dead Bug', category: 'isolation', primary: ['core'], sets: '3', reps: '10/side', notes: 'Anti-extension core. Stuart McGill staple. Contralateral arm/leg extension.', primarySub: ['abs_lower', 'abs_upper'], phases: ['warmup', 'medium'], equipment: ['bodyweight']},
+  {name: 'McGill Curl-Up', category: 'isolation', primary: ['core'], sets: '3', reps: '8 (5s holds)', notes: 'Modified crunch with hands under low back. Spine-safe. McGill big-3.', primarySub: ['abs_upper'], phases: ['warmup', 'medium'], equipment: ['bodyweight']},
+  {name: 'Side Plank', category: 'isolation', primary: ['core'], sets: '3', reps: '20-45s/side', notes: 'Anti-lateral flexion. Lateral chain endurance. McGill big-3.', primarySub: ['obliques'], phases: ['warmup', 'medium'], equipment: ['bodyweight']},
+
+  // ── Stretch-mediated hypertrophy (Schoenfeld / Wolf 2023) ──
+  {name: 'DB Pullover', category: 'hypertrophy', primary: ['chest', 'back'], secondary: ['triceps', 'core'], compound: true, sets: '4', reps: '10-12', notes: 'Lying on bench, DB overhead → chest. Stretches lats AND chest.', primarySub: ['chest_upper', 'lats'], secondarySub: ['triceps_long', 'abs_upper'], phases: ['medium'], equipment: ['dumbbell']},
+  {name: 'Bayesian Cable Curl', category: 'hypertrophy', primary: ['biceps'], sets: '4', reps: '10-12/side', notes: 'Cable behind body, curl forward. Biceps long-head fully stretched.', primarySub: ['biceps_long'], phases: ['medium'], equipment: ['cable']},
+  {name: 'Decline DB Curl', category: 'hypertrophy', primary: ['biceps'], sets: '3', reps: '10-12', notes: 'Lying face-down on incline bench. Maximum biceps stretch.', primarySub: ['biceps_long'], phases: ['medium'], equipment: ['dumbbell']},
+  {name: 'Heel-Elevated DB Squat', category: 'hypertrophy', primary: ['quad'], secondary: ['posterior', 'core'], compound: true, sets: '4', reps: '10-12', notes: 'Plates under heels for max ROM. Quad stretch hypertrophy.', primarySub: ['rectus_femoris', 'vastus_medialis'], phases: ['medium'], equipment: ['dumbbell']},
+
+  // ── Scapular strength foundation ──
+  {name: 'Scapular Pull-Up', category: 'isolation', primary: ['back'], secondary: ['traps'], sets: '3', reps: '10', notes: 'Hang, retract scaps without bending elbows. Lat + lower-trap activation.', primarySub: ['lats', 'traps_mid'], phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Scapular Push-Up', category: 'isolation', primary: ['back'], secondary: ['core'], sets: '3', reps: '10', notes: 'Plank, protract/retract scaps. Serratus anterior activation.', primarySub: ['rhomboids'], phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Wall Slide (Y-T-W)', category: 'isolation', primary: ['shoulder', 'back'], sets: '3', reps: '8 each shape', notes: 'Back to wall, slide arms in Y, T, W shapes. Shoulder mobility + scap control.', primarySub: ['delt_rear', 'rhomboids', 'traps_mid'], phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Lying Y-T-W Raises', category: 'isolation', primary: ['shoulder', 'back'], sets: '3', reps: '10 each shape', notes: 'Face-down on bench with light DBs. Hits all rear-delt + scap retractor patterns.', primarySub: ['delt_rear', 'rhomboids', 'traps_mid'], phases: ['warmup', 'pump'], equipment: ['dumbbell']},
+
+  // ── FRC / mobility (Andreo Spina, Eric Cressey) ──
+  {name: '90/90 Hip Switch', category: 'metabolic', primary: ['core'], secondary: ['posterior'], sets: '2', reps: '10 switches', notes: 'Seated 90/90, switch sides without hands. FRC hip mobility staple.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Hip Airplane', category: 'isolation', primary: ['posterior', 'core'], compound: true, sets: '2', reps: '6/side', notes: 'Single-leg RDL with rotation. Glute control + balance (Cressey).', primarySub: ['glute_med', 'glute_max'], secondarySub: ['obliques'], phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Couch Stretch', category: 'isolation', primary: ['quad'], sets: '2', reps: '60-90s/side', notes: 'Knee against wall, foot up couch/wall. Hip flexor mobility (Kelly Starrett).', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Thread the Needle', category: 'isolation', primary: ['back'], sets: '2', reps: '8/side', notes: 'Quadruped thoracic rotation. Upper-back mobility.', phases: ['warmup'], equipment: ['bodyweight']},
+
+  // ── Plyometric / power (Verkhoshansky depth-jump research) ──
+  {name: 'Depth Jump', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['calves', 'core'], compound: true, sets: '5', reps: '5', notes: 'Step off 18-30" box, immediate vertical jump. Reactive strength (Verkhoshansky).', primarySub: ['glute_max', 'rectus_femoris', 'gastrocnemius'], phases: ['multijoint'], equipment: ['box']},
+  {name: 'Lateral Bound', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['core', 'calves'], compound: true, sets: '4', reps: '5/side', notes: 'Side-to-side single-leg jump. Frontal-plane power.', primarySub: ['glute_med', 'glute_max'], phases: ['warmup', 'multijoint'], equipment: ['bodyweight']},
+  {name: 'Medicine Ball Slam', category: 'metabolic', primary: ['core', 'back'], secondary: ['shoulder', 'quad'], compound: true, sets: '4', reps: '8-10', notes: 'Ball overhead → slam to floor. Anterior-core power.', primarySub: ['abs_upper', 'lats'], phases: ['warmup', 'multijoint']},
+  {name: 'Medicine Ball Rotational Throw', category: 'metabolic', primary: ['core'], secondary: ['shoulder', 'posterior'], compound: true, sets: '4', reps: '8/side', notes: 'Ball rotated and thrown into wall. Anti-rotation/rotational power.', primarySub: ['obliques'], phases: ['warmup', 'multijoint']},
+  {name: 'Medicine Ball Chest Pass', category: 'metabolic', primary: ['chest', 'shoulder'], secondary: ['triceps', 'core'], compound: true, sets: '4', reps: '8-10', notes: 'Explosive bench-pass to wall/partner. Upper-body power.', primarySub: ['chest_mid', 'delt_front'], phases: ['warmup', 'multijoint']},
+
+  // ── TRX / suspension ──
+  {name: 'TRX Row', category: 'hypertrophy', primary: ['back'], secondary: ['biceps', 'core'], compound: true, sets: '3', reps: '10-15', notes: 'Body row from straps. Adjustable difficulty by foot angle.', primarySub: ['lats', 'rhomboids'], secondarySub: ['biceps_long'], phases: ['warmup', 'medium'], equipment: ['bodyweight']},
+  {name: 'TRX Push-Up', category: 'hypertrophy', primary: ['chest'], secondary: ['triceps', 'shoulder', 'core'], compound: true, sets: '3', reps: '10-15', notes: 'Hands in straps. Stability challenge + chest.', primarySub: ['chest_mid'], phases: ['warmup', 'medium'], equipment: ['bodyweight']},
+  {name: 'TRX Pistol Squat', category: 'strength', primary: ['quad'], secondary: ['posterior', 'core'], compound: true, sets: '4', reps: '5-8/leg', notes: 'Single-leg squat with TRX assist for balance.', primarySub: ['rectus_femoris', 'vastus_medialis'], phases: ['heavy'], equipment: ['bodyweight']},
+  {name: 'TRX Y-T-W', category: 'isolation', primary: ['shoulder', 'back'], sets: '3', reps: '10 each shape', notes: 'Standing pull from straps in Y/T/W. Scap retraction + rear delts.', primarySub: ['delt_rear', 'rhomboids'], phases: ['warmup', 'pump'], equipment: ['bodyweight']},
+  {name: 'TRX Hamstring Curl', category: 'hypertrophy', primary: ['posterior'], secondary: ['core'], compound: true, sets: '3', reps: '10-12', notes: 'Heels in straps, curl in. Hamstring strength + glute activation.', primarySub: ['hams_bf', 'glute_max'], phases: ['medium'], equipment: ['bodyweight']},
+];
+
 export const ALL_EXERCISES: FlatExercise[] = (() => {
   const legacy = flattenLegacy();
   const withOverrides = legacy.map((ex) => {
@@ -831,6 +892,7 @@ export const ALL_EXERCISES: FlatExercise[] = (() => {
     ...COMPOUND_ADDITIONS,
     ...PHASED_ADDITIONS,
     ...STRENGTH_ADDITIONS,
+    ...SCIENTIFIC_ADDITIONS,
   ];
   return all.map((ex) => {
     const tagged = PHASE_TAGS[ex.name];
