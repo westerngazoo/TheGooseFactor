@@ -80,7 +80,7 @@ something that looks like C.
 
 ## 1.3 What This Book Asks of You
 
-Three commitments.
+Two things, really.
 
 ### 1.3.1 Build with sanitizers on, always.
 
@@ -92,32 +92,24 @@ CFLAGS += -fsanitize=address,undefined
 LDFLAGS = -fsanitize=address,undefined
 ```
 
-If your build script omits these, you're not following the book.
+You'll write a buffer overrun. ASan will catch it before your
+program corrupts memory and limps along until something else dies
+in a confusing way. That's the whole point — the sanitizer is your
+co-author.
 
-### 1.3.2 Prove correctness.
+> :sharpgoose: A program that "works" without ASan but fails with it
+> isn't working. It's getting lucky.
 
-Every chapter's analysis section asks for a proof. Sometimes by
-loop invariant, sometimes by structural induction, sometimes by
-amortized argument. The proofs are not optional.
+### 1.3.2 Do the practice questions.
 
-> :mathgoose: A correct algorithm without a proof of correctness is
-> a *belief*. We're building knowledge here.
+Each chapter ends with a short set: a few **Try it** problems (do
+these), a couple of **Stretch** ones (most readers should), and an
+optional **Deep dive** for the curious. We don't grade on rigor.
+We do ask you to predict runtimes, explain your reasoning, and write
+working code.
 
-### 1.3.3 Do the exercises.
-
-Knuth's books are 70% exercises. The exercises are where the
-learning happens. If you read a chapter and skip the exercises,
-you've read a textbook description of the material. If you do the
-exercises, you've internalized it.
-
-The difficulty stars (★ to ★★★★) are inherited from Knuth and
-calibrated similarly:
-
-- ★ Routine. Should take 10–20 minutes. Do them all.
-- ★★ Substantive. 30–90 minutes. Do most of them.
-- ★★★ Hard. Half a day. Worth it; pick the ones that interest you.
-- ★★★★ Research-level. Not all are solved. Sit with the ones that
-  hook you.
+> :weightliftinggoose: Reading without practicing is reading. Practicing
+> without reading is fumbling. Do both.
 
 ## 1.4 The Setup
 
@@ -173,11 +165,11 @@ for talking about algorithms rigorously. Then we start
 
 ---
 
-## Exercises
+## Practice
 
-### **1.1 [★]**
+### Try it
 
-Compile this program with `cc -fsanitize=undefined`:
+**1.1** Compile this program with `cc -fsanitize=undefined`:
 
 ```c
 #include <stdio.h>
@@ -188,49 +180,34 @@ int main(void) {
 }
 ```
 
-What does UBSan report, and why?
+What does UBSan report? In your own words, why is the program
+ill-formed?
 
-### **1.2 [★]**
+**1.2** Write a tiny C program that intentionally writes one byte
+past the end of a heap buffer (`malloc(8)`, write to index 8).
+Compile with `-fsanitize=address` and run it. Read the report —
+what info did ASan give you?
 
-In C17, evaluate the conformance of the following expression:
+### Stretch
 
-```c
-int i = 0;
-int x = i++ + i++;
-```
+**1.3** Find an open-source C project on GitHub (SQLite, Redis,
+git's source). Open one source file. Read it. Note three things
+that surprise you about how production C code is written compared
+to what you've seen in textbooks.
 
-State the formal rule (sequence points / sequenced-before relation)
-that determines whether this is well-defined.
+**1.4** Skim the GitHub `main` README of two of these tools (your
+choice): cmocka, Unity, libFuzzer, valgrind. Which would you reach
+for first if you were starting a new C project today, and why?
 
-### **1.3 [★★]**
+### Deep dive (optional)
 
-Write a C program that demonstrates a buffer overflow on the *heap*
-(via `malloc`) and another that demonstrates one on the *stack*.
-Compile both with ASan. Compare the two reports — what does each
-tell you about how ASan is implemented?
-
-### **1.4 [★★]**
-
-Find an open-source C project on GitHub (suggestion: SQLite, Redis,
-or `lib/` in the Linux kernel). Pick a single function whose name
-matches an algorithm we'll cover in Part III. Read it. Write a
-one-page summary of how the implementation differs from the
-textbook description. We'll revisit this in Chapter 36.
-
-### **1.5 [★★★]**
-
-Argue formally that *every* algorithm expressible in a Turing-complete
-language can be expressed in C. State and prove the result. (Hint: think
-about implementing an interpreter.)
-
-### **1.6 [★★★★]**
-
-Find an algorithm in TAOCP that is *not* expressible naturally in C
-without going through a runtime support library (e.g., a coroutine
-library, a garbage collector). Discuss what's missing and what the
-nearest C equivalent looks like.
+**1.5** What can C *not* express directly that languages like
+Rust or Haskell can? Pick one feature (e.g., sum types, generics,
+ownership). Sketch how you'd simulate it in C — and what's lost in
+translation.
 
 ---
 
-> :happygoose: That's Chapter 1. The book proper starts in Chapter 2,
-> where we define the abstract machine we'll be programming.
+> :happygoose: That's Chapter 1. Chapter 2 covers the C abstract
+> machine — the mental model you'll use to reason about everything
+> else.

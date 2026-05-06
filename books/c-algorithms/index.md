@@ -7,11 +7,10 @@ slug: /
 
 # C: Algorithms & Data Structures
 
-> An academic, Knuth-flavored treatment of classical algorithms and data
-> structures using C — the language of the abstract machine. For students
-> who want depth, for engineers preparing for serious interviews, and for
-> anyone who believes the right way to learn this material is to write it
-> by hand from first principles.
+> A friendly, intuition-first guide to the classical algorithms and data
+> structures, written in C. For students taking their first algorithms
+> class, engineers preparing for an Amazon-style interview, and anyone
+> who wants to *get* this material — not just survive a quiz on it.
 
 ## Why C?
 
@@ -69,23 +68,25 @@ Three audiences:
 
 ## How To Read This
 
-Each chapter follows a deliberate four-act structure:
+Each chapter follows a four-beat rhythm:
 
-1. **The Problem** — what we're solving and why it's hard.
-2. **The Algorithm** — pseudocode, then C, then a worked example.
-3. **The Analysis** — correctness proof, asymptotic bound, and where
-   the constant factor hides.
-4. **The Exercises** — Knuth-numbered, by difficulty (★ easy, ★★
-   moderate, ★★★ hard, ★★★★ research). Solutions in
-   [Appendix D](/c-book/appendix/exercise-solutions).
+1. **Hook** — the problem in human terms (DMV lines, recipe scaling,
+   the kind of thing you can describe without a whiteboard).
+2. **Idea** — the algorithm or data structure, described informally
+   first. Pictures, metaphors, small worked examples.
+3. **Code** — real C with prose-style comments. Each non-obvious
+   line gets a one-sentence why.
+4. **Practice** — a handful of problems split into **Try it**
+   (do these), **Stretch** (most readers should), and an optional
+   **Deep dive** for the curious.
 
-Code is in `code/` directories shipped with each chapter. Build with
-`make`, run with `./out/<name>`, profile with `perf`.
+Goose personas pop in to surface the question you're probably about
+to ask, flag a common bug, or call out the moment when the algorithm
+just clicks. They're teaching aids, used sparingly.
 
-> :weightliftinggoose: This book trains the algorithmic muscle. Theory
-> alone won't make you fast on a whiteboard. Code alone won't survive
-> a senior interviewer's "prove this terminates." Both together is the
-> work.
+> :weightliftinggoose: Reading without practicing is reading. Practicing
+> without reading is fumbling. Do both — that's where the muscle gets
+> built.
 
 ## Roadmap
 
@@ -109,7 +110,7 @@ Living manuscript. Chapters land as they're written. Open issues on
 [GitHub](https://github.com/westerngazoo/TheGooseFactor) for typos,
 factual errors, or topics you'd like to see added.
 
-> :sharpgoose: If a chapter cites a result without a proof, the proof
-> is an exercise. If an exercise looks easy, you're missing something.
-> If an exercise looks impossible, it's marked ★★★★ and you're in good
-> company.
+> :happygoose: The goal isn't to make you fluent in formal proof
+> language. The goal is to make you the engineer who walks into an
+> interview, hears "design a hash table," and *sees the picture* —
+> the buckets, the load factor, the resize. Then writes the code.

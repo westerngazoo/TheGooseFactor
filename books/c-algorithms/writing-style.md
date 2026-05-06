@@ -6,103 +6,145 @@ title: "Writing Style Guide"
 
 # Writing Style Guide
 
-The style of this book is deliberate. If you're contributing or just
-curious why it reads the way it does, here's the rubric.
+This book trades formal rigor for **accessibility, intuition, and
+didactic momentum**. We're not writing CLRS or Knuth. We're writing the
+book that gets a smart undergrad — or a working engineer two weeks
+before an Amazon onsite — from "I sort of know what Big-O means" to
+"I can implement, debug, and reason about this on a whiteboard."
+
+The standard for prose is: **could a focused reader who hasn't seen
+this material before follow along without stopping?** If yes, ship it.
+If no, add an analogy, a picture, or a goose.
 
 ## Voice
 
-**Academic but human.** We write like a careful professor lecturing
-to a sharp graduate student. We don't dumb things down, but we also
-don't show off. Every formal definition is followed by an example.
-Every example is followed by the reason we chose it.
+**Friendly, direct, opinionated.** We talk to the reader, not at them.
+We write like a senior engineer explaining over coffee: precise enough
+to be useful, casual enough to feel like a conversation.
 
-**Goose personas** appear in the margins to say the things a textbook
-won't:
+**Informal first, formal in side notes.** When we introduce a new
+concept, we describe it in everyday language. *Then*, if the formal
+definition is useful, we drop it into a callout for readers who want
+the precision. The main thread keeps moving.
 
-> :nerdygoose: When the math gets hairy, I'll show up to make sure
-> you're not just nodding along.
+> **Formal definition.** $f(n) \in O(g(n))$ iff there exist constants
+> $c > 0$ and $n_0$ such that $0 \le f(n) \le c \cdot g(n)$ for all
+> $n \ge n_0$.
 
-> :sharpgoose: When you're about to write a bug, I'll point at it
-> first.
+That's the formal version. Use it sparingly. The intuition is what the
+reader will remember six weeks later.
 
-> :weightliftinggoose: When the chapter is asking you to do real
-> work, I'll be the one in the background going "one more rep."
+## Goose personas — accessibility tools, not jokes
 
-> :angrygoose: When the literature is wrong about something, I get
-> the floor.
+Each persona has a teaching role. Use them to break long stretches of
+prose, surface the question the reader is *probably* about to ask, or
+flag where intuition might mislead.
 
-> :happygoose: When the algorithm is just *beautiful*, that's me.
+> :happygoose: When the algorithm just clicks. "Oh, that's why it
+> works!" moments.
 
-> :mathgoose: When we're proving something rigorously.
+> :nerdygoose: When the formal definition matters. The reader who
+> wants the math version gets it here.
 
-> :surprisedgoose: When a result is genuinely counterintuitive.
+> :mathgoose: When we *do* dip into proof or derivation. Rare. Worth
+> reading when it shows up.
 
-> :sarcasticgoose: When a "simple optimization" makes things worse.
+> :sharpgoose: When you're about to make a common mistake. Off-by-one,
+> integer overflow, the classic interview-blunder.
 
-Use them sparingly. One per section is plenty.
+> :surprisedgoose: When the result is genuinely counterintuitive. (Why
+> is hash table insertion *amortized* O(1) but worst-case O(n)?)
 
-## Structure
+> :sarcasticgoose: When the "obvious" optimization is wrong, or when
+> the textbook is being clever for no reason.
 
-Every chapter follows the same four acts:
+> :angrygoose: When the literature is misleading or the standard
+> answer is wrong.
 
-1. **The Problem.** State it formally. Give the input/output spec.
-   Show why a naive approach is unacceptable.
-2. **The Algorithm.** First in pseudocode (LaTeX-rendered).
-   Then in C, with every invariant labeled. Then a worked example
-   small enough to trace by hand.
-3. **The Analysis.** Prove correctness via loop invariants or
-   induction. State the asymptotic complexity formally
-   (Θ-bound when known, otherwise O upper and Ω lower). Note the
-   constant factor and where it hides.
-4. **The Exercises.** Knuth-style — numbered, with difficulty
-   stars, sometimes with hints. Solutions in Appendix D.
+> :weightliftinggoose: When it's time to do the work. Practice
+> exercises, code drills.
+
+Use them sparingly. **At most one per major section.** If a chapter
+has 12 personas, the personas stop being signposts and start being
+clutter.
+
+## Chapter structure
+
+A flexible four-beat rhythm:
+
+1. **Hook.** The problem in human terms. "You're at the DMV. There are
+   100 people in line. How do you find the one named Jordan?"
+2. **Idea.** The algorithm or data structure, described informally.
+   Pictures, metaphors, small worked examples.
+3. **Code.** Real C, with comments that read like prose. Each
+   non-obvious line gets a one-sentence why.
+4. **Practice.** A handful of exercises: implement, predict, debug,
+   compare. Knuth-style difficulty stars are gone — we use plain
+   labels: **Try it**, **Stretch**, **Deep dive** (optional).
+
+We do *not* require proofs. We do require the reader can predict the
+runtime and explain why the code is correct in their own words.
 
 ## Code
 
-- **Standard:** C17 (`-std=c17`). C23 features only when called out.
-- **Sanitizers:** every example must compile and run cleanly with
-  `-fsanitize=address,undefined`.
-- **Style:** allman braces, 4-space indent, no tabs. Lowercase
-  snake_case. Macros in `SCREAMING_SNAKE_CASE`. Short function
-  names when scope is local; descriptive names for public API.
-- **No `goto`** outside the `goto cleanup;` idiom for error
-  unwinding. We're not religious about it but we are picky.
-- **`const`**-correctness everywhere. `restrict` when it's true.
-- **Headers:** every public type and function in `.h`; static
-  helpers in `.c` only.
+- **Standard:** C17. Compile with `gcc -std=c17 -Wall -Wextra` or
+  clang equivalent.
+- **Sanitizers** (`-fsanitize=address,undefined`) are still strongly
+  encouraged in the build instructions but not a religion. We point
+  them out the first time they catch a bug.
+- **Style:** clear over clever. 4-space indent, snake_case, short
+  function names when scope is local. Comments that explain *why*,
+  never *what*.
+- **Length:** code listings should fit on one screen. If a function
+  is too long, refactor it for the book.
+
+> :sharpgoose: Code that passes the compiler but fails ASan still
+> *runs*. That's the dangerous case. We'll show several examples in
+> Ch 1 and Ch 2 to build the habit of trusting the sanitizer over
+> the absence of a crash.
 
 ## Math
 
-LaTeX everywhere via `remark-math` + `rehype-katex`:
+LaTeX renders inline (`$O(n \log n)$`) and display-mode (`$$T(n) =
+2T(n/2) + n$$`). Use it where it adds clarity, not as decoration.
 
-- Inline: `$O(n \log n)$` renders as $O(n \log n)$.
-- Display: `$$T(n) = 2T(n/2) + \Theta(n)$$` for centered
-  recurrences.
-- We use $\Theta$ for tight bounds, $O$ for upper, $\Omega$ for
-  lower. Small-o and small-omega when they're meaningful.
-- Asymptotic notation is *defined* in
-  [Chapter 3](/c-book/part-1-foundations/ch03-asymptotics) before
-  use.
+- $\Theta$, $O$, $\Omega$ — we'll use all three but mostly $O$ in
+  prose.
+- Recurrence relations only when they're the cleanest way to say
+  what's happening (merge sort, quicksort).
+- Master theorem appears as a **recipe**, not a theorem. State the
+  three cases plainly. The proof is in the appendix for anyone who
+  wants it.
 
 ## Citations
 
-Format: **Author Year, Volume:Page**. Examples:
+Light. We cite when the reader benefits from going deeper:
 
-- Knuth 1997, 1:73 → *TAOCP* Vol 1, page 73.
-- CLRS 2022, §22.5 → *Introduction to Algorithms*, Section 22.5.
-- Sedgewick 2011, p. 285.
+- Knuth 1997, *TAOCP* Vol 1, §2.2 — for readers who want the formal
+  treatment.
+- CLRS, §22.5 — same.
+- Sedgewick & Wayne, *Algorithms 4th ed* — when their pictorial
+  approach is better than ours (which happens).
 
-Full bibliography in Appendix E.
+No bibliography. Citations link inline to the page on Amazon, the
+Stanford CS page, or wherever the canonical source lives.
 
-## What We Don't Do
+## What we don't do
 
-- We don't write "obvious" or "trivial" without proof. If a step
-  is obvious, we still show it.
-- We don't omit error handling in the main code listing. (Fragments
-  used inline for explanation may abridge — flagged with
-  `// ... error checks elided`.)
-- We don't depend on platform-specific behavior without flagging
-  it. (POSIX-only? Linux-only? GCC-only? Say so.)
-- We don't use third-party libraries in chapter code. The whole
-  point is building from primitives. The library chapters
-  ([Ch 35](/c-book/part-5-practice)) are the exception.
+- **No exhaustive proofs.** We sketch them when they aid intuition.
+  The reader who wants every step goes to Knuth.
+- **No formal definition before informal one.** Always intuition
+  first, formalism second (and only if it earns its keep).
+- **No greek-letter blizzards.** If a section starts collecting
+  more than four distinct symbols, rewrite it with words.
+- **No condescension.** The reader is smart. They just haven't seen
+  this material yet.
+- **No filler.** If a paragraph doesn't teach something specific,
+  cut it.
+
+## The test
+
+Before publishing a chapter, read it out loud. If you find yourself
+slipping into "academic monotone," rewrite. If a sentence makes you
+want to skip ahead, your reader will too. The goose personas exist
+to interrupt monotone — use them when the prose flatlines.
