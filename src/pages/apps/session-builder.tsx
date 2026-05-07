@@ -20,6 +20,9 @@ import MuscleMap, {
   activationFor,
   mergeActivations,
 } from '../../components/MuscleMap';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import BodyWeightInput, {KcalBadge} from '../../components/BodyWeightInput';
+import {estimateCalories} from '../../lib/calories';
 
 /* ══════════════════════════════════════════
    SESSION BUILDER
@@ -78,6 +81,10 @@ export default function SessionBuilder(): ReactNode {
   const [selGroup, setSelGroup] = useState<MuscleGroup>('chest');
   const [selCategory, setSelCategory] = useState<ExerciseCategory>('strength');
   const [exSearch, setExSearch] = useState('');
+  const [bodyKg, setBodyKg] = useState<number>(0);
+  const totalKcal = bodyKg > 0
+    ? picks.reduce((sum, p) => sum + estimateCalories(p.exercise, bodyKg), 0)
+    : 0;
 
   const addExercise = useCallback((exercise: Exercise) => {
     setPicks((prev) => [
@@ -126,6 +133,9 @@ export default function SessionBuilder(): ReactNode {
           <p className={styles.subtitle}>
             Cherry-pick today's workout &mdash; pick a group, a category, and the exact exercises you want.
           </p>
+          <div style={{marginTop: '0.5rem', display: 'flex', justifyContent: 'center'}}>
+            <BrowserOnly>{() => <BodyWeightInput onChange={setBodyKg} />}</BrowserOnly>
+          </div>
         </header>
 
         {/* ─── Category legend ─── */}
@@ -270,6 +280,9 @@ export default function SessionBuilder(): ReactNode {
               <div className={styles.summary}>
                 <strong>{picks.length}</strong> exercise{picks.length !== 1 ? 's' : ''} · estimated{' '}
                 <strong>{picks.reduce((s, p) => s + (parseInt(p.exercise.sets) || 0), 0)}</strong> working sets
+                {totalKcal > 0 && (
+                  <> · <strong>≈ {Math.round(totalKcal)} kcal</strong></>
+                )}
               </div>
             )}
 

@@ -42,6 +42,7 @@ import MuscleMap, {
   mergeActivations,
 } from '../../components/MuscleMap';
 import {searchNutrition, scaleMacros, type FoodResult, type NutritionSource} from '../../lib/nutrition';
+import {estimateCalories, getStoredWeight} from '../../lib/calories';
 
 /* ══════════════════════════════════════════
    PROGRESS TRACKER
@@ -221,6 +222,7 @@ function ProgressTrackerApp(): ReactNode {
           entries={workoutEntries}
           ensureSession={ensureSession}
           reload={reload}
+          bodyMetrics={bodyMetrics}
         />
       )}
       {tab === 'diet' && (
@@ -251,7 +253,7 @@ function ProgressTrackerApp(): ReactNode {
    WORKOUT TAB
    ═══════════════════════════════════════════════════════════ */
 function WorkoutTab({
-  supabase, userId, todaySession, entries, ensureSession, reload,
+  supabase, userId, todaySession, entries, ensureSession, reload, bodyMetrics,
 }: {
   supabase: any;
   userId: string;
@@ -259,7 +261,16 @@ function WorkoutTab({
   entries: WorkoutEntry[];
   ensureSession: () => Promise<WorkoutSession | null>;
   reload: () => Promise<void>;
+  bodyMetrics: BodyMetric[];
 }): ReactNode {
+  // Latest weight: most recent body_metrics row with a weight_kg, falling
+  // back to localStorage (if user set it elsewhere) and finally 0 = hide.
+  const latestWeight = useMemo(() => {
+    const fromMetrics = bodyMetrics.find((m) => m.weight_kg != null)?.weight_kg ?? 0;
+    if (fromMetrics > 0) return fromMetrics as number;
+    if (typeof window !== 'undefined') return getStoredWeight();
+    return 0;
+  }, [bodyMetrics]);
   const [group, setGroup] = useState<MuscleGroup>('chest');
   const [category, setCategory] = useState<ExerciseCategory>('strength');
   const [intensity, setIntensity] = useState<IntensityTag>('high');
@@ -480,6 +491,12 @@ function WorkoutTab({
             {lastEntry.weight_kg != null && ` @ ${lastEntry.weight_kg}kg`}
             {lastEntry.rpe != null && ` · RPE ${lastEntry.rpe}`}
             {lastEntry.notes && ` · ${lastEntry.notes}`}
+          </div>
+        )}
+        {currentEx && latestWeight > 0 && (
+          <div className={`${styles.colSpan2} ${styles.lastHint}`} style={{background: 'rgba(243, 156, 18, 0.08)'}}>
+            <strong>Est. burn</strong> for one execution at body weight {latestWeight}kg:
+            {' '}≈ {Math.round(estimateCalories(currentEx, latestWeight))} kcal
           </div>
         )}
         <label>

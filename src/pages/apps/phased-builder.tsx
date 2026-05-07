@@ -19,6 +19,9 @@ import MuscleMap, {
   mergeActivations,
 } from '../../components/MuscleMap';
 import {getSupabase, type SessionType} from '../../lib/supabase';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import BodyWeightInput from '../../components/BodyWeightInput';
+import {estimateCalories} from '../../lib/calories';
 
 /* ══════════════════════════════════════════
    PHASED SESSION BUILDER
@@ -82,6 +85,7 @@ export default function PhasedBuilder(): ReactNode {
   const [nextId, setNextId] = useState(1);
   const [equipFilter, setEquipFilter] = useState<string>('all');
   const [textFilter, setTextFilter] = useState<string>('');
+  const [bodyKg, setBodyKg] = useState<number>(0);
 
   const addPick = useCallback((phase: Phase, ex: LibraryExercise) => {
     setPicks((prev) => [...prev, {id: nextId, phase, ex}]);
@@ -221,6 +225,9 @@ export default function PhasedBuilder(): ReactNode {
           <p className={styles.subtitle}>
             Build today on the fly. Each phase narrows the next based on the movement pattern you pick.
           </p>
+          <div style={{marginTop: '0.5rem', display: 'flex', justifyContent: 'center'}}>
+            <BrowserOnly>{() => <BodyWeightInput onChange={setBodyKg} />}</BrowserOnly>
+          </div>
         </header>
 
         {/* Filters */}
@@ -312,6 +319,9 @@ export default function PhasedBuilder(): ReactNode {
                 <div className={styles.totals}>
                   <strong>{picks.length}</strong> exercises ·{' '}
                   <strong>{picks.reduce((s, p) => s + (parseInt(p.ex.sets) || 0), 0)}</strong> total sets
+                  {bodyKg > 0 && (
+                    <> · <strong>≈ {Math.round(picks.reduce((s, p) => s + estimateCalories(p.ex, bodyKg), 0))} kcal</strong></>
+                  )}
                 </div>
 
                 <MuscleMap activation={aggActivation} />
@@ -322,7 +332,12 @@ export default function PhasedBuilder(): ReactNode {
                     {picks.filter((p) => p.phase === ph).map((p) => (
                       <div key={p.id} className={styles.sessionItem}>
                         <span className={styles.itemName}>{p.ex.name}</span>
-                        <span className={styles.itemMeta}>{p.ex.sets} × {p.ex.reps}</span>
+                        <span className={styles.itemMeta}>
+                          {p.ex.sets} × {p.ex.reps}
+                          {bodyKg > 0 && (
+                            <> · ≈ {Math.round(estimateCalories(p.ex, bodyKg))} kcal</>
+                          )}
+                        </span>
                         <button className={styles.removeBtn} onClick={() => removePick(p.id)}>×</button>
                       </div>
                     ))}

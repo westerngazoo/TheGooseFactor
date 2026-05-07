@@ -1,4 +1,7 @@
 import {useState, useMemo, type ReactNode} from 'react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import BodyWeightInput, {KcalBadge} from '../../components/BodyWeightInput';
+import {estimateCalories} from '../../lib/calories';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import styles from './exercise-library.module.css';
@@ -45,6 +48,7 @@ export default function ExerciseLibrary(): ReactNode {
   const [equip, setEquip] = useState<Set<string>>(new Set());
   const [compoundOnly, setCompoundOnly] = useState(false);
   const [selected, setSelected] = useState<LibraryExercise | null>(null);
+  const [bodyKg, setBodyKg] = useState<number>(0);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -81,6 +85,11 @@ export default function ExerciseLibrary(): ReactNode {
           <p className={styles.subtitle}>
             {ALL_EXERCISES.length} exercises — powerlifting, Olympic, strongman, calisthenics, mobility, plyometrics, KOT, McGill core, and more.
           </p>
+          <div style={{marginTop: '0.6rem', display: 'flex', justifyContent: 'center'}}>
+            <BrowserOnly>
+              {() => <BodyWeightInput onChange={setBodyKg} />}
+            </BrowserOnly>
+          </div>
         </header>
 
         <div className={styles.layout}>
@@ -229,6 +238,9 @@ export default function ExerciseLibrary(): ReactNode {
                     {ex.equipment?.map((eq) => (
                       <span key={eq} className={styles.cardEquip}>{eq}</span>
                     ))}
+                    {bodyKg > 0 && (
+                      <KcalBadge kcal={estimateCalories(ex, bodyKg)} />
+                    )}
                   </div>
 
                   <div className={styles.cardMuscles}>
