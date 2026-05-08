@@ -85,10 +85,27 @@ export default function ExerciseLibrary(): ReactNode {
           <p className={styles.subtitle}>
             {ALL_EXERCISES.length} exercises — powerlifting, Olympic, strongman, calisthenics, mobility, plyometrics, KOT, McGill core, and more.
           </p>
-          <div style={{marginTop: '0.6rem', display: 'flex', justifyContent: 'center'}}>
+          <div style={{
+            marginTop: '0.8rem',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '0.4rem',
+            padding: '0.75rem 1rem',
+            borderRadius: '8px',
+            background: 'rgba(243, 156, 18, 0.08)',
+            border: '1px solid rgba(243, 156, 18, 0.3)',
+            maxWidth: '600px',
+            margin: '0.8rem auto 0',
+          }}>
             <BrowserOnly>
               {() => <BodyWeightInput onChange={setBodyKg} />}
             </BrowserOnly>
+            <div style={{fontSize: '0.8rem', opacity: 0.75, textAlign: 'center'}}>
+              {bodyKg > 0
+                ? `🔥 Showing estimated calories burned per exercise based on your weight (${bodyKg}kg).`
+                : '🔥 Enter your body weight above to see estimated calories burned per exercise.'}
+            </div>
           </div>
         </header>
 
