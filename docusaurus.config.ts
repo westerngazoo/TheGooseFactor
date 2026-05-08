@@ -28,6 +28,8 @@ const books = [
   {id: 'geometric-algebra',  path: 'books/geometric-algebra',  routeBasePath: 'geometric-algebra', label: 'Geometric Algebra'},
   {id: 'os-compared',        path: 'books/os-compared',        routeBasePath: 'os-compared',       label: 'OS Compared'},
   {id: 'c-algorithms',       path: 'books/c-algorithms',       routeBasePath: 'c-book',            label: 'C Algorithms'},
+  {id: 'physics-ga',         path: 'books/physics-ga',         routeBasePath: 'physics-ga',        label: 'Physics through GA'},
+  {id: 'ai-ga',              path: 'books/ai-ga',              routeBasePath: 'ai-ga',             label: 'AI through GA'},
 ];
 
 const defaultBook = books[0];
