@@ -630,7 +630,7 @@ insertion is $O(1)$"?
 
 ## What's next
 
-[Chapter 8](/c-book/part-2-data-structures) covers linked lists —
+Chapter 8 (forthcoming) will cover linked lists —
 why they're slower than you think, when they're still the right
 answer (intrusive lists in kernels), and the difference between
 "owning" and "intrusive" list designs.

@@ -29,16 +29,16 @@ Two reasons:
 
 ## Episode list
 
-1. [Introducing geometric algebra](/geometric-algebra/06-video-companion/episode-00-introducing-ga)
-2. [Vector division (ep. 1)](/geometric-algebra/06-video-companion/episode-01-vector-division)
-3. [The geometric product (ep. 2)](/geometric-algebra/06-video-companion/episode-02-geometric-product)
-4. [Multivectors in Cl(2) (ep. 3)](/geometric-algebra/06-video-companion/episode-03-multivectors-cl2)
-5. [Complex numbers are multivectors (ep. 4)](/geometric-algebra/06-video-companion/episode-04-complex-numbers)
-6. [Polar form of the geometric product (ep. 5)](/geometric-algebra/06-video-companion/episode-05-polar-form)
-7. [The wedge product (ep. 6)](/geometric-algebra/06-video-companion/episode-06-wedge-product)
-8. [Linear algebra using the wedge product (ep. 7)](/geometric-algebra/06-video-companion/episode-07-la-with-wedge)
-9. [Hodge duality and orthogonal complements (ep. 8)](/geometric-algebra/06-video-companion/episode-08-hodge-duality)
-10. [Wedge vs cross product (ep. 9)](/geometric-algebra/06-video-companion/episode-09-wedge-vs-cross)
+1. [Introducing geometric algebra](/geometric-algebra/video-companion/episode-00-introducing-ga)
+2. [Vector division (ep. 1)](/geometric-algebra/video-companion/episode-01-vector-division)
+3. [The geometric product (ep. 2)](/geometric-algebra/video-companion/episode-02-geometric-product)
+4. [Multivectors in Cl(2) (ep. 3)](/geometric-algebra/video-companion/episode-03-multivectors-cl2)
+5. [Complex numbers are multivectors (ep. 4)](/geometric-algebra/video-companion/episode-04-complex-numbers)
+6. [Polar form of the geometric product (ep. 5)](/geometric-algebra/video-companion/episode-05-polar-form)
+7. [The wedge product (ep. 6)](/geometric-algebra/video-companion/episode-06-wedge-product)
+8. [Linear algebra using the wedge product (ep. 7)](/geometric-algebra/video-companion/episode-07-la-with-wedge)
+9. [Hodge duality and orthogonal complements (ep. 8)](/geometric-algebra/video-companion/episode-08-hodge-duality)
+10. [Wedge vs cross product (ep. 9)](/geometric-algebra/video-companion/episode-09-wedge-vs-cross)
 
 ## How to use
 

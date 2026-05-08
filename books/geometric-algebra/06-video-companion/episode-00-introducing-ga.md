@@ -21,7 +21,7 @@ been given a fragmented mess; this is the unification."
 - [Why Geometric Algebra (intro)](/geometric-algebra) — the book's
   own front-door pitch, in roughly the same spirit but written
   rather than spoken.
-- [Vectors and the Geometric Product](/geometric-algebra/01-foundations/vectors-and-the-geometric-product)
+- [Vectors and the Geometric Product](/geometric-algebra/foundations/vectors-and-the-geometric-product)
   — picks up where the video stops, deriving the fundamental
   identity from two axioms.
 

@@ -20,9 +20,9 @@ wedge of two parallel vectors is zero.
 
 ## In this book
 
-- [The Outer Product](/geometric-algebra/02-products-and-operations/the-outer-product)
+- [The Outer Product](/geometric-algebra/products-and-operations/the-outer-product)
   — the same content with persona commentary.
-- [Blades as Geometric Objects](/geometric-algebra/03-geometry/blades-as-geometry)
+- [Blades as Geometric Objects](/geometric-algebra/geometry/blades-as-geometry)
   — extends the "bivector = oriented area" reading to higher
   grades.
 
@@ -30,7 +30,7 @@ wedge of two parallel vectors is zero.
 
 The wedge product is what the cross product *should have been*.
 The video makes the comparison explicit; the book does the same
-in [Episode 9's chapter](/geometric-algebra/02-products-and-operations/the-outer-product)
+in [Episode 9's chapter](/geometric-algebra/products-and-operations/the-outer-product)
 (wedge vs. cross). If you've ever found the cross product
 arbitrary — "why does it only work in 3D?" — the wedge is the
 answer.

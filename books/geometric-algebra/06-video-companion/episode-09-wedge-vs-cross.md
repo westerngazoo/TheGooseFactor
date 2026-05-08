@@ -34,11 +34,11 @@ thrown away. We taught the lossy version because it gave us a
 
 ## In this book
 
-- [The Outer Product](/geometric-algebra/02-products-and-operations/the-outer-product)
+- [The Outer Product](/geometric-algebra/products-and-operations/the-outer-product)
   — the wedge as the primitive.
-- [Duality and the Pseudoscalar](/geometric-algebra/02-products-and-operations/duality-and-the-pseudoscalar)
+- [Duality and the Pseudoscalar](/geometric-algebra/products-and-operations/duality-and-the-pseudoscalar)
   — formalizes "cross = wedge composed with duality."
-- [Reflections](/geometric-algebra/03-geometry/reflections)
+- [Reflections](/geometric-algebra/geometry/reflections)
   — shows how reflections across an arbitrary plane work cleanly
   with the wedge / duality machinery, not with cross products.
 

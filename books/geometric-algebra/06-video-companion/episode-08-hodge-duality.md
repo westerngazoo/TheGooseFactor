@@ -24,13 +24,13 @@ pseudoscalar.
 
 ## In this book
 
-- [Duality and the Pseudoscalar](/geometric-algebra/02-products-and-operations/duality-and-the-pseudoscalar)
+- [Duality and the Pseudoscalar](/geometric-algebra/products-and-operations/duality-and-the-pseudoscalar)
   — the same operation, derived from the pseudoscalar's
   properties.
-- [Meet & Join](/geometric-algebra/03-geometry/meet-and-join)
+- [Meet & Join](/geometric-algebra/geometry/meet-and-join)
   — uses duality to express intersection: meet = dualize, wedge,
   undualize.
-- [Reflections](/geometric-algebra/03-geometry/reflections)
+- [Reflections](/geometric-algebra/geometry/reflections)
   — uses duality to reflect across an arbitrary plane (the dual
   of the bivector is the perpendicular vector).
 

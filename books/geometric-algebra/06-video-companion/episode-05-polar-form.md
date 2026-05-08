@@ -25,10 +25,10 @@ the bridge to section 4 of the book.
 
 ## In this book
 
-- [Multivectors and Grades](/geometric-algebra/01-foundations/multivectors-and-grades)
+- [Multivectors and Grades](/geometric-algebra/foundations/multivectors-and-grades)
   — covers $\hat{\mathbf{B}}^2 = -1$ for unit bivectors, which
   is what makes the exponential work.
-- [The Sandwich Product](/geometric-algebra/04-rotations-and-rotors/the-sandwich-product)
+- [The Sandwich Product](/geometric-algebra/rotations-and-rotors/the-sandwich-product)
   — uses polar form to define rotors as $e^{\theta\mathbf{B}/2}$.
 
 ## What clicks here

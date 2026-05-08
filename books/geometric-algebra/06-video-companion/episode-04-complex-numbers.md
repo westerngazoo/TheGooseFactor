@@ -25,10 +25,10 @@ is *not* an analogy but an isomorphism.
 
 ## In this book
 
-- [Multivectors and Grades](/geometric-algebra/01-foundations/multivectors-and-grades)
+- [Multivectors and Grades](/geometric-algebra/foundations/multivectors-and-grades)
   — covers the pseudoscalar (which in 2D is $\mathbf{e}_{12}$,
   the same thing playing the role of $i$).
-- [Rotors in 2D and 3D](/geometric-algebra/04-rotations-and-rotors/rotors-in-2d-and-3d)
+- [Rotors in 2D and 3D](/geometric-algebra/rotations-and-rotors/rotors-in-2d-and-3d)
   — formalizes the same identification when discussing rotations.
   Complex numbers turn out to be 2D rotors.
 

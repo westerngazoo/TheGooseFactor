@@ -24,9 +24,9 @@ like, and why the structure is exactly what you need to capture
 
 ## In this book
 
-- [Multivectors and Grades](/geometric-algebra/01-foundations/multivectors-and-grades)
+- [Multivectors and Grades](/geometric-algebra/foundations/multivectors-and-grades)
   — covers the grade structure in arbitrary dimension.
-- [Blades as Geometric Objects](/geometric-algebra/03-geometry/blades-as-geometry)
+- [Blades as Geometric Objects](/geometric-algebra/geometry/blades-as-geometry)
   — generalizes "what does each grade *mean* geometrically" beyond 2D.
 
 ## Why 2D first?

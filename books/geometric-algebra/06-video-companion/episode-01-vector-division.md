@@ -23,10 +23,10 @@ work because the geometric product is the right multiplication.
 
 ## In this book
 
-- [Vectors and the Geometric Product](/geometric-algebra/01-foundations/vectors-and-the-geometric-product)
+- [Vectors and the Geometric Product](/geometric-algebra/foundations/vectors-and-the-geometric-product)
   — derives the contraction rule $\mathbf{a}^2 = |\mathbf{a}|^2$
   from which inverses follow.
-- [Projections & Rejections](/geometric-algebra/03-geometry/projections-and-rejections)
+- [Projections & Rejections](/geometric-algebra/geometry/projections-and-rejections)
   — uses $\mathbf{b}^{-1}$ in formulas. The book takes the
   inverse for granted; the video is where to go for "why does
   this make sense at all."

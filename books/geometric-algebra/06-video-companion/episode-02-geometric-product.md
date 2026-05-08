@@ -23,9 +23,9 @@ mix gives rotations.
 
 ## In this book
 
-- [Vectors and the Geometric Product](/geometric-algebra/01-foundations/vectors-and-the-geometric-product)
+- [Vectors and the Geometric Product](/geometric-algebra/foundations/vectors-and-the-geometric-product)
   — the same content, derived from the contraction-rule axioms.
-- [Multivectors and Grades](/geometric-algebra/01-foundations/multivectors-and-grades)
+- [Multivectors and Grades](/geometric-algebra/foundations/multivectors-and-grades)
   — picks up after the video and develops the full grade structure.
 
 ## What the book adds

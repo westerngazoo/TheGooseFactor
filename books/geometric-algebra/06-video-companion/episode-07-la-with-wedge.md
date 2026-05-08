@@ -25,10 +25,10 @@ the subspace test, all in wedge language.
 
 ## In this book
 
-- [The Outer Product](/geometric-algebra/02-products-and-operations/the-outer-product)
+- [The Outer Product](/geometric-algebra/products-and-operations/the-outer-product)
   — establishes the antisymmetry and bilinearity that this video
   applies.
-- [Blades as Geometric Objects](/geometric-algebra/03-geometry/blades-as-geometry)
+- [Blades as Geometric Objects](/geometric-algebra/geometry/blades-as-geometry)
   — the algebraic-test bestiary (parallelism, perpendicularity,
   containment) all derive from these wedge properties.
 
