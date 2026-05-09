@@ -37,3 +37,13 @@ goose-method:
   label: Goose Method
   permalink: /goose-method
   description: The Goose training and nutrition framework
+
+c-language:
+  label: C Language
+  permalink: /c-language
+  description: ISO C — standards, evolution, and idioms
+
+programming-languages:
+  label: Programming Languages
+  permalink: /programming-languages
+  description: Language design, history, and evolution
