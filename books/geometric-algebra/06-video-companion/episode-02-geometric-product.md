@@ -11,34 +11,80 @@ title: "Episode 2 — The Geometric Product"
 
 ## What it covers
 
-The headliner. Defines $\mathbf{ab} = \mathbf{a}\cdot\mathbf{b} +
-\mathbf{a}\wedge\mathbf{b}$ — a *single* product that simultaneously
-encodes the dot product (scalar part) and the wedge (bivector part).
-This is *the* product on which all of GA rests.
+The fundamental identity of geometric algebra: every product of
+two vectors decomposes into a symmetric scalar part (the inner
+product) and an antisymmetric bivector part (the wedge product).
 
-The video walks through the symmetric and antisymmetric
-decomposition, shows why parallel vectors give a pure scalar and
-perpendicular vectors give a pure bivector, and previews how the
-mix gives rotations.
+### The two axioms
+
+The geometric product on real vectors is defined by:
+
+1. **Associativity:** $(\mathbf{a}\mathbf{b})\mathbf{c} = \mathbf{a}(\mathbf{b}\mathbf{c})$.
+2. **Contraction:** $\mathbf{a}^2 = |\mathbf{a}|^2 \in \mathbb{R}$.
+
+Together with bilinearity (which is implicit when we say "a product
+on a vector space"), these rules generate the entire algebra.
+
+### Deriving the decomposition
+
+Compute $(\mathbf{a}+\mathbf{b})^2$ using the contraction rule on
+the left and bilinear expansion on the right:
+
+$$|\mathbf{a}+\mathbf{b}|^2 = (\mathbf{a}+\mathbf{b})^2 = \mathbf{a}^2 + \mathbf{a}\mathbf{b} + \mathbf{b}\mathbf{a} + \mathbf{b}^2 = |\mathbf{a}|^2 + |\mathbf{b}|^2 + \mathbf{a}\mathbf{b} + \mathbf{b}\mathbf{a}$$
+
+But also, by the law of cosines,
+
+$$|\mathbf{a}+\mathbf{b}|^2 = |\mathbf{a}|^2 + |\mathbf{b}|^2 + 2(\mathbf{a}\cdot\mathbf{b})$$
+
+Equating and rearranging:
+
+$$\boxed{\;\mathbf{a}\cdot\mathbf{b} = \tfrac{1}{2}(\mathbf{a}\mathbf{b} + \mathbf{b}\mathbf{a})\;}$$
+
+The **inner product** is the symmetric part of the geometric
+product. Defining the antisymmetric part as
+
+$$\boxed{\;\mathbf{a}\wedge\mathbf{b} := \tfrac{1}{2}(\mathbf{a}\mathbf{b} - \mathbf{b}\mathbf{a})\;}$$
+
+we get the **fundamental identity**:
+
+$$\boxed{\;\mathbf{a}\mathbf{b} = \mathbf{a}\cdot\mathbf{b} + \mathbf{a}\wedge\mathbf{b}\;}$$
+
+### Two corollaries
+
+**Parallel vectors anti/commute scalarly.** If $\mathbf{a}\parallel\mathbf{b}$,
+then $\mathbf{a}\wedge\mathbf{b} = 0$ (no oriented area between
+parallel vectors), so $\mathbf{a}\mathbf{b} = \mathbf{a}\cdot\mathbf{b}$
+is a pure scalar — and $\mathbf{a}\mathbf{b} = \mathbf{b}\mathbf{a}$.
+
+**Perpendicular vectors anti-commute.** If $\mathbf{a}\perp\mathbf{b}$,
+then $\mathbf{a}\cdot\mathbf{b} = 0$, so $\mathbf{a}\mathbf{b} = \mathbf{a}\wedge\mathbf{b}$
+is a pure bivector — and $\mathbf{a}\mathbf{b} = -\mathbf{b}\mathbf{a}$.
+
+These two facts are the reason the sandwich product (next chapter)
+implements reflections so cleanly.
+
+### A 2D worked example
+
+Take $\mathbf{a} = \mathbf{e}_1$, $\mathbf{b} = \mathbf{e}_1 + \mathbf{e}_2$.
+
+$$\mathbf{a}\cdot\mathbf{b} = \mathbf{e}_1\cdot(\mathbf{e}_1+\mathbf{e}_2) = 1$$
+
+$$\mathbf{a}\wedge\mathbf{b} = \mathbf{e}_1\wedge(\mathbf{e}_1+\mathbf{e}_2) = \mathbf{e}_1\wedge\mathbf{e}_2 = \mathbf{e}_{12}$$
+
+(using $\mathbf{e}_1\wedge\mathbf{e}_1 = 0$.)
+
+$$\mathbf{a}\mathbf{b} = 1 + \mathbf{e}_{12}$$
+
+A scalar plus a bivector — a **mixed multivector**.
 
 ## In this book
 
 - [Vectors and the Geometric Product](/geometric-algebra/foundations/vectors-and-the-geometric-product)
-  — the same content, derived from the contraction-rule axioms.
+  — the same derivation with a slightly different framing.
 - [Multivectors and Grades](/geometric-algebra/foundations/multivectors-and-grades)
-  — picks up after the video and develops the full grade structure.
+  — extends to higher grades.
 
-## What the book adds
-
-The book does a careful axiom-and-derivation flow: start with
-$(\mathbf{ab})\mathbf{c} = \mathbf{a}(\mathbf{bc})$ and
-$\mathbf{a}^2 = |\mathbf{a}|^2$, derive everything. The video
-reaches the same identity by different motivation. Both routes
-arrive at the same place; the book's framing is "two axioms and
-the rest is theorems," the video's is "build up the rules from
-geometric intuition."
-
-> :weightliftinggoose: Pick the framing that makes the rule stick.
-> Some readers click on axioms-then-theorems; others click on
-> geometric-intuition-then-formalism. The destination is the
-> same.
+> :nerdygoose: The whole framework rests on the boxed identity
+> $\mathbf{a}\mathbf{b} = \mathbf{a}\cdot\mathbf{b} + \mathbf{a}\wedge\mathbf{b}$.
+> Memorize the boxed lines on this page; the rest of GA is
+> consequences.

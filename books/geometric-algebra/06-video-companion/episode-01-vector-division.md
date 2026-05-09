@@ -11,26 +11,63 @@ title: "Episode 1 — Vector Division"
 
 ## What it covers
 
-Standard linear algebra has no notion of "dividing by a vector."
-The video sets up the problem — what *would* it mean? — and then
-shows that GA provides the answer: vectors have multiplicative
-inverses. Specifically, $\mathbf{a}^{-1} = \mathbf{a} / |\mathbf{a}|^2$,
-and $\mathbf{a}\,\mathbf{a}^{-1} = 1$.
+Mathoma argues that any operation worth calling "multiplication"
+should admit an inverse. The dot product fails this — there is no
+$\mathbf{x}$ such that $\mathbf{a}\cdot\mathbf{x} = 1$ in the
+vector space (the dot product produces a scalar, not a vector).
+The cross product also fails — $\mathbf{a}\times\mathbf{x}$ is
+always orthogonal to $\mathbf{a}$, so the equation
+$\mathbf{a}\times\mathbf{x} = \mathbf{a}$ has no solution.
 
-The point is foundational: GA is an *algebra*, not just a calculus
-of arrows. You can multiply, divide, take powers — the operations
-work because the geometric product is the right multiplication.
+The geometric product *does* admit an inverse.
+
+### Definition
+
+For a nonzero vector $\mathbf{a}$, define
+
+$$\boxed{\;\mathbf{a}^{-1} := \frac{\mathbf{a}}{|\mathbf{a}|^2}\;}$$
+
+By the contraction rule $\mathbf{a}^2 = |\mathbf{a}|^2$, we have
+
+$$\mathbf{a}\,\mathbf{a}^{-1} = \mathbf{a}\,\frac{\mathbf{a}}{|\mathbf{a}|^2} = \frac{\mathbf{a}^2}{|\mathbf{a}|^2} = \frac{|\mathbf{a}|^2}{|\mathbf{a}|^2} = 1$$
+
+and similarly $\mathbf{a}^{-1}\mathbf{a} = 1$. So every nonzero
+vector has a two-sided multiplicative inverse.
+
+### Consequences
+
+Vector equations now solve algebraically. From
+$\mathbf{a}\mathbf{x} = \mathbf{b}$ we get
+$\mathbf{x} = \mathbf{a}^{-1}\mathbf{b}$. The same applies for
+right-multiplication: $\mathbf{x}\mathbf{a} = \mathbf{b} \Rightarrow
+\mathbf{x} = \mathbf{b}\mathbf{a}^{-1}$. Note that
+$\mathbf{a}^{-1}\mathbf{b} \ne \mathbf{b}\mathbf{a}^{-1}$ in
+general — the geometric product is **not** commutative.
+
+### Why this matters geometrically
+
+Multiplying by $\mathbf{a}^{-1}$ is the algebraic step that lets
+you *project* onto $\mathbf{a}$:
+
+$$\text{proj}_{\mathbf{a}}(\mathbf{b}) = (\mathbf{b}\cdot\mathbf{a})\,\mathbf{a}^{-1} = \frac{\mathbf{b}\cdot\mathbf{a}}{|\mathbf{a}|^2}\,\mathbf{a}$$
+
+The standard projection formula falls out as a one-liner once
+$\mathbf{a}^{-1}$ exists. The same trick handles **rejection**:
+
+$$\text{rej}_{\mathbf{a}}(\mathbf{b}) = (\mathbf{b}\wedge\mathbf{a})\,\mathbf{a}^{-1}$$
+
+Together they sum to $\mathbf{b}$ via the fundamental identity
+$\mathbf{b}\mathbf{a} = \mathbf{b}\cdot\mathbf{a} + \mathbf{b}\wedge\mathbf{a}$.
 
 ## In this book
 
 - [Vectors and the Geometric Product](/geometric-algebra/foundations/vectors-and-the-geometric-product)
-  — derives the contraction rule $\mathbf{a}^2 = |\mathbf{a}|^2$
-  from which inverses follow.
+  — the contraction rule axiom from which $\mathbf{a}^{-1}$ derives.
 - [Projections & Rejections](/geometric-algebra/geometry/projections-and-rejections)
-  — uses $\mathbf{b}^{-1}$ in formulas. The book takes the
-  inverse for granted; the video is where to go for "why does
-  this make sense at all."
+  — the inverse used in working formulas.
 
-> :surprisedgoose: "Vectors have inverses" is the kind of one-line
-> claim that flips your understanding of linear algebra. The
-> video sells the punchline well.
+> :surprisedgoose: The standard projection formula isn't ad hoc.
+> It's just $(\mathbf{b}\cdot\mathbf{a})\mathbf{a}^{-1}$ with the
+> inverse made explicit. Linear algebra hides the inverse because
+> "vectors don't have inverses." GA has them, and the formulas
+> simplify accordingly.

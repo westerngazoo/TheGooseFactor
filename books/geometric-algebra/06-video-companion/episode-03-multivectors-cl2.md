@@ -11,33 +11,86 @@ title: "Episode 3 — Multivectors in Cl(2)"
 
 ## What it covers
 
-Specializes to $\text{Cl}(2)$ — the geometric algebra of the
-2D Euclidean plane. Four basis elements:
+Specializes the general theory to the geometric algebra of the
+2D Euclidean plane, denoted $\text{Cl}(2)$ or $G(\mathbb{R}^2)$.
 
-$$\{1, \mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_{12}\}$$
+### The basis
 
-The general multivector is $a + b\mathbf{e}_1 + c\mathbf{e}_2 +
-d\mathbf{e}_{12}$ — scalar + vector + bivector. The video walks
-through how to multiply two such things, what the result looks
-like, and why the structure is exactly what you need to capture
-2D geometry.
+Pick orthonormal basis vectors $\mathbf{e}_1, \mathbf{e}_2$
+satisfying
+
+$$\mathbf{e}_1^2 = \mathbf{e}_2^2 = 1, \qquad \mathbf{e}_1\mathbf{e}_2 = -\mathbf{e}_2\mathbf{e}_1$$
+
+The full algebra has **four** basis blades, one per grade:
+
+| Grade | Basis | Dim |
+|---|---|---|
+| 0 (scalar) | $1$ | 1 |
+| 1 (vector) | $\mathbf{e}_1, \mathbf{e}_2$ | 2 |
+| 2 (bivector) | $\mathbf{e}_{12} = \mathbf{e}_1\mathbf{e}_2$ | 1 |
+
+Total dimension: $2^2 = 4$. The general multivector is
+
+$$M = \alpha + \beta_1\mathbf{e}_1 + \beta_2\mathbf{e}_2 + \gamma\,\mathbf{e}_{12}$$
+
+four real coefficients.
+
+### The pseudoscalar squares to $-1$
+
+Compute $\mathbf{e}_{12}^2$:
+
+$$\mathbf{e}_{12}^2 = (\mathbf{e}_1\mathbf{e}_2)(\mathbf{e}_1\mathbf{e}_2) = \mathbf{e}_1\mathbf{e}_2\mathbf{e}_1\mathbf{e}_2 = -\mathbf{e}_1\mathbf{e}_1\mathbf{e}_2\mathbf{e}_2 = -|\mathbf{e}_1|^2 |\mathbf{e}_2|^2 = -1$$
+
+(used anti-commutativity to swap the middle pair, picking up a minus sign.)
+
+The pseudoscalar $I = \mathbf{e}_{12}$ satisfies $I^2 = -1$ —
+algebraically identical to the imaginary unit. This is the seed
+fact behind episode 4.
+
+### Multiplication table
+
+| × | 1 | $\mathbf{e}_1$ | $\mathbf{e}_2$ | $\mathbf{e}_{12}$ |
+|---|---|---|---|---|
+| **1** | 1 | $\mathbf{e}_1$ | $\mathbf{e}_2$ | $\mathbf{e}_{12}$ |
+| **$\mathbf{e}_1$** | $\mathbf{e}_1$ | 1 | $\mathbf{e}_{12}$ | $\mathbf{e}_2$ |
+| **$\mathbf{e}_2$** | $\mathbf{e}_2$ | $-\mathbf{e}_{12}$ | 1 | $-\mathbf{e}_1$ |
+| **$\mathbf{e}_{12}$** | $\mathbf{e}_{12}$ | $-\mathbf{e}_2$ | $\mathbf{e}_1$ | $-1$ |
+
+Use this to multiply any two general multivectors by distributing
+over the basis.
+
+### Worked example
+
+Multiply $M_1 = 2 + 3\mathbf{e}_1$ and $M_2 = \mathbf{e}_2 + \mathbf{e}_{12}$:
+
+$$\begin{aligned}
+M_1 M_2 &= 2(\mathbf{e}_2 + \mathbf{e}_{12}) + 3\mathbf{e}_1(\mathbf{e}_2 + \mathbf{e}_{12}) \\
+        &= 2\mathbf{e}_2 + 2\mathbf{e}_{12} + 3\mathbf{e}_1\mathbf{e}_2 + 3\mathbf{e}_1\mathbf{e}_{12} \\
+        &= 2\mathbf{e}_2 + 2\mathbf{e}_{12} + 3\mathbf{e}_{12} + 3\mathbf{e}_2 \\
+        &= 5\mathbf{e}_2 + 5\mathbf{e}_{12}
+\end{aligned}$$
+
+(used $\mathbf{e}_1\mathbf{e}_{12} = \mathbf{e}_2$ from the table.)
+
+The result has only grade-1 and grade-2 components — the scalar
+component happens to be zero.
+
+### Why $\text{Cl}(2)$ first
+
+Two reasons:
+
+1. **Small enough to compute by hand.** Four basis elements,
+   $4\times 4$ multiplication table.
+2. **Contains complex numbers as a subalgebra.** The even-grade
+   elements $\{1, \mathbf{e}_{12}\}$ form a closed sub-ring
+   isomorphic to $\mathbb{C}$. Episode 4 makes that precise.
 
 ## In this book
 
 - [Multivectors and Grades](/geometric-algebra/foundations/multivectors-and-grades)
-  — covers the grade structure in arbitrary dimension.
 - [Blades as Geometric Objects](/geometric-algebra/geometry/blades-as-geometry)
-  — generalizes "what does each grade *mean* geometrically" beyond 2D.
 
-## Why 2D first?
-
-There's pedagogical wisdom in starting with $\text{Cl}(2)$ before
-$\text{Cl}(3)$ or higher. In 2D you have one bivector basis
-element ($\mathbf{e}_{12}$), the algebra is just 4-dimensional,
-and you can compute everything by hand. By the time you move to
-3D the patterns are familiar and only the count goes up.
-
-> :nerdygoose: The book's approach is dimension-agnostic from the
-> start. The video's approach builds dimension-by-dimension. If
-> you find the book's "any dimension" framing slippery,
-> $\text{Cl}(2)$ is the right place to ground it.
+> :weightliftinggoose: The multiplication table is the muscle
+> memory of GA. Drill it. By the time you reach
+> $\text{Cl}(3)$ in the next videos, the table is $8\times 8$
+> — but built from the same basis-blade rules as $\text{Cl}(2)$.
