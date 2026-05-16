@@ -196,10 +196,62 @@
   font-size: 0.88rem;
 }
 
-.resultsHint {
-  font-size: 0.78rem;
-  opacity: 0.65;
-  font-style: italic;
+.activeFilters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0 0.25rem 0.7rem;
+}
+
+.activeFiltersLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.6;
+  margin-right: 0.15rem;
+}
+
+.activeFilter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.55rem;
+  background: var(--goose-accent);
+  border: 1px solid var(--goose-accent);
+  border-radius: 14px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.12s;
+}
+
+.activeFilter:hover {
+  opacity: 0.8;
+}
+
+.activeFilterX {
+  font-size: 0.95rem;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.activeClearAll {
+  padding: 0.2rem 0.55rem;
+  background: transparent;
+  border: 1px solid var(--ifm-color-emphasis-400);
+  border-radius: 14px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--ifm-font-color-base);
+}
+
+.activeClearAll:hover {
+  border-color: #e74c3c;
+  color: #e74c3c;
 }
 
 .empty {

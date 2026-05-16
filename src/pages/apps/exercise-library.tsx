@@ -77,6 +77,32 @@ export default function ExerciseLibrary(): ReactNode {
     setPhases(new Set()); setEquip(new Set()); setCompoundOnly(false);
   };
 
+  type ActiveFilter = {key: string; label: string; remove: () => void};
+  const activeFilters: ActiveFilter[] = [
+    ...(search.trim()
+      ? [{key: 'search', label: `“${search.trim()}”`, remove: () => setSearch('')}]
+      : []),
+    ...[...groups].map((g) => ({
+      key: `g-${g}`, label: GROUP_LABELS[g],
+      remove: () => setGroups((s) => toggleSet(s, g)),
+    })),
+    ...[...cats].map((c) => ({
+      key: `c-${c}`, label: CATEGORY_LABELS[c],
+      remove: () => setCats((s) => toggleSet(s, c)),
+    })),
+    ...[...phases].map((p) => ({
+      key: `p-${p}`, label: PHASE_LABELS[p],
+      remove: () => setPhases((s) => toggleSet(s, p)),
+    })),
+    ...[...equip].map((e) => ({
+      key: `e-${e}`, label: e,
+      remove: () => setEquip((s) => toggleSet(s, e)),
+    })),
+    ...(compoundOnly
+      ? [{key: 'compound', label: 'Compound only ◆', remove: () => setCompoundOnly(false)}]
+      : []),
+  ];
+
   return (
     <Layout title="Exercise Library" description="Every exercise in the Goose Factor database — search, filter, preview anatomy, link to YouTube tutorial.">
       <div className={styles.page}>
@@ -216,10 +242,25 @@ export default function ExerciseLibrary(): ReactNode {
           <section className={styles.resultsCol}>
             <div className={styles.resultsHead}>
               <span><strong>{filtered.length}</strong> of {ALL_EXERCISES.length} exercises</span>
-              {(search.trim() || groups.size + cats.size + phases.size + equip.size > 0 || compoundOnly) && (
-                <span className={styles.resultsHint}>Showing filtered results — click "Clear" to reset.</span>
-              )}
             </div>
+
+            {activeFilters.length > 0 && (
+              <div className={styles.activeFilters}>
+                <span className={styles.activeFiltersLabel}>Filtering by</span>
+                {activeFilters.map((f) => (
+                  <button
+                    key={f.key}
+                    className={styles.activeFilter}
+                    onClick={f.remove}
+                    title="Remove this filter"
+                  >
+                    {f.label}
+                    <span className={styles.activeFilterX}>×</span>
+                  </button>
+                ))}
+                <button className={styles.activeClearAll} onClick={clearAll}>Clear all</button>
+              </div>
+            )}
 
             {filtered.length === 0 && (
               <div className={styles.empty}>
