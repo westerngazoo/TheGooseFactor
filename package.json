@@ -16,6 +16,10 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc"
   },
+  "overrides": {
+    "serialize-javascript": "^7.0.5",
+    "webpackbar": "^7.0.0"
+  },
   "dependencies": {
     "@docusaurus/core": "3.9.2",
     "@docusaurus/preset-classic": "3.9.2",
