@@ -913,6 +913,38 @@ const SCIENTIFIC_ADDITIONS: FlatExercise[] = [
   {name: 'TRX Hamstring Curl', category: 'hypertrophy', primary: ['posterior'], secondary: ['core'], compound: true, sets: '3', reps: '10-12', notes: 'Heels in straps, curl in. Hamstring strength + glute activation.', primarySub: ['hams_bf', 'glute_max'], phases: ['medium'], equipment: ['bodyweight']},
 ];
 
+/* ── NERVOUS-SYSTEM ADDITIONS — CNS-focused work: overcoming isometrics,
+   post-activation-potentiation (PAP) contrast complexes, reactive
+   plyometrics, and acceleration. Trains rate of force development and
+   high-threshold motor-unit recruitment rather than muscle size. ── */
+const NERVOUS_SYSTEM_ADDITIONS: FlatExercise[] = [
+  // ─── Overcoming isometrics — max recruitment, no eccentric fatigue ───
+  {name: 'Overcoming Isometric Mid-Thigh Pull', category: 'strength', primary: ['posterior', 'back'], secondary: ['traps', 'quad'], compound: true, sets: '5', reps: '5 × 3-6s max', notes: 'Pull a bar pinned immovable at mid-thigh with maximal intent. Recruits high-threshold motor units with no eccentric fatigue — Verkhoshansky / Hatfield CNS work.', primarySub: ['glute_max', 'erectors'], secondarySub: ['traps_upper'], phases: ['heavy'], equipment: ['barbell']},
+  {name: 'Overcoming Isometric Bench (Pin)', category: 'strength', primary: ['chest', 'triceps'], secondary: ['shoulder'], compound: true, sets: '5', reps: '5 × 3-6s max', notes: 'Press the bar into immovable pins set at a chosen sticking point. Max intent for 3-6s. Trains rate of force development at the weakest joint angle.', primarySub: ['chest_mid', 'triceps_lateral'], secondarySub: ['delt_front'], phases: ['heavy'], equipment: ['barbell']},
+  {name: 'Overcoming Isometric Squat (Pin)', category: 'strength', primary: ['quad'], secondary: ['posterior', 'core'], compound: true, sets: '5', reps: '5 × 5s max', notes: 'Drive a pinned bar from a dead squat position with maximal effort. Joint-angle-specific CNS overload.', primarySub: ['vastus_lateralis', 'rectus_femoris'], secondarySub: ['glute_max'], phases: ['heavy'], equipment: ['barbell']},
+
+  // ─── Contrast / post-activation potentiation (PAP) complexes ───
+  {name: 'Contrast Squat Complex', category: 'strength', primary: ['quad', 'posterior'], secondary: ['calves', 'core'], compound: true, sets: '4', reps: '3 @ 85% + 5 jumps', notes: 'Heavy squat triple, rest 30-60s, then explosive jump squats. The heavy set potentiates the CNS so the jumps fire harder.', primarySub: ['glute_max', 'vastus_lateralis'], phases: ['heavy'], equipment: ['barbell']},
+  {name: 'Contrast Bench Complex', category: 'strength', primary: ['chest', 'triceps'], secondary: ['shoulder', 'core'], compound: true, sets: '4', reps: '3 @ 85% + 5 throws', notes: 'Heavy bench triple, rest 30-60s, then explosive plyo push-ups or med-ball chest passes. Upper-body PAP for pressing power.', primarySub: ['chest_mid', 'triceps_lateral'], phases: ['heavy'], equipment: ['barbell']},
+  {name: 'French Contrast (Lower)', category: 'strength', primary: ['quad', 'posterior'], secondary: ['calves', 'core'], compound: true, sets: '3', reps: '4-station cluster', notes: 'Cometti method: heavy squat → loaded jump → bodyweight jump → band-assisted jump, back to back. Hits the whole force-velocity curve in one set.', primarySub: ['glute_max', 'rectus_femoris'], phases: ['heavy', 'multijoint'], equipment: ['barbell', 'band']},
+  {name: 'Heavy Squat Walkout', category: 'strength', primary: ['quad', 'core'], secondary: ['posterior', 'back'], compound: true, sets: '4', reps: '3 × 5-10s', notes: 'Unrack 110-130% of squat 1RM, walk it out, hold braced — no descent. Supramaximal CNS priming and bracing overload.', primarySub: ['erectors', 'vastus_lateralis'], secondarySub: ['abs_upper'], phases: ['heavy'], equipment: ['barbell']},
+
+  // ─── Reactive plyometrics — stretch-shortening cycle & starting strength ───
+  {name: 'Seated Box Jump', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['calves', 'core'], compound: true, sets: '5', reps: '5', notes: 'Jump to a box from a dead-seated start. Removes the stretch-shortening cycle — isolates pure concentric starting strength.', primarySub: ['glute_max', 'rectus_femoris'], phases: ['multijoint'], equipment: ['box']},
+  {name: 'Single-Leg Box Jump', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['calves', 'core'], compound: true, sets: '4', reps: '4-6/leg', notes: 'Unilateral reactive jump. Exposes left-right power asymmetries.', primarySub: ['glute_max', 'vastus_lateralis'], phases: ['multijoint'], equipment: ['box']},
+  {name: 'Hurdle Hops', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['calves', 'core'], compound: true, sets: '4', reps: '5-8 hurdles', notes: 'Continuous two-foot hops over low hurdles. Minimal ground-contact time — trains reactive strength and the stretch-shortening cycle.', primarySub: ['gastrocnemius', 'glute_max'], phases: ['warmup', 'multijoint'], equipment: ['bodyweight']},
+  {name: 'Depth Drop Push-Up', category: 'metabolic', primary: ['chest', 'triceps'], secondary: ['shoulder', 'core'], compound: true, sets: '4', reps: '5-6', notes: 'Hands drop off low boxes, catch and explode straight back up. Upper-body shock method — reactive pressing power.', primarySub: ['chest_mid', 'triceps_lateral'], phases: ['multijoint'], equipment: ['box', 'bodyweight']},
+
+  // ─── Loaded jumps & Olympic-derived speed-strength ───
+  {name: 'Trap-Bar Jump', category: 'metabolic', primary: ['posterior', 'quad'], secondary: ['traps', 'calves'], compound: true, sets: '5', reps: '3-5 @ 20-30% 1RM', notes: 'Jump holding a lightly loaded trap bar. Loaded jumps sit mid-curve on force-velocity — peak mechanical power output.', primarySub: ['glute_max', 'vastus_lateralis'], phases: ['multijoint']},
+  {name: 'Jump Shrug', category: 'metabolic', primary: ['posterior', 'traps'], secondary: ['back', 'calves'], compound: true, sets: '5', reps: '3-5', notes: 'Explosive triple extension from the hang — violent shrug, no pull under. Teaches rate of force development for the Olympic lifts.', primarySub: ['traps_upper', 'glute_max'], phases: ['multijoint'], equipment: ['barbell']},
+  {name: 'Overhead Backward Med-Ball Throw', category: 'metabolic', primary: ['posterior', 'core'], secondary: ['shoulder', 'back'], compound: true, sets: '4', reps: '6-8', notes: 'Full-body extension, hurl the ball back over the head for max distance. Total-body ballistic power.', primarySub: ['glute_max', 'erectors'], phases: ['warmup', 'multijoint']},
+
+  // ─── Acceleration — rate of force development, joint-friendly ───
+  {name: 'Hill Sprint', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['calves', 'core'], compound: true, sets: '8', reps: '10-20m', notes: 'Max-intent uphill acceleration. High force at reduced impact — RFD without the eccentric pounding of flat sprints.', primarySub: ['glute_max', 'hams_bf'], phases: ['multijoint']},
+  {name: 'Resisted Sprint (Sled)', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['calves', 'core'], compound: true, sets: '6', reps: '15-25m', notes: 'Sprint towing a sled at ~10-20% bodyweight. Overloads the acceleration phase — horizontal force production.', primarySub: ['glute_max', 'hams_bf'], phases: ['multijoint']},
+];
+
 /** Infer equipment from an exercise name. Used as a fallback for legacy
  *  entries that didn't declare equipment explicitly. Uses simple
  *  substring matching for robustness (no regex slash issues). */
@@ -1045,6 +1077,7 @@ export const ALL_EXERCISES: FlatExercise[] = (() => {
     ...STRENGTH_ADDITIONS,
     ...SCIENTIFIC_ADDITIONS,
     ...TRADITION_ADDITIONS,
+    ...NERVOUS_SYSTEM_ADDITIONS,
   ];
   // Apply PHASE_TAGS for any entry missing explicit phases
   const tagged = all.map((ex) => {
