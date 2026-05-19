@@ -83,6 +83,8 @@ export default function MuscleMap({
   const g = activation.group;
   const s = activation.sub;
   const f = (grp: MuscleGroup, sub: SubMuscle) => subFill(grp, sub, g, s);
+  // Group-only fill for regions without sub-muscle tagging (e.g. neck).
+  const fg = (grp: MuscleGroup) => (g[grp] ? COLORS[g[grp]!] : COLORS.none);
 
   // Which sub-muscles are lit, for the legend tag list
   const lit = (Object.keys(s) as SubMuscle[]).filter((k) => s[k]);
@@ -98,7 +100,8 @@ export default function MuscleMap({
           <text x="90" y="14" textAnchor="middle" fontSize="10" fill="currentColor" opacity="0.6">Front</text>
           {/* Head */}
           <circle cx="90" cy="34" r="16" fill="rgba(150,150,150,0.12)" stroke={STROKE} strokeWidth="1"/>
-          <rect x="84" y="48" width="12" height="8" fill="rgba(150,150,150,0.12)" stroke={STROKE} strokeWidth="1"/>
+          {/* Neck */}
+          <rect x="84" y="48" width="12" height="8" fill={fg('neck')} stroke={STROKE} strokeWidth="1"/>
 
           {/* Front traps (upper) */}
           <path d="M67 58 Q90 48 113 58 L107 64 Q90 56 73 64 Z"
@@ -171,7 +174,8 @@ export default function MuscleMap({
           <text x="270" y="14" textAnchor="middle" fontSize="10" fill="currentColor" opacity="0.6">Back</text>
           {/* Head */}
           <circle cx="270" cy="34" r="16" fill="rgba(150,150,150,0.12)" stroke={STROKE} strokeWidth="1"/>
-          <rect x="264" y="48" width="12" height="8" fill="rgba(150,150,150,0.12)" stroke={STROKE} strokeWidth="1"/>
+          {/* Neck */}
+          <rect x="264" y="48" width="12" height="8" fill={fg('neck')} stroke={STROKE} strokeWidth="1"/>
 
           {/* Upper traps (prominent) */}
           <path d="M238 50 Q270 40 302 50 L294 70 Q270 60 246 70 Z"

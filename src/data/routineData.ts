@@ -16,7 +16,8 @@ export type MuscleGroup =
   | 'core'
   | 'calves'
   | 'forearms'
-  | 'traps';
+  | 'traps'
+  | 'neck';
 
 export type Phase = 'warmup' | 'multijoint' | 'heavy' | 'medium' | 'pump';
 
@@ -119,7 +120,7 @@ export const SUB_LABELS: Record<SubMuscle, string> = {
 
 export const MUSCLE_GROUPS: MuscleGroup[] = [
   'quad', 'posterior', 'chest', 'back', 'shoulder',
-  'biceps', 'triceps', 'core', 'calves', 'forearms', 'traps',
+  'biceps', 'triceps', 'core', 'calves', 'forearms', 'traps', 'neck',
 ];
 
 export const GROUP_LABELS: Record<MuscleGroup, string> = {
@@ -134,6 +135,7 @@ export const GROUP_LABELS: Record<MuscleGroup, string> = {
   calves: 'Calves',
   forearms: 'Forearms',
   traps: 'Traps',
+  neck: 'Neck',
 };
 
 export const INTENSITY_COLORS: Record<Intensity, string> = {
@@ -945,6 +947,32 @@ const NERVOUS_SYSTEM_ADDITIONS: FlatExercise[] = [
   {name: 'Resisted Sprint (Sled)', category: 'metabolic', primary: ['quad', 'posterior'], secondary: ['calves', 'core'], compound: true, sets: '6', reps: '15-25m', notes: 'Sprint towing a sled at ~10-20% bodyweight. Overloads the acceleration phase — horizontal force production.', primarySub: ['glute_max', 'hams_bf'], phases: ['multijoint']},
 ];
 
+/* ── NECK & CORE ADDITIONS — direct neck training (an under-served group)
+   plus trunk work across flexion, rotation, and anti-extension. ── */
+const NECK_AND_CORE_ADDITIONS: FlatExercise[] = [
+  // ─── Neck — flexion, extension, lateral, isometric ───
+  {name: 'Neck Flexion (Plate)', category: 'isolation', primary: ['neck'], sets: '3', reps: '15-20', notes: 'Lie face-up on a bench, plate on the forehead over a towel. Curl the chin toward the chest through full ROM. Add load slowly.', phases: ['medium', 'pump'], equipment: ['dumbbell']},
+  {name: 'Neck Extension (Plate)', category: 'isolation', primary: ['neck'], secondary: ['traps'], sets: '3', reps: '15-20', notes: 'Lie face-down, plate held behind the head. Extend the neck up through full ROM. Trains the posterior neck and upper traps.', phases: ['medium', 'pump'], equipment: ['dumbbell']},
+  {name: 'Neck Lateral Flexion (Plate)', category: 'isolation', primary: ['neck'], sets: '3', reps: '12-15/side', notes: 'Lie on your side, plate on the side of the head. Raise the head toward the ceiling. Trains the sternocleidomastoid and scalenes.', phases: ['medium', 'pump'], equipment: ['dumbbell']},
+  {name: 'Neck Harness Extension', category: 'strength', primary: ['neck'], secondary: ['traps'], sets: '4', reps: '10-15', notes: 'Head harness loaded with a plate on a chain. Nod through full ROM. The classic loaded neck builder — combat-sport staple.', phases: ['medium']},
+  {name: 'Banded Neck Isometric (4-Way)', category: 'isolation', primary: ['neck'], sets: '4', reps: '20-30s/direction', notes: 'Loop a band around the head, anchor it, and resist into flexion, extension, and each side. Joint-friendly entry to direct neck work.', phases: ['warmup', 'pump'], equipment: ['band']},
+  {name: '4-Way Neck Machine', category: 'isolation', primary: ['neck'], secondary: ['traps'], sets: '3', reps: '12-15/direction', notes: 'Padded neck machine — flexion, extension, and lateral flexion each side. Consistent, controlled loading.', phases: ['medium', 'pump'], equipment: ['machine']},
+  {name: 'Chin Tuck', category: 'isolation', primary: ['neck'], sets: '3', reps: '10 × 5s holds', notes: 'Draw the chin straight back, lengthening the back of the neck. Deep-neck-flexor activation — posture and forward-head prehab.', phases: ['warmup'], equipment: ['bodyweight']},
+  {name: 'Wrestler’s Bridge', category: 'strength', primary: ['neck'], secondary: ['posterior', 'core'], compound: true, sets: '3', reps: '20-40s', notes: 'Bodyweight neck bridge — advanced. Build up gradually from partial range; not advisable with any history of neck injury.', phases: ['medium'], equipment: ['bodyweight']},
+
+  // ─── Core — flexion, rotation, anti-extension ───
+  {name: 'Cable Crunch', category: 'hypertrophy', primary: ['core'], sets: '4', reps: '12-15', notes: 'Kneel at a high cable, rope behind the head, crunch the rib cage toward the pelvis. Loadable spinal flexion for the rectus abdominis.', primarySub: ['abs_upper', 'abs_lower'], phases: ['medium', 'pump'], equipment: ['cable']},
+  {name: 'Hanging Knee Raise', category: 'isolation', primary: ['core'], secondary: ['forearms'], sets: '3', reps: '12-15', notes: 'Hang from a bar, raise the knees to the chest with control — no swing. The accessible entry to hanging flexion work.', primarySub: ['abs_lower'], phases: ['medium', 'pump'], equipment: ['bodyweight']},
+  {name: 'Toes-to-Bar', category: 'strength', primary: ['core'], secondary: ['back', 'forearms'], compound: true, sets: '4', reps: '8-12', notes: 'Hang and bring straight legs all the way to the bar. Full-ROM hanging flexion plus heavy lat and grip demand.', primarySub: ['abs_lower', 'abs_upper'], secondarySub: ['lats'], phases: ['heavy', 'medium'], equipment: ['bodyweight']},
+  {name: 'Reverse Crunch', category: 'isolation', primary: ['core'], sets: '3', reps: '15-20', notes: 'Lie supine, curl the pelvis up off the floor toward the rib cage. Lower-ab bias with no hip-flexor dominance.', primarySub: ['abs_lower'], phases: ['medium', 'pump'], equipment: ['bodyweight']},
+  {name: 'Russian Twist', category: 'isolation', primary: ['core'], sets: '3', reps: '15-20/side', notes: 'Seated, torso leaned back, rotate a weight from side to side. Rotational and oblique work.', primarySub: ['obliques'], phases: ['medium', 'pump'], equipment: ['dumbbell', 'bodyweight']},
+  {name: 'Landmine Twist', category: 'isolation', primary: ['core'], secondary: ['shoulder'], compound: true, sets: '3', reps: '10-12/side', notes: 'Hold the end of a landmine bar overhead, arc it side to side. Standing rotational power for the obliques.', primarySub: ['obliques'], phases: ['medium'], equipment: ['barbell']},
+  {name: 'Hanging Windshield Wiper', category: 'strength', primary: ['core'], secondary: ['back', 'forearms'], compound: true, sets: '3', reps: '6-10/side', notes: 'Hang with legs raised, sweep them in an arc from side to side. Advanced anti-rotation and oblique strength.', primarySub: ['obliques', 'abs_lower'], phases: ['heavy'], equipment: ['bodyweight']},
+  {name: 'Stir the Pot', category: 'isolation', primary: ['core'], secondary: ['shoulder'], sets: '3', reps: '8-10/direction', notes: 'Forearms on a stability ball in a plank, draw small circles. Dynamic anti-extension — a Stuart McGill favorite.', primarySub: ['abs_upper', 'obliques'], phases: ['medium'], equipment: ['bodyweight']},
+  {name: 'Hollow Body Rock', category: 'isolation', primary: ['core'], sets: '3', reps: '15-20', notes: 'Hold a hollow position and rock head-to-toe as one rigid unit. Gymnastics-staple anti-extension under dynamic load.', primarySub: ['abs_lower', 'abs_upper'], phases: ['warmup', 'medium'], equipment: ['bodyweight']},
+  {name: 'Weighted Decline Sit-Up', category: 'hypertrophy', primary: ['core'], sets: '4', reps: '10-15', notes: 'Sit-up on a decline bench holding a plate at the chest. Full-ROM loaded spinal flexion.', primarySub: ['abs_upper', 'abs_lower'], phases: ['medium'], equipment: ['dumbbell']},
+];
+
 /** Infer equipment from an exercise name. Used as a fallback for legacy
  *  entries that didn't declare equipment explicitly. Uses simple
  *  substring matching for robustness (no regex slash issues). */
@@ -1078,6 +1106,7 @@ export const ALL_EXERCISES: FlatExercise[] = (() => {
     ...SCIENTIFIC_ADDITIONS,
     ...TRADITION_ADDITIONS,
     ...NERVOUS_SYSTEM_ADDITIONS,
+    ...NECK_AND_CORE_ADDITIONS,
   ];
   // Apply PHASE_TAGS for any entry missing explicit phases
   const tagged = all.map((ex) => {
