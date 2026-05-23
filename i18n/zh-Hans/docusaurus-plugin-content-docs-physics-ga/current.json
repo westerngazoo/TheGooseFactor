@@ -1,0 +1,38 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.bookSidebar.category.Part I — Foundations refresh": {
+    "message": "Part I — Foundations refresh",
+    "description": "The label for category 'Part I — Foundations refresh' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part II — Classical Mechanics": {
+    "message": "Part II — Classical Mechanics",
+    "description": "The label for category 'Part II — Classical Mechanics' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part III — Spacetime Algebra": {
+    "message": "Part III — Spacetime Algebra",
+    "description": "The label for category 'Part III — Spacetime Algebra' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part IV — Electromagnetism": {
+    "message": "Part IV — Electromagnetism",
+    "description": "The label for category 'Part IV — Electromagnetism' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part V — Quantum Theory": {
+    "message": "Part V — Quantum Theory",
+    "description": "The label for category 'Part V — Quantum Theory' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part VI — Gauge Gravity": {
+    "message": "Part VI — Gauge Gravity",
+    "description": "The label for category 'Part VI — Gauge Gravity' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part VII — Geometric Calculus": {
+    "message": "Part VII — Geometric Calculus",
+    "description": "The label for category 'Part VII — Geometric Calculus' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Appendices": {
+    "message": "Appendices",
+    "description": "The label for category 'Appendices' in sidebar 'bookSidebar'"
+  }
+}

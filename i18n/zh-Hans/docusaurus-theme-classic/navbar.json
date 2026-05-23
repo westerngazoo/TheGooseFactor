@@ -1,0 +1,86 @@
+{
+  "title": {
+    "message": "The Goose Factor",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "Goose 标志",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Blog": {
+    "message": "博客",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.Books": {
+    "message": "书籍",
+    "description": "Navbar item with label Books"
+  },
+  "item.label.Apps": {
+    "message": "应用",
+    "description": "Navbar item with label Apps"
+  },
+  "item.label.About": {
+    "message": "关于",
+    "description": "Navbar item with label About"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  },
+  "item.label.X": {
+    "message": "X",
+    "description": "Navbar item with label X"
+  },
+  "item.label.C++ Algorithms": {
+    "message": "C++ 算法",
+    "description": "Navbar item with label C++ Algorithms"
+  },
+  "item.label.Embedded C++/Rust": {
+    "message": "嵌入式 C++/Rust",
+    "description": "Navbar item with label Embedded C++/Rust"
+  },
+  "item.label.Systems Interview": {
+    "message": "系统设计面试",
+    "description": "Navbar item with label Systems Interview"
+  },
+  "item.label.Math Basics": {
+    "message": "数学基础",
+    "description": "Navbar item with label Math Basics"
+  },
+  "item.label.Physics Basics": {
+    "message": "物理基础",
+    "description": "Navbar item with label Physics Basics"
+  },
+  "item.label.Sci-Fi Novel": {
+    "message": "科幻小说",
+    "description": "Navbar item with label Sci-Fi Novel"
+  },
+  "item.label.Poems": {
+    "message": "诗集",
+    "description": "Navbar item with label Poems"
+  },
+  "item.label.GooseOS": {
+    "message": "GooseOS",
+    "description": "Navbar item with label GooseOS"
+  },
+  "item.label.Geometric Algebra": {
+    "message": "几何代数",
+    "description": "Navbar item with label Geometric Algebra"
+  },
+  "item.label.OS Compared": {
+    "message": "操作系统对比",
+    "description": "Navbar item with label OS Compared"
+  },
+  "item.label.C Algorithms": {
+    "message": "C 算法",
+    "description": "Navbar item with label C Algorithms"
+  },
+  "item.label.Physics through GA": {
+    "message": "用几何代数学物理",
+    "description": "Navbar item with label Physics through GA"
+  },
+  "item.label.AI through GA": {
+    "message": "用几何代数学 AI",
+    "description": "Navbar item with label AI through GA"
+  }
+}

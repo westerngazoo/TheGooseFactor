@@ -1,0 +1,66 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.bookSidebar.category.Part 1: Boot + Hello World": {
+    "message": "Part 1: Boot + Hello World",
+    "description": "The label for category 'Part 1: Boot + Hello World' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part 2: println! + Panic Handler": {
+    "message": "Part 2: println! + Panic Handler",
+    "description": "The label for category 'Part 2: println! + Panic Handler' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part 3: Traps + Interrupts": {
+    "message": "Part 3: Traps + Interrupts",
+    "description": "The label for category 'Part 3: Traps + Interrupts' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part 4: Real Hardware": {
+    "message": "Part 4: Real Hardware",
+    "description": "The label for category 'Part 4: Real Hardware' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part 5: Virtual Memory": {
+    "message": "Part 5: Virtual Memory",
+    "description": "The label for category 'Part 5: Virtual Memory' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part 6: First Userspace Process": {
+    "message": "Part 6: First Userspace Process",
+    "description": "The label for category 'Part 6: First Userspace Process' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part 7: Synchronous IPC": {
+    "message": "Part 7: Synchronous IPC",
+    "description": "The label for category 'Part 7: Synchronous IPC' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part 8: The Architecture": {
+    "message": "Part 8: The Architecture",
+    "description": "The label for category 'Part 8: The Architecture' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part 9: Call/Reply IPC": {
+    "message": "Part 9: Call/Reply IPC",
+    "description": "The label for category 'Part 9: Call/Reply IPC' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part 10: Memory Management": {
+    "message": "Part 10: Memory Management",
+    "description": "The label for category 'Part 10: Memory Management' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part 11: Process Lifecycle": {
+    "message": "Part 11: Process Lifecycle",
+    "description": "The label for category 'Part 11: Process Lifecycle' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part 12: Preemptive Scheduling": {
+    "message": "Part 12: Preemptive Scheduling",
+    "description": "The label for category 'Part 12: Preemptive Scheduling' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part 13: Userspace Device Servers": {
+    "message": "Part 13: Userspace Device Servers",
+    "description": "The label for category 'Part 13: Userspace Device Servers' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Appendix": {
+    "message": "Appendix",
+    "description": "The label for category 'Appendix' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Appendix.link.generated-index.description": {
+    "message": "RISC-V architecture primer, hardware reference, and U-Boot command guide for OS developers.",
+    "description": "The generated-index page description for category 'Appendix' in sidebar 'bookSidebar'"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.bookSidebar.category.Part I: Foundations": {
+    "message": "Part I: Foundations",
+    "description": "The label for category 'Part I: Foundations' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part II: Data Structures": {
+    "message": "Part II: Data Structures",
+    "description": "The label for category 'Part II: Data Structures' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part III: Algorithms": {
+    "message": "Part III: Algorithms",
+    "description": "The label for category 'Part III: Algorithms' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part IV: Numerical & Mathematical": {
+    "message": "Part IV: Numerical & Mathematical",
+    "description": "The label for category 'Part IV: Numerical & Mathematical' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part V: Practice & Beyond": {
+    "message": "Part V: Practice & Beyond",
+    "description": "The label for category 'Part V: Practice & Beyond' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Appendices": {
+    "message": "Appendices",
+    "description": "The label for category 'Appendices' in sidebar 'bookSidebar'"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.bookSidebar.category.1. Discrete Math Refresh": {
+    "message": "1. Discrete Math Refresh",
+    "description": "The label for category '1. Discrete Math Refresh' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.1. Discrete Math Refresh.link.generated-index.description": {
+    "message": "Sets, logic, relations, functions -- the type system for reasoning about algorithms.",
+    "description": "The generated-index page description for category '1. Discrete Math Refresh' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.2. Real Numbers & Precalculus": {
+    "message": "2. Real Numbers & Precalculus",
+    "description": "The label for category '2. Real Numbers & Precalculus' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.2. Real Numbers & Precalculus.link.generated-index.description": {
+    "message": "The real number system, algebra, and trigonometry — everything you need before Apostol's Calculus.",
+    "description": "The generated-index page description for category '2. Real Numbers & Precalculus' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.3. Calculus": {
+    "message": "3. Calculus",
+    "description": "The label for category '3. Calculus' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.3. Calculus.link.generated-index.description": {
+    "message": "Limits, continuity, differentiation, and integration — following Apostol's rigorous approach.",
+    "description": "The generated-index page description for category '3. Calculus' in sidebar 'bookSidebar'"
+  }
+}

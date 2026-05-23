@@ -1,0 +1,30 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.bookSidebar.category.1. Foundations": {
+    "message": "1. Foundations",
+    "description": "The label for category '1. Foundations' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.2. Products & Operations": {
+    "message": "2. Products & Operations",
+    "description": "The label for category '2. Products & Operations' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.3. Geometry": {
+    "message": "3. Geometry",
+    "description": "The label for category '3. Geometry' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.4. Rotations & Rotors": {
+    "message": "4. Rotations & Rotors",
+    "description": "The label for category '4. Rotations & Rotors' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.5. Applications": {
+    "message": "5. Applications",
+    "description": "The label for category '5. Applications' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Video Companion (Mathoma)": {
+    "message": "Video Companion (Mathoma)",
+    "description": "The label for category 'Video Companion (Mathoma)' in sidebar 'bookSidebar'"
+  }
+}

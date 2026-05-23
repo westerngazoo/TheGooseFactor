@@ -1,0 +1,86 @@
+{
+  "title": {
+    "message": "The Goose Factor",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "Logo del Ganso",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Blog": {
+    "message": "Blog",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.Books": {
+    "message": "Libros",
+    "description": "Navbar item with label Books"
+  },
+  "item.label.Apps": {
+    "message": "Apps",
+    "description": "Navbar item with label Apps"
+  },
+  "item.label.About": {
+    "message": "Acerca de",
+    "description": "Navbar item with label About"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  },
+  "item.label.X": {
+    "message": "X",
+    "description": "Navbar item with label X"
+  },
+  "item.label.C++ Algorithms": {
+    "message": "Algoritmos en C++",
+    "description": "Navbar item with label C++ Algorithms"
+  },
+  "item.label.Embedded C++/Rust": {
+    "message": "C++/Rust embebido",
+    "description": "Navbar item with label Embedded C++/Rust"
+  },
+  "item.label.Systems Interview": {
+    "message": "Entrevista de sistemas",
+    "description": "Navbar item with label Systems Interview"
+  },
+  "item.label.Math Basics": {
+    "message": "Conceptos básicos de matemáticas",
+    "description": "Navbar item with label Math Basics"
+  },
+  "item.label.Physics Basics": {
+    "message": "Conceptos básicos de física",
+    "description": "Navbar item with label Physics Basics"
+  },
+  "item.label.Sci-Fi Novel": {
+    "message": "Novela de ciencia ficción",
+    "description": "Navbar item with label Sci-Fi Novel"
+  },
+  "item.label.Poems": {
+    "message": "Poemas",
+    "description": "Navbar item with label Poems"
+  },
+  "item.label.GooseOS": {
+    "message": "GooseOS",
+    "description": "Navbar item with label GooseOS"
+  },
+  "item.label.Geometric Algebra": {
+    "message": "Álgebra geométrica",
+    "description": "Navbar item with label Geometric Algebra"
+  },
+  "item.label.OS Compared": {
+    "message": "Comparativa de SO",
+    "description": "Navbar item with label OS Compared"
+  },
+  "item.label.C Algorithms": {
+    "message": "Algoritmos en C",
+    "description": "Navbar item with label C Algorithms"
+  },
+  "item.label.Physics through GA": {
+    "message": "Física con AG",
+    "description": "Navbar item with label Physics through GA"
+  },
+  "item.label.AI through GA": {
+    "message": "IA con AG",
+    "description": "Navbar item with label AI through GA"
+  }
+}

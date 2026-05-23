@@ -1,0 +1,18 @@
+{
+  "link.title.Community": {
+    "message": "社区",
+    "description": "The title of the footer links column with title=Community in the footer"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/westerngazoo"
+  },
+  "link.item.label.X": {
+    "message": "X",
+    "description": "The label of footer link with label=X linking to https://x.com/techno_goose"
+  },
+  "copyright": {
+    "message": "Copyright © 2026 The Goose Factor. 使用 Docusaurus 构建。",
+    "description": "The footer copyright"
+  }
+}

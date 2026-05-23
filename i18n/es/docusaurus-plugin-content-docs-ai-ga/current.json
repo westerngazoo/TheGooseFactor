@@ -1,0 +1,34 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.bookSidebar.category.Part I — Why GA for ML?": {
+    "message": "Part I — Why GA for ML?",
+    "description": "The label for category 'Part I — Why GA for ML?' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part II — Equivariant Networks": {
+    "message": "Part II — Equivariant Networks",
+    "description": "The label for category 'Part II — Equivariant Networks' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part III — Clifford / GA Networks": {
+    "message": "Part III — Clifford / GA Networks",
+    "description": "The label for category 'Part III — Clifford / GA Networks' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part IV — Multivector Representations": {
+    "message": "Part IV — Multivector Representations",
+    "description": "The label for category 'Part IV — Multivector Representations' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part V — Robotics & Control": {
+    "message": "Part V — Robotics & Control",
+    "description": "The label for category 'Part V — Robotics & Control' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part VI — Frontiers": {
+    "message": "Part VI — Frontiers",
+    "description": "The label for category 'Part VI — Frontiers' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Appendices": {
+    "message": "Appendices",
+    "description": "The label for category 'Appendices' in sidebar 'bookSidebar'"
+  }
+}

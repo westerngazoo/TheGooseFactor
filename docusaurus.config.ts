@@ -59,7 +59,15 @@ const config: Config = {
   projectName: 'the-goose-factor',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  i18n: { defaultLocale: 'en', locales: ['en'] },
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'es', 'zh-Hans'],
+    localeConfigs: {
+      en: { label: 'English' },
+      es: { label: 'Español' },
+      'zh-Hans': { label: '简体中文' },
+    },
+  },
   customFields: {
     supabaseUrl: process.env.SUPABASE_URL ?? '',
     supabaseAnonKey: process.env.SUPABASE_ANON_KEY ?? '',
@@ -140,6 +148,7 @@ const config: Config = {
         { to: '/about', label: 'About', position: 'left' },
         { href: 'https://github.com/westerngazoo', label: 'GitHub', position: 'right' },
         { href: 'https://x.com/techno_goose', label: 'X', position: 'right' },
+        { type: 'localeDropdown', position: 'right' },
       ],
     },
     footer: {

@@ -1,0 +1,34 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.bookSidebar.category.Part I: Foundations": {
+    "message": "Part I: Foundations",
+    "description": "The label for category 'Part I: Foundations' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part II: Core Concepts": {
+    "message": "Part II: Core Concepts",
+    "description": "The label for category 'Part II: Core Concepts' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part III: Communication Protocols": {
+    "message": "Part III: Communication Protocols",
+    "description": "The label for category 'Part III: Communication Protocols' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part IV: Advanced Topics": {
+    "message": "Part IV: Advanced Topics",
+    "description": "The label for category 'Part IV: Advanced Topics' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part V: Performance & Optimization": {
+    "message": "Part V: Performance & Optimization",
+    "description": "The label for category 'Part V: Performance & Optimization' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part VI: Real-World Projects": {
+    "message": "Part VI: Real-World Projects",
+    "description": "The label for category 'Part VI: Real-World Projects' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part VII: Comparative Analysis": {
+    "message": "Part VII: Comparative Analysis",
+    "description": "The label for category 'Part VII: Comparative Analysis' in sidebar 'bookSidebar'"
+  }
+}

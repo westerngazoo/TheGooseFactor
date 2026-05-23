@@ -1,0 +1,18 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.bookSidebar.category.Part I: Origins & Core Foundations": {
+    "message": "Part I: Origins & Core Foundations",
+    "description": "The label for category 'Part I: Origins & Core Foundations' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Part I: Origins & Core Foundations.link.generated-index.description": {
+    "message": "Chapters covering C++ history, tooling, and foundational concepts.",
+    "description": "The generated-index page description for category 'Part I: Origins & Core Foundations' in sidebar 'bookSidebar'"
+  },
+  "sidebar.bookSidebar.category.Appendices": {
+    "message": "Appendices",
+    "description": "The label for category 'Appendices' in sidebar 'bookSidebar'"
+  }
+}
