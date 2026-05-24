@@ -1,21 +1,20 @@
 import {useState, useMemo, useCallback, type ReactNode} from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import Translate, {translate} from '@docusaurus/Translate';
 import styles from './session-builder.module.css';
 import {
   type MuscleGroup,
   type ExerciseCategory,
   type Exercise,
   MUSCLE_GROUPS,
-  GROUP_LABELS,
   CATEGORIES,
-  CATEGORY_LABELS,
   CATEGORY_COLORS,
-  CATEGORY_PURPOSE,
   exercisesFor,
   exerciseVideoUrl,
   ALL_EXERCISES,
 } from '../../data/routineData';
+import {useT} from '../../data/routineData.translations';
 import MuscleMap, {
   activationFor,
   mergeActivations,
@@ -25,12 +24,7 @@ import BodyWeightInput, {KcalBadge} from '../../components/BodyWeightInput';
 import {estimateCalories} from '../../lib/calories';
 
 /* ══════════════════════════════════════════
-   SESSION BUILDER
-   Cherry-pick today's workout.
-   For each muscle group, choose a category
-   (Strength / Metabolic / Hypertrophy /
-   Isolation) and pick specific exercises
-   from the best-known list for that combo.
+   SESSION BUILDER (i18n)
    ══════════════════════════════════════════ */
 
 type PickedExercise = {
@@ -40,42 +34,62 @@ type PickedExercise = {
   exercise: Exercise;
 };
 
-function validateSession(picks: PickedExercise[]): string[] {
-  const warnings: string[] = [];
+type WarningKey =
+  | {kind: 'tooManyStrength'; count: number}
+  | {kind: 'sacredChest'}
+  | {kind: 'dlBeforeSquat'}
+  | {kind: 'strengthFirst'};
 
-  // Multiple strength blocks — CNS load
+function validateSession(picks: PickedExercise[]): WarningKey[] {
+  const warnings: WarningKey[] = [];
   const strengthCount = picks.filter((p) => p.category === 'strength').length;
-  if (strengthCount > 3) {
-    warnings.push(`${strengthCount} strength lifts selected. Max 1 strength focus per group per session.`);
-  }
+  if (strengthCount > 3) warnings.push({kind: 'tooManyStrength', count: strengthCount});
 
-  // Chest strength + other strength
   const groupsWithStrength = new Set(picks.filter((p) => p.category === 'strength').map((p) => p.group));
-  if (groupsWithStrength.has('chest') && groupsWithStrength.size > 1) {
-    warnings.push('Chest STRENGTH is a SACRED session — other strength work not recommended.');
-  }
+  if (groupsWithStrength.has('chest') && groupsWithStrength.size > 1) warnings.push({kind: 'sacredChest'});
 
-  // Deadlift (back strength) before squat (quad strength)
   const dlIdx = picks.findIndex((p) => p.group === 'back' && p.category === 'strength');
   const sqIdx = picks.findIndex((p) => p.group === 'quad' && p.category === 'strength');
-  if (dlIdx >= 0 && sqIdx >= 0 && sqIdx < dlIdx) {
-    warnings.push('Back STRENGTH (deadlift) should come before Quad STRENGTH (squat) on the same day.');
-  }
+  if (dlIdx >= 0 && sqIdx >= 0 && sqIdx < dlIdx) warnings.push({kind: 'dlBeforeSquat'});
 
-  // Strength should precede other categories
   let sawNonStrength = false;
   for (const p of picks) {
     if (p.category !== 'strength') sawNonStrength = true;
-    else if (sawNonStrength) {
-      warnings.push('Strength lifts should come first in the session, before Metabolic / Hypertrophy / Isolation.');
-      break;
-    }
+    else if (sawNonStrength) { warnings.push({kind: 'strengthFirst'}); break; }
   }
-
   return warnings;
 }
 
+function renderWarning(w: WarningKey): string {
+  switch (w.kind) {
+    case 'tooManyStrength':
+      return translate(
+        {
+          id: 'apps.sessionBuilder.warn.tooManyStrength',
+          message: '{count} strength lifts selected. Max 1 strength focus per group per session.',
+        },
+        {count: w.count}
+      );
+    case 'sacredChest':
+      return translate({
+        id: 'apps.sessionBuilder.warn.sacredChest',
+        message: 'Chest STRENGTH is a SACRED session — other strength work not recommended.',
+      });
+    case 'dlBeforeSquat':
+      return translate({
+        id: 'apps.sessionBuilder.warn.dlBeforeSquat',
+        message: 'Back STRENGTH (deadlift) should come before Quad STRENGTH (squat) on the same day.',
+      });
+    case 'strengthFirst':
+      return translate({
+        id: 'apps.sessionBuilder.warn.strengthFirst',
+        message: 'Strength lifts should come first in the session, before Metabolic / Hypertrophy / Isolation.',
+      });
+  }
+}
+
 export default function SessionBuilder(): ReactNode {
+  const t = useT();
   const [picks, setPicks] = useState<PickedExercise[]>([]);
   const [nextId, setNextId] = useState(1);
   const [selGroup, setSelGroup] = useState<MuscleGroup>('chest');
@@ -87,10 +101,7 @@ export default function SessionBuilder(): ReactNode {
     : 0;
 
   const addExercise = useCallback((exercise: Exercise) => {
-    setPicks((prev) => [
-      ...prev,
-      {id: nextId, group: selGroup, category: selCategory, exercise},
-    ]);
+    setPicks((prev) => [...prev, {id: nextId, group: selGroup, category: selCategory, exercise}]);
     setNextId((n) => n + 1);
   }, [nextId, selGroup, selCategory]);
 
@@ -118,20 +129,29 @@ export default function SessionBuilder(): ReactNode {
   const warnings = useMemo(() => validateSession(picks), [picks]);
   const availableExercises = useMemo(() => {
     const q = exSearch.trim().toLowerCase();
-    if (q) return ALL_EXERCISES.filter((e) => e.name.toLowerCase().includes(q));
+    if (q) return ALL_EXERCISES.filter((e) =>
+      e.name.toLowerCase().includes(q) || t.tName(e.name).toLowerCase().includes(q)
+    );
     return exercisesFor(selGroup, selCategory);
-  }, [selGroup, selCategory, exSearch]);
+  }, [selGroup, selCategory, exSearch, t]);
   const pickedNames = new Set(
     picks.filter((p) => p.group === selGroup && p.category === selCategory).map((p) => p.exercise.name)
   );
 
   return (
-    <Layout title="Session Builder" description="Cherry-pick today's workout by muscle group, training category, and specific exercises.">
+    <Layout
+      title={translate({id: 'apps.sessionBuilder.title', message: 'Session Builder'})}
+      description={translate({id: 'apps.sessionBuilder.description', message: "Cherry-pick today's workout by muscle group, training category, and specific exercises."})}
+    >
       <div className={styles.page}>
         <header className={styles.header}>
-          <Heading as="h1" className={styles.title}>Session Builder</Heading>
+          <Heading as="h1" className={styles.title}>
+            <Translate id="apps.sessionBuilder.title">Session Builder</Translate>
+          </Heading>
           <p className={styles.subtitle}>
-            Cherry-pick today's workout &mdash; pick a group, a category, and the exact exercises you want.
+            <Translate id="apps.sessionBuilder.subtitle">
+              Cherry-pick today's workout — pick a group, a category, and the exact exercises you want.
+            </Translate>
           </p>
           <div style={{marginTop: '0.5rem', display: 'flex', justifyContent: 'center'}}>
             <BrowserOnly>{() => <BodyWeightInput onChange={setBodyKg} />}</BrowserOnly>
@@ -143,9 +163,9 @@ export default function SessionBuilder(): ReactNode {
           {CATEGORIES.map((c) => (
             <div key={c} className={styles.legendItem}>
               <span className={styles.legendBadge} style={{background: CATEGORY_COLORS[c]}}>
-                {CATEGORY_LABELS[c]}
+                {t.tCategory(c)}
               </span>
-              <span className={styles.legendText}>{CATEGORY_PURPOSE[c]}</span>
+              <span className={styles.legendText}>{t.tCategoryPurpose(c)}</span>
             </div>
           ))}
         </div>
@@ -153,10 +173,14 @@ export default function SessionBuilder(): ReactNode {
         <div className={styles.layout}>
           {/* ─── PICKER PANEL ─── */}
           <div className={styles.pickerPanel}>
-            <Heading as="h3" className={styles.sectionTitle}>Pick exercises</Heading>
+            <Heading as="h3" className={styles.sectionTitle}>
+              <Translate id="apps.sessionBuilder.picker.title">Pick exercises</Translate>
+            </Heading>
 
             <div className={styles.pickerField}>
-              <label className={styles.fieldLabel}>Muscle group</label>
+              <label className={styles.fieldLabel}>
+                <Translate id="apps.sessionBuilder.picker.muscleGroup">Muscle group</Translate>
+              </label>
               <div className={styles.chipRow}>
                 {MUSCLE_GROUPS.map((g) => (
                   <button
@@ -164,14 +188,16 @@ export default function SessionBuilder(): ReactNode {
                     className={`${styles.chip} ${selGroup === g ? styles.chipActive : ''}`}
                     onClick={() => setSelGroup(g)}
                   >
-                    {GROUP_LABELS[g]}
+                    {t.tGroup(g)}
                   </button>
                 ))}
               </div>
             </div>
 
             <div className={styles.pickerField}>
-              <label className={styles.fieldLabel}>Category</label>
+              <label className={styles.fieldLabel}>
+                <Translate id="apps.sessionBuilder.picker.category">Category</Translate>
+              </label>
               <div className={styles.chipRow}>
                 {CATEGORIES.map((c) => (
                   <button
@@ -179,20 +205,22 @@ export default function SessionBuilder(): ReactNode {
                     className={`${styles.chip} ${selCategory === c ? styles.chipActive : ''}`}
                     style={selCategory === c ? {background: CATEGORY_COLORS[c], borderColor: CATEGORY_COLORS[c], color: '#fff'} : {borderColor: CATEGORY_COLORS[c], color: CATEGORY_COLORS[c]}}
                     onClick={() => setSelCategory(c)}
-                    title={CATEGORY_PURPOSE[c]}
+                    title={t.tCategoryPurpose(c)}
                   >
-                    {CATEGORY_LABELS[c]}
+                    {t.tCategory(c)}
                   </button>
                 ))}
               </div>
             </div>
 
             <div className={styles.pickerField}>
-              <label className={styles.fieldLabel}>Search any exercise</label>
+              <label className={styles.fieldLabel}>
+                <Translate id="apps.sessionBuilder.picker.search">Search any exercise</Translate>
+              </label>
               <input
                 type="text"
                 className={styles.searchInput}
-                placeholder="Type to search the full library — clear to filter by group/category"
+                placeholder={translate({id: 'apps.sessionBuilder.picker.searchPlaceholder', message: 'Type to search the full library — clear to filter by group/category'})}
                 value={exSearch}
                 onChange={(e) => setExSearch(e.target.value)}
               />
@@ -201,11 +229,21 @@ export default function SessionBuilder(): ReactNode {
             <div className={styles.pickerField}>
               <div className={styles.availableHeader}>
                 <label className={styles.fieldLabel}>
-                  {exSearch.trim()
-                    ? `Search: "${exSearch.trim()}"`
-                    : `${GROUP_LABELS[selGroup]} · ${CATEGORY_LABELS[selCategory]}`}
+                  {exSearch.trim() ? (
+                    <Translate
+                      id="apps.sessionBuilder.picker.searchLabel"
+                      values={{query: exSearch.trim()}}
+                    >{'Search: "{query}"'}</Translate>
+                  ) : (
+                    `${t.tGroup(selGroup)} · ${t.tCategory(selCategory)}`
+                  )}
                 </label>
-                <span className={styles.availableCount}>{availableExercises.length} exercises</span>
+                <span className={styles.availableCount}>
+                  <Translate
+                    id="apps.sessionBuilder.picker.count"
+                    values={{count: availableExercises.length}}
+                  >{'{count} exercises'}</Translate>
+                </span>
               </div>
               <div className={styles.exerciseList}>
                 {availableExercises.map((ex) => {
@@ -216,34 +254,40 @@ export default function SessionBuilder(): ReactNode {
                       className={`${styles.exerciseBtn} ${already ? styles.exerciseBtnPicked : ''}`}
                     >
                       <span className={styles.exName}>
-                        {ex.compound ? '◆ ' : ''}{ex.name}
+                        {ex.compound ? '◆ ' : ''}{t.tName(ex.name)}
                       </span>
-                      <span className={styles.exMeta}>{ex.sets} &times; {ex.reps}</span>
+                      <span className={styles.exMeta}>{ex.sets} × {ex.reps}</span>
                       {(ex.primary || ex.secondary) && (
                         <span className={styles.exActivation}>
                           {(ex.primary ?? []).map((g) => (
-                            <span key={`p-${g}`} className={styles.pillPrimary}>{GROUP_LABELS[g]}</span>
+                            <span key={`p-${g}`} className={styles.pillPrimary}>{t.tGroup(g)}</span>
                           ))}
                           {(ex.secondary ?? []).map((g) => (
-                            <span key={`s-${g}`} className={styles.pillSecondary}>{GROUP_LABELS[g]}</span>
+                            <span key={`s-${g}`} className={styles.pillSecondary}>{t.tGroup(g)}</span>
                           ))}
                         </span>
                       )}
-                      {ex.notes && <span className={styles.exNotes}>{ex.notes}</span>}
+                      {ex.notes && <span className={styles.exNotes}>{t.tNotes(ex.name, ex.notes)}</span>}
                       <span className={styles.exActionRow}>
                         <a
                           href={exerciseVideoUrl(ex.name)}
                           target="_blank"
                           rel="noreferrer"
                           className={styles.exVideoLink}
-                          title="Open YouTube tutorial"
-                        >▶ video</a>
+                          title={translate({id: 'apps.sessionBuilder.exercise.videoTitle', message: 'Open YouTube tutorial'})}
+                        >
+                          <Translate id="apps.sessionBuilder.exercise.video">▶ video</Translate>
+                        </a>
                         <button
                           type="button"
                           className={styles.exAddBtn}
                           onClick={() => addExercise(ex)}
                           disabled={already}
-                        >{already ? '✓ added' : '+ add'}</button>
+                        >
+                          {already
+                            ? <Translate id="apps.sessionBuilder.exercise.added">✓ added</Translate>
+                            : <Translate id="apps.sessionBuilder.exercise.add">+ add</Translate>}
+                        </button>
                       </span>
                     </div>
                   );
@@ -255,31 +299,44 @@ export default function SessionBuilder(): ReactNode {
           {/* ─── SESSION PANEL ─── */}
           <div className={styles.sessionPanel}>
             <div className={styles.sessionHeader}>
-              <Heading as="h3" className={styles.sectionTitle}>Today's Session</Heading>
+              <Heading as="h3" className={styles.sectionTitle}>
+                <Translate id="apps.sessionBuilder.session.title">Today's Session</Translate>
+              </Heading>
               {picks.length > 0 && (
-                <button className={styles.clearBtn} onClick={clearAll}>Clear</button>
+                <button className={styles.clearBtn} onClick={clearAll}>
+                  <Translate id="apps.sessionBuilder.session.clear">Clear</Translate>
+                </button>
               )}
             </div>
 
             {picks.length === 0 && (
               <p className={styles.emptyState}>
-                No exercises yet. Pick a group, a category, and tap exercises to add them.
+                <Translate id="apps.sessionBuilder.session.empty">
+                  No exercises yet. Pick a group, a category, and tap exercises to add them.
+                </Translate>
               </p>
             )}
 
             {warnings.length > 0 && (
               <div className={styles.warningBox}>
-                <strong>Heads up:</strong>
+                <strong>
+                  <Translate id="apps.sessionBuilder.session.headsUp">Heads up:</Translate>
+                </strong>
                 <ul>
-                  {warnings.map((w, i) => <li key={i}>{w}</li>)}
+                  {warnings.map((w, i) => <li key={i}>{renderWarning(w)}</li>)}
                 </ul>
               </div>
             )}
 
             {picks.length > 0 && (
               <div className={styles.summary}>
-                <strong>{picks.length}</strong> exercise{picks.length !== 1 ? 's' : ''} · estimated{' '}
-                <strong>{picks.reduce((s, p) => s + (parseInt(p.exercise.sets) || 0), 0)}</strong> working sets
+                <Translate
+                  id="apps.sessionBuilder.session.summary"
+                  values={{
+                    n: <strong key="n">{picks.length}</strong>,
+                    sets: <strong key="s">{picks.reduce((s, p) => s + (parseInt(p.exercise.sets) || 0), 0)}</strong>,
+                  }}
+                >{'{n} exercises · estimated {sets} working sets'}</Translate>
                 {totalKcal > 0 && (
                   <> · <strong>≈ {Math.round(totalKcal)} kcal</strong></>
                 )}
@@ -291,12 +348,7 @@ export default function SessionBuilder(): ReactNode {
                 <MuscleMap
                   activation={mergeActivations(
                     picks.map((p) =>
-                      activationFor(
-                        p.exercise.primary,
-                        p.exercise.secondary,
-                        p.exercise.primarySub,
-                        p.exercise.secondarySub,
-                      )
+                      activationFor(p.exercise.primary, p.exercise.secondary, p.exercise.primarySub, p.exercise.secondarySub)
                     )
                   )}
                 />
@@ -306,42 +358,45 @@ export default function SessionBuilder(): ReactNode {
             {picks.map((p, idx) => (
               <div key={p.id} className={styles.pickCard}>
                 <div className={styles.pickHeader}>
-                  <span
-                    className={styles.pickBadge}
-                    style={{background: CATEGORY_COLORS[p.category]}}
-                  >
-                    {CATEGORY_LABELS[p.category]}
+                  <span className={styles.pickBadge} style={{background: CATEGORY_COLORS[p.category]}}>
+                    {t.tCategory(p.category)}
                   </span>
-                  <span className={styles.pickGroup}>{GROUP_LABELS[p.group]}</span>
+                  <span className={styles.pickGroup}>{t.tGroup(p.group)}</span>
                   <div className={styles.pickControls}>
                     <button
                       className={styles.moveBtn}
                       onClick={() => movePick(p.id, -1)}
                       disabled={idx === 0}
-                      title="Move up"
+                      title={translate({id: 'apps.sessionBuilder.pick.moveUp', message: 'Move up'})}
                     >▲</button>
                     <button
                       className={styles.moveBtn}
                       onClick={() => movePick(p.id, 1)}
                       disabled={idx === picks.length - 1}
-                      title="Move down"
+                      title={translate({id: 'apps.sessionBuilder.pick.moveDown', message: 'Move down'})}
                     >▼</button>
                     <button
                       className={styles.removeBtn}
                       onClick={() => removePick(p.id)}
-                      title="Remove"
+                      title={translate({id: 'apps.sessionBuilder.pick.remove', message: 'Remove'})}
                     >×</button>
                   </div>
                 </div>
                 <div className={styles.pickBody}>
-                  <div className={styles.pickName}>{p.exercise.name}</div>
+                  <div className={styles.pickName}>{t.tName(p.exercise.name)}</div>
                   <div className={styles.pickMeta}>
-                    <span className={styles.pickSetsReps}>{p.exercise.sets} &times; {p.exercise.reps}</span>
+                    <span className={styles.pickSetsReps}>{p.exercise.sets} × {p.exercise.reps}</span>
                     {p.exercise.biseriePair && (
-                      <span className={styles.pickBiserie}>+ {p.exercise.biseriePair} (biserie)</span>
+                      <span className={styles.pickBiserie}>
+                        <Translate
+                          id="apps.sessionBuilder.pick.biserie"
+                          values={{partner: t.tName(p.exercise.biseriePair)}}
+                        >{'+ {partner} (biserie)'}</Translate>
+                      </span>
                     )}
+                    {bodyKg > 0 && <KcalBadge kcal={estimateCalories(p.exercise, bodyKg)} />}
                   </div>
-                  {p.exercise.notes && <div className={styles.pickNotes}>{p.exercise.notes}</div>}
+                  {p.exercise.notes && <div className={styles.pickNotes}>{t.tNotes(p.exercise.name, p.exercise.notes)}</div>}
                 </div>
               </div>
             ))}

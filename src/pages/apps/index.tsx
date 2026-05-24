@@ -1,11 +1,13 @@
 import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
+import Translate, {translate} from '@docusaurus/Translate';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
 type AppCard = {
+  id: string;
   title: string;
   emoji: string;
   description: string;
@@ -13,56 +15,102 @@ type AppCard = {
   tags: string[];
 };
 
-const apps: AppCard[] = [
-  {
-    title: 'Calorie Calculator',
-    emoji: '\u{1F525}',
-    description:
-      'TDEE, macros by time window, Keto and Mixed Diet modes. Synced with the Goose Method.',
-    link: '/apps/calorie-calculator',
-    tags: ['Nutrition', 'Macros', 'TDEE'],
-  },
-  {
-    title: 'Routine Generator',
-    emoji: '\u{1F4AA}',
-    description:
-      'Generate your week under the Goose Method constraints: CNS cost, PAP supersets, undulating recovery.',
-    link: '/apps/routine-generator',
-    tags: ['Training', 'Goose Method', 'PAP'],
-  },
-  {
-    title: 'Session Builder',
-    emoji: '\u{1F3AF}',
-    description:
-      "Cherry-pick today's workout — pick muscle groups and intensity on the fly, with live Goose Method validation.",
-    link: '/apps/session-builder',
-    tags: ['Training', 'Today', 'Ad-hoc'],
-  },
-  {
-    title: 'Phased Builder',
-    emoji: '\u{1F525}',
-    description:
-      'Build your session in 5 phases — warm-up circuit, multi-joint compound, heavy strength, hypertrophy, pump. Each phase narrows the next.',
-    link: '/apps/phased-builder',
-    tags: ['Training', 'Phased', 'Adaptive'],
-  },
-  {
-    title: 'Progress Tracker',
-    emoji: '\u{1F4C8}',
-    description:
-      'Daily log for workouts, diet, and body metrics. Sign in with Google; data is private to your account.',
-    link: '/apps/progress-tracker',
-    tags: ['Logging', 'Google Auth', 'Supabase'],
-  },
-  {
-    title: 'Exercise Library',
-    emoji: '\u{1F4DA}',
-    description:
-      "Every exercise in the database — search and filter by muscle, category, phase, equipment. Anatomy preview + YouTube tutorial per move.",
-    link: '/apps/exercise-library',
-    tags: ['Reference', 'Filterable', 'Anatomy'],
-  },
-];
+// Strings are wrapped in translate() at call time so the current locale resolves
+// per render. The English `message` is the source string.
+function getApps(): AppCard[] {
+  return [
+    {
+      id: 'calorie-calculator',
+      title: translate({id: 'apps.index.calorieCalculator.title', message: 'Calorie Calculator'}),
+      emoji: '\u{1F525}',
+      description: translate({
+        id: 'apps.index.calorieCalculator.desc',
+        message: 'TDEE, macros by time window, Keto and Mixed Diet modes. Synced with the Goose Method.',
+      }),
+      link: '/apps/calorie-calculator',
+      tags: [
+        translate({id: 'apps.index.tag.nutrition', message: 'Nutrition'}),
+        translate({id: 'apps.index.tag.macros', message: 'Macros'}),
+        translate({id: 'apps.index.tag.tdee', message: 'TDEE'}),
+      ],
+    },
+    {
+      id: 'routine-generator',
+      title: translate({id: 'apps.index.routineGenerator.title', message: 'Routine Generator'}),
+      emoji: '\u{1F4AA}',
+      description: translate({
+        id: 'apps.index.routineGenerator.desc',
+        message: 'Generate your week under the Goose Method constraints: CNS cost, PAP supersets, undulating recovery.',
+      }),
+      link: '/apps/routine-generator',
+      tags: [
+        translate({id: 'apps.index.tag.training', message: 'Training'}),
+        translate({id: 'apps.index.tag.gooseMethod', message: 'Goose Method'}),
+        translate({id: 'apps.index.tag.pap', message: 'PAP'}),
+      ],
+    },
+    {
+      id: 'session-builder',
+      title: translate({id: 'apps.index.sessionBuilder.title', message: 'Session Builder'}),
+      emoji: '\u{1F3AF}',
+      description: translate({
+        id: 'apps.index.sessionBuilder.desc',
+        message: "Cherry-pick today's workout — pick muscle groups and intensity on the fly, with live Goose Method validation.",
+      }),
+      link: '/apps/session-builder',
+      tags: [
+        translate({id: 'apps.index.tag.training', message: 'Training'}),
+        translate({id: 'apps.index.tag.today', message: 'Today'}),
+        translate({id: 'apps.index.tag.adhoc', message: 'Ad-hoc'}),
+      ],
+    },
+    {
+      id: 'phased-builder',
+      title: translate({id: 'apps.index.phasedBuilder.title', message: 'Phased Builder'}),
+      emoji: '\u{1F525}',
+      description: translate({
+        id: 'apps.index.phasedBuilder.desc',
+        message: 'Build your session in 5 phases — warm-up circuit, multi-joint compound, heavy strength, hypertrophy, pump. Each phase narrows the next.',
+      }),
+      link: '/apps/phased-builder',
+      tags: [
+        translate({id: 'apps.index.tag.training', message: 'Training'}),
+        translate({id: 'apps.index.tag.phased', message: 'Phased'}),
+        translate({id: 'apps.index.tag.adaptive', message: 'Adaptive'}),
+      ],
+    },
+    {
+      id: 'progress-tracker',
+      title: translate({id: 'apps.index.progressTracker.title', message: 'Progress Tracker'}),
+      emoji: '\u{1F4C8}',
+      description: translate({
+        id: 'apps.index.progressTracker.desc',
+        message: 'Daily log for workouts, diet, and body metrics. Sign in with Google; data is private to your account.',
+      }),
+      link: '/apps/progress-tracker',
+      tags: [
+        translate({id: 'apps.index.tag.logging', message: 'Logging'}),
+        translate({id: 'apps.index.tag.googleAuth', message: 'Google Auth'}),
+        translate({id: 'apps.index.tag.supabase', message: 'Supabase'}),
+      ],
+    },
+    {
+      id: 'exercise-library',
+      title: translate({id: 'apps.index.exerciseLibrary.title', message: 'Exercise Library'}),
+      emoji: '\u{1F4DA}',
+      description: translate({
+        id: 'apps.index.exerciseLibrary.desc',
+        message: 'Every exercise in the database — search and filter by muscle, category, phase, equipment. Anatomy preview + YouTube tutorial per move.',
+      }),
+      link: '/apps/exercise-library',
+      tags: [
+        translate({id: 'apps.index.tag.reference', message: 'Reference'}),
+        translate({id: 'apps.index.tag.filterable', message: 'Filterable'}),
+        translate({id: 'apps.index.tag.anatomy', message: 'Anatomy'}),
+      ],
+    },
+  ];
+}
 
 function AppCardComponent({title, emoji, description, link, tags}: AppCard) {
   return (
@@ -84,28 +132,35 @@ function AppCardComponent({title, emoji, description, link, tags}: AppCard) {
 }
 
 export default function AppsIndex(): ReactNode {
+  const apps = getApps();
   return (
-    <Layout title="Apps" description="Interactive tools from the Goose Method">
+    <Layout
+      title={translate({id: 'apps.index.layout.title', message: 'Apps'})}
+      description={translate({id: 'apps.index.layout.description', message: 'Interactive tools from the Goose Method'})}>
       <header className={styles.header}>
         <div className="container">
           <img
             src="/img/weightliftinggoose.png"
-            alt="Goose lifting weights"
+            alt={translate({id: 'apps.index.heroAlt', message: 'Goose lifting weights'})}
             className={styles.heroImg}
           />
           <Heading as="h1" className={styles.heroTitle}>
-            Goose Apps
+            <Translate id="apps.index.heroTitle">Goose Apps</Translate>
           </Heading>
           <p className={styles.heroSub}>
-            Interactive tools powered by the <strong>Goose Method</strong>.
-            Calorie calculator, routine generator and more.
+            <Translate
+              id="apps.index.heroSub"
+              values={{methodName: <strong key="m">{translate({id: 'apps.index.gooseMethod', message: 'Goose Method'})}</strong>}}
+            >
+              {'Interactive tools powered by the {methodName}. Calorie calculator, routine generator and more.'}
+            </Translate>
           </p>
         </div>
       </header>
       <main className="container">
         <div className={clsx('row', styles.grid)}>
           {apps.map((app) => (
-            <AppCardComponent key={app.title} {...app} />
+            <AppCardComponent key={app.id} {...app} />
           ))}
         </div>
       </main>

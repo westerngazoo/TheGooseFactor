@@ -1,7 +1,7 @@
 import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Translate, {translate} from '@docusaurus/Translate';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
@@ -9,31 +9,35 @@ import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
 function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
         <Heading as="h1" className={clsx('hero__title', styles.heroTitleHacker)}>
-          Entering The Goose zone
+          <Translate id="home.hero.title">Entering The Goose zone</Translate>
         </Heading>
-  <p className={clsx('hero__subtitle', styles.heroSubtitleAdjust)} aria-label="Beware of the quack!">
+        <p
+          className={clsx('hero__subtitle', styles.heroSubtitleAdjust)}
+          aria-label={translate({id: 'home.hero.aria', message: 'Beware of the quack!'})}
+        >
           <span className={styles.typingWrapper}>
-      <span className={styles.typingText}>Beware of the ...</span>
+            <span className={styles.typingText}>
+              <Translate id="home.hero.typing">Beware of the ...</Translate>
+            </span>
           </span>
           <span className={styles.impactQuack} aria-hidden="true">QUACK!</span>
         </p>
         <div className={styles.buttons}>
           <Link className={clsx('button button--lg', styles.heroButton)} to="/blog">
-            Read the Blog
+            <Translate id="home.hero.readBlog">Read the Blog</Translate>
           </Link>
           <Link className={clsx('button button--lg margin--sm', styles.heroButton)} to="/book">
-            C++ Algorithms
+            <Translate id="home.hero.cppAlgorithms">C++ Algorithms</Translate>
           </Link>
           <Link className={clsx('button button--lg margin--sm', styles.heroButton)} to="/math">
-            Math & Physics
+            <Translate id="home.hero.mathPhysics">Math &amp; Physics</Translate>
           </Link>
           <Link className={clsx('button button--lg margin--sm', styles.heroButton)} to="/apps">
-            Goose Apps
+            <Translate id="home.hero.gooseApps">Goose Apps</Translate>
           </Link>
         </div>
       </div>
@@ -42,11 +46,10 @@ function HomepageHeader() {
 }
 
 export default function Home(): ReactNode {
-  const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title="The Goose Zone"
-      description="You're entering the Goose Zone – beware of the quack.">
+      title={translate({id: 'home.layout.title', message: 'The Goose Zone'})}
+      description={translate({id: 'home.layout.description', message: "You're entering the Goose Zone – beware of the quack."})}>
       <HomepageHeader />
       <main>
         <HomepageFeatures />

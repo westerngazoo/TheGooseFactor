@@ -426,5 +426,230 @@
   },
   "apps.exerciseLibrary.card.showAnatomy": {
     "message": "查看解剖"
+  },
+  "bodyWeight.title": {
+    "message": "体重(kg),用于估算热量消耗。本地保存。"
+  },
+  "bodyWeight.label": {
+    "message": "体重:"
+  },
+  "bodyWeight.placeholder": {
+    "message": "kg"
+  },
+  "bodyWeight.unit": {
+    "message": "kg"
+  },
+  "kcalBadge.title": {
+    "message": "按所列组数×次数估算单次执行消耗的热量。"
+  },
+  "home.hero.title": {
+    "message": "进入鹅区"
+  },
+  "home.hero.aria": {
+    "message": "小心嘎嘎声!"
+  },
+  "home.hero.typing": {
+    "message": "小心..."
+  },
+  "home.hero.readBlog": {
+    "message": "阅读博客"
+  },
+  "home.hero.cppAlgorithms": {
+    "message": "C++ 算法"
+  },
+  "home.hero.mathPhysics": {
+    "message": "数学与物理"
+  },
+  "home.hero.gooseApps": {
+    "message": "Goose 应用"
+  },
+  "home.layout.title": {
+    "message": "鹅区"
+  },
+  "home.layout.description": {
+    "message": "你正在进入鹅区 – 小心嘎嘎声。"
+  },
+  "apps.index.calorieCalculator.title": {
+    "message": "热量计算器"
+  },
+  "apps.index.calorieCalculator.desc": {
+    "message": "TDEE、按时间窗口的宏量、生酮和混合饮食模式。与 Goose 方法同步。"
+  },
+  "apps.index.tag.nutrition": {
+    "message": "营养"
+  },
+  "apps.index.tag.macros": {
+    "message": "宏量"
+  },
+  "apps.index.tag.tdee": {
+    "message": "TDEE"
+  },
+  "apps.index.routineGenerator.title": {
+    "message": "训练计划生成器"
+  },
+  "apps.index.routineGenerator.desc": {
+    "message": "基于 Goose 方法的约束生成一周计划：神经系统消耗、PAP 超级组、波动恢复。"
+  },
+  "apps.index.tag.training": {
+    "message": "训练"
+  },
+  "apps.index.tag.gooseMethod": {
+    "message": "Goose 方法"
+  },
+  "apps.index.tag.pap": {
+    "message": "PAP"
+  },
+  "apps.index.sessionBuilder.title": {
+    "message": "训练构建器"
+  },
+  "apps.index.sessionBuilder.desc": {
+    "message": "挑选今天的训练 — 即时选择肌群和强度，配合 Goose 方法实时验证。"
+  },
+  "apps.index.tag.today": {
+    "message": "今日"
+  },
+  "apps.index.tag.adhoc": {
+    "message": "即时"
+  },
+  "apps.index.phasedBuilder.title": {
+    "message": "分段构建器"
+  },
+  "apps.index.phasedBuilder.desc": {
+    "message": "将训练分成 5 个阶段构建 — 热身循环、多关节复合、大重量力量、增肌、泵感。每个阶段收窄下一个。"
+  },
+  "apps.index.tag.phased": {
+    "message": "分阶段"
+  },
+  "apps.index.tag.adaptive": {
+    "message": "自适应"
+  },
+  "apps.index.progressTracker.title": {
+    "message": "进度追踪"
+  },
+  "apps.index.progressTracker.desc": {
+    "message": "训练、饮食、身体指标的每日日志。使用 Google 登录;数据归你账户所有,私密。"
+  },
+  "apps.index.tag.logging": {
+    "message": "日志"
+  },
+  "apps.index.tag.googleAuth": {
+    "message": "Google 登录"
+  },
+  "apps.index.tag.supabase": {
+    "message": "Supabase"
+  },
+  "apps.index.exerciseLibrary.title": {
+    "message": "动作库"
+  },
+  "apps.index.exerciseLibrary.desc": {
+    "message": "数据库中的所有动作 — 按肌肉、类别、阶段、器材筛选。每个动作配解剖预览 + YouTube 教学。"
+  },
+  "apps.index.tag.reference": {
+    "message": "参考"
+  },
+  "apps.index.tag.filterable": {
+    "message": "可筛选"
+  },
+  "apps.index.tag.anatomy": {
+    "message": "解剖"
+  },
+  "apps.index.layout.title": {
+    "message": "应用"
+  },
+  "apps.index.layout.description": {
+    "message": "来自 Goose 方法的交互式工具"
+  },
+  "apps.index.heroAlt": {
+    "message": "举重的鹅"
+  },
+  "apps.index.heroTitle": {
+    "message": "Goose 应用"
+  },
+  "apps.index.heroSub": {
+    "message": "由 {methodName} 驱动的交互式工具。热量计算器、训练计划生成器等。"
+  },
+  "apps.index.gooseMethod": {
+    "message": "Goose 方法"
+  },
+  "apps.sessionBuilder.warn.tooManyStrength": {
+    "message": "已选 {count} 个力量动作。建议每个肌群每次训练最多 1 个力量重点。"
+  },
+  "apps.sessionBuilder.warn.sacredChest": {
+    "message": "胸部力量是一次神圣的训练 — 不建议其他力量训练。"
+  },
+  "apps.sessionBuilder.warn.dlBeforeSquat": {
+    "message": "同一天背部力量(硬拉)应在腿部力量(深蹲)之前。"
+  },
+  "apps.sessionBuilder.warn.strengthFirst": {
+    "message": "力量动作应在训练前段,先于代谢/增肌/孤立动作。"
+  },
+  "apps.sessionBuilder.title": {
+    "message": "训练构建器"
+  },
+  "apps.sessionBuilder.description": {
+    "message": "按肌群、训练类别和具体动作挑选今天的训练。"
+  },
+  "apps.sessionBuilder.subtitle": {
+    "message": "挑选今天的训练 — 选一个肌群、一个类别和想要的具体动作。"
+  },
+  "apps.sessionBuilder.picker.title": {
+    "message": "选择动作"
+  },
+  "apps.sessionBuilder.picker.muscleGroup": {
+    "message": "肌肉群"
+  },
+  "apps.sessionBuilder.picker.category": {
+    "message": "类别"
+  },
+  "apps.sessionBuilder.picker.search": {
+    "message": "搜索任意动作"
+  },
+  "apps.sessionBuilder.picker.searchPlaceholder": {
+    "message": "输入以搜索整个动作库 — 清空以按肌群/类别筛选"
+  },
+  "apps.sessionBuilder.picker.searchLabel": {
+    "message": "搜索:\"{query}\""
+  },
+  "apps.sessionBuilder.picker.count": {
+    "message": "{count} 个动作"
+  },
+  "apps.sessionBuilder.exercise.videoTitle": {
+    "message": "打开 YouTube 教学"
+  },
+  "apps.sessionBuilder.exercise.video": {
+    "message": "▶ 视频"
+  },
+  "apps.sessionBuilder.exercise.added": {
+    "message": "✓ 已添加"
+  },
+  "apps.sessionBuilder.exercise.add": {
+    "message": "+ 添加"
+  },
+  "apps.sessionBuilder.session.title": {
+    "message": "今日训练"
+  },
+  "apps.sessionBuilder.session.clear": {
+    "message": "清除"
+  },
+  "apps.sessionBuilder.session.empty": {
+    "message": "尚未添加动作。选择一个肌群、一个类别,然后点击动作添加。"
+  },
+  "apps.sessionBuilder.session.headsUp": {
+    "message": "提示:"
+  },
+  "apps.sessionBuilder.session.summary": {
+    "message": "{n} 个动作 · 估计 {sets} 个有效组"
+  },
+  "apps.sessionBuilder.pick.moveUp": {
+    "message": "上移"
+  },
+  "apps.sessionBuilder.pick.moveDown": {
+    "message": "下移"
+  },
+  "apps.sessionBuilder.pick.remove": {
+    "message": "移除"
+  },
+  "apps.sessionBuilder.pick.biserie": {
+    "message": "+ {partner}(组合)"
   }
 }

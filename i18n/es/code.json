@@ -426,5 +426,230 @@
   },
   "apps.exerciseLibrary.card.showAnatomy": {
     "message": "Mostrar anatomía"
+  },
+  "bodyWeight.title": {
+    "message": "Peso corporal en kg, usado para estimar calorías. Guardado localmente."
+  },
+  "bodyWeight.label": {
+    "message": "Peso corporal:"
+  },
+  "bodyWeight.placeholder": {
+    "message": "kg"
+  },
+  "bodyWeight.unit": {
+    "message": "kg"
+  },
+  "kcalBadge.title": {
+    "message": "Calorías estimadas quemadas en una ejecución a las series×reps indicadas."
+  },
+  "home.hero.title": {
+    "message": "Entrando a la Zona del Ganso"
+  },
+  "home.hero.aria": {
+    "message": "¡Cuidado con el cuac!"
+  },
+  "home.hero.typing": {
+    "message": "Cuidado con el ..."
+  },
+  "home.hero.readBlog": {
+    "message": "Leer el blog"
+  },
+  "home.hero.cppAlgorithms": {
+    "message": "Algoritmos en C++"
+  },
+  "home.hero.mathPhysics": {
+    "message": "Matemáticas y Física"
+  },
+  "home.hero.gooseApps": {
+    "message": "Goose Apps"
+  },
+  "home.layout.title": {
+    "message": "La Zona del Ganso"
+  },
+  "home.layout.description": {
+    "message": "Estás entrando en la Zona del Ganso – cuidado con el cuac."
+  },
+  "apps.index.calorieCalculator.title": {
+    "message": "Calculadora de calorías"
+  },
+  "apps.index.calorieCalculator.desc": {
+    "message": "TDEE, macros por ventana horaria, modo Keto y Mixto. Sincronizado con el Método Goose."
+  },
+  "apps.index.tag.nutrition": {
+    "message": "Nutrición"
+  },
+  "apps.index.tag.macros": {
+    "message": "Macros"
+  },
+  "apps.index.tag.tdee": {
+    "message": "TDEE"
+  },
+  "apps.index.routineGenerator.title": {
+    "message": "Generador de rutinas"
+  },
+  "apps.index.routineGenerator.desc": {
+    "message": "Genera tu semana bajo las restricciones del Método Goose: coste del SNC, supersets PAP, recuperación ondulatoria."
+  },
+  "apps.index.tag.training": {
+    "message": "Entreno"
+  },
+  "apps.index.tag.gooseMethod": {
+    "message": "Método Goose"
+  },
+  "apps.index.tag.pap": {
+    "message": "PAP"
+  },
+  "apps.index.sessionBuilder.title": {
+    "message": "Constructor de sesión"
+  },
+  "apps.index.sessionBuilder.desc": {
+    "message": "Arma el entreno de hoy — elige grupos musculares e intensidad sobre la marcha, con validación en vivo del Método Goose."
+  },
+  "apps.index.tag.today": {
+    "message": "Hoy"
+  },
+  "apps.index.tag.adhoc": {
+    "message": "Ad-hoc"
+  },
+  "apps.index.phasedBuilder.title": {
+    "message": "Constructor por fases"
+  },
+  "apps.index.phasedBuilder.desc": {
+    "message": "Arma tu sesión en 5 fases — calentamiento, compuesto multiarticular, fuerza pesada, hipertrofia, bombeo. Cada fase acota la siguiente."
+  },
+  "apps.index.tag.phased": {
+    "message": "Por fases"
+  },
+  "apps.index.tag.adaptive": {
+    "message": "Adaptativo"
+  },
+  "apps.index.progressTracker.title": {
+    "message": "Registro de progreso"
+  },
+  "apps.index.progressTracker.desc": {
+    "message": "Diario de entrenamientos, dieta y métricas corporales. Inicia sesión con Google; tus datos son privados."
+  },
+  "apps.index.tag.logging": {
+    "message": "Registro"
+  },
+  "apps.index.tag.googleAuth": {
+    "message": "Auth con Google"
+  },
+  "apps.index.tag.supabase": {
+    "message": "Supabase"
+  },
+  "apps.index.exerciseLibrary.title": {
+    "message": "Biblioteca de ejercicios"
+  },
+  "apps.index.exerciseLibrary.desc": {
+    "message": "Cada ejercicio en la base de datos — busca y filtra por músculo, categoría, fase, equipamiento. Vista anatómica + tutorial de YouTube por movimiento."
+  },
+  "apps.index.tag.reference": {
+    "message": "Referencia"
+  },
+  "apps.index.tag.filterable": {
+    "message": "Filtrable"
+  },
+  "apps.index.tag.anatomy": {
+    "message": "Anatomía"
+  },
+  "apps.index.layout.title": {
+    "message": "Apps"
+  },
+  "apps.index.layout.description": {
+    "message": "Herramientas interactivas del Método Goose"
+  },
+  "apps.index.heroAlt": {
+    "message": "Ganso levantando pesas"
+  },
+  "apps.index.heroTitle": {
+    "message": "Goose Apps"
+  },
+  "apps.index.heroSub": {
+    "message": "Herramientas interactivas potenciadas por el {methodName}. Calculadora de calorías, generador de rutinas y más."
+  },
+  "apps.index.gooseMethod": {
+    "message": "Método Goose"
+  },
+  "apps.sessionBuilder.warn.tooManyStrength": {
+    "message": "{count} ejercicios de fuerza seleccionados. Máximo 1 enfoque de fuerza por grupo por sesión."
+  },
+  "apps.sessionBuilder.warn.sacredChest": {
+    "message": "La FUERZA de pecho es una sesión SAGRADA — no se recomienda otro trabajo de fuerza."
+  },
+  "apps.sessionBuilder.warn.dlBeforeSquat": {
+    "message": "La FUERZA de espalda (peso muerto) debe ir antes que la FUERZA de cuádriceps (sentadilla) en el mismo día."
+  },
+  "apps.sessionBuilder.warn.strengthFirst": {
+    "message": "Los ejercicios de fuerza deben ir primero en la sesión, antes de Metabólico / Hipertrofia / Aislamiento."
+  },
+  "apps.sessionBuilder.title": {
+    "message": "Constructor de sesión"
+  },
+  "apps.sessionBuilder.description": {
+    "message": "Arma tu entreno de hoy por grupo muscular, categoría de entreno y ejercicios específicos."
+  },
+  "apps.sessionBuilder.subtitle": {
+    "message": "Arma tu entreno de hoy — elige un grupo, una categoría y los ejercicios exactos que quieras."
+  },
+  "apps.sessionBuilder.picker.title": {
+    "message": "Elegir ejercicios"
+  },
+  "apps.sessionBuilder.picker.muscleGroup": {
+    "message": "Grupo muscular"
+  },
+  "apps.sessionBuilder.picker.category": {
+    "message": "Categoría"
+  },
+  "apps.sessionBuilder.picker.search": {
+    "message": "Buscar cualquier ejercicio"
+  },
+  "apps.sessionBuilder.picker.searchPlaceholder": {
+    "message": "Escribe para buscar en toda la biblioteca — borra para filtrar por grupo/categoría"
+  },
+  "apps.sessionBuilder.picker.searchLabel": {
+    "message": "Búsqueda: \"{query}\""
+  },
+  "apps.sessionBuilder.picker.count": {
+    "message": "{count} ejercicios"
+  },
+  "apps.sessionBuilder.exercise.videoTitle": {
+    "message": "Abrir tutorial de YouTube"
+  },
+  "apps.sessionBuilder.exercise.video": {
+    "message": "▶ vídeo"
+  },
+  "apps.sessionBuilder.exercise.added": {
+    "message": "✓ añadido"
+  },
+  "apps.sessionBuilder.exercise.add": {
+    "message": "+ añadir"
+  },
+  "apps.sessionBuilder.session.title": {
+    "message": "Sesión de hoy"
+  },
+  "apps.sessionBuilder.session.clear": {
+    "message": "Limpiar"
+  },
+  "apps.sessionBuilder.session.empty": {
+    "message": "Aún no hay ejercicios. Elige un grupo, una categoría y toca los ejercicios para añadirlos."
+  },
+  "apps.sessionBuilder.session.headsUp": {
+    "message": "Aviso:"
+  },
+  "apps.sessionBuilder.session.summary": {
+    "message": "{n} ejercicios · estimado {sets} series efectivas"
+  },
+  "apps.sessionBuilder.pick.moveUp": {
+    "message": "Mover arriba"
+  },
+  "apps.sessionBuilder.pick.moveDown": {
+    "message": "Mover abajo"
+  },
+  "apps.sessionBuilder.pick.remove": {
+    "message": "Quitar"
+  },
+  "apps.sessionBuilder.pick.biserie": {
+    "message": "+ {partner} (biserie)"
   }
 }

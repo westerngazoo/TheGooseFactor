@@ -1,4 +1,5 @@
 import {useEffect, useState, type ReactNode} from 'react';
+import {translate} from '@docusaurus/Translate';
 import {getStoredWeight, setStoredWeight} from '../lib/calories';
 
 /**
@@ -41,9 +42,11 @@ export default function BodyWeightInput({
         gap: '0.4rem',
         fontSize: '0.85rem',
       }}
-      title="Body weight in kg, used for calorie estimates. Saved locally."
+      title={translate({id: 'bodyWeight.title', message: 'Body weight in kg, used for calorie estimates. Saved locally.'})}
     >
-      <span style={{opacity: 0.75, fontWeight: 600}}>Body weight:</span>
+      <span style={{opacity: 0.75, fontWeight: 600}}>
+        {translate({id: 'bodyWeight.label', message: 'Body weight:'})}
+      </span>
       <input
         type="number"
         min={30}
@@ -51,7 +54,7 @@ export default function BodyWeightInput({
         step={0.5}
         value={hydrated ? kg || '' : ''}
         onChange={(e) => handleChange(e.target.value)}
-        placeholder="kg"
+        placeholder={translate({id: 'bodyWeight.placeholder', message: 'kg'})}
         style={{
           width: '5rem',
           padding: '0.25rem 0.5rem',
@@ -62,7 +65,7 @@ export default function BodyWeightInput({
           color: 'var(--ifm-font-color-base)',
         }}
       />
-      <span style={{opacity: 0.55}}>kg</span>
+      <span style={{opacity: 0.55}}>{translate({id: 'bodyWeight.unit', message: 'kg'})}</span>
     </label>
   );
 }
@@ -82,7 +85,7 @@ export function KcalBadge({kcal}: {kcal: number}): ReactNode {
         fontSize: '0.72rem',
         fontWeight: 700,
       }}
-      title={`Estimated calories burned for one execution at the listed sets×reps.`}
+      title={translate({id: 'kcalBadge.title', message: 'Estimated calories burned for one execution at the listed sets×reps.'})}
     >
       ≈ {Math.round(kcal)} kcal
     </span>
