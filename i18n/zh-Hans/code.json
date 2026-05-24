@@ -360,5 +360,71 @@
   "theme.tags.tagsPageTitle": {
     "message": "标签",
     "description": "The title of the tag list page"
+  },
+  "apps.exerciseLibrary.compoundOnlyPill": {
+    "message": "仅复合 ◆"
+  },
+  "apps.exerciseLibrary.title": {
+    "message": "动作库"
+  },
+  "apps.exerciseLibrary.description": {
+    "message": "The Goose Factor 数据库中的所有动作 — 搜索、筛选、预览解剖、链接到 YouTube 教学。"
+  },
+  "apps.exerciseLibrary.subtitle": {
+    "message": "{count} 个动作 — 力量举、奥举、大力士、自重、灵活性、爆发力、KOT、McGill 核心等。"
+  },
+  "apps.exerciseLibrary.calories.showing": {
+    "message": "🔥 根据你的体重 ({kg}kg) 显示每个动作的估算消耗热量。"
+  },
+  "apps.exerciseLibrary.calories.enterWeight": {
+    "message": "🔥 在上方输入你的体重，查看每个动作估算消耗的热量。"
+  },
+  "apps.exerciseLibrary.filters.title": {
+    "message": "筛选"
+  },
+  "apps.exerciseLibrary.filters.clear": {
+    "message": "清除"
+  },
+  "apps.exerciseLibrary.filters.searchPlaceholder": {
+    "message": "按名称搜索…"
+  },
+  "apps.exerciseLibrary.filters.muscleGroup": {
+    "message": "肌肉群"
+  },
+  "apps.exerciseLibrary.filters.category": {
+    "message": "类别"
+  },
+  "apps.exerciseLibrary.filters.phase": {
+    "message": "阶段"
+  },
+  "apps.exerciseLibrary.filters.equipment": {
+    "message": "器材"
+  },
+  "apps.exerciseLibrary.filters.compoundOnly": {
+    "message": "仅复合动作 (◆)"
+  },
+  "apps.exerciseLibrary.preview.watchTutorial": {
+    "message": "▶ 在 YouTube 观看教学"
+  },
+  "apps.exerciseLibrary.results.count": {
+    "message": "{filtered} / {total} 个动作"
+  },
+  "apps.exerciseLibrary.results.filteringBy": {
+    "message": "筛选条件"
+  },
+  "apps.exerciseLibrary.results.removeFilter": {
+    "message": "移除此筛选"
+  },
+  "apps.exerciseLibrary.results.clearAll": {
+    "message": "全部清除"
+  },
+  "apps.exerciseLibrary.results.empty": {
+    "message": "没有动作符合这些筛选条件。请尝试移除一些。"
+  },
+  "apps.exerciseLibrary.card.youtube": {
+    "message": "▶ YouTube"
+  },
+  "apps.exerciseLibrary.card.showAnatomy": {
+    "message": "查看解剖"
   }
 }

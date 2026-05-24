@@ -360,5 +360,71 @@
   "theme.tags.tagsPageTitle": {
     "message": "Etiquetas",
     "description": "The title of the tag list page"
+  },
+  "apps.exerciseLibrary.compoundOnlyPill": {
+    "message": "Solo compuestos ◆"
+  },
+  "apps.exerciseLibrary.title": {
+    "message": "Biblioteca de ejercicios"
+  },
+  "apps.exerciseLibrary.description": {
+    "message": "Cada ejercicio en la base de datos de The Goose Factor — busca, filtra, previsualiza anatomía, enlaza al tutorial de YouTube."
+  },
+  "apps.exerciseLibrary.subtitle": {
+    "message": "{count} ejercicios — powerlifting, halterofilia, strongman, calistenia, movilidad, pliometría, KOT, core de McGill y más."
+  },
+  "apps.exerciseLibrary.calories.showing": {
+    "message": "🔥 Mostrando calorías estimadas quemadas por ejercicio según tu peso ({kg}kg)."
+  },
+  "apps.exerciseLibrary.calories.enterWeight": {
+    "message": "🔥 Ingresa tu peso corporal arriba para ver las calorías estimadas quemadas por ejercicio."
+  },
+  "apps.exerciseLibrary.filters.title": {
+    "message": "Filtros"
+  },
+  "apps.exerciseLibrary.filters.clear": {
+    "message": "Limpiar"
+  },
+  "apps.exerciseLibrary.filters.searchPlaceholder": {
+    "message": "Buscar por nombre…"
+  },
+  "apps.exerciseLibrary.filters.muscleGroup": {
+    "message": "Grupo muscular"
+  },
+  "apps.exerciseLibrary.filters.category": {
+    "message": "Categoría"
+  },
+  "apps.exerciseLibrary.filters.phase": {
+    "message": "Fase"
+  },
+  "apps.exerciseLibrary.filters.equipment": {
+    "message": "Equipamiento"
+  },
+  "apps.exerciseLibrary.filters.compoundOnly": {
+    "message": "Solo compuestos (◆)"
+  },
+  "apps.exerciseLibrary.preview.watchTutorial": {
+    "message": "▶ Ver tutorial en YouTube"
+  },
+  "apps.exerciseLibrary.results.count": {
+    "message": "{filtered} de {total} ejercicios"
+  },
+  "apps.exerciseLibrary.results.filteringBy": {
+    "message": "Filtrando por"
+  },
+  "apps.exerciseLibrary.results.removeFilter": {
+    "message": "Quitar este filtro"
+  },
+  "apps.exerciseLibrary.results.clearAll": {
+    "message": "Limpiar todo"
+  },
+  "apps.exerciseLibrary.results.empty": {
+    "message": "Ningún ejercicio coincide con estos filtros. Prueba a quitar alguno."
+  },
+  "apps.exerciseLibrary.card.youtube": {
+    "message": "▶ YouTube"
+  },
+  "apps.exerciseLibrary.card.showAnatomy": {
+    "message": "Mostrar anatomía"
   }
 }
