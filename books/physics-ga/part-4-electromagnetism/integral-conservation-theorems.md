@@ -152,7 +152,7 @@ volume-integrated work done on charges inside.
 
 This is the **integral form** of Poynting's theorem, generalizing
 Gauss's law / Stokes's law to STA. The full machinery of integral
-theorems in GA is the topic of [Ch 30](/physics-ga/part-7-geometric-calculus/coming-soon).
+theorems in GA is the topic of [Ch 30](/physics-ga/part-7-geometric-calculus/the-vector-derivative).
 For now: the principle is that conservation laws hold globally,
 not just locally — energy that enters a region either stays as
 field energy or transfers to charges.

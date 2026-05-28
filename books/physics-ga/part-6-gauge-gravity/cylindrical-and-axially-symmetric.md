@@ -210,7 +210,7 @@ in the strong-field regime.
 
 ## What's next
 
-That closes Part VI — gauge theory gravity. [Part VII](/physics-ga/part-7-geometric-calculus/coming-soon)
+That closes Part VI — gauge theory gravity. [Part VII](/physics-ga/part-7-geometric-calculus/the-vector-derivative)
 returns to the algebraic foundations: **geometric calculus**.
 The vector derivative, integration on manifolds, generalized
 Stokes's theorem, and the embedding of differential geometry into

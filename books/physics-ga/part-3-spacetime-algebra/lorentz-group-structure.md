@@ -227,7 +227,7 @@ $$x \mapsto \Lambda x + a$$
 In GA, translations are just vector additions. The Poincaré group
 isn't a group of rotors alone — it's a semidirect product
 $\mathbb{R}^4 \rtimes \mathrm{Spin}(1,3)$. In **conformal GA**
-(briefly previewed in [Ch 32](/physics-ga/part-7-geometric-calculus/coming-soon)),
+(briefly previewed in [Ch 32](/physics-ga/part-7-geometric-calculus/the-vector-derivative)),
 translations also become rotors, and the Poincaré group becomes a
 pure rotor group in a higher-dimensional algebra.
 
