@@ -226,7 +226,7 @@ the classical / first-quantized level.
 
 ## What's next
 
-That closes Part V. [Part VI](/physics-ga/part-6-gauge-gravity/coming-soon)
+That closes Part V. [Part VI](/physics-ga/part-6-gauge-gravity/gauge-principles-for-gravitation)
 turns to **gauge theory gravity** — the GA-native approach to
 general relativity, where curved spacetime is replaced by gauge
 fields on flat spacetime, and gravitational dynamics becomes

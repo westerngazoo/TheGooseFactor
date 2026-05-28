@@ -8,7 +8,7 @@ title: "Spacetime Dynamics"
 > *Doran-Lasenby §5.5.* Equations of motion in STA. The relativistic
 > Lagrangian, energy-momentum conservation, and the geodesic equation
 > in flat spacetime as a warm-up for the curved-spacetime story
-> in [Part VI](/physics-ga/part-6-gauge-gravity/coming-soon).
+> in [Part VI](/physics-ga/part-6-gauge-gravity/gauge-principles-for-gravitation).
 
 Closing Part III: how do particles and fields evolve in spacetime?
 The answer in STA is what you'd expect — the same Lagrangian and
@@ -91,7 +91,7 @@ proper-time parameterization, $|v| = 1$, so $v$ is a constant unit
 vector. This is the **geodesic equation in flat spacetime**, and
 it's just "F = ma" with no force.
 
-In curved spacetime ([Part VI](/physics-ga/part-6-gauge-gravity/coming-soon)),
+In curved spacetime ([Part VI](/physics-ga/part-6-gauge-gravity/gauge-principles-for-gravitation)),
 the geodesic equation acquires a covariant derivative
 correction — but the GA form is still $\nabla_v v = 0$ with
 $\nabla_v$ the directional derivative along the worldline. Same

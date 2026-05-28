@@ -229,7 +229,7 @@ A symmetric $(1,1)$-tensor is a self-adjoint linear function $f$.
 
 The **Riemann curvature tensor** — the heaviest tensor in physics —
 becomes a bivector-valued linear function of bivectors in GA. We'll
-hit that in [Part VI](/physics-ga/part-6-gauge-gravity/coming-soon).
+hit that in [Part VI](/physics-ga/part-6-gauge-gravity/gauge-principles-for-gravitation).
 
 > :angrygoose: Tensors-as-arrays is a 1900s notation. Tensors are
 > multilinear maps; their array form was a 20th-century compromise

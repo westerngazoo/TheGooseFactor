@@ -212,7 +212,7 @@ limitations. (The skating-coin problem is hard in *any* notation.)
 **Gauge freedom** in the Lagrangian — $L \to L + df/dt$ for any
 $f$ — leaves the equations of motion unchanged. This is a
 1-parameter family of equivalent Lagrangians, and it's the
-classical-mechanics seed of all the gauge theory in [Part VI](/physics-ga/part-6-gauge-gravity/coming-soon).
+classical-mechanics seed of all the gauge theory in [Part VI](/physics-ga/part-6-gauge-gravity/gauge-principles-for-gravitation).
 
 ## 8. The phase-space picture
 

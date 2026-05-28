@@ -263,4 +263,4 @@ pure rotor group in a higher-dimensional algebra.
 spacetime dynamics. Equations of motion, the relativistic
 Lagrangian, energy-momentum conservation, and the geodesic
 equation in flat spacetime (preview for the curved version in
-[Part VI](/physics-ga/part-6-gauge-gravity/coming-soon)).
+[Part VI](/physics-ga/part-6-gauge-gravity/gauge-principles-for-gravitation)).
