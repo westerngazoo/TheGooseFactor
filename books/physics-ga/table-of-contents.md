@@ -12,9 +12,9 @@ Aligned with Doran & Lasenby (D-L) chapter numbering. Strikethrough
 ## Part I — Foundations refresh
 *[D-L Ch 1, 2, 4]*
 
-1. GA in 60 seconds (for the physics audience)
-2. Reflections, rotations, and the sandwich
-3. Frames, components, and tensor-free linear algebra
+1. ~~[GA in 60 seconds (for the physics audience)](/physics-ga/part-1-foundations/ga-in-60-seconds)~~
+2. ~~[Reflections, rotations, and the sandwich](/physics-ga/part-1-foundations/reflections-rotations-and-the-sandwich)~~
+3. ~~[Frames, components, and tensor-free linear algebra](/physics-ga/part-1-foundations/frames-components-and-tensor-free-linear-algebra)~~
 
 ## Part II — Classical mechanics
 *[D-L Ch 3]*
