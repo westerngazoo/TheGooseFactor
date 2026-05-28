@@ -276,7 +276,7 @@ For quick translation between physics-grad notation and GA:
 
 ## What's next
 
-This closes Part I. [Part II](/physics-ga/part-2-classical-mechanics/coming-soon)
+This closes Part I. [Part II](/physics-ga/part-2-classical-mechanics/elementary-principles)
 applies the framework to classical mechanics — Lagrangians, central
 forces, rigid bodies — all done with rotors and bivectors instead
 of Euler angles and matrices.

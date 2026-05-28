@@ -202,7 +202,7 @@ multiply rotors in order. The geometry takes care of itself.
 > rotation matrices have 9 parameters with 6 constraints, Tait-Bryan
 > conventions disagree across textbooks. With rotors: $R = R_3 R_2 R_1$.
 > No gimbal lock, no constraints, no convention wars. Welcome to
-> [Ch 7 — rigid-body dynamics](/physics-ga/part-2-classical-mechanics/coming-soon).
+> [Ch 7 — rigid-body dynamics](/physics-ga/part-2-classical-mechanics/rigid-body-dynamics-with-rotors).
 
 ## 6. Differentiating a rotor
 
@@ -220,7 +220,7 @@ The bivector $\Omega$ is the **angular velocity bivector** — the
 GA-native form of the angular velocity 3-vector $\boldsymbol{\omega}$,
 related by $\Omega = I\boldsymbol{\omega}$ in 3D.
 
-This single equation drives all of rigid-body dynamics in [Part II](/physics-ga/part-2-classical-mechanics/coming-soon).
+This single equation drives all of rigid-body dynamics in [Part II](/physics-ga/part-2-classical-mechanics/rigid-body-dynamics-with-rotors).
 It also reappears in [Part III](/physics-ga/part-3-spacetime-algebra/coming-soon)
 as the rate-of-change of an observer's frame.
 
