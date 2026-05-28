@@ -204,7 +204,7 @@ In GA, the exponential $e^{-i k\cdot x}$ requires choosing what
 "$i$" means. The natural choice: $i = I_2 = \gamma_{12}$ (a
 spatial-rotation bivector), or any other unit bivector squaring to
 $-1$. The plane-wave solutions are then **bivector-modulated**
-oscillations — a hint at the spinor structure we'll need in [Part V](/physics-ga/part-5-quantum/coming-soon).
+oscillations — a hint at the spinor structure we'll need in [Part V](/physics-ga/part-5-quantum/non-relativistic-quantum-spin).
 
 The KG equation isn't the *quantum* equation of an electron — that's
 Dirac. But it's the relativistic generalization of Schrödinger for

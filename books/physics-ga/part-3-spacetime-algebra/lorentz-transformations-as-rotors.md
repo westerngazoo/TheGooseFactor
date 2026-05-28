@@ -169,7 +169,7 @@ derivation.
 
 ## 7. Boost composition and the spin-1/2 connection
 
-For spin-1/2 systems (which we'll do in [Part V](/physics-ga/part-5-quantum/coming-soon)),
+For spin-1/2 systems (which we'll do in [Part V](/physics-ga/part-5-quantum/non-relativistic-quantum-spin)),
 $R$ acts not by sandwiching but by **direct multiplication**:
 
 $$\psi' = R\psi$$

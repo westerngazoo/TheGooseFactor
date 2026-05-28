@@ -197,7 +197,7 @@ $PT = \gamma_0\gamma_1\gamma_2\gamma_3 = I$, the pseudoscalar.
 > that GA exposes immediately and that tensor formulations take
 > three chapters to derive. The CPT theorem connects the
 > pseudoscalar to charge conjugation in quantum field theory —
-> we'll see that in [Part V](/physics-ga/part-5-quantum/coming-soon).
+> we'll see that in [Part V](/physics-ga/part-5-quantum/non-relativistic-quantum-spin).
 
 ## 7. Casimir invariants
 

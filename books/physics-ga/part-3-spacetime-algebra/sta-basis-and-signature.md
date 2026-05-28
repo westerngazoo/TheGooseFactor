@@ -33,7 +33,7 @@ This book uses the D-L convention throughout.
 The notation $\gamma_\mu$ is deliberately chosen to remind you of
 the **Dirac gamma matrices** from relativistic quantum mechanics —
 the basis of STA *is* the abstract structure that Dirac matrices
-realize concretely. In [Part V](/physics-ga/part-5-quantum/coming-soon)
+realize concretely. In [Part V](/physics-ga/part-5-quantum/non-relativistic-quantum-spin)
 we'll see that Dirac's formulation falls out of STA naturally.
 
 > :nerdygoose: The $\gamma$ notation is also Hestenes' original

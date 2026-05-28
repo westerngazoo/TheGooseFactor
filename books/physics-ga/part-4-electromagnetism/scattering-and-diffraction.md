@@ -203,7 +203,7 @@ was the first direct demonstration of the photon's particle nature
 (in the relativistic regime where $\hbar\omega \approx mc^2$).
 
 The full QED treatment uses Dirac spinors (next chapter for us, in
-spirit — [Part V](/physics-ga/part-5-quantum/coming-soon)). The
+spirit — [Part V](/physics-ga/part-5-quantum/non-relativistic-quantum-spin)). The
 classical-EM Thomson result is the low-energy limit.
 
 > :weightliftinggoose: Thomson, Rayleigh, Compton: three limits of
@@ -230,7 +230,7 @@ classical-EM Thomson result is the low-energy limit.
 
 ## What's next
 
-That closes Part IV — electromagnetism. [Part V](/physics-ga/part-5-quantum/coming-soon)
+That closes Part IV — electromagnetism. [Part V](/physics-ga/part-5-quantum/non-relativistic-quantum-spin)
 introduces **spinors** and quantum mechanics in STA. Pauli spin,
 Dirac equation, hydrogen atom, multi-particle states — all in the
 GA framework, where spinors are even-grade multivectors and the
