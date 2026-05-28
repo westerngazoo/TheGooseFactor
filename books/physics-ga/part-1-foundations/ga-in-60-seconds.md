@@ -11,7 +11,7 @@ title: "GA in 60 Seconds (For the Physics Audience)"
 > bottom.
 
 A physicist's working summary of geometric algebra. Everything in this
-chapter generalizes to spacetime in [Part III](/physics-ga/part-3-spacetime-algebra/coming-soon),
+chapter generalizes to spacetime in [Part III](/physics-ga/part-3-spacetime-algebra/sta-basis-and-signature),
 but here we stay in Euclidean 3D so the picture is concrete.
 
 ## 1. The one rule
@@ -27,7 +27,7 @@ Everything else is a consequence.
 
 > :nerdygoose: This is the Clifford algebra $\mathcal{Cl}(3,0)$ in
 > textbook notation. The signature $(p,q)$ counts how many basis
-> vectors square to $+1$ vs $-1$. Spacetime algebra in [Part III](/physics-ga/part-3-spacetime-algebra/coming-soon)
+> vectors square to $+1$ vs $-1$. Spacetime algebra in [Part III](/physics-ga/part-3-spacetime-algebra/sta-basis-and-signature)
 > is $\mathcal{Cl}(1,3)$ with one $+$ and three $-$.
 
 ## 2. Multiplying two vectors

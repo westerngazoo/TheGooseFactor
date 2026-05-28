@@ -263,7 +263,7 @@ but in 3D it's interchangeable with quaternions, by [Ch 1 §7](/physics-ga/part-
 
 ## What's next
 
-That closes Part II. [Part III](/physics-ga/part-3-spacetime-algebra/coming-soon)
+That closes Part II. [Part III](/physics-ga/part-3-spacetime-algebra/sta-basis-and-signature)
 introduces **spacetime algebra** (STA) — the same rotor/bivector
 machinery in signature $(+,-,-,-)$, where rotors become Lorentz
 transformations and bivectors become the electromagnetic field.

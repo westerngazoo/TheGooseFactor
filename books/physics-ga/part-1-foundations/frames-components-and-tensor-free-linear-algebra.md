@@ -198,7 +198,7 @@ $$\underline{R}(M) = R M \tilde{R}$$
 identity $R\tilde{R} = 1$ ensures $\det(R) = +1$ (orientation
 preserved), making it an element of $SO(p,q)$.
 
-The infinitesimal version, from [Ch 2 §6](/physics-ga/part-1-foundations/reflections-rotations-and-the-sandwich#6-differentiating-a-rotor):
+The infinitesimal version, from [Ch 2 §6](/physics-ga/part-1-foundations/reflections-rotations-and-the-sandwich):
 
 $$\delta v = \tfrac{1}{2}[\Omega, v]$$
 

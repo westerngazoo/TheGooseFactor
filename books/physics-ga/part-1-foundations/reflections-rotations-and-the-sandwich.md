@@ -98,7 +98,7 @@ recovered Euler's formula in disguise:
 
 $$R = \cos\theta + \hat{B}\sin\theta = \exp(\hat{B}\theta)$$
 
-(using $\hat{B}^2 = -1$ — see [Ch 1 §3](/physics-ga/part-1-foundations/ga-in-60-seconds#3-the-four-grades)).
+(using $\hat{B}^2 = -1$ — see [Ch 1 §3](/physics-ga/part-1-foundations/ga-in-60-seconds)).
 
 And the sandwich form? Computing $\hat{m}\hat{n}$ uses the reverse:
 
@@ -221,7 +221,7 @@ GA-native form of the angular velocity 3-vector $\boldsymbol{\omega}$,
 related by $\Omega = I\boldsymbol{\omega}$ in 3D.
 
 This single equation drives all of rigid-body dynamics in [Part II](/physics-ga/part-2-classical-mechanics/rigid-body-dynamics-with-rotors).
-It also reappears in [Part III](/physics-ga/part-3-spacetime-algebra/coming-soon)
+It also reappears in [Part III](/physics-ga/part-3-spacetime-algebra/lorentz-transformations-as-rotors)
 as the rate-of-change of an observer's frame.
 
 ## 7. Reflections, rotations, and the orthogonal group
