@@ -30,6 +30,7 @@ const books = [
   {id: 'c-algorithms',       path: 'books/c-algorithms',       routeBasePath: 'c-book',            label: 'C Algorithms'},
   {id: 'physics-ga',         path: 'books/physics-ga',         routeBasePath: 'physics-ga',        label: 'Physics through GA'},
   {id: 'ai-ga',              path: 'books/ai-ga',              routeBasePath: 'ai-ga',             label: 'AI through GA'},
+  {id: 'compiler-course',    path: 'books/compiler-course',    routeBasePath: 'compiler',          label: 'Build Your Own Compiler'},
 ];
 
 const defaultBook = books[0];
