@@ -52,6 +52,23 @@ plain = queued.
 23. Building a real project
 24. Where to go next
 
+## Part VII — Advanced Control
+
+25. ~~[Continuations and `call/cc`](/lisp/part-7-advanced-control/continuations)~~
+    — the rest of the computation, as a value
+26. ~~[The condition system](/lisp/part-7-advanced-control/condition-system)~~
+    — error handling that beats exceptions
+27. ~~[Dynamic variables and dynamic extent](/lisp/part-7-advanced-control/dynamic-variables)~~
+28. ~~[Lazy evaluation and streams](/lisp/part-7-advanced-control/lazy-streams)~~
+    — infinite data, computed on demand
+
+## Part VIII — CLOS: Objects the Lisp Way
+
+29. ~~[Generic functions and multiple dispatch](/lisp/part-8-clos/generic-functions)~~
+30. ~~[Classes, slots, and inheritance](/lisp/part-8-clos/classes-and-slots)~~
+31. ~~[Method combination](/lisp/part-8-clos/method-combination)~~
+32. ~~[The Metaobject Protocol](/lisp/part-8-clos/metaobject-protocol)~~
+
 ## Appendix
 
 A. Cheat sheet — the core forms

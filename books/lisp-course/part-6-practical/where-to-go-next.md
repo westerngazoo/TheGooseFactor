@@ -9,10 +9,14 @@ title: "Where to Go Next"
 > how to keep growing as a Lisp programmer — plus a look back at what
 > this course gave you.
 
-You've reached the end of the course. You understand Lisp from the
-S-expression up through the metacircular evaluator. This final chapter
-points you onward: what to read, what to explore, and how to keep the
-enlightenment going.
+You've reached the end of the *core* course. You understand Lisp from the
+S-expression up through the metacircular evaluator. This chapter points
+you onward: what to read, what to explore, and how to keep the
+enlightenment going. (And if you want to go deeper *within* this course
+first, two advanced parts await —
+[Part VII — Advanced Control](/lisp/part-7-advanced-control/continuations)
+and [Part VIII — CLOS](/lisp/part-8-clos/generic-functions) — covering
+several of the "deeper topics" below in full.)
 
 ## 1. What you now know
 
@@ -79,21 +83,32 @@ online and famously approachable.
 > values understanding and sharing over gatekeeping. You can get a
 > world-class Lisp education for $0.
 
-## 3. Deeper topics we skipped
+## 3. Deeper topics — several now covered here
 
-This course covered the core. Beyond it lie:
+The core course stopped at the metacircular evaluator. Several of the
+classic "next" topics now have full chapters in
+[Part VII](/lisp/part-7-advanced-control/continuations) and
+[Part VIII](/lisp/part-8-clos/generic-functions) of this course:
 
-- **Continuations** (`call/cc` in Scheme): first-class control flow —
-  capture "the rest of the computation" as a value. Mind-bending and
-  powerful (used for coroutines, generators, backtracking).
-- **Streams and lazy evaluation**: infinite data structures, computed
-  on demand (SICP Ch 3).
-- **The full object systems**: CLOS (Common Lisp Object System) is the
-  most powerful OOP system in any language — multiple dispatch,
-  method combination, the meta-object protocol.
-- **The condition/restart system** (Common Lisp): error handling that
-  surpasses exceptions ([Chapter 22](/lisp/part-6-practical/the-repl-workflow)).
-- **Tail-call-based control and `call/cc`-based** abstractions.
+- **Continuations** (`call/cc`): first-class control flow — capture "the
+  rest of the computation" as a value (coroutines, generators,
+  backtracking). →
+  [Chapter 25](/lisp/part-7-advanced-control/continuations).
+- **The condition/restart system**: error handling that surpasses
+  exceptions. →
+  [Chapter 26](/lisp/part-7-advanced-control/condition-system).
+- **Dynamic variables and `unwind-protect`**: ambient context and
+  guaranteed cleanup. →
+  [Chapter 27](/lisp/part-7-advanced-control/dynamic-variables).
+- **Streams and lazy evaluation**: infinite data structures, computed on
+  demand (SICP Ch 3). →
+  [Chapter 28](/lisp/part-7-advanced-control/lazy-streams).
+- **CLOS** — multiple dispatch, method combination, the metaobject
+  protocol; arguably the most powerful object system in any language. →
+  [Part VIII](/lisp/part-8-clos/generic-functions) (Chapters 29–32).
+
+And beyond even this course:
+
 - **Compilers**: SICP Chapter 5 builds a compiler; turning the
   *interpreter* you wrote ([Part V](/lisp/part-5-metacircular/eval-and-apply))
   into a *compiler* is the natural next step.

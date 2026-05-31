@@ -56,7 +56,8 @@ start from `(+ 1 2)`.
 
 ## The shape of the course
 
-Six parts, building strictly on each other:
+Eight parts. The first six build the core language top to bottom; the
+last two are advanced deep dives you can take once the core is solid:
 
 - **Part I — The Core Idea.** S-expressions, atoms, lists, cons
   cells, and the evaluation rule. The entire syntax and semantics of
@@ -73,6 +74,13 @@ Six parts, building strictly on each other:
   deepest hour in the course.
 - **Part VI — Practical Lisp.** Common Lisp vs Scheme vs Clojure, the
   REPL workflow, a real project, and where to go next.
+- **Part VII — Advanced Control.** Continuations and `call/cc`, the
+  condition system, dynamic variables, and lazy streams. The features
+  that, like macros, change how you think about control flow.
+- **Part VIII — CLOS.** The Common Lisp Object System: generic functions
+  and multiple dispatch, classes and slots, method combination, and the
+  Metaobject Protocol — arguably the most powerful object system in any
+  language.
 
 See the [Roadmap](/lisp/table-of-contents) for the full chapter list.
 
