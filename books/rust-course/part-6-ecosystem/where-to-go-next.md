@@ -9,11 +9,16 @@ title: "Where to Go Next"
 > concurrency — then the crates, domains, and resources that take you from
 > "finished the course" to "shipping real Rust."
 
-You've reached the end. You started with *why* Rust exists and you've
-arrived at its ecosystem, having passed through the hardest and most
-rewarding ideas in modern systems programming. This final chapter points
-you onward: what you now know, where Rust is used, the crates and books
-that go deeper, and how to keep the momentum.
+You've reached the end of the *core* course. You started with *why* Rust
+exists and you've arrived at its ecosystem, having passed through the
+hardest and most rewarding ideas in modern systems programming. This
+chapter points you onward: what you now know, where Rust is used, the
+crates and books that go deeper, and how to keep the momentum. (And if you
+want to go deeper *within* this course first, two advanced parts await —
+[Part VII — Advanced Types & Traits](/rust/part-7-advanced-types/advanced-traits)
+and [Part VIII — Rust in Practice](/rust/part-8-in-practice/async-internals)
+— covering the type-system frontier, async internals, embedded, and the
+idioms that turn "writing Rust" into "thinking in Rust.")
 
 ## 1. What you now know
 

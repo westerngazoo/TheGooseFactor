@@ -50,6 +50,20 @@ The full course, organized around ownership. Strikethrough = drafted;
 22. ~~[Testing and tooling](/rust/part-6-ecosystem/testing-and-tooling)~~
 23. ~~[Where to go next](/rust/part-6-ecosystem/where-to-go-next)~~
 
+## Part VII — Advanced Types & Traits
+
+24. ~~[Advanced traits](/rust/part-7-advanced-types/advanced-traits)~~
+25. ~~[Advanced lifetimes and variance](/rust/part-7-advanced-types/advanced-lifetimes-and-variance)~~
+26. ~~[Typestate and zero-cost design](/rust/part-7-advanced-types/typestate-and-zero-cost-design)~~
+27. ~~[Advanced unsafe and FFI](/rust/part-7-advanced-types/advanced-unsafe-and-ffi)~~
+
+## Part VIII — Rust in Practice
+
+28. ~~[Async internals](/rust/part-8-in-practice/async-internals)~~
+29. ~~[Performance and optimization](/rust/part-8-in-practice/performance-and-optimization)~~
+30. ~~[Embedded and no_std Rust](/rust/part-8-in-practice/embedded-and-no-std)~~
+31. ~~[Idioms, patterns, and type-driven design](/rust/part-8-in-practice/idioms-and-patterns)~~
+
 ## Appendix
 
 A. ~~[Cheat sheet](/rust/appendix/cheat-sheet)~~

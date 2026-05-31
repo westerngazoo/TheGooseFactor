@@ -57,8 +57,16 @@ A from-scratch path through Rust, organized around the central idea:
   shared state, async/await, and `unsafe`.
 - **Part VI — The Ecosystem.** Modules and crates, macros, testing, and
   where to go next.
+- **Part VII — Advanced Types & Traits.** The type-system frontier:
+  advanced traits, lifetimes and variance, zero-cost type-driven design
+  (typestate, newtypes, const generics), and sound unsafe and FFI.
+- **Part VIII — Rust in Practice.** Async internals (how `.await` really
+  works), performance and optimization, embedded and `no_std` Rust, and the
+  idioms and design philosophy that tie it all together.
 
-See the [Roadmap](/rust/table-of-contents) for the full chapter list.
+Parts I–VI are the complete language; Parts VII–VIII are advanced deep
+dives to take once the core is solid. See the
+[Roadmap](/rust/table-of-contents) for the full chapter list.
 
 ## What this course assumes
 
