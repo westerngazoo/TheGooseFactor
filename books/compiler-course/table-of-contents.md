@@ -49,6 +49,20 @@ next on deck; plain = queued.
 21. ~~[JIT compilation](/compiler/part-6-runtime/jit-compilation)~~
 22. ~~[Bootstrapping and self-hosting](/compiler/part-6-runtime/bootstrapping)~~
 
+## Part VII — Compiling Real Language Features
+
+23. ~~[Closures and first-class functions](/compiler/part-7-language-features/closures)~~
+24. ~~[Algebraic data types and pattern matching](/compiler/part-7-language-features/pattern-matching-and-adts)~~
+25. ~~[Exceptions and continuations](/compiler/part-7-language-features/exceptions-and-continuations)~~
+26. ~~[Modules, separate compilation, and linking](/compiler/part-7-language-features/modules-and-linking)~~
+
+## Part VIII — Advanced Type Systems & Analysis
+
+27. ~~[Type inference](/compiler/part-8-types-and-analysis/type-inference)~~
+28. ~~[Generics and polymorphism](/compiler/part-8-types-and-analysis/generics-and-polymorphism)~~
+29. ~~[Ownership and borrow checking](/compiler/part-8-types-and-analysis/ownership-and-borrow-checking)~~
+30. ~~[Static analysis and its limits](/compiler/part-8-types-and-analysis/static-analysis-and-limits)~~
+
 ## Appendix
 
 A. ~~[Toolchain and tools](/compiler/appendix/toolchain)~~

@@ -69,7 +69,9 @@ compiler.
 
 ## The shape of the course
 
-Six parts, following the compiler pipeline front to back:
+Eight parts. The first six follow the compiler pipeline front to back;
+the last two are advanced deep dives you can take once the pipeline is
+solid:
 
 - **Part I — Foundations.** What a compiler is, the source and target
   languages, the pipeline overview.
@@ -83,6 +85,13 @@ Six parts, following the compiler pipeline front to back:
   allocation, bytecode VMs, targeting real machines.
 - **Part VI — Runtime & Beyond.** Garbage collection, JIT compilation,
   bootstrapping and self-hosting.
+- **Part VII — Compiling Real Language Features.** The features that make
+  modern languages modern: closures, algebraic data types and pattern
+  matching, exceptions and continuations, modules and linking.
+- **Part VIII — Advanced Type Systems & Analysis.** The static-analysis
+  frontier: type inference (Hindley-Milner), generics and polymorphism,
+  ownership and borrow checking, and the theory and limits of static
+  analysis itself.
 
 See the [Roadmap](/compiler/table-of-contents) for the full chapter
 list.

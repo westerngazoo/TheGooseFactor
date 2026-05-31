@@ -177,6 +177,13 @@ compiler design" dragon
 one comprehensible stage at a time. Go build a compiler — and maybe,
 eventually, one that compiles itself.
 
+That's the core pipeline. If you want to go deeper, two advanced parts
+await: [Part VII — Compiling Real Language Features](/compiler/part-7-language-features/closures)
+(closures, ADTs/pattern matching, exceptions, modules/linking) and
+[Part VIII — Advanced Type Systems & Analysis](/compiler/part-8-types-and-analysis/type-inference)
+(type inference, generics, borrow checking, and the limits of static
+analysis) — the features and frontier beyond the basic pipeline.
+
 > :weightliftinggoose: Self-hosting is the compiler-builder's
 > black belt: a compiler for a language, written in that language. The
 > chicken-and-egg is broken by **bootstrapping** — write version 0 in
@@ -210,7 +217,12 @@ eventually, one that compiles itself.
 
 ## What's next
 
-That's the course. The [Appendix](/compiler/appendix/toolchain) has a
-toolchain guide, a glossary, and further reading to take you deeper —
-real compiler codebases, the canonical books, and the projects worth
-building next.
+That's the core pipeline. From here, go deeper with the advanced parts —
+[Part VII — Compiling Real Language Features](/compiler/part-7-language-features/closures)
+(closures, ADTs/pattern matching, exceptions and continuations,
+modules/linking) and
+[Part VIII — Advanced Type Systems & Analysis](/compiler/part-8-types-and-analysis/type-inference)
+(type inference, generics, ownership/borrow checking, static analysis and
+its limits). Or jump to the [Appendix](/compiler/appendix/toolchain) for a
+toolchain guide, a glossary, and further reading — real compiler
+codebases, the canonical books, and the projects worth building next.
