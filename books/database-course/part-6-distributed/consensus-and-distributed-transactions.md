@@ -242,7 +242,15 @@ of building from scratch.
 
 ## What's next
 
-That's the course! Revisit the [introduction](/database/) and the
+That's the core OLTP database. From here, two advanced parts go beyond it:
+[Part VII — Analytics & Specialized Systems](/database/part-7-analytics/columnar-and-olap)
+(columnar storage, vectorized/compiled execution, specialized indexes for
+search/geo/time-series/vectors, and streaming) and
+[Part VIII — Databases in Practice](/database/part-8-in-practice/indexing-and-query-tuning)
+(query tuning, schema design & evolution, scaling & caching, and modern
+cloud-native architectures).
+
+Or revisit the [introduction](/database/) and the
 [roadmap](/database/table-of-contents), and lean on the appendix: a
 [cheat sheet](/database/appendix/cheat-sheet), a
 [glossary](/database/appendix/glossary), and

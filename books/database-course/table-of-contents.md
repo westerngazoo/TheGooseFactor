@@ -46,6 +46,20 @@ The full course, built bottom-up. Strikethrough = drafted.
 19. ~~[Partitioning and sharding](/database/part-6-distributed/partitioning)~~
 20. ~~[Consensus and distributed transactions](/database/part-6-distributed/consensus-and-distributed-transactions)~~
 
+## Part VII — Analytics & Specialized Systems
+
+21. ~~[Columnar storage and OLAP](/database/part-7-analytics/columnar-and-olap)~~
+22. ~~[Vectorized and compiled execution](/database/part-7-analytics/vectorized-and-compiled-execution)~~
+23. ~~[Specialized indexes and engines](/database/part-7-analytics/specialized-indexes-and-engines)~~
+24. ~~[Streaming and materialized views](/database/part-7-analytics/streaming-and-materialized-views)~~
+
+## Part VIII — Databases in Practice
+
+25. ~~[Indexing and query tuning](/database/part-8-in-practice/indexing-and-query-tuning)~~
+26. ~~[Schema design and evolution](/database/part-8-in-practice/schema-design-and-evolution)~~
+27. ~~[Scaling and caching](/database/part-8-in-practice/scaling-and-caching)~~
+28. ~~[Modern architectures](/database/part-8-in-practice/modern-architectures)~~
+
 ## Appendix
 
 A. ~~[Cheat sheet](/database/appendix/cheat-sheet)~~

@@ -55,7 +55,9 @@ you put a record on a disk?"
 
 ## The shape of the course
 
-Six parts, built bottom-up — each layer rests on the one below:
+Eight parts. The first six build the OLTP database bottom-up — each layer
+resting on the one below; the last two go beyond it, into analytics and
+practice:
 
 - **Part I — Foundations.** What a database guarantees, its layered
   architecture, and how bytes are laid out on disk (pages, records,
@@ -74,8 +76,18 @@ Six parts, built bottom-up — each layer rests on the one below:
 - **Part VI — Distributed Databases.** Scaling out: **replication**,
   **partitioning/sharding**, and **consensus** (Raft) plus distributed
   transactions.
+- **Part VII — Analytics & Specialized Systems.** The OLAP world: **columnar
+  storage**, **vectorized/compiled execution**, **specialized indexes**
+  (search, geo, time-series, vector), and **streaming** with materialized
+  views.
+- **Part VIII — Databases in Practice.** The practitioner's craft: **query
+  tuning** (indexes, `EXPLAIN`), **schema design & evolution**, **scaling &
+  caching**, and the **modern cloud-native architectures** reshaping
+  databases.
 
-See the [Roadmap](/database/table-of-contents) for the full chapter list.
+Parts I–VI are the complete OLTP database; Parts VII–VIII are advanced deep
+dives — analytics and practice — to take once the core is solid. See the
+[Roadmap](/database/table-of-contents) for the full chapter list.
 
 ## The running example: GooseDB
 
