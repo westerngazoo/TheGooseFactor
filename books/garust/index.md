@@ -107,7 +107,7 @@ Four parts — **the math and the engine, interleaved**:
   and a signature cookbook — *which $Cl(P,Q,R)$ for what*. *(Roadmapped.)*
 - **Part IV — Engine Design & Extension.** The architecture: generic over
   scalar and signature, the products as bit tricks, performance, and
-  extending `garust` (custom scalars, autodiff, the API). *(Roadmapped.)*
+  extending `garust` (custom scalars, autodiff, the API). *(Drafted.)*
 
 See the [Roadmap](/garust/table-of-contents) for the full chapter list. The
 **physics** — kinematics, the rigid body, Maxwell's equations, relativistic

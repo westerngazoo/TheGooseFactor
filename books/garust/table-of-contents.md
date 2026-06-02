@@ -41,9 +41,12 @@ This book is deliberately scoped to **GA + its implementation**. The
 
 ## Part IV — Engine Design & Extension
 
-12. Generic over scalar and signature — the architecture
-13. The products as bit tricks — performance and `O(DIM²)`
-14. Extending garust — custom scalars, autodiff, and the API
+12. ~~[Generic over scalar and signature](/garust/part-4-engine/generic-over-scalar-and-signature)~~
+    — the architecture
+13. ~~[The products as bit tricks](/garust/part-4-engine/products-as-bit-tricks)~~
+    — performance and `O(DIM²)`
+14. ~~[Extending garust](/garust/part-4-engine/extending-garust)~~
+    — custom scalars, autodiff, and the API
 
 ## Appendix
 
