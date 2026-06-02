@@ -73,7 +73,7 @@ The **grade** of a blade is the number of generators in it:
 - **Grade 2** — the **bivectors** $e_{ij}$ (oriented *areas* / planes).
 - **Grade 3** — the **trivectors** $e_{ijk}$ (oriented *volumes*).
 - **Grade $N$** — the **pseudoscalar** (the top blade,
-  [Chapter 6](/garust/table-of-contents)).
+  [Chapter 6](/garust/part-2-geometry/duality-and-the-meet)).
 
 This is the first big idea: GA gives you *higher-dimensional* directed
 quantities — not just vectors, but oriented planes and volumes — as

@@ -122,7 +122,7 @@ assert_eq!(e1.wedge(&e1), Vga3::zero());         // e1 ∧ e1 = 0
 > **any** dimension, with no perpendicular and no handedness convention.
 > The cross product is the wedge composted into a vector via 3D-only
 > duality: $a \times b = -\,I\,(a \wedge b)$
-> ([Chapter 6](/garust/table-of-contents)). Once you have the wedge, you
+> ([Chapter 6](/garust/part-2-geometry/duality-and-the-meet)). Once you have the wedge, you
 > can throw the right-hand rule away.
 
 ## 4. The identity, verified

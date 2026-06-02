@@ -29,9 +29,9 @@ This book is deliberately scoped to **GA + its implementation**. The
 
 ## Part II — Geometry: Spaces & Motions
 
-6. Duality, the pseudoscalar, and the meet
-7. Projective GA: points, lines, and planes
-8. Motors: rigid-body motion as a screw
+6. ~~[Duality, the pseudoscalar, and the meet](/garust/part-2-geometry/duality-and-the-meet)~~
+7. ~~[Projective GA: points, lines, and planes](/garust/part-2-geometry/projective-ga)~~
+8. ~~[Motors: rigid-body motion](/garust/part-2-geometry/motors)~~
 
 ## Part III — The Wider Algebras
 

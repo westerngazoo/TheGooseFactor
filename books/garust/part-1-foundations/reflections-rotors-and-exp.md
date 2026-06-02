@@ -110,7 +110,7 @@ let rotated = r.sandwich(&x);
 
 It works for reflections (sandwich with a vector), rotations (sandwich
 with a rotor), and — in later algebras — rigid motions (sandwich with a
-**motor**, [Chapter 8](/garust/table-of-contents)). One operation,
+**motor**, [Chapter 8](/garust/part-2-geometry/motors)). One operation,
 `sandwich`, performs *every* orthogonal transformation in *every* algebra.
 That uniformity — transformations are conjugation by versors — is one of
 GA's great simplifications over the zoo of transformation matrices.
