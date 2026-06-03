@@ -58,6 +58,18 @@ If you've ever felt that quaternions came out of nowhere, or that the cross prod
 - The fundamental theorem of geometric calculus — Green, Gauss, Stokes, and Cauchy in one
 - Monogenic functions — complex analysis, unleashed into any dimension
 
+### The Conformal Model (CGA)
+- Lifting space into $\mathbb{R}^{n+1,1}$ — fixing standard GA's origin-bound blind spot
+- Points as null vectors; the inner product that *is* Euclidean distance
+- Spheres, circles, lines, planes as blades (rounds and flats)
+- The whole conformal group — translations, dilations, inversions — as versors
+
+### Spacetime Algebra (STA)
+- $Cl(1,3)$ — relativity from a single minus sign
+- The spacetime split — where 3D physics (and the Pauli/spin algebra) comes from
+- Lorentz transformations as rotors; boosts as hyperbolic rotations
+- The EM field as one bivector, Maxwell as $\nabla F = J$, and the Dirac equation
+
 > :weightliftinggoose: Think of this like progressive overload. We start with just two axioms and build up. Each section adds weight — bivectors, then rotors, then applications. Don't skip ahead. The foundation reps are what make the heavy lifts possible later.
 
 ## Study Approach
