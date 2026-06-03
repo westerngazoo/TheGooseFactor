@@ -31,6 +31,9 @@ const books = [
   {id: 'physics-ga',         path: 'books/physics-ga',         routeBasePath: 'physics-ga',        label: 'Physics through GA'},
   {id: 'ai-ga',              path: 'books/ai-ga',              routeBasePath: 'ai-ga',             label: 'AI through GA'},
   {id: 'rust-course',        path: 'books/rust-course',        routeBasePath: 'rust',              label: 'The Rust Book'},
+  {id: 'database-course',    path: 'books/database-course',    routeBasePath: 'database',          label: 'Databases from Scratch'},
+  {id: 'garust',             path: 'books/garust',             routeBasePath: 'garust',            label: 'Garust'},
+  {id: 'rust-algorithms',    path: 'books/rust-algorithms',    routeBasePath: 'rust-book',         label: 'Rust Algorithms'},
 ];
 
 const defaultBook = books[0];
