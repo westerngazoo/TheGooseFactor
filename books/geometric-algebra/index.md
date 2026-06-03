@@ -52,6 +52,12 @@ If you've ever felt that quaternions came out of nowhere, or that the cross prod
 - Computer graphics and game engines
 - Robotics and spatial reasoning
 
+### Geometric Calculus
+- The vector derivative $\nabla$ — calculus on multivector fields
+- Grad, div, and curl as one equation: $\nabla F = \nabla\cdot F + \nabla\wedge F$
+- The fundamental theorem of geometric calculus — Green, Gauss, Stokes, and Cauchy in one
+- Monogenic functions — complex analysis, unleashed into any dimension
+
 > :weightliftinggoose: Think of this like progressive overload. We start with just two axioms and build up. Each section adds weight — bivectors, then rotors, then applications. Don't skip ahead. The foundation reps are what make the heavy lifts possible later.
 
 ## Study Approach
