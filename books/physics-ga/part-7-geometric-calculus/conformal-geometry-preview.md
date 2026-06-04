@@ -113,7 +113,7 @@ Modern robotics uses CGA for **rigid-body kinematics**:
 - Inverse kinematics: solve rotor equations.
 - Path planning: paths in rotor space.
 
-The `gafro` library (introduced in [ai-ga/Part V](/ai-ga/part-5-robotics/coming-soon))
+The `gafro` library (introduced in [ai-ga/Part V](/ai-ga/part-5-robotics/the-gafro-library))
 implements this in C++ for industrial robotic arms. Lots of
 academic + industrial work in the last 5 years.
 
@@ -155,7 +155,7 @@ Reasons:
    operations need more careful implementation to match.
 
 The Brandstetter/Ruhe/etc. work on **Clifford neural networks** in
-[ai-ga/Part III](/ai-ga/part-3-clifford-networks/coming-soon) is
+[ai-ga/Part III](/ai-ga/part-3-clifford-networks/clifford-layers) is
 slowly pushing CGA into machine-learning consciousness.
 
 ## 7. The structure summary
