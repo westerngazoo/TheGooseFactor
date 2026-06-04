@@ -20,6 +20,7 @@ plain = queued.
 ## Part II — Functional Foundations
 
 5. **Functions and lambda**
+    - [Lambda Calculus](/lisp/part-2-functional/lambda-calculus)
 6. Recursion and the list as a recursive structure
 7. Higher-order functions (map, filter, reduce)
 8. Closures and lexical scope
