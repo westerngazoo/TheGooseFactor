@@ -31,6 +31,7 @@ const books = [
   {id: 'physics-ga',         path: 'books/physics-ga',         routeBasePath: 'physics-ga',        label: 'Physics through GA'},
   {id: 'ai-ga',              path: 'books/ai-ga',              routeBasePath: 'ai-ga',             label: 'AI through GA'},
   {id: 'rust-algorithms',    path: 'books/rust-algorithms',    routeBasePath: 'rust-book',         label: 'Rust Algorithms'},
+  {id: 'cpp-category-theory', path: 'books/cpp-category-theory', routeBasePath: 'cpp-category-theory', label: 'C++ Category Theory'},
 ];
 
 const defaultBook = books[0];
