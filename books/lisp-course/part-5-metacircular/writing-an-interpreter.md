@@ -218,9 +218,12 @@ With all the pieces, we can run programs through our interpreter:
 (my-eval '((lambda (x) (* x x)) 5) genv)   ; => 25
 (my-eval '(if (> 3 2) 'yes 'no) genv)      ; => yes
 
-;; Define and call a recursive function THROUGH our interpreter:
-(my-eval '(define (fact n)
-            (if (= n 0) 1 (* n (fact (- n 1)))))
+;; Define and call a recursive function THROUGH our interpreter.
+;; Our toy `define` handles the (define name value) form, so we bind
+;; `fact` to an explicit lambda (the closure captures genv, so the
+;; recursive self-reference resolves):
+(my-eval '(define fact
+            (lambda (n) (if (= n 0) 1 (* n (fact (- n 1))))))
          genv)
 (my-eval '(fact 5) genv)                   ; => 120
 ```
