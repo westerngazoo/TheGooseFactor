@@ -70,6 +70,11 @@ If you've ever felt that quaternions came out of nowhere, or that the cross prod
 - Lorentz transformations as rotors; boosts as hyperbolic rotations
 - The EM field as one bivector, Maxwell as $\nabla F = J$, and the Dirac equation
 
+### Rewriting Physics
+- Applying geometric calculus and STA to classical mechanics with rotors.
+- Compressing Maxwell's equations into $\nabla F = J / \epsilon_0$.
+- Formulating the Dirac equation using real multivectors instead of complex matrices.
+
 > :weightliftinggoose: Think of this like progressive overload. We start with just two axioms and build up. Each section adds weight — bivectors, then rotors, then applications. Don't skip ahead. The foundation reps are what make the heavy lifts possible later.
 
 ## Study Approach
