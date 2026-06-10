@@ -36,6 +36,7 @@ const books = [
   {id: 'database-course',    path: 'books/database-course',    routeBasePath: 'database',          label: 'Databases from Scratch'},
   {id: 'garust',             path: 'books/garust',             routeBasePath: 'garust',            label: 'Garust'},
   {id: 'rust-algorithms',    path: 'books/rust-algorithms',    routeBasePath: 'rust-book',         label: 'Rust Algorithms'},
+  {id: 'ufl',                path: 'books/ufl',                routeBasePath: 'ufl',               label: 'UFL & Unconventional Computing'},
 ];
 
 const defaultBook = books[0];
