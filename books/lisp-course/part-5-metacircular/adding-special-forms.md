@@ -44,7 +44,7 @@ it to nested `if`s, then evaluate the result:
 
 (define (cond->if clauses)
   (if (null? clauses)
-      'false                                  ; no clause matched
+      #f                                      ; no clause matched
       (let ((clause (car clauses)))
         (if (eq? (car clause) 'else)
             (cadr clause)                      ; else: just its body
@@ -129,8 +129,9 @@ them directly:
 
 (define (eval-or exprs env)
   (cond ((null? exprs) #f)                      ; (or) => #f
-        ((my-eval (car exprs) env) => ...)      ; first true → return it
-        (else (eval-or (cdr exprs) env))))      ; else check the rest
+        (else (let ((v (my-eval (car exprs) env)))
+                (if v v                         ; first true → return it
+                    (eval-or (cdr exprs) env)))))) ; else check the rest
 ```
 
 `eval-and` evaluates expressions left to right, stopping (without

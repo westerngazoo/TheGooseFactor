@@ -55,7 +55,7 @@ The reflection goes all the way down. A generic function
 `standard-method`:
 
 ```lisp
-(class-of #'area)                       ; => #<STANDARD-CLASS STANDARD-GENERIC-FUNCTION>
+(class-of #'area)                       ; => #<FUNCALLABLE-STANDARD-CLASS STANDARD-GENERIC-FUNCTION>
 (generic-function-methods #'area)       ; => a list of method objects
 ```
 

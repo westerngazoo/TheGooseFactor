@@ -215,8 +215,8 @@ the nesting:
 '((a . 1) (b . 2) (c . 3))
 ```
 
-Answers: a 3-element list; a 4-element list (one element is itself a
-3-element list); a 4-element list with two nested 2-element lists; a
+Answers: a 3-element list; a 5-element list (one element, `(list 3 4)`,
+is itself a 3-element list); a 4-element list with two nested 2-element lists; a
 quoted 3-element list of pairs (we'll meet the `.` dotted-pair
 notation in [Chapter 3](/lisp/part-1-core-idea/atoms-lists-cons)).
 
