@@ -21,6 +21,7 @@ An evolving lab notebook: code experiments, algorithmic write‑ups, math/physic
 
 ## Connect
 GitHub: [@westerngazoo](https://github.com/westerngazoo)  
-X: [@theg00sefactor](https://x.com/theg00sefactor)
+X: [@theg00sefactor](https://x.com/theg00sefactor)  
+Company: [Goosethropic Blade Systems](https://goosethropic.systems) — goosethropic.systems
 
 > Enter freely. Mind the feathers.

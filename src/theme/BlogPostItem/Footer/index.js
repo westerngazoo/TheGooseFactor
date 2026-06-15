@@ -37,11 +37,28 @@ function ShareButtons() {
   );
 }
 
+function GoosethropicByline() {
+  return (
+    <div className="goosethropic-byline">
+      <span className="goosethropic-byline__label">Built at</span>{' '}
+      <a
+        href="https://goosethropic.systems"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="goosethropic-byline__link"
+      >
+        Goosethropic Blade Systems
+      </a>
+    </div>
+  );
+}
+
 export default function FooterWrapper(props) {
   return (
     <>
       <Footer {...props} />
       <ShareButtons />
+      <GoosethropicByline />
     </>
   );
 }

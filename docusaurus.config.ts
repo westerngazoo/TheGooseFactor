@@ -167,6 +167,12 @@ const config: Config = {
             { label: 'X', href: 'https://x.com/techno_goose' },
           ],
         },
+        {
+          title: 'Company',
+          items: [
+            { label: 'Goosethropic Blade Systems', href: 'https://goosethropic.systems' },
+          ],
+        },
       ],
       copyright: `Copyright \u00a9 ${new Date().getFullYear()} The Goose Factor. Built with Docusaurus.`,
     },
