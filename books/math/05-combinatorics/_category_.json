@@ -1,0 +1,10 @@
+{
+  "label": "5. Combinatorics",
+  "position": 6,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "Combinatorics patterns (binomial, stars & bars, inclusion-exclusion)"
+  }
+}

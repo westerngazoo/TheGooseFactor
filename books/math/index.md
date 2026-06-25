@@ -20,12 +20,20 @@ The real number system (field axioms, order, completeness), algebra refresher (i
 ### 3. Calculus
 Limits, continuity, differentiation, and integration — following Apostol's rigorous approach with an emphasis on why the definitions work.
 
-### Coming Soon
-- Modular arithmetic & fast exponentiation
-- Combinatorics patterns (binomial, stars & bars, inclusion-exclusion)
-- Probability essentials (linearity, indicator RVs, tail bounds)
-- Graph theory core (cuts, flows, matchings)
-- Linear algebra (rank, nullity, projections, spectral glimpse)
+### 4. Modular Arithmetic
+Modular arithmetic & fast exponentiation.
+
+### 5. Combinatorics
+Combinatorics patterns (binomial, stars & bars, inclusion-exclusion).
+
+### 6. Probability
+Probability essentials (linearity, indicator RVs, tail bounds).
+
+### 7. Graph Theory
+Graph theory core (cuts, flows, matchings).
+
+### 8. Linear Algebra
+Linear algebra (rank, nullity, projections, spectral glimpse).
 
 ## Approach
 - **Minimal fluff**: definitions, intuition, canonical examples.

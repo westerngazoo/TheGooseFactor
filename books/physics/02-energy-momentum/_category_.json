@@ -1,0 +1,10 @@
+{
+  "label": "2. Energy & Momentum",
+  "position": 3,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "Conservation as invariants, problem framing with energy methods"
+  }
+}

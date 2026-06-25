@@ -11,14 +11,23 @@ Physics through the lens of computation — formulas as reusable building blocks
 
 ## What's Covered
 
-### Coming Soon
+### 1. Kinematics & Dynamics
+F=ma discretized, projectile motion, harmonic oscillator.
 
-- **Kinematics & dynamics**: F=ma discretized, projectile motion, harmonic oscillator
-- **Energy & momentum**: conservation as invariants, problem framing with energy methods
-- **Dimensional analysis**: the physicist's type checker — catch errors before you compute
-- **Computational physics**: time stepping, numerical stability, Euler vs Runge-Kutta
-- **Statistical mechanics analogies**: simulated annealing, random walks, diffusion as search
-- **Optimization landscapes**: potential energy surfaces, gradient flows, saddle points
+### 2. Energy & Momentum
+Conservation as invariants, problem framing with energy methods.
+
+### 3. Dimensional Analysis
+The physicist's type checker — catch errors before you compute.
+
+### 4. Computational Physics
+Time stepping, numerical stability, Euler vs Runge-Kutta.
+
+### 5. Statistical Mechanics Analogies
+Statistical mechanics analogies: simulated annealing, random walks, diffusion as search.
+
+### 6. Optimization Landscapes
+Potential energy surfaces, gradient flows, saddle points.
 
 ## Approach
 

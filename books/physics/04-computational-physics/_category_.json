@@ -1,0 +1,10 @@
+{
+  "label": "4. Computational Physics",
+  "position": 5,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "Time stepping, numerical stability, Euler vs Runge-Kutta"
+  }
+}
