@@ -1,0 +1,10 @@
+{
+  "label": "6. Optimization Landscapes",
+  "position": 7,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "Potential energy surfaces, gradient flows, saddle points"
+  }
+}

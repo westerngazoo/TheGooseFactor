@@ -1,0 +1,10 @@
+{
+  "label": "7. Graph Theory",
+  "position": 8,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "Graph theory core (cuts, flows, matchings)"
+  }
+}
