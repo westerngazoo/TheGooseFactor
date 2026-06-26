@@ -36,6 +36,7 @@ const books = [
   {id: 'database-course',    path: 'books/database-course',    routeBasePath: 'database',          label: 'Databases from Scratch'},
   {id: 'garust',             path: 'books/garust',             routeBasePath: 'garust',            label: 'Garust'},
   {id: 'rust-algorithms',    path: 'books/rust-algorithms',    routeBasePath: 'rust-book',         label: 'Rust Algorithms'},
+  {id: 'fpga-ga',            path: 'books/fpga-ga',            routeBasePath: 'fpga-ga',           label: 'FPGA for GA Coprocessor'},
 ];
 
 const defaultBook = books[0];
