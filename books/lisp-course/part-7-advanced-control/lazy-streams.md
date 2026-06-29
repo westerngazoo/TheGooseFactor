@@ -62,7 +62,7 @@ argument isn't evaluated immediately):
   (syntax-rules ()
     ((_ expr) (make-promise (lambda () expr)))))
 
-(define (force promise) (promise-value promise))   ; with memoization (§6)
+(define (force promise) (promise))   ; call the thunk; memoized in §6
 ```
 
 With these two primitives, you control *exactly* when each value is
@@ -113,11 +113,16 @@ compute as far as you look. Even slicker, define a stream **in terms of
 itself**:
 
 ```scheme
+;; Add two streams element-by-element (a stream of pairwise sums):
+(define (add-streams s1 s2)
+  (cons-stream (+ (stream-car s1) (stream-car s2))
+               (add-streams (stream-cdr s1) (stream-cdr s2))))
+
 ;; Fibonacci, as a self-referential stream:
 (define fibs
   (cons-stream 0
     (cons-stream 1
-      (stream-map + fibs (stream-cdr fibs)))))
+      (add-streams (stream-cdr fibs) fibs))))
 
 (stream-take fibs 8)   ; => (0 1 1 2 3 5 8 13)
 ```

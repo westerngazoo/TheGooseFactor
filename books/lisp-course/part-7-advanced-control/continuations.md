@@ -200,7 +200,7 @@ choose again:
 (define c (amb 1 2 3 4 5))
 (if (= (+ (* a a) (* b b)) (* c c))
     (list a b c)
-    (fail))           ; => (3 4 5)
+    (fail))           ; => (4 3 5)  (first triple found, searching last choice first)
 ```
 
 Each `amb` saves continuations for its un-tried alternatives. `fail`

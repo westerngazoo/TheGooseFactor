@@ -65,9 +65,9 @@ the idea (simplified):
 ```lisp
 (defmacro html-tag (tag . body)
   `(string-append
-     "<" ,(symbol->string 'tag) ">"
+     "<" ,(symbol->string tag) ">"
      ,@body
-     "</" ,(symbol->string 'tag) ">"))
+     "</" ,(symbol->string tag) ">"))
 ```
 
 A macro `html-tag` takes a tag symbol and a body, and generates the
