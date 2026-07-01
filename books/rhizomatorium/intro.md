@@ -2,6 +2,7 @@
 id: intro
 title: Introduction to Rhizomatorium
 sidebar_position: 1
+slug: /
 ---
 
 # Rhizomatorium: A Geometric Algebra Approach
