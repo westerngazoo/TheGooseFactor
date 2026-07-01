@@ -30,6 +30,11 @@ const books = [
   {id: 'c-algorithms',       path: 'books/c-algorithms',       routeBasePath: 'c-book',            label: 'C Algorithms'},
   {id: 'physics-ga',         path: 'books/physics-ga',         routeBasePath: 'physics-ga',        label: 'Physics through GA'},
   {id: 'ai-ga',              path: 'books/ai-ga',              routeBasePath: 'ai-ga',             label: 'AI through GA'},
+  {id: 'rhizomatorium',      path: 'books/rhizomatorium',      routeBasePath: 'rhizomatorium',     label: 'Rhizomatorium'},
+  {id: 'calculus-universitam',path: 'books/calculus-universitam',routeBasePath: 'calculus-universitam',label: 'Calculus Universitam'},
+  {id: 'linear-algebra-universitam',path: 'books/linear-algebra-universitam',routeBasePath: 'linear-algebra-universitam',label: 'Linear Algebra Universitam'},
+  {id: 'electromagnetism-universitam',path: 'books/electromagnetism-universitam',routeBasePath: 'electromagnetism-universitam',label: 'Electromagnetism Universitam'},
+  {id: 'chemistry-universitam',path: 'books/chemistry-universitam',routeBasePath: 'chemistry-universitam',label: 'Chemistry Universitam'},
   {id: 'lisp-course',        path: 'books/lisp-course',        routeBasePath: 'lisp',              label: 'Lisp Course'},
   {id: 'compiler-course',    path: 'books/compiler-course',    routeBasePath: 'compiler',          label: 'Build Your Own Compiler'},
   {id: 'rust-course',        path: 'books/rust-course',        routeBasePath: 'rust',              label: 'The Rust Book'},
@@ -43,7 +48,24 @@ const defaultBook = books[0];
 const extraBooks = books.slice(1);
 
 // Generate navbar dropdown items from books array
-const bookDropdownItems = books.map(b => ({
+// Filter out rhizomatorium and universitam books from the main Books dropdown
+const mainBooks = books.filter(b => 
+  b.id !== 'rhizomatorium' && 
+  !b.id.includes('universitam')
+);
+
+const bookDropdownItems = mainBooks.map(b => ({
+  to: `/${b.routeBasePath}`,
+  label: b.label,
+}));
+
+// Create Rhizomatorium dropdown items
+const rhizomatoriumBooks = books.filter(b => 
+  b.id === 'rhizomatorium' || 
+  b.id.includes('universitam')
+);
+
+const rhizomatoriumDropdownItems = rhizomatoriumBooks.map(b => ({
   to: `/${b.routeBasePath}`,
   label: b.label,
 }));
@@ -151,6 +173,13 @@ const config: Config = {
           position: 'left',
           items: bookDropdownItems,
         },
+        {
+          type: 'dropdown',
+          label: 'Rhizomatorium',
+          position: 'left',
+          items: rhizomatoriumDropdownItems,
+        },
+        { to: '/universitam', label: 'Universitam', position: 'left' },
         { to: '/apps', label: 'Apps', position: 'left' },
         { to: '/about', label: 'About', position: 'left' },
         { href: 'https://github.com/westerngazoo', label: 'GitHub', position: 'right' },
