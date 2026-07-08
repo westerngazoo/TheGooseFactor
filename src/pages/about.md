@@ -21,6 +21,16 @@ An evolving lab notebook: code experiments, algorithmic write‑ups, math/physic
 
 ## Connect
 GitHub: [@westerngazoo](https://github.com/westerngazoo)  
-X: [@theg00sefactor](https://x.com/theg00sefactor)
+X: [@theg00sefactor](https://x.com/theg00sefactor)  
+Company: [Goosethropic Blade Systems](https://goosethropic.systems) — goosethropic.systems
+
+## The Geese Collective
+
+*The set of all geese* — `𝔾 = { g : g is a goose I've had a wing in }`. The apps, projects, and ventures I help build.
+
+Open source, under [Goosethropic Blade Systems](https://goosethropic.systems):
+
+- **[A Million Plateaus](https://plateaus.goosethropic.systems)** — a decentralized, spatial, multiplayer learning world where knowledge is geometry, powered by [garust](/garust). ([source](https://github.com/westerngazoo/AMillionPlateaus))
+- **[SargentAI](https://sargent.goosethropic.systems)** — personalized fitness coaching driven by adaptive, ML-tuned programming. ([source](https://github.com/westerngazoo/sargentAI))
 
 > Enter freely. Mind the feathers.

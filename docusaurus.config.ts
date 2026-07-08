@@ -197,6 +197,19 @@ const config: Config = {
             { label: 'X', href: 'https://x.com/techno_goose' },
           ],
         },
+        {
+          title: 'Company',
+          items: [
+            { label: 'Goosethropic Blade Systems', href: 'https://goosethropic.systems' },
+          ],
+        },
+        {
+          title: 'The Geese Collective',
+          items: [
+            { label: 'A Million Plateaus', href: 'https://plateaus.goosethropic.systems' },
+            { label: 'SargentAI', href: 'https://sargent.goosethropic.systems' },
+          ],
+        },
       ],
       copyright: `Copyright \u00a9 ${new Date().getFullYear()} The Goose Factor. Built with Docusaurus.`,
     },
